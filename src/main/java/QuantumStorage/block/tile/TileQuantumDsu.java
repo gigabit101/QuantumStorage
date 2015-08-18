@@ -1,9 +1,13 @@
 package QuantumStorage.block.tile;
 
+import java.util.List;
+
 import QuantumStorage.init.ModBlocks;
 import QuantumStorage.packet.PacketHandler;
 import QuantumStorage.util.Inventory;
 import QuantumStorage.util.ItemUtils;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -188,22 +192,20 @@ public class TileQuantumDsu extends TileEntity implements IInventory {
 		}
 	}
 	
-	// TODO
-	// @Override
-	// public void addWailaInfo(List<String> info) {
-	// super.addWailaInfo(info);
-	// int size = 0;
-	// String name = "of nothing";
-	// if (storedItem != null) {
-	// name = storedItem.getDisplayName();
-	// size += storedItem.stackSize;
-	// }
-	// if (getStackInSlot(1) != null) {
-	// name = getStackInSlot(1).getDisplayName();
-	// size += getStackInSlot(1).stackSize;
-	// }
-	// info.add(size + " " + name);
-	//
-	// }
-
+    @SideOnly(Side.CLIENT)
+	 public void addWailaInfo(List<String> info) {
+//		super.addWailaInfo(info);
+		int size = 0;
+		String name = "of nothing";
+		if (storedItem != null) {
+			name = storedItem.getDisplayName();
+			size += storedItem.stackSize;
+		}
+		if (getStackInSlot(1) != null) {
+			name = getStackInSlot(1).getDisplayName();
+			size += getStackInSlot(1).stackSize;
+		}
+		info.add(size + " " + name);
+	
+	 }
 }
