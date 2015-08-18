@@ -36,18 +36,10 @@ dependencies {
         f.mkdir()
     }
 	println("  Downloading dependencies!")
-	grabDep('gbl', 'https://dl.dropboxusercontent.com/u/47135879/Baubles-deobf-1.7.10-1.0.1.4.jar')
-	grabDep('gbt', 'https://dl.dropboxusercontent.com/u/47135879/Thaumcraft-1.7.10-4.2.0.1.jar')
-    grabDep('gbb', 'http://addons.cursecdn.com/files/2224/758/BloodMagic-1.7.10-1.3.0b-3.jar')
-    grabDep('gbd', 'http://vazkii.us/mod/Botania/files/Botania%20r1.2-120.jar')
-    
-
-
+	grabDep('gbl', 'http://addons-origin.cursecdn.com/files/2230/518/Waila-1.5.10_1.7.10.jar')
+	
 	println("  Adding dependencies!")
     compile files("dep/gbl.jar")
-     compile files("dep/gbt.jar")
-	 compile files("dep/gbb.jar")
-	 compile files("dep/gbd.jar")
 	println("  Finished adding dependencies!")
 }
 
@@ -58,10 +50,7 @@ minecraft {
 
 dependencies {
 	compile files (
-		'Baubles-deobf.jar',
-		'Thaumcraft.jar',
-		'Blood.jar',
-		'Botania.jar'
+		'Waila-deobf.jar'
 	)
 }
 
