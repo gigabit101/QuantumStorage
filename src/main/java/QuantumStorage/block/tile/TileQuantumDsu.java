@@ -19,6 +19,7 @@ public class TileQuantumDsu extends TileEntity implements IInventory {
 	public Inventory inventory = new Inventory(3, "TileSimpleDsu", storage);
 
 	public ItemStack storedItem;
+	public String storedItemAsString;
 
 	@Override
 	public void updateEntity() {
@@ -84,6 +85,7 @@ public class TileQuantumDsu extends TileEntity implements IInventory {
 		inventory.readFromNBT(tagCompound);
 
 		storedItem = null;
+		storedItemAsString = null;
 
 		if (tagCompound.hasKey("storedStack")) {
 			storedItem = ItemStack.loadItemStackFromNBT((NBTTagCompound) tagCompound.getTag("storedStack"));
@@ -91,6 +93,7 @@ public class TileQuantumDsu extends TileEntity implements IInventory {
 
 		if (storedItem != null) {
 			storedItem.stackSize = tagCompound.getInteger("storedQuantity");
+			storedItemAsString = tagCompound.getString("storedItemAsString");
 		}
 	}
 
@@ -105,6 +108,7 @@ public class TileQuantumDsu extends TileEntity implements IInventory {
 		if (storedItem != null) {
 			tagCompound.setTag("storedStack", storedItem.writeToNBT(new NBTTagCompound()));
 			tagCompound.setInteger("storedQuantity", storedItem.stackSize);
+			tagCompound.setString("storedItemAsString", storedItem.getDisplayName());
 		} else
 			tagCompound.setInteger("storedQuantity", 0);
 	}
@@ -183,7 +187,7 @@ public class TileQuantumDsu extends TileEntity implements IInventory {
 			PacketHandler.sendPacketToAllPlayers(getDescriptionPacket(), worldObj);
 		}
 	}
-
+	
 	// TODO
 	// @Override
 	// public void addWailaInfo(List<String> info) {

@@ -2,6 +2,8 @@ package QuantumStorage.init;
 
 import QuantumStorage.block.BlockQuantumDsu;
 import QuantumStorage.block.tile.TileQuantumDsu;
+import QuantumStorage.items.ItemQuantumStorage;
+import QuantumStorage.items.itemblocks.ItemBlockQuantumDsu;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -14,7 +16,7 @@ public class ModBlocks {
 
 	public static void init() {
 		QuantumDsu = new BlockQuantumDsu(Material.iron);
-		GameRegistry.registerBlock(QuantumDsu, "quantumdsu");
+		GameRegistry.registerBlock(QuantumDsu, ItemBlockQuantumDsu.class, "quantumdsu");
 		GameRegistry.registerTileEntity(TileQuantumDsu.class, "tilequantumdsu");
 		addRecipes();
 	}
