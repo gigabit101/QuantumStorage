@@ -1,0 +1,21 @@
+[
+{
+  "modid": "DeepStorage",
+  "name": "DeepStorage",
+  "description": "",
+  "version": "1.0.0",
+  "url": "",
+  "updateUrl": "",
+  "authorList": [
+    "Gigabit101, Mj11jM"
+    
+  ],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [
+  ],
+  "parent":"",
+  "dependencies": [
+  ]
+}
+]
