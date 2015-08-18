@@ -13,7 +13,7 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileQuantumStorage extends TileEntity implements IInventory {
+public class TileQuantumDsu extends TileEntity implements IInventory {
 	int storage = (int) Double.MAX_VALUE;
 
 	public Inventory inventory = new Inventory(3, "TileSimpleDsu", storage);
@@ -171,7 +171,7 @@ public class TileQuantumStorage extends TileEntity implements IInventory {
 
 	public ItemStack getDropWithNBT() {
 		NBTTagCompound tileEntity = new NBTTagCompound();
-		ItemStack dropStack = new ItemStack(ModBlocks.simpleDsu, 1);
+		ItemStack dropStack = new ItemStack(ModBlocks.QuantumDsu, 1);
 		writeToNBTWithoutCoords(tileEntity);
 		dropStack.setTagCompound(new NBTTagCompound());
 		dropStack.stackTagCompound.setTag("tileEntity", tileEntity);

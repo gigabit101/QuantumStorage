@@ -1,7 +1,7 @@
 package QuantumStorage.block;
 
 import QuantumStorage.QuantumStorage;
-import QuantumStorage.block.tile.TileQuantumStorage;
+import QuantumStorage.block.tile.TileQuantumDsu;
 import QuantumStorage.client.GuiHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -14,7 +14,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-public class BlockQuantumStorage extends BlockContainer {
+public class BlockQuantumDsu extends BlockContainer {
 	@SideOnly(Side.CLIENT)
 	private IIcon iconFront;
 
@@ -24,11 +24,11 @@ public class BlockQuantumStorage extends BlockContainer {
 	@SideOnly(Side.CLIENT)
 	private IIcon iconBottom;
 
-	public TileQuantumStorage dsu;
+	public TileQuantumDsu dsu;
 
-	public BlockQuantumStorage(Material material) {
+	public BlockQuantumDsu(Material material) {
 		super(material);
-		setBlockName("simpledsu");
+		setBlockName("quantumdsu");
 		setCreativeTab(CreativeTabs.tabMisc);
 		setHardness(2.0F);
 	}
@@ -60,7 +60,7 @@ public class BlockQuantumStorage extends BlockContainer {
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int p_149915_2_) {
-		return new TileQuantumStorage();
+		return new TileQuantumDsu();
 	}
 
 }
