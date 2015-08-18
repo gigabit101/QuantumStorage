@@ -10,7 +10,7 @@ import net.minecraft.util.StatCollector;
 
 public class GuiSimpleDsu extends GuiContainer {
 
-	private static final ResourceLocation texture = new ResourceLocation("simpledsu", "textures/gui/dsu.png");
+	private static final ResourceLocation texture = new ResourceLocation("quantumstorage", "textures/gui/dsu.png");
 
 	TileQuantumStorage tile;
 	public int amoauntStored;

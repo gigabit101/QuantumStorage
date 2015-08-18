@@ -44,10 +44,10 @@ public class BlockQuantumStorage extends BlockContainer {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister icon) {
-		this.blockIcon = icon.registerIcon("simpledsu:dsuside");
-		this.iconFront = icon.registerIcon("simpledsu:dsufront");
-		this.iconTop = icon.registerIcon("simpledsu:dsutop");
-		this.iconBottom = icon.registerIcon("simpledsu:dsubottom");
+		this.blockIcon = icon.registerIcon("quantumstorage:dsuside");
+		this.iconFront = icon.registerIcon("quantumstorage:dsufront");
+		this.iconTop = icon.registerIcon("quantumstorage:dsutop");
+		this.iconBottom = icon.registerIcon("quantumstorage:dsubottom");
 	}
 
 	@SideOnly(Side.CLIENT)
