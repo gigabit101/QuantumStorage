@@ -1,8 +1,11 @@
 package QuantumStorage.block;
 
+import java.util.Random;
+
 import QuantumStorage.QuantumStorage;
 import QuantumStorage.block.tile.TileQuantumDsu;
 import QuantumStorage.client.GuiHandler;
+import QuantumStorage.init.ModBlocks;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -12,6 +15,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
@@ -72,17 +76,33 @@ public class BlockQuantumDsu extends BlockContainer {
 		TileEntity te = world.getTileEntity(x, y, z);
 		if(te instanceof TileQuantumDsu)
 		{
-			float xOffset = world.rand.nextFloat() * 0.8F + 0.1F;
-			float yOffset = world.rand.nextFloat() * 0.8F + 0.1F;
-			float zOffset = world.rand.nextFloat() * 0.8F + 0.1F;
+			if (((TileQuantumDsu) te).storedItem != null){
+				float xOffset = world.rand.nextFloat() * 0.8F + 0.1F;
+				float yOffset = world.rand.nextFloat() * 0.8F + 0.1F;
+				float zOffset = world.rand.nextFloat() * 0.8F + 0.1F;
 						
-			ItemStack stacknbt = ((TileQuantumDsu) te).getDropWithNBT();
-			int amountToDrop = Math.min(world.rand.nextInt(21) + 10, stacknbt.stackSize);
+				ItemStack stacknbt = ((TileQuantumDsu) te).getDropWithNBT();
+				int amountToDrop = Math.min(world.rand.nextInt(21) + 10, stacknbt.stackSize);
 
-			EntityItem entityitem = new EntityItem(world,
-					x + xOffset, y + yOffset, z + zOffset,
-					stacknbt.splitStack(amountToDrop));
-			world.spawnEntityInWorld(entityitem);
+				EntityItem entityitem = new EntityItem(world,
+						x + xOffset, y + yOffset, z + zOffset,
+						stacknbt.splitStack(amountToDrop));
+				world.spawnEntityInWorld(entityitem);
+			}
+			else 
+			{
+				float xOffset = world.rand.nextFloat() * 0.8F + 0.1F;
+				float yOffset = world.rand.nextFloat() * 0.8F + 0.1F;
+				float zOffset = world.rand.nextFloat() * 0.8F + 0.1F;
+				ItemStack stack = new ItemStack(ModBlocks.QuantumDsu);
+				
+				EntityItem entityitem = new EntityItem(world,
+						x + xOffset, y + yOffset, z + zOffset, stack);
+				world.spawnEntityInWorld(entityitem);
+			}
 		}
 	}
+	
+	@Override
+	protected void dropBlockAsItem(World world, int x, int y, int z, ItemStack stack) {}
 }

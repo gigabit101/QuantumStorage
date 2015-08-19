@@ -194,9 +194,8 @@ public class TileQuantumDsu extends TileEntity implements IInventory {
 	
     @SideOnly(Side.CLIENT)
 	 public void addWailaInfo(List<String> info) {
-//		super.addWailaInfo(info);
 		int size = 0;
-		String name = "of nothing";
+		String name = "";
 		if (storedItem != null) {
 			name = storedItem.getDisplayName();
 			size += storedItem.stackSize;
@@ -205,6 +204,7 @@ public class TileQuantumDsu extends TileEntity implements IInventory {
 			name = getStackInSlot(1).getDisplayName();
 			size += getStackInSlot(1).stackSize;
 		}
+		if (storedItem != null)
 		info.add(size + " " + name);
 	
 	 }
