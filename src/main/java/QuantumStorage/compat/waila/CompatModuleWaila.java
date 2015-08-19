@@ -1,4 +1,4 @@
-package QuantumStorage.compat;
+package QuantumStorage.compat.waila;
 
 import QuantumStorage.block.tile.TileQuantumDsu;
 import cpw.mods.fml.common.event.FMLInitializationEvent;

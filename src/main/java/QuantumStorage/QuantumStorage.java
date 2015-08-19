@@ -2,7 +2,8 @@ package QuantumStorage;
 
 import QuantumStorage.block.tile.TileQuantumDsu;
 import QuantumStorage.client.GuiHandler;
-import QuantumStorage.compat.CompatModuleWaila;
+import QuantumStorage.compat.CompatManager;
+import QuantumStorage.compat.waila.CompatModuleWaila;
 import QuantumStorage.init.ModBlocks;
 import QuantumStorage.lib.ModInfo;
 import QuantumStorage.packet.PacketHandler;
@@ -23,8 +24,7 @@ public class QuantumStorage {
 		ModBlocks.init();
 		NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, new GuiHandler());
 		PacketHandler.setChannels(NetworkRegistry.INSTANCE.newChannel(ModInfo.MOD_ID + "_packets", new PacketHandler()));
-		if(Loader.isModLoaded("Waila")){
-			new CompatModuleWaila().init(event);
-		}
+		CompatManager.init(event);
+		
 	}
 }

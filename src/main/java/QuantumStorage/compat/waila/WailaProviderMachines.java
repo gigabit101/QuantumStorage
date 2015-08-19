@@ -1,4 +1,4 @@
-package QuantumStorage.compat;
+package QuantumStorage.compat.waila;
 
 import java.util.ArrayList;
 import java.util.List;
