@@ -23,6 +23,6 @@ public class ModBlocks {
 
 	public static void addRecipes() {
 		GameRegistry.addRecipe(new ItemStack(QuantumDsu, 1, 0), "EEE", "ECE", "EEE", 'E',
-				new ItemStack(Items.ender_pearl), 'C', new ItemStack(Blocks.chest));
+				new ItemStack(Items.ender_pearl), 'C', new ItemStack(Blocks.ender_chest));
 	}
 }
