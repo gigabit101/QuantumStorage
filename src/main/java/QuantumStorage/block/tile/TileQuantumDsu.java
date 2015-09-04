@@ -10,6 +10,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -17,7 +18,7 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileQuantumDsu extends TileEntity implements IInventory {
+public class TileQuantumDsu extends TileEntity implements ISidedInventory {
 	int storage = (int) Double.MAX_VALUE;
 
 	public Inventory inventory = new Inventory(3, "TileSimpleDsu", storage);
@@ -208,4 +209,20 @@ public class TileQuantumDsu extends TileEntity implements IInventory {
 		info.add(size + " " + name);
 	
 	 }
+
+	@Override
+	public int[] getAccessibleSlotsFromSide(int p_94128_1_)
+	{
+		return new int[] {0, 1};
+	}
+
+	@Override
+	public boolean canInsertItem(int slotIndex, ItemStack p_102007_2_, int p_102007_3_) {
+		return (slotIndex == 0 ? true : false);
+	}
+
+	@Override
+	public boolean canExtractItem(int slotIndex, ItemStack p_102008_2_, int p_102008_3_) {
+		return (slotIndex == 1 ? true : false);
+	}
 }
