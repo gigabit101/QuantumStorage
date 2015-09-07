@@ -73,3 +73,7 @@ processResources
         exclude 'mcmod.info'
     }
 }
+
+jar.doFirst {
+    version = project.minecraft.version + "-" + version;
+}
