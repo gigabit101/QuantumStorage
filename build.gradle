@@ -17,7 +17,7 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.1.0"
+version = "1.2.0"
 group= "com.gigabit101.QuantumStorage" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "QuantumStorage"
 
@@ -71,12 +71,5 @@ processResources
     // copy everything else, thats not the mcmod.info
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
-    }
-}
-
-jar.doFirst {
-    version = project.minecraft.version + "-" + version;
-    if (System.getenv().BUILD_NUMBER != null) {
-        version += "-" + "${System.getenv().BUILD_NUMBER}"
     }
 }
