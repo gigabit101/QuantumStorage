@@ -16,8 +16,9 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import powercrystals.minefactoryreloaded.api.IDeepStorageUnit;
 
-public class TileQuantumDsu extends TileEntity implements IInventory {
+public class TileQuantumDsu extends TileEntity implements IInventory, IDeepStorageUnit {
 	int storage = (int) Double.MAX_VALUE;
 
 	public Inventory inventory = new Inventory(3, "TileSimpleDsu", storage);
@@ -208,4 +209,28 @@ public class TileQuantumDsu extends TileEntity implements IInventory {
 		info.add(size + " " + name);
 	
 	 }
+
+	@Override
+	public ItemStack getStoredItemType() {
+		return this.storedItem;
+	}
+
+	@Override
+	public void setStoredItemCount(int amount) {
+		this.storedItem.stackSize = 0;
+		this.storedItem.stackSize += (amount);
+		this.markDirty();
+	}
+
+	@Override
+	public void setStoredItemType(ItemStack type, int amount) {
+		this.storedItem = type;
+		this.storedItem.stackSize = amount;
+		this.markDirty();
+	}
+
+	@Override
+	public int getMaxStoredCount() {
+		return this.storage;
+	}
 }
