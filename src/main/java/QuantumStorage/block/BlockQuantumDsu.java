@@ -2,6 +2,7 @@ package QuantumStorage.block;
 
 import java.util.Random;
 
+import QuantumStorage.CreativeTabQuantumStorage;
 import QuantumStorage.QuantumStorage;
 import QuantumStorage.block.tile.TileQuantumDsu;
 import QuantumStorage.client.GuiHandler;
@@ -21,7 +22,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-public class BlockQuantumDsu extends BlockContainer {
+public class BlockQuantumDsu extends BlockContainer 
+{
 	@SideOnly(Side.CLIENT)
 	private IIcon iconFront;
 
@@ -33,16 +35,17 @@ public class BlockQuantumDsu extends BlockContainer {
 
 	public TileQuantumDsu dsu;
 
-	public BlockQuantumDsu(Material material) {
+	public BlockQuantumDsu(Material material) 
+	{
 		super(material);
 		setBlockName("quantumdsu");
-		setCreativeTab(CreativeTabs.tabMisc);
+		setCreativeTab(CreativeTabQuantumStorage.instance);
 		setHardness(2.0F);
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX,
-			float hitY, float hitZ) {
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) 
+	{
 		if (!player.isSneaking())
 			player.openGui(QuantumStorage.INSTANCE, GuiHandler.dsu, world, x, y, z);
 		return true;
@@ -50,7 +53,8 @@ public class BlockQuantumDsu extends BlockContainer {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister icon) {
+	public void registerBlockIcons(IIconRegister icon) 
+	{
 		this.blockIcon = icon.registerIcon("quantumstorage:dsuside");
 		this.iconFront = icon.registerIcon("quantumstorage:dsufront");
 		this.iconTop = icon.registerIcon("quantumstorage:dsutop");
@@ -58,7 +62,8 @@ public class BlockQuantumDsu extends BlockContainer {
 	}
 
 	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int metadata) {
+	public IIcon getIcon(int side, int metadata) 
+	{
 		return metadata == 0 && side == 3 ? this.iconFront
 				: side == 1 ? this.iconTop
 						: side == 0 ? this.iconBottom
@@ -66,7 +71,8 @@ public class BlockQuantumDsu extends BlockContainer {
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world, int p_149915_2_) {
+	public TileEntity createNewTileEntity(World world, int p_149915_2_) 
+	{
 		return new TileQuantumDsu();
 	}
 	
