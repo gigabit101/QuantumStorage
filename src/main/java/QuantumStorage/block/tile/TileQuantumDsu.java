@@ -209,7 +209,9 @@ public class TileQuantumDsu extends TileEntity implements IInventory, ISidedInve
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack stack) 
 	{
-		return inventory.isItemValidForSlot(slot, stack);
+		if(ItemUtils.isItemEqual(stack, getStackInSlot(1), true, true) || (getStackInSlot(1) == null))
+			return inventory.isItemValidForSlot(slot, stack);
+		return false;
 	}
 
 	public ItemStack getDropWithNBT() 
@@ -286,13 +288,13 @@ public class TileQuantumDsu extends TileEntity implements IInventory, ISidedInve
 	@Override
 	public boolean canInsertItem(int slotIndex, ItemStack stack, int p_102007_3_) 
 	{
-		if(ItemUtils.isItemEqual(storedItem, stack, true, true))
+		if(ItemUtils.isItemEqual(getStackInSlot(2), stack, true, true) || (getStackInSlot(1) == null));
 			return (slotIndex == 0 ? true : false);
-		return false;
 	}
 
 	@Override
-	public boolean canExtractItem(int slotIndex, ItemStack p_102008_2_, int p_102008_3_) {
+	public boolean canExtractItem(int slotIndex, ItemStack p_102008_2_, int p_102008_3_) 
+	{
 		return (slotIndex == 1 ? true : false);
 	}
 }
