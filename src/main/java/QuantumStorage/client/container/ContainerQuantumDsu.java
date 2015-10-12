@@ -7,12 +7,14 @@ import QuantumStorage.client.slot.SlotOutput;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;
 
-public class ContainerQuantumDsu extends QuantumStorageContainer {
+public class ContainerQuantumDsu extends QuantumStorageContainer 
+{
 	public TileQuantumDsu tile;
 	public EntityPlayer player;
 	public int stackamount;
 
-	public ContainerQuantumDsu(TileQuantumDsu tilesimple, EntityPlayer player) {
+	public ContainerQuantumDsu(TileQuantumDsu tilesimple, EntityPlayer player)
+	{
 		super();
 		this.tile = tilesimple;
 		this.player = player;
@@ -23,19 +25,23 @@ public class ContainerQuantumDsu extends QuantumStorageContainer {
 
 		int i;
 
-		for (i = 0; i < 3; ++i) {
-			for (int j = 0; j < 9; ++j) {
+		for (i = 0; i < 3; ++i) 
+		{
+			for (int j = 0; j < 9; ++j) 
+			{
 				this.addSlotToContainer(new Slot(player.inventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
 			}
 		}
 
-		for (i = 0; i < 9; ++i) {
+		for (i = 0; i < 9; ++i) 
+		{
 			this.addSlotToContainer(new Slot(player.inventory, i, 8 + i * 18, 142));
 		}
 	}
 
 	@Override
-	public boolean canInteractWith(EntityPlayer player) {
+	public boolean canInteractWith(EntityPlayer player) 
+	{
 		return true;
 	}
 }

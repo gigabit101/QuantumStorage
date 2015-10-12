@@ -11,6 +11,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -38,6 +39,12 @@ public class TileQuantumDsu extends TileEntity implements IInventory, ISidedInve
 				fakeStack.stackSize = 1;
 				setInventorySlotContents(2, fakeStack);
 			} 
+			else if (storedItem == null && getStackInSlot(1) != null)
+			{
+				ItemStack fakeStack = getStackInSlot(1).copy();
+				fakeStack.stackSize = 1;
+				setInventorySlotContents(2, fakeStack);
+			}
 			else 
 			{
 				setInventorySlotContents(2, null);
@@ -45,11 +52,12 @@ public class TileQuantumDsu extends TileEntity implements IInventory, ISidedInve
 
 			if (getStackInSlot(0) != null) 
 			{
-				if (storedItem == null) 
+				if (storedItem == null && getStackInSlot(1) == null) 
 				{
 					storedItem = getStackInSlot(0);
 					setInventorySlotContents(0, null);
-				} else if (ItemUtils.isItemEqual(storedItem, getStackInSlot(0), true, true)) 
+				} 
+				else if (ItemUtils.isItemEqual(storedItem, getStackInSlot(0), true, true)) 
 				{
 					if (storedItem.stackSize <= Integer.MAX_VALUE - getStackInSlot(0).stackSize) 
 					{
@@ -209,8 +217,10 @@ public class TileQuantumDsu extends TileEntity implements IInventory, ISidedInve
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack stack) 
 	{
-		if(ItemUtils.isItemEqual(stack, getStackInSlot(1), true, true) || (getStackInSlot(1) == null))
-			return inventory.isItemValidForSlot(slot, stack);
+		if(ItemUtils.isItemEqual(stack, storedItem, true, true) || (getStackInSlot(1) == null))
+			return true;
+		if(!ItemUtils.isItemEqual(stack, getStackInSlot(1), true, true))
+			return false;
 		return false;
 	}
 
@@ -288,7 +298,7 @@ public class TileQuantumDsu extends TileEntity implements IInventory, ISidedInve
 	@Override
 	public boolean canInsertItem(int slotIndex, ItemStack stack, int p_102007_3_) 
 	{
-		if(ItemUtils.isItemEqual(getStackInSlot(2), stack, true, true) || (getStackInSlot(1) == null));
+		if(ItemUtils.isItemEqual(storedItem, stack, true, true) || (getStackInSlot(1) == null));
 			return (slotIndex == 0 ? true : false);
 	}
 
