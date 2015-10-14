@@ -2,7 +2,7 @@ package QuantumStorage.items.itemblocks;
 
 import java.util.List;
 
-import QuantumStorage.block.tile.TileQuantumDsu;
+import QuantumStorage.block.tile.TileQuantumDsuMk4;
 import QuantumStorage.init.ModBlocks;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -14,9 +14,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
 
-public class ItemBlockQuantumDsu extends ItemBlock{
+public class ItemBlockQuantumDsuMk4 extends ItemBlock{
 
-	public ItemBlockQuantumDsu(Block block) {
+	public ItemBlockQuantumDsuMk4(Block block) {
 		super(block);
 	}
 	
@@ -35,15 +35,15 @@ public class ItemBlockQuantumDsu extends ItemBlock{
 
     @Override
     public boolean placeBlockAt(ItemStack stack, EntityPlayer player,  World world, int x, int y, int z, int side, float hitX, float hitY,  float hitZ, int metadata) {
-        if (!world.setBlock(x, y, z, ModBlocks.QuantumDsu, metadata, 3)) {
+        if (!world.setBlock(x, y, z, ModBlocks.QuantumDsuMk4, metadata, 3)) {
             return false;
         }
-        if (world.getBlock(x, y, z) == ModBlocks.QuantumDsu) {
+        if (world.getBlock(x, y, z) == ModBlocks.QuantumDsuMk4) {
             world.getBlock(x, y, z).onBlockPlacedBy(world, x, y, z, player, stack);
             world.getBlock(x, y, z).onPostBlockPlaced(world, x, y, z, metadata);
         }
         if (stack != null && stack.hasTagCompound()) {
-            ((TileQuantumDsu) world.getTileEntity(x, y, z))
+            ((TileQuantumDsuMk4) world.getTileEntity(x, y, z))
                     .readFromNBTWithoutCoords(stack.getTagCompound()
                             .getCompoundTag("tileEntity"));
         }

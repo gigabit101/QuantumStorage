@@ -2,9 +2,17 @@ package QuantumStorage.items;
 
 import java.util.List;
 
+import org.lwjgl.input.Keyboard;
+
 import QuantumStorage.QuantumStorage;
-import QuantumStorage.block.BlockQuantumDsu;
-import QuantumStorage.block.tile.TileQuantumDsu;
+import QuantumStorage.block.BlockQuantumDsuMk1;
+import QuantumStorage.block.BlockQuantumDsuMk2;
+import QuantumStorage.block.BlockQuantumDsuMk3;
+import QuantumStorage.block.BlockQuantumDsuMk4;
+import QuantumStorage.block.tile.TileQuantumDsuMk1;
+import QuantumStorage.block.tile.TileQuantumDsuMk2;
+import QuantumStorage.block.tile.TileQuantumDsuMk3;
+import QuantumStorage.block.tile.TileQuantumDsuMk4;
 import QuantumStorage.client.GuiHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -13,8 +21,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.ChunkCoordinates;
-import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 public class ItemLinkedBag extends ItemQuantumStorage
@@ -30,7 +37,7 @@ public class ItemLinkedBag extends ItemQuantumStorage
 		Block block = world.getBlock(x, y, z);
 		if(player.isSneaking())
 		{
-			if(block instanceof BlockQuantumDsu)
+			if(block instanceof BlockQuantumDsuMk1 || block instanceof BlockQuantumDsuMk2 || block instanceof BlockQuantumDsuMk3 || block instanceof BlockQuantumDsuMk4)
 			{
 				stack.stackTagCompound = new NBTTagCompound();
 				stack.stackTagCompound.setInteger("xcord", x);
@@ -51,9 +58,15 @@ public class ItemLinkedBag extends ItemQuantumStorage
 			int cordZ = stack.stackTagCompound.getInteger("zcord");
 	
 			if(!player.isSneaking() && stack.stackTagCompound != null)
-				if(world.getTileEntity(cordX, cordY, cordZ) instanceof TileQuantumDsu)
+				if(world.getTileEntity(cordX, cordY, cordZ) instanceof TileQuantumDsuMk1)
+					player.openGui(QuantumStorage.INSTANCE, GuiHandler.dsuMk1, world, cordX, cordY, cordZ);
+				if(world.getTileEntity(cordX, cordY, cordZ) instanceof TileQuantumDsuMk2)
+					player.openGui(QuantumStorage.INSTANCE, GuiHandler.dsuMk2, world, cordX, cordY, cordZ);
+				if(world.getTileEntity(cordX, cordY, cordZ) instanceof TileQuantumDsuMk3)
+					player.openGui(QuantumStorage.INSTANCE, GuiHandler.dsuMk3, world, cordX, cordY, cordZ);
+				if(world.getTileEntity(cordX, cordY, cordZ) instanceof TileQuantumDsuMk4)
 					player.openGui(QuantumStorage.INSTANCE, GuiHandler.dsu, world, cordX, cordY, cordZ);
-				else
+				else if(world.getTileEntity(cordX, cordY, cordZ) == null)
 					player.addChatComponentMessage(new ChatComponentText("QSU is missing or not loaded"));
 			return stack;
 		}
@@ -64,16 +77,20 @@ public class ItemLinkedBag extends ItemQuantumStorage
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean p_77624_4_) 
 	{
-		if(stack != null && stack.stackTagCompound != null)
+		if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))
 		{
-			int cordX = stack.stackTagCompound.getInteger("xcord");
-			int cordY = stack.stackTagCompound.getInteger("ycord");
-			int cordZ = stack.stackTagCompound.getInteger("zcord");
-			list.add("Linked to QSU @ X-" + cordX + " Y-" + cordY + " Z-" + cordZ);
+			if(stack != null && stack.stackTagCompound != null)
+			{
+				int cordX = stack.stackTagCompound.getInteger("xcord");
+				int cordY = stack.stackTagCompound.getInteger("ycord");
+				int cordZ = stack.stackTagCompound.getInteger("zcord");
+				list.add("Linked to QSU @ X=" + cordX + " Y=" + cordY + " Z=" + cordZ);
+			}
+			if(stack.stackTagCompound == null)
+			{
+				list.add("Shift Click on a QSU to link to its inventory");
+			}
 		}
-		if(stack.stackTagCompound == null)
-		{
-			list.add("Shift Click on a QSU to link to its inventory");
-		}
+		else list.add(StatCollector.translateToLocal("quantumstorage.holdshiftmessage"));
 	}
 }

@@ -3,15 +3,13 @@ package QuantumStorage.client.inventory;
 import QuantumStorage.init.ModItems;
 import QuantumStorage.items.ItemQuantumBag;
 import QuantumStorage.items.upgrades.ItemPickupUpgrade;
-import QuantumStorage.items.upgrades.ItemUpgrade;
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 
-public class InventoryQuantumBag implements IInventory
+public class InventoryPickupCard implements IInventory
 {
-	private static final ItemStack[] FALLBACK_INVENTORY = new ItemStack[64];
+	private static final ItemStack[] FALLBACK_INVENTORY = new ItemStack[1];
 
 	EntityPlayer player;
 	int slot;
@@ -20,34 +18,15 @@ public class InventoryQuantumBag implements IInventory
 	boolean invPushed = false;
 	ItemStack storedInv = null;
 	
-	public InventoryQuantumBag(EntityPlayer player, int slot) 
+	public InventoryPickupCard(EntityPlayer player, int slot) 
 	{
 		this.player = player;
 		this.slot = slot;	
 	}
 	
-	public void getUpgrades()
-	{
-		ItemStack stack = getStackInSlot(55);
-		if(stack != null && stack.getItem() instanceof ItemUpgrade)
-		{
-			if(stack.getItem() == ModItems.pickupCard)
-			{
-				getPickupUpgrade(stack);
-			}
-		}
-	}
-	
-	public ItemStack getPickupUpgrade(ItemStack stack)
-	{
-		ItemStack[] baginv = ItemPickupUpgrade.loadStacks(stack);
-		ItemStack stackAt = baginv[0];
-		return stackAt;
-	}
-	
 	public static boolean isBag(ItemStack stack) 
 	{
-		return stack != null && stack.getItem() == ModItems.quantumBag;
+		return stack != null && stack.getItem() == ModItems.pickupCard;
 	}
 	
 	ItemStack getStack()
@@ -65,7 +44,7 @@ public class InventoryQuantumBag implements IInventory
 
 		ItemStack stack = getStack();
 		if(isBag(getStack())) {
-			stacks = ItemQuantumBag.loadStacks(stack);
+			stacks = ItemPickupUpgrade.loadStacks(stack);
 			return stacks;
 		}
 
@@ -83,7 +62,7 @@ public class InventoryQuantumBag implements IInventory
 
 		if(stack != null) {
 			ItemStack[] inv = getInventory();
-			ItemQuantumBag.setStacks(stack, inv);
+			ItemPickupUpgrade.setStacks(stack, inv);
 		}
 
 		invPushed = true;
@@ -92,7 +71,7 @@ public class InventoryQuantumBag implements IInventory
 	@Override
 	public int getSizeInventory() 
 	{
-		return 60;
+		return 1;
 	}
 
 	@Override
@@ -141,7 +120,7 @@ public class InventoryQuantumBag implements IInventory
 	@Override
 	public int getInventoryStackLimit() 
 	{
-		return 64;
+		return 1;
 	}
 
 	@Override

@@ -1,6 +1,6 @@
 package QuantumStorage;
 
-import QuantumStorage.block.tile.TileQuantumDsu;
+import QuantumStorage.block.tile.TileQuantumDsuMk4;
 import QuantumStorage.client.GuiHandler;
 import QuantumStorage.compat.CompatManager;
 import QuantumStorage.compat.waila.CompatModuleWaila;

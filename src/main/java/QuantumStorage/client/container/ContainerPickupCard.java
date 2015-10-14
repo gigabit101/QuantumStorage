@@ -2,6 +2,7 @@ package QuantumStorage.client.container;
 
 import QuantumStorage.client.QuantumStorageContainer;
 import QuantumStorage.client.inventory.InventoryCraftingCard;
+import QuantumStorage.client.inventory.InventoryPickupCard;
 import QuantumStorage.client.inventory.InventoryQuantumBag;
 import QuantumStorage.client.slot.SlotLocked;
 import QuantumStorage.client.slot.SlotUpgrade;
@@ -14,45 +15,34 @@ import net.minecraft.inventory.SlotCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class ContainerQuantumBag extends QuantumStorageContainer
+public class ContainerPickupCard extends QuantumStorageContainer
 {	
-	InventoryQuantumBag bagInv;
-	public ContainerQuantumBag(EntityPlayer player) 
+	InventoryPickupCard bagInv;
+	public ContainerPickupCard(EntityPlayer player) 
 	{
 		int slot = player.inventory.currentItem;
 		IInventory playerInv = player.inventory;
-		bagInv = new InventoryQuantumBag(player, slot);
+		bagInv = new InventoryPickupCard(player, slot);
 		
         int i;
         int j;
-        //Bag inv
-		for(i = 0; i < 6; ++i)
-		{
-			for(j = 0; j < 9; ++j) 
-			{
-				addSlotToContainer(new Slot(bagInv, j + i * 9, 8 + j * 18, 18 + i * 18));
-			}
-		}
-		//upgrade slots
-		for(i = 0; i < 6; ++i) 
-		{
-			addSlotToContainer(new SlotUpgrade(bagInv, i + 54, 173, 18 + i * 18));
-		}
+        
+        addSlotToContainer(new Slot(bagInv, 0, 84, 44));
 		
 		//player inv
 		for (i = 0; i < 3; ++i)
 		{
 			for (j = 0; j < 9; ++j)
 			{
-				addSlotToContainer(new Slot(playerInv, j + i * 9 + 9, 8 + j * 18, 140 + i * 18));
+				addSlotToContainer(new Slot(playerInv, j + i * 9 + 9, 12 + j * 18, 102 + i * 18));
 			}
 		}
 		//player hotbar
 		for(i = 0; i < 9; ++i) 
 		{
 			if(player.inventory.currentItem == i)
-				addSlotToContainer(new SlotLocked(playerInv, i, 8 + i * 18, 198));
-			else addSlotToContainer(new Slot(playerInv, i, 8 + i * 18, 198));
+				addSlotToContainer(new SlotLocked(playerInv, i, 12 + i * 18, 160));
+			else addSlotToContainer(new Slot(playerInv, i, 12 + i * 18, 160));
 		}
 	}
 

@@ -20,10 +20,11 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import powercrystals.minefactoryreloaded.api.IDeepStorageUnit;
 
-public class TileQuantumDsu extends TileEntity implements IInventory, ISidedInventory, IDeepStorageUnit {
-	int storage = (int) Double.MAX_VALUE;
+public class TileQuantumDsuMk2 extends TileEntity implements IInventory, ISidedInventory, IDeepStorageUnit 
+{
+	int storage = Integer.MAX_VALUE / 3;
 
-	public Inventory inventory = new Inventory(3, "TileSimpleDsu", storage);
+	public Inventory inventory = new Inventory(3, "TileQuantumDsuMk2", storage);
 
 	public ItemStack storedItem;
 	public String storedItemAsString;
@@ -59,7 +60,7 @@ public class TileQuantumDsu extends TileEntity implements IInventory, ISidedInve
 				} 
 				else if (ItemUtils.isItemEqual(storedItem, getStackInSlot(0), true, true)) 
 				{
-					if (storedItem.stackSize <= Integer.MAX_VALUE - getStackInSlot(0).stackSize) 
+					if (storedItem.stackSize <= storage - getStackInSlot(0).stackSize) 
 					{
 						storedItem.stackSize += getStackInSlot(0).stackSize;
 						decrStackSize(0, getStackInSlot(0).stackSize);
@@ -123,7 +124,8 @@ public class TileQuantumDsu extends TileEntity implements IInventory, ISidedInve
 			storedItem = ItemStack.loadItemStackFromNBT((NBTTagCompound) tagCompound.getTag("storedStack"));
 		}
 
-		if (storedItem != null) {
+		if (storedItem != null) 
+		{
 			storedItem.stackSize = tagCompound.getInteger("storedQuantity");
 			storedItemAsString = tagCompound.getString("storedItemAsString");
 		}
@@ -227,7 +229,7 @@ public class TileQuantumDsu extends TileEntity implements IInventory, ISidedInve
 	public ItemStack getDropWithNBT() 
 	{
 		NBTTagCompound tileEntity = new NBTTagCompound();
-		ItemStack dropStack = new ItemStack(ModBlocks.QuantumDsu, 1);
+		ItemStack dropStack = new ItemStack(ModBlocks.QuantumDsuMk2, 1);
 		writeToNBTWithoutCoords(tileEntity);
 		dropStack.setTagCompound(new NBTTagCompound());
 		dropStack.stackTagCompound.setTag("tileEntity", tileEntity);

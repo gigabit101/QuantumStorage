@@ -3,7 +3,7 @@ package QuantumStorage.compat.waila;
 import java.util.ArrayList;
 import java.util.List;
 
-import QuantumStorage.block.tile.TileQuantumDsu;
+import QuantumStorage.block.tile.TileQuantumDsuMk4;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaDataProvider;
@@ -20,7 +20,7 @@ public class WailaProviderMachines implements IWailaDataProvider {
 	@Override
 	public List<String> getWailaBody(ItemStack item, List<String> tip, IWailaDataAccessor accessor, IWailaConfigHandler config) {
 
-		TileQuantumDsu machine = (TileQuantumDsu) accessor.getTileEntity();
+		TileQuantumDsuMk4 machine = (TileQuantumDsuMk4) accessor.getTileEntity();
 
 		machine.addWailaInfo(info);
 		tip.addAll(info);

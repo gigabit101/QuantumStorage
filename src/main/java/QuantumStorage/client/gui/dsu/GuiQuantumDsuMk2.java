@@ -1,22 +1,22 @@
-package QuantumStorage.client.gui;
+package QuantumStorage.client.gui.dsu;
 
-import QuantumStorage.block.tile.TileQuantumDsu;
-import QuantumStorage.client.container.ContainerQuantumDsu;
+import QuantumStorage.block.tile.TileQuantumDsuMk2;
+import QuantumStorage.client.container.dsu.ContainerQuantumDsuMk2;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 
-public class GuiQuantumDsu extends GuiContainer {
+public class GuiQuantumDsuMk2 extends GuiContainer {
 
 	private static final ResourceLocation texture = new ResourceLocation("quantumstorage", "textures/gui/dsu.png");
 
-	TileQuantumDsu tile;
+	TileQuantumDsuMk2 tile;
 	public int amoauntStored;
 
-	public GuiQuantumDsu(EntityPlayer player, TileQuantumDsu tile) {
-		super(new ContainerQuantumDsu(tile, player));
+	public GuiQuantumDsuMk2(EntityPlayer player, TileQuantumDsuMk2 tile) {
+		super(new ContainerQuantumDsuMk2(tile, player));
 		this.xSize = 176;
 		this.ySize = 167;
 		this.tile = tile;
@@ -31,7 +31,7 @@ public class GuiQuantumDsu extends GuiContainer {
 	}
 
 	protected void drawGuiContainerForegroundLayer(int p_146979_1_, int p_146979_2_) {
-		String name = StatCollector.translateToLocal("tile.quantumdsu.name");
+		String name = StatCollector.translateToLocal("tile.quantumdsumk2.name");
 		this.fontRendererObj.drawString(name, this.xSize / 2 - this.fontRendererObj.getStringWidth(name) / 2, 6,
 				4210752);
 		this.fontRendererObj.drawString(I18n.format("container.inventory", new Object[0]), 8, this.ySize - 96 + 2,

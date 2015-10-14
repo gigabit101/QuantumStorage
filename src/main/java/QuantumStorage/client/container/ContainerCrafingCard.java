@@ -2,25 +2,29 @@ package QuantumStorage.client.container;
 
 import QuantumStorage.client.QuantumStorageContainer;
 import QuantumStorage.client.inventory.InventoryCraftingCard;
+import QuantumStorage.client.inventory.InventoryQuantumBag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ContainerWorkbench;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotCrafting;
 import net.minecraft.world.World;
 
-public class ContainerCrafingCard extends ContainerWorkbench {
-
-	public ContainerCrafingCard(InventoryPlayer p_i1808_1_, World p_i1808_2_) {
-		super(p_i1808_1_, p_i1808_2_, 0, 0, 0);
-
+public class ContainerCrafingCard extends ContainerWorkbench 
+{
+	public ContainerCrafingCard(EntityPlayer player) 
+	{
+		super(player.inventory, player.worldObj, 0, 0, 0);
+		int slot = player.inventory.currentItem;
+		IInventory playerInv = player.inventory;		
 		craftMatrix = new InventoryCraftingCard(this, 3, 3);
 
 		inventorySlots.clear();
 		inventoryItemStacks.clear();
 
 		// Le copypasta
-		addSlotToContainer(new SlotCrafting(p_i1808_1_.player, craftMatrix, craftResult, 0, 124, 35));
+		addSlotToContainer(new SlotCrafting(player.inventory.player, craftMatrix, craftResult, 0, 124, 35));
 		int l;
 		int i1;
 
@@ -36,20 +40,21 @@ public class ContainerCrafingCard extends ContainerWorkbench {
 		{
 			for (i1 = 0; i1 < 9; ++i1)
 			{
-				addSlotToContainer(new Slot(p_i1808_1_, i1 + l * 9 + 9, 8 + i1 * 18, 84 + l * 18));
+				addSlotToContainer(new Slot(playerInv, i1 + l * 9 + 9, 8 + i1 * 18, 84 + l * 18));
 			}
 		}
 
 		for (l = 0; l < 9; ++l)
 		{
-			addSlotToContainer(new Slot(p_i1808_1_, l, 8 + l * 18, 142));
+			addSlotToContainer(new Slot(playerInv, l, 8 + l * 18, 142));
 		}
 
 		onCraftMatrixChanged(craftMatrix);
 	}
 
 	@Override
-	public boolean canInteractWith(EntityPlayer p_75145_1_) {
+	public boolean canInteractWith(EntityPlayer player) 
+	{
 		return true;
 	}
 }

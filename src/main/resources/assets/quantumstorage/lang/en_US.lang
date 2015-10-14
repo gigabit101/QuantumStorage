@@ -1,2 +1,22 @@
-tile.quantumdsu.name=Quantum Storage Unit
+tile.quantumdsumk1.name=Quantum Storage Unit Mk1
+tile.quantumdsumk2.name=Quantum Storage Unit Mk2
+tile.quantumdsumk3.name=Quantum Storage Unit Mk3
+tile.quantumdsu.name=Quantum Storage Unit Mk4
 item.linkedbag.name=Quantum Linked Pouch
+
+item.quantumBag.name=Quantum Bag
+item.quantumBag.tooltip=A Large Bag With Upgrade Slots
+
+item.quantumCraftingCard.name=Crafting Card Upgrade [WIP]
+item.quantumCraftingCard.tooltip=Will auto craft item in the bag based on the recipe in the card
+
+item.pickupupgrade.name=Filter Upgrade
+item.pickupupgrade.tooltip=Will add the item in the filter to the bag on pickup
+
+item.quantumstorage.misc.storagecore.name=Storage Core
+item.quantumstorage.misc.storagecore.tooltip=A Crafting Component
+
+item.quantumstorage.misc.blankcard.name=Blank Upgrade Card
+item.quantumstorage.misc.blankcard.tooltip=A Crafting Component
+
+quantumstorage.holdshiftmessage=Hold Shift for more info:
