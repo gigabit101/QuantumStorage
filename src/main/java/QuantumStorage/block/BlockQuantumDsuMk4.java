@@ -52,7 +52,7 @@ public class BlockQuantumDsuMk4 extends BlockQuantumDsuMk1
 		TileEntity te = world.getTileEntity(x, y, z);
 		if(te instanceof TileQuantumDsuMk4)
 		{
-			if (((TileQuantumDsuMk4) te).storedItem != null){
+			if (((TileQuantumDsuMk4) te).getStackInSlot(1) != null){
 				float xOffset = world.rand.nextFloat() * 0.8F + 0.1F;
 				float yOffset = world.rand.nextFloat() * 0.8F + 0.1F;
 				float zOffset = world.rand.nextFloat() * 0.8F + 0.1F;
