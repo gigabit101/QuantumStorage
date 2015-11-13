@@ -8,6 +8,7 @@ import QuantumStorage.block.tile.TileQuantumDsuMk4;
 import QuantumStorage.block.tile.TileQuantumDsuMk1;
 import QuantumStorage.client.GuiHandler;
 import QuantumStorage.init.ModBlocks;
+import QuantumStorage.util.LogHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -95,6 +96,7 @@ public class BlockQuantumDsuMk1 extends BlockContainer
 						x + xOffset, y + yOffset, z + zOffset,
 						stacknbt.splitStack(amountToDrop));
 				world.spawnEntityInWorld(entityitem);
+				LogHelper.debug("droped with nbt");
 			}
 			else 
 			{
@@ -106,6 +108,7 @@ public class BlockQuantumDsuMk1 extends BlockContainer
 				EntityItem entityitem = new EntityItem(world,
 						x + xOffset, y + yOffset, z + zOffset, stack);
 				world.spawnEntityInWorld(entityitem);
+				LogHelper.debug("droped without nbt");
 			}
 		}
 	}

@@ -1,5 +1,6 @@
 package QuantumStorage.client;
 
+import QuantumStorage.block.tile.TileQuantumChest;
 import QuantumStorage.block.tile.TileQuantumDsuMk1;
 import QuantumStorage.block.tile.TileQuantumDsuMk2;
 import QuantumStorage.block.tile.TileQuantumDsuMk3;
@@ -7,6 +8,7 @@ import QuantumStorage.block.tile.TileQuantumDsuMk4;
 import QuantumStorage.client.container.ContainerCrafingCard;
 import QuantumStorage.client.container.ContainerPickupCard;
 import QuantumStorage.client.container.ContainerQuantumBag;
+import QuantumStorage.client.container.ContainerQuantumChest;
 import QuantumStorage.client.container.dsu.ContainerQuantumDsuMk1;
 import QuantumStorage.client.container.dsu.ContainerQuantumDsuMk2;
 import QuantumStorage.client.container.dsu.ContainerQuantumDsuMk3;
@@ -14,6 +16,7 @@ import QuantumStorage.client.container.dsu.ContainerQuantumDsuMk4;
 import QuantumStorage.client.gui.GuiCraftingCard;
 import QuantumStorage.client.gui.GuiPickupCard;
 import QuantumStorage.client.gui.GuiQuantumBag;
+import QuantumStorage.client.gui.GuiQuantumChest;
 import QuantumStorage.client.gui.dsu.GuiQuantumDsuMk1;
 import QuantumStorage.client.gui.dsu.GuiQuantumDsuMk2;
 import QuantumStorage.client.gui.dsu.GuiQuantumDsuMk3;
@@ -31,7 +34,7 @@ public class GuiHandler implements IGuiHandler
 	public static final int dsuMk1 = 4;
 	public static final int dsuMk2 = 5;
 	public static final int dsuMk3 = 6;
-
+	public static final int chest = 7;
 
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) 
@@ -63,6 +66,10 @@ public class GuiHandler implements IGuiHandler
 		if (ID == pickupcard) 
 		{
 			return new ContainerPickupCard(player);
+		}
+		if (ID == chest) 
+		{
+			return new ContainerQuantumChest((TileQuantumChest) world.getTileEntity(x, y, z), player);
 		}
 		return null;
 	}
@@ -97,6 +104,10 @@ public class GuiHandler implements IGuiHandler
 		if (ID == pickupcard) 
 		{
 			return new GuiPickupCard(player);
+		}
+		if (ID == chest) 
+		{
+			return new GuiQuantumChest(player, (TileQuantumChest) world.getTileEntity(x, y, z));
 		}
 		return null;
 	}

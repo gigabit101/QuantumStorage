@@ -87,6 +87,10 @@ public class TileQuantumDsuMk2 extends TileEntity implements IInventory, ISidedI
 				}
 			}
 		}
+		if(inventory.hasChanged)
+		{
+			syncWithAll();
+		}
 	}
 
 	public Packet getDescriptionPacket() 

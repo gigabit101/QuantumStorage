@@ -1,13 +1,16 @@
 package QuantumStorage.init;
 
+import QuantumStorage.block.BlockQuantumChest;
 import QuantumStorage.block.BlockQuantumDsuMk1;
 import QuantumStorage.block.BlockQuantumDsuMk2;
 import QuantumStorage.block.BlockQuantumDsuMk3;
 import QuantumStorage.block.BlockQuantumDsuMk4;
+import QuantumStorage.block.tile.TileQuantumChest;
 import QuantumStorage.block.tile.TileQuantumDsuMk1;
 import QuantumStorage.block.tile.TileQuantumDsuMk2;
 import QuantumStorage.block.tile.TileQuantumDsuMk3;
 import QuantumStorage.block.tile.TileQuantumDsuMk4;
+import QuantumStorage.items.itemblocks.ItemBlockQuantumChest;
 import QuantumStorage.items.itemblocks.ItemBlockQuantumDsuMk1;
 import QuantumStorage.items.itemblocks.ItemBlockQuantumDsuMk2;
 import QuantumStorage.items.itemblocks.ItemBlockQuantumDsuMk3;
@@ -25,6 +28,7 @@ public class ModBlocks
 	public static Block QuantumDsuMk2;
 	public static Block QuantumDsuMk3;
 	public static Block QuantumDsuMk4;
+	public static Block QuantumChest;
 
 	public static void init() 
 	{
@@ -44,6 +48,10 @@ public class ModBlocks
 		QuantumDsuMk4 = new BlockQuantumDsuMk4(Material.iron);
 		GameRegistry.registerBlock(QuantumDsuMk4, ItemBlockQuantumDsuMk4.class, "quantumdsu");
 		GameRegistry.registerTileEntity(TileQuantumDsuMk4.class, "tilequantumdsu");
+		//Chest
+//		QuantumChest = new BlockQuantumChest(Material.iron);
+//		GameRegistry.registerBlock(QuantumChest, ItemBlockQuantumChest.class ,"quantumchest");
+//		GameRegistry.registerTileEntity(TileQuantumChest.class, "tilequantumchest");
 		addRecipes();
 	}
 
