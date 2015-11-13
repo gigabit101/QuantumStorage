@@ -14,6 +14,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import mcp.mobius.waila.api.IWailaRegistrar;
+import net.minecraftforge.common.ForgeChunkManager;
 
 @Mod(name = ModInfo.MOD_NAME, modid = ModInfo.MOD_ID, version = ModInfo.MOD_VERSION)
 public class QuantumStorage 
@@ -24,8 +25,8 @@ public class QuantumStorage
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) 
 	{
-		ModBlocks.init();
 		ModItems.init();
+		ModBlocks.init();
 		NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, new GuiHandler());
 		PacketHandler.setChannels(NetworkRegistry.INSTANCE.newChannel(ModInfo.MOD_ID + "_packets", new PacketHandler()));
 		CompatManager.init(event);		

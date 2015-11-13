@@ -4,8 +4,6 @@ import java.util.List;
 
 import QuantumStorage.init.ModBlocks;
 import QuantumStorage.packet.PacketHandler;
-import QuantumStorage.util.Inventory;
-import QuantumStorage.util.ItemUtils;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,6 +17,8 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import powercrystals.minefactoryreloaded.api.IDeepStorageUnit;
+import reborncore.common.util.Inventory;
+import reborncore.common.util.ItemUtils;
 
 public class TileQuantumDsuMk4 extends TileEntity implements IInventory, ISidedInventory, IDeepStorageUnit 
 {
@@ -53,7 +53,7 @@ public class TileQuantumDsuMk4 extends TileEntity implements IInventory, ISidedI
 
 			if (getStackInSlot(0) != null) 
 			{
-				if (storedItem == null && getStackInSlot(1) == null) 
+				if (storedItem == null) 
 				{
 					storedItem = getStackInSlot(0);
 					setInventorySlotContents(0, null);
@@ -88,7 +88,6 @@ public class TileQuantumDsuMk4 extends TileEntity implements IInventory, ISidedI
 				}
 			}
 		}
-		syncWithAll();
 	}
 
 	public Packet getDescriptionPacket() 

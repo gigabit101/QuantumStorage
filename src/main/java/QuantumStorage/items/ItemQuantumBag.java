@@ -3,21 +3,14 @@ package QuantumStorage.items;
 import java.awt.Color;
 import java.util.List;
 
-import org.lwjgl.Sys;
-
 import QuantumStorage.QuantumStorage;
 import QuantumStorage.client.GuiHandler;
-import QuantumStorage.init.ModBlocks;
-import QuantumStorage.items.upgrades.ItemPickupUpgrade;
 import QuantumStorage.util.InventoryHelper;
 import QuantumStorage.util.ItemNBTHelper;
-import QuantumStorage.util.ItemUtils;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -29,7 +22,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
-import scala.reflect.internal.Trees.Return;
+import reborncore.common.util.ItemUtils;
 
 public class ItemQuantumBag extends ItemQuantumStorage
 {
@@ -43,7 +36,8 @@ public class ItemQuantumBag extends ItemQuantumStorage
 	{
 		setUnlocalizedName("quantumBag");
         setHasSubtypes(true);
-        MinecraftForge.EVENT_BUS.register(this);
+        //TODO
+//        MINECRAFTFORGE.EVENT_BUS.REGISTER(THIS);
 	}
 	
 	@SubscribeEvent

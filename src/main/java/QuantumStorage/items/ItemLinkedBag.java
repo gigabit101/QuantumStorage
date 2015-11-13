@@ -18,11 +18,15 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.event.ClickEvent;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.StatCollector;
+import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeChunkManager;
 
 public class ItemLinkedBag extends ItemQuantumStorage
 {	
@@ -30,7 +34,7 @@ public class ItemLinkedBag extends ItemQuantumStorage
 	{
 		setUnlocalizedName("linkedbag");
 	}
-	
+		
 	@Override
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int p_77648_7_, float p_77648_8_, float p_77648_9_, float p_77648_10_) 
 	{
@@ -57,7 +61,8 @@ public class ItemLinkedBag extends ItemQuantumStorage
 			int cordY = stack.stackTagCompound.getInteger("ycord");
 			int cordZ = stack.stackTagCompound.getInteger("zcord");
 	
-			if(!player.isSneaking() && stack.stackTagCompound != null)
+			if(!world.isRemote && !player.isSneaking() && stack.stackTagCompound != null)
+			{
 				if(world.getTileEntity(cordX, cordY, cordZ) instanceof TileQuantumDsuMk1)
 					player.openGui(QuantumStorage.INSTANCE, GuiHandler.dsuMk1, world, cordX, cordY, cordZ);
 				if(world.getTileEntity(cordX, cordY, cordZ) instanceof TileQuantumDsuMk2)
@@ -66,6 +71,7 @@ public class ItemLinkedBag extends ItemQuantumStorage
 					player.openGui(QuantumStorage.INSTANCE, GuiHandler.dsuMk3, world, cordX, cordY, cordZ);
 				if(world.getTileEntity(cordX, cordY, cordZ) instanceof TileQuantumDsuMk4)
 					player.openGui(QuantumStorage.INSTANCE, GuiHandler.dsu, world, cordX, cordY, cordZ);
+			}
 				else if(world.getTileEntity(cordX, cordY, cordZ) == null)
 					player.addChatComponentMessage(new ChatComponentText("QSU is missing or not loaded"));
 			return stack;

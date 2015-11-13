@@ -22,25 +22,14 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-public class BlockQuantumDsuMk4 extends BlockContainer 
+public class BlockQuantumDsuMk4 extends BlockQuantumDsuMk1 
 {
-	@SideOnly(Side.CLIENT)
-	private IIcon iconFront;
-
-	@SideOnly(Side.CLIENT)
-	private IIcon iconTop;
-
-	@SideOnly(Side.CLIENT)
-	private IIcon iconBottom;
-
 	public TileQuantumDsuMk4 dsu;
 
 	public BlockQuantumDsuMk4(Material material) 
 	{
 		super(material);
 		setBlockName("quantumdsu");
-		setCreativeTab(CreativeTabQuantumStorage.instance);
-		setHardness(2.0F);
 	}
 
 	@Override
@@ -49,25 +38,6 @@ public class BlockQuantumDsuMk4 extends BlockContainer
 		if (!player.isSneaking())
 			player.openGui(QuantumStorage.INSTANCE, GuiHandler.dsu, world, x, y, z);
 		return true;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister icon) 
-	{
-		this.blockIcon = icon.registerIcon("quantumstorage:dsuside");
-		this.iconFront = icon.registerIcon("quantumstorage:dsufront");
-		this.iconTop = icon.registerIcon("quantumstorage:dsutop");
-		this.iconBottom = icon.registerIcon("quantumstorage:dsubottom");
-	}
-
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int metadata) 
-	{
-		return metadata == 0 && side == 3 ? this.iconFront
-				: side == 1 ? this.iconTop
-						: side == 0 ? this.iconBottom
-								: (side == 0 ? this.iconTop : (side == metadata ? this.iconFront : this.blockIcon));
 	}
 
 	@Override
@@ -108,7 +78,4 @@ public class BlockQuantumDsuMk4 extends BlockContainer
 			}
 		}
 	}
-	
-	@Override
-	protected void dropBlockAsItem(World world, int x, int y, int z, ItemStack stack) {}
 }

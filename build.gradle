@@ -17,7 +17,7 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.3.0"
+version = "1.4.1"
 group= "com.gigabit101.QuantumStorage" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "QuantumStorage"
 
@@ -37,9 +37,11 @@ dependencies {
     }
 	println("  Downloading dependencies!")
 	grabDep('gbl', 'http://addons-origin.cursecdn.com/files/2230/518/Waila-1.5.10_1.7.10.jar')
+	grabDep('gbc', 'http://addons-origin.cursecdn.com/files/2266/366/RebornCore-1.0.0.8-dev.jar')
 	
 	println("  Adding dependencies!")
     compile files("dep/gbl.jar")
+    compile files("dep/gbc.jar")
 	println("  Finished adding dependencies!")
 }
 
@@ -50,7 +52,8 @@ minecraft {
 
 dependencies {
 	compile files (
-		'Waila-deobf.jar'
+		'Waila-deobf.jar',
+		'RebornCore.jar'
 	)
 }
 

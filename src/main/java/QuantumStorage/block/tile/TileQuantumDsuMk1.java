@@ -1,24 +1,29 @@
 package QuantumStorage.block.tile;
 
+import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
 
+import QuantumStorage.QuantumStorage;
 import QuantumStorage.init.ModBlocks;
 import QuantumStorage.packet.PacketHandler;
-import QuantumStorage.util.Inventory;
-import QuantumStorage.util.ItemUtils;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import mcp.mobius.waila.api.impl.ConfigHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.ChunkCoordIntPair;
+import net.minecraftforge.common.ForgeChunkManager;
 import powercrystals.minefactoryreloaded.api.IDeepStorageUnit;
+import reborncore.common.util.Inventory;
+import reborncore.common.util.ItemUtils;
 
 public class TileQuantumDsuMk1 extends TileEntity implements IInventory, ISidedInventory, IDeepStorageUnit 
 {
@@ -28,7 +33,9 @@ public class TileQuantumDsuMk1 extends TileEntity implements IInventory, ISidedI
 
 	public ItemStack storedItem;
 	public String storedItemAsString;
-
+    // Slot 0 = Input
+    // Slot 1 = Output
+    // Slot 2 = Fake Item
 	@Override
 	public void updateEntity() 
 	{
@@ -53,7 +60,7 @@ public class TileQuantumDsuMk1 extends TileEntity implements IInventory, ISidedI
 
 			if (getStackInSlot(0) != null) 
 			{
-				if (storedItem == null && getStackInSlot(1) == null) 
+				if (storedItem == null) 
 				{
 					storedItem = getStackInSlot(0);
 					setInventorySlotContents(0, null);
@@ -74,21 +81,22 @@ public class TileQuantumDsuMk1 extends TileEntity implements IInventory, ISidedI
 				itemStack.stackSize = itemStack.getMaxStackSize();
 				setInventorySlotContents(1, itemStack);
 				storedItem.stackSize -= itemStack.getMaxStackSize();
-			} else if (ItemUtils.isItemEqual(getStackInSlot(1), storedItem, true, true)) 
+			} 
+			else if (ItemUtils.isItemEqual(getStackInSlot(1), storedItem, true, true)) 
 			{
 				int wanted = getStackInSlot(1).getMaxStackSize() - getStackInSlot(1).stackSize;
 				if (storedItem.stackSize >= wanted) 
 				{
 					decrStackSize(1, -wanted);
 					storedItem.stackSize -= wanted;
-				} else 
+				} 
+				else 
 				{
 					decrStackSize(1, -storedItem.stackSize);
 					storedItem = null;
 				}
 			}
 		}
-		syncWithAll();
 	}
 
 	public Packet getDescriptionPacket() 
