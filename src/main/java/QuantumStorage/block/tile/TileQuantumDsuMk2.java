@@ -19,7 +19,7 @@ import powercrystals.minefactoryreloaded.api.IDeepStorageUnit;
 import reborncore.common.util.Inventory;
 import reborncore.common.util.ItemUtils;
 
-public class TileQuantumDsuMk2 extends TileEntity implements IInventory, ISidedInventory, IDeepStorageUnit 
+public class TileQuantumDsuMk2 extends TileQuantumStorage implements IInventory, ISidedInventory, IDeepStorageUnit 
 {
 	int storage = Integer.MAX_VALUE / 3;
 
@@ -251,15 +251,15 @@ public class TileQuantumDsuMk2 extends TileEntity implements IInventory, ISidedI
     {
 		int size = 0;
 		String name = "";
-		if (storedItem != null) 
-		{
-			name = storedItem.getDisplayName();
-			size += storedItem.stackSize;
-		}
-		if (getStackInSlot(1) != null) 
+		if (getStackInSlot(1) != null && storedItem == null) 
 		{
 			name = getStackInSlot(1).getDisplayName();
 			size += getStackInSlot(1).stackSize;
+		}
+		if(getStackInSlot(1) != null && storedItem != null)
+		{
+			name = getStackInSlot(1).getDisplayName();
+			size += getStackInSlot(1).stackSize + storedItem.stackSize;
 		}
 		if (storedItem != null)
 		info.add(size + " " + name);

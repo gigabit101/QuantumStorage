@@ -7,6 +7,7 @@ import QuantumStorage.block.tile.TileQuantumDsuMk1;
 import QuantumStorage.block.tile.TileQuantumDsuMk2;
 import QuantumStorage.block.tile.TileQuantumDsuMk3;
 import QuantumStorage.block.tile.TileQuantumDsuMk4;
+import QuantumStorage.block.tile.TileQuantumStorage;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaDataProvider;
@@ -23,15 +24,11 @@ public class WailaProviderMachines implements IWailaDataProvider
 	@Override
 	public List<String> getWailaBody(ItemStack item, List<String> tip, IWailaDataAccessor accessor, IWailaConfigHandler config) 
 	{
-		TileQuantumDsuMk1 mk1 = (TileQuantumDsuMk1) accessor.getTileEntity();
-		TileQuantumDsuMk2 mk2 = (TileQuantumDsuMk2) accessor.getTileEntity();
-		TileQuantumDsuMk3 mk3 = (TileQuantumDsuMk3) accessor.getTileEntity();
-		TileQuantumDsuMk4 mk4 = (TileQuantumDsuMk4) accessor.getTileEntity();
+		TileQuantumStorage tile = (TileQuantumStorage) accessor.getTileEntity();
 
-		mk1.addWailaInfo(info);
-		mk2.addWailaInfo(info);
-		mk3.addWailaInfo(info);
-		mk4.addWailaInfo(info);
+
+		tile.addWailaInfo(info);
+
 		tip.addAll(info);
 		info.clear();
 
