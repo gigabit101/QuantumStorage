@@ -4,7 +4,6 @@ import QuantumStorage.init.ModBlocks;
 import QuantumStorage.lib.ModInfo;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 
 public class CreativeTabQuantumStorage extends CreativeTabs
 {

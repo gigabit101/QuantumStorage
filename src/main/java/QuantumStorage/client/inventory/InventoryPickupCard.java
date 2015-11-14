@@ -1,7 +1,6 @@
 package QuantumStorage.client.inventory;
 
 import QuantumStorage.init.ModItems;
-import QuantumStorage.items.ItemQuantumBag;
 import QuantumStorage.items.upgrades.ItemPickupUpgrade;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;

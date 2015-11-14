@@ -1,8 +1,6 @@
 package QuantumStorage.client.container;
 
 import QuantumStorage.client.QuantumStorageContainer;
-import QuantumStorage.client.slot.SlotFake;
-import QuantumStorage.client.slot.SlotLocked;
 import QuantumStorage.tile.TileQuantumChest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;

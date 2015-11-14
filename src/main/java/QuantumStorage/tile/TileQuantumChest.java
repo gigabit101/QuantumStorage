@@ -1,29 +1,12 @@
 package QuantumStorage.tile;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.logging.Level;
-
-import QuantumStorage.QuantumStorage;
 import QuantumStorage.init.ModBlocks;
-import QuantumStorage.packet.PacketHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import mcp.mobius.waila.api.impl.ConfigHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.ChunkCoordIntPair;
-import net.minecraftforge.common.ForgeChunkManager;
-import powercrystals.minefactoryreloaded.api.IDeepStorageUnit;
 import reborncore.common.util.Inventory;
-import reborncore.common.util.ItemUtils;
 
 public class TileQuantumChest extends TileEntity implements IInventory 
 {

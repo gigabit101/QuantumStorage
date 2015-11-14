@@ -3,7 +3,6 @@ package QuantumStorage.block.qst;
 import QuantumStorage.QuantumStorage;
 import QuantumStorage.client.GuiHandler;
 import QuantumStorage.init.ModBlocks;
-import QuantumStorage.tile.qst.TileQuantumTankMk1;
 import QuantumStorage.tile.qst.TileQuantumTankMk2;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

@@ -1,6 +1,5 @@
 package QuantumStorage.client.slot;
 
-import QuantumStorage.items.upgrades.ItemCraftingCardUpgrade;
 import QuantumStorage.items.upgrades.ItemUpgrade;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;

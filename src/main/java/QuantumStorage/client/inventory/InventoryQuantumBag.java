@@ -4,7 +4,6 @@ import QuantumStorage.init.ModItems;
 import QuantumStorage.items.ItemQuantumBag;
 import QuantumStorage.items.upgrades.ItemPickupUpgrade;
 import QuantumStorage.items.upgrades.ItemUpgrade;
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;

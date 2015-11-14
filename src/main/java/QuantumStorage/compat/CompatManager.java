@@ -1,7 +1,5 @@
 package QuantumStorage.compat;
 
-import org.lwjgl.Sys;
-
 import QuantumStorage.compat.waila.CompatModuleWaila;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLInitializationEvent;

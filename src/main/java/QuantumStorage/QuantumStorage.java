@@ -4,22 +4,16 @@ import java.io.File;
 
 import QuantumStorage.client.GuiHandler;
 import QuantumStorage.compat.CompatManager;
-import QuantumStorage.compat.waila.CompatModuleWaila;
 import QuantumStorage.config.ConfigQuantumStorage;
 import QuantumStorage.init.ModBlocks;
 import QuantumStorage.init.ModItems;
 import QuantumStorage.init.ModRecipes;
 import QuantumStorage.lib.ModInfo;
 import QuantumStorage.packet.PacketHandler;
-import QuantumStorage.tile.qsu.TileQuantumDsuMk4;
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
-import mcp.mobius.waila.api.IWailaRegistrar;
-import net.minecraftforge.common.ForgeChunkManager;
 
 @Mod(name = ModInfo.MOD_NAME, modid = ModInfo.MOD_ID, version = ModInfo.MOD_VERSION)
 public class QuantumStorage 

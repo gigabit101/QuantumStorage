@@ -5,7 +5,6 @@ import QuantumStorage.client.slot.SlotFake;
 import QuantumStorage.client.slot.SlotOutput;
 import QuantumStorage.config.ConfigQuantumStorage;
 import QuantumStorage.tile.qsu.TileQuantumDsuMk2;
-import QuantumStorage.tile.qsu.TileQuantumDsuMk4;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;
 

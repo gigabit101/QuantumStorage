@@ -1,19 +1,11 @@
 package QuantumStorage.client.container;
 
 import QuantumStorage.client.QuantumStorageContainer;
-import QuantumStorage.client.inventory.InventoryCraftingCard;
 import QuantumStorage.client.inventory.InventoryPickupCard;
-import QuantumStorage.client.inventory.InventoryQuantumBag;
 import QuantumStorage.client.slot.SlotLocked;
-import QuantumStorage.client.slot.SlotUpgrade;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
-import net.minecraft.inventory.SlotCrafting;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
 
 public class ContainerPickupCard extends QuantumStorageContainer
 {	

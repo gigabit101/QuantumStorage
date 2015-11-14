@@ -1,15 +1,11 @@
 package QuantumStorage.client.container;
 
-import QuantumStorage.client.QuantumStorageContainer;
 import QuantumStorage.client.inventory.InventoryCraftingCard;
-import QuantumStorage.client.inventory.InventoryQuantumBag;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ContainerWorkbench;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotCrafting;
-import net.minecraft.world.World;
 
 public class ContainerCrafingCard extends ContainerWorkbench 
 {
