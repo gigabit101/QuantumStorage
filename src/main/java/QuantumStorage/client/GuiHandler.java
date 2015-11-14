@@ -1,10 +1,5 @@
 package QuantumStorage.client;
 
-import QuantumStorage.block.tile.TileQuantumChest;
-import QuantumStorage.block.tile.TileQuantumDsuMk1;
-import QuantumStorage.block.tile.TileQuantumDsuMk2;
-import QuantumStorage.block.tile.TileQuantumDsuMk3;
-import QuantumStorage.block.tile.TileQuantumDsuMk4;
 import QuantumStorage.client.container.ContainerCrafingCard;
 import QuantumStorage.client.container.ContainerPickupCard;
 import QuantumStorage.client.container.ContainerQuantumBag;
@@ -21,6 +16,11 @@ import QuantumStorage.client.gui.dsu.GuiQuantumDsuMk1;
 import QuantumStorage.client.gui.dsu.GuiQuantumDsuMk2;
 import QuantumStorage.client.gui.dsu.GuiQuantumDsuMk3;
 import QuantumStorage.client.gui.dsu.GuiQuantumDsuMk4;
+import QuantumStorage.tile.TileQuantumChest;
+import QuantumStorage.tile.qsu.TileQuantumDsuMk1;
+import QuantumStorage.tile.qsu.TileQuantumDsuMk2;
+import QuantumStorage.tile.qsu.TileQuantumDsuMk3;
+import QuantumStorage.tile.qsu.TileQuantumDsuMk4;
 import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;

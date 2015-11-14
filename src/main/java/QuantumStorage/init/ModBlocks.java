@@ -1,20 +1,20 @@
 package QuantumStorage.init;
 
 import QuantumStorage.block.BlockQuantumChest;
-import QuantumStorage.block.BlockQuantumDsuMk1;
-import QuantumStorage.block.BlockQuantumDsuMk2;
-import QuantumStorage.block.BlockQuantumDsuMk3;
-import QuantumStorage.block.BlockQuantumDsuMk4;
-import QuantumStorage.block.tile.TileQuantumChest;
-import QuantumStorage.block.tile.TileQuantumDsuMk1;
-import QuantumStorage.block.tile.TileQuantumDsuMk2;
-import QuantumStorage.block.tile.TileQuantumDsuMk3;
-import QuantumStorage.block.tile.TileQuantumDsuMk4;
+import QuantumStorage.block.qsu.BlockQuantumDsuMk1;
+import QuantumStorage.block.qsu.BlockQuantumDsuMk2;
+import QuantumStorage.block.qsu.BlockQuantumDsuMk3;
+import QuantumStorage.block.qsu.BlockQuantumDsuMk4;
 import QuantumStorage.items.itemblocks.ItemBlockQuantumChest;
 import QuantumStorage.items.itemblocks.ItemBlockQuantumDsuMk1;
 import QuantumStorage.items.itemblocks.ItemBlockQuantumDsuMk2;
 import QuantumStorage.items.itemblocks.ItemBlockQuantumDsuMk3;
 import QuantumStorage.items.itemblocks.ItemBlockQuantumDsuMk4;
+import QuantumStorage.tile.TileQuantumChest;
+import QuantumStorage.tile.qsu.TileQuantumDsuMk1;
+import QuantumStorage.tile.qsu.TileQuantumDsuMk2;
+import QuantumStorage.tile.qsu.TileQuantumDsuMk3;
+import QuantumStorage.tile.qsu.TileQuantumDsuMk4;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -52,37 +52,5 @@ public class ModBlocks
 //		QuantumChest = new BlockQuantumChest(Material.iron);
 //		GameRegistry.registerBlock(QuantumChest, ItemBlockQuantumChest.class ,"quantumchest");
 //		GameRegistry.registerTileEntity(TileQuantumChest.class, "tilequantumchest");
-		addRecipes();
-	}
-
-	public static void addRecipes() 
-	{	
-		GameRegistry.addRecipe(new ItemStack(QuantumDsuMk1), 
-				"EEE", 
-				"ECE", 
-				"EEE", 
-				'E', new ItemStack(Blocks.chest), 
-				'C', new ItemStack(ModItems.misc));	
-		
-		GameRegistry.addRecipe(new ItemStack(QuantumDsuMk2), 
-				"EEE", 
-				"ECE", 
-				"EEE", 
-				'E', new ItemStack(Items.gold_ingot), 
-				'C', new ItemStack(QuantumDsuMk1));	
-		
-		GameRegistry.addRecipe(new ItemStack(QuantumDsuMk3), 
-				"EEE", 
-				"ECE", 
-				"EEE", 
-				'E', new ItemStack(Items.diamond), 
-				'C', new ItemStack(QuantumDsuMk2));	
-		
-		GameRegistry.addRecipe(new ItemStack(QuantumDsuMk4), 
-				"EEE", 
-				"ECE", 
-				"EEE", 
-				'E', new ItemStack(Items.emerald), 
-				'C', new ItemStack(QuantumDsuMk3));	
 	}
 }

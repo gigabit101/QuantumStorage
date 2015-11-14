@@ -2,8 +2,8 @@ package QuantumStorage.items.itemblocks;
 
 import java.util.List;
 
-import QuantumStorage.block.tile.TileQuantumDsuMk2;
 import QuantumStorage.init.ModBlocks;
+import QuantumStorage.tile.qsu.TileQuantumDsuMk2;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;

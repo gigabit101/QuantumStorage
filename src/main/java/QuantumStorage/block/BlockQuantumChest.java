@@ -1,10 +1,10 @@
 package QuantumStorage.block;
 
 import QuantumStorage.QuantumStorage;
-import QuantumStorage.block.tile.TileQuantumChest;
-import QuantumStorage.block.tile.TileQuantumDsuMk4;
 import QuantumStorage.client.GuiHandler;
 import QuantumStorage.init.ModBlocks;
+import QuantumStorage.tile.TileQuantumChest;
+import QuantumStorage.tile.qsu.TileQuantumDsuMk4;
 import QuantumStorage.util.LogHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;

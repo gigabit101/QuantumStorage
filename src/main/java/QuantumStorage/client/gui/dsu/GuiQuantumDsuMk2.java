@@ -1,7 +1,7 @@
 package QuantumStorage.client.gui.dsu;
 
-import QuantumStorage.block.tile.TileQuantumDsuMk2;
 import QuantumStorage.client.container.dsu.ContainerQuantumDsuMk2;
+import QuantumStorage.tile.qsu.TileQuantumDsuMk2;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;

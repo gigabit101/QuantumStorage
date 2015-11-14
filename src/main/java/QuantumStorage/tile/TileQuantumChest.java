@@ -1,4 +1,4 @@
-package QuantumStorage.block.tile;
+package QuantumStorage.tile;
 
 import java.util.LinkedList;
 import java.util.List;

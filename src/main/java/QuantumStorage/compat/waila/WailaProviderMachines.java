@@ -3,11 +3,11 @@ package QuantumStorage.compat.waila;
 import java.util.ArrayList;
 import java.util.List;
 
-import QuantumStorage.block.tile.TileQuantumDsuMk1;
-import QuantumStorage.block.tile.TileQuantumDsuMk2;
-import QuantumStorage.block.tile.TileQuantumDsuMk3;
-import QuantumStorage.block.tile.TileQuantumDsuMk4;
-import QuantumStorage.block.tile.TileQuantumStorage;
+import QuantumStorage.tile.TileQuantumStorage;
+import QuantumStorage.tile.qsu.TileQuantumDsuMk1;
+import QuantumStorage.tile.qsu.TileQuantumDsuMk2;
+import QuantumStorage.tile.qsu.TileQuantumDsuMk3;
+import QuantumStorage.tile.qsu.TileQuantumDsuMk4;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaDataProvider;

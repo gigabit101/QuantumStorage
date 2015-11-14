@@ -1,41 +1,36 @@
-package QuantumStorage.block.tile;
+package QuantumStorage.tile.qsu;
 
-import java.util.LinkedList;
 import java.util.List;
-import java.util.logging.Level;
 
-import QuantumStorage.QuantumStorage;
+import QuantumStorage.config.ConfigQuantumStorage;
 import QuantumStorage.init.ModBlocks;
 import QuantumStorage.packet.PacketHandler;
+import QuantumStorage.tile.TileQuantumStorage;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import mcp.mobius.waila.api.impl.ConfigHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.ChunkCoordIntPair;
-import net.minecraftforge.common.ForgeChunkManager;
 import powercrystals.minefactoryreloaded.api.IDeepStorageUnit;
 import reborncore.common.util.Inventory;
 import reborncore.common.util.ItemUtils;
 
-public class TileQuantumDsuMk1 extends TileQuantumStorage implements IInventory, ISidedInventory, IDeepStorageUnit 
+public class TileQuantumDsuMk4 extends TileQuantumStorage implements IInventory, ISidedInventory, IDeepStorageUnit 
 {
-	int storage = Integer.MAX_VALUE / 4;
+	int storage = ConfigQuantumStorage.mk4MaxStorage;
 
-	public Inventory inventory = new Inventory(3, "TileQuantumDsuMk1", storage);
+	public Inventory inventory = new Inventory(3, "TileSimpleDsu", storage);
 
 	public ItemStack storedItem;
 	public String storedItemAsString;
-    // Slot 0 = Input
-    // Slot 1 = Output
-    // Slot 2 = Fake Item
+
 	@Override
 	public void updateEntity() 
 	{
@@ -81,16 +76,14 @@ public class TileQuantumDsuMk1 extends TileQuantumStorage implements IInventory,
 				itemStack.stackSize = itemStack.getMaxStackSize();
 				setInventorySlotContents(1, itemStack);
 				storedItem.stackSize -= itemStack.getMaxStackSize();
-			} 
-			else if (ItemUtils.isItemEqual(getStackInSlot(1), storedItem, true, true)) 
+			} else if (ItemUtils.isItemEqual(getStackInSlot(1), storedItem, true, true)) 
 			{
 				int wanted = getStackInSlot(1).getMaxStackSize() - getStackInSlot(1).stackSize;
 				if (storedItem.stackSize >= wanted) 
 				{
 					decrStackSize(1, -wanted);
 					storedItem.stackSize -= wanted;
-				} 
-				else 
+				} else 
 				{
 					decrStackSize(1, -storedItem.stackSize);
 					storedItem = null;
@@ -241,7 +234,7 @@ public class TileQuantumDsuMk1 extends TileQuantumStorage implements IInventory,
 	public ItemStack getDropWithNBT() 
 	{
 		NBTTagCompound tileEntity = new NBTTagCompound();
-		ItemStack dropStack = new ItemStack(ModBlocks.QuantumDsuMk1, 1);
+		ItemStack dropStack = new ItemStack(ModBlocks.QuantumDsuMk4, 1);
 		writeToNBTWithoutCoords(tileEntity);
 		dropStack.setTagCompound(new NBTTagCompound());
 		dropStack.stackTagCompound.setTag("tileEntity", tileEntity);
