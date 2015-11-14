@@ -16,7 +16,16 @@ item.pickupupgrade.tooltip=Will add the item in the filter to the bag on pickup
 item.quantumstorage.misc.storagecore.name=Storage Core [WIP DO NOT USE]
 item.quantumstorage.misc.storagecore.tooltip=A Crafting Component
 
-item.quantumstorage.misc.blankcard.name=Blank Upgrade Card [WIP DO NOT USE]
+item.quantumstorage.misc.blankcard.name=Blank Upgrade Card
 item.quantumstorage.misc.blankcard.tooltip=A Crafting Component
+
+item.quantumstorage.qsuupgrade.mk2.name=Mk2 Upgrade
+item.quantumstorage.qsuupgrade.mk2.tooltip=Shift Right Click on a MK1 QSU to upgrade into MK2
+
+item.quantumstorage.qsuupgrade.mk3.name=Mk3 Upgrade
+item.quantumstorage.qsuupgrade.mk3.tooltip=Shift Right Click on a MK2 QSU to upgrade into MK3
+
+item.quantumstorage.qsuupgrade.mk4.name=Mk4 Upgrade
+item.quantumstorage.qsuupgrade.mk4.tooltip=Shift Right Click on a MK3 QSU to upgrade into MK4
 
 quantumstorage.holdshiftmessage=Hold Shift for more info:

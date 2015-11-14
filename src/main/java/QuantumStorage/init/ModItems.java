@@ -2,6 +2,7 @@ package QuantumStorage.init;
 
 import QuantumStorage.items.ItemLinkedBag;
 import QuantumStorage.items.ItemMisc;
+import QuantumStorage.items.ItemQsuUpgrade;
 import QuantumStorage.items.ItemQuantumBag;
 import QuantumStorage.items.upgrades.ItemCraftingCardUpgrade;
 import QuantumStorage.items.upgrades.ItemPickupUpgrade;
@@ -20,6 +21,7 @@ public class ModItems
 	public static Item linkedBag;
 	public static Item pickupCard;
 	public static Item misc;
+	public static Item qsuUpgrades;
 	
 	public static void init()
 	{
@@ -37,6 +39,9 @@ public class ModItems
 		
 		misc = new ItemMisc();
 		GameRegistry.registerItem(misc, "misc");
+		
+		qsuUpgrades = new ItemQsuUpgrade();
+		GameRegistry.registerItem(qsuUpgrades, "qsuupgrade");
 		
 		addRecipes();
 	}
@@ -82,6 +87,27 @@ public class ModItems
 				'L', new ItemStack(Items.leather), 
 				'E', new ItemStack(Blocks.wool),
 				'C', new ItemStack(misc ,1 ,0));
+		//Upgrades		
+		GameRegistry.addRecipe(new ItemStack(qsuUpgrades, 1, 0), 
+				"EEE", 
+				"ECE", 
+				"EEE", 
+				'E', new ItemStack(Items.gold_ingot), 
+				'C', new ItemStack(misc, 1, 1));	
+		
+		GameRegistry.addRecipe(new ItemStack(qsuUpgrades, 1, 1), 
+				"EEE", 
+				"ECE", 
+				"EEE", 
+				'E', new ItemStack(Items.diamond), 
+				'C', new ItemStack(misc ,1 ,1));	
+		
+		GameRegistry.addRecipe(new ItemStack(qsuUpgrades, 1, 2), 
+				"EEE", 
+				"ECE", 
+				"EEE", 
+				'E', new ItemStack(Items.emerald), 
+				'C', new ItemStack(misc,1 ,1));	
 		
 		//Colour Bags
 		CraftingHelper.addShapelessOreRecipe(new ItemStack(quantumBag ,1, 0), 
