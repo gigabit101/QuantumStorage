@@ -4,10 +4,17 @@ import java.util.List;
 
 import org.lwjgl.input.Keyboard;
 
+import QuantumStorage.block.qst.BlockQuantumTankMk1;
+import QuantumStorage.block.qst.BlockQuantumTankMk2;
+import QuantumStorage.block.qst.BlockQuantumTankMk3;
 import QuantumStorage.block.qsu.BlockQuantumDsuMk1;
 import QuantumStorage.block.qsu.BlockQuantumDsuMk2;
 import QuantumStorage.block.qsu.BlockQuantumDsuMk3;
 import QuantumStorage.init.ModBlocks;
+import QuantumStorage.tile.qst.TileQuantumTankMk1;
+import QuantumStorage.tile.qst.TileQuantumTankMk2;
+import QuantumStorage.tile.qst.TileQuantumTankMk3;
+import QuantumStorage.tile.qst.TileQuantumTankMk4;
 import QuantumStorage.tile.qsu.TileQuantumDsuMk1;
 import QuantumStorage.tile.qsu.TileQuantumDsuMk2;
 import QuantumStorage.tile.qsu.TileQuantumDsuMk3;
@@ -25,6 +32,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidStack;
 
 public class ItemQsuUpgrade extends ItemQuantumStorage
 {
@@ -145,6 +153,69 @@ public class ItemQsuUpgrade extends ItemQuantumStorage
 				TileQuantumDsuMk4 te2 = (TileQuantumDsuMk4) world.getTileEntity(x, y, z);
 				//set stack for old tile
 				te2.storedItem = storeditem;
+				ItemStack upgrade = stack;
+				stack.stackSize -= 1;
+			}
+			if(block instanceof BlockQuantumTankMk1 && meta == 0)
+			{
+				//mk1
+				TileQuantumTankMk1 te = (TileQuantumTankMk1) world.getTileEntity(x, y, z);
+				//stored items
+				FluidStack storeditem = ((TileQuantumTankMk1) te).tank.getFluid();				
+				//clear out old
+				world.setBlockToAir(x, y, z);
+				EntityItem eni = whatsNear(world, x, y, z);
+				//Removes the old dsu drop
+				if(eni != null)
+					eni.setDead();
+				//set to new tile
+				world.setBlock(x, y, z, ModBlocks.QuantumTankMk2);
+				//new tile
+				TileQuantumTankMk2 te2 = (TileQuantumTankMk2) world.getTileEntity(x, y, z);
+				//set stack for old tile
+				te2.tank.setFluid(storeditem);
+				ItemStack upgrade = stack;
+				stack.stackSize -= 1;
+			}
+			if(block instanceof BlockQuantumTankMk2 && meta == 1)
+			{
+				//mk1
+				TileQuantumTankMk2 te = (TileQuantumTankMk2) world.getTileEntity(x, y, z);
+				//stored items
+				FluidStack storeditem = ((TileQuantumTankMk2) te).tank.getFluid();				
+				//clear out old
+				world.setBlockToAir(x, y, z);
+				EntityItem eni = whatsNear(world, x, y, z);
+				//Removes the old dsu drop
+				if(eni != null)
+					eni.setDead();
+				//set to new tile
+				world.setBlock(x, y, z, ModBlocks.QuantumTankMk3);
+				//new tile
+				TileQuantumTankMk3 te2 = (TileQuantumTankMk3) world.getTileEntity(x, y, z);
+				//set stack for old tile
+				te2.tank.setFluid(storeditem);
+				ItemStack upgrade = stack;
+				stack.stackSize -= 1;
+			}
+			if(block instanceof BlockQuantumTankMk3 && meta == 0)
+			{
+				//mk1
+				TileQuantumTankMk3 te = (TileQuantumTankMk3) world.getTileEntity(x, y, z);
+				//stored items
+				FluidStack storeditem = ((TileQuantumTankMk3) te).tank.getFluid();				
+				//clear out old
+				world.setBlockToAir(x, y, z);
+				EntityItem eni = whatsNear(world, x, y, z);
+				//Removes the old dsu drop
+				if(eni != null)
+					eni.setDead();
+				//set to new tile
+				world.setBlock(x, y, z, ModBlocks.QuantumTankMk4);
+				//new tile
+				TileQuantumTankMk4 te2 = (TileQuantumTankMk4) world.getTileEntity(x, y, z);
+				//set stack for old tile
+				te2.tank.setFluid(storeditem);
 				ItemStack upgrade = stack;
 				stack.stackSize -= 1;
 			}
