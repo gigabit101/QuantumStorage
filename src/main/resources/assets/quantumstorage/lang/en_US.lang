@@ -1,7 +1,16 @@
+#Quantum Storage Units
 tile.quantumdsumk1.name=Quantum Storage Unit Mk1
 tile.quantumdsumk2.name=Quantum Storage Unit Mk2
 tile.quantumdsumk3.name=Quantum Storage Unit Mk3
 tile.quantumdsu.name=Quantum Storage Unit Mk4
+
+#Quantum Tanks
+tile.quantumtankmk1.name=Quantum Tank Mk1
+tile.quantumtankmk2.name=Quantum Tank Mk2
+tile.quantumtankmk3.name=Quantum Tank Mk3
+tile.quantumtankmk4.name=Quantum Tank Mk4
+
+#Items
 item.linkedbag.name=Quantum Linked Pouch[WIP DO NOT USE]
 
 item.quantumBag.name=Quantum Bag[WIP DO NOT USE]

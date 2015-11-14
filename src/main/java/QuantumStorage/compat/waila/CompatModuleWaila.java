@@ -1,5 +1,6 @@
 package QuantumStorage.compat.waila;
 
+import QuantumStorage.tile.qst.TileQuantumTankMk1;
 import QuantumStorage.tile.qsu.TileQuantumDsuMk1;
 import QuantumStorage.tile.qsu.TileQuantumDsuMk2;
 import QuantumStorage.tile.qsu.TileQuantumDsuMk3;
@@ -20,5 +21,6 @@ public class CompatModuleWaila {
 		registrar.registerBodyProvider(new WailaProviderMachines(), TileQuantumDsuMk2.class);
 		registrar.registerBodyProvider(new WailaProviderMachines(), TileQuantumDsuMk3.class);
 		registrar.registerBodyProvider(new WailaProviderMachines(), TileQuantumDsuMk4.class);
+		registrar.registerBodyProvider(new WailaProviderMachines(), TileQuantumTankMk1.class);
 	}
 }

@@ -1,4 +1,4 @@
-package QuantumStorage.block.qsu;
+package QuantumStorage.block.qst;
 
 import QuantumStorage.CreativeTabQuantumStorage;
 import cpw.mods.fml.relauncher.Side;
@@ -11,7 +11,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-public class BlockDsu extends BlockContainer
+public class BlockQuantumTank extends BlockContainer
 {
 	@SideOnly(Side.CLIENT)
 	private IIcon iconFront;
@@ -22,12 +22,13 @@ public class BlockDsu extends BlockContainer
 	@SideOnly(Side.CLIENT)
 	private IIcon iconBottom;
 	
-	protected BlockDsu(Material material) 
+	public BlockQuantumTank(Material material) 
 	{
 		super(material);
-		setCreativeTab(CreativeTabQuantumStorage.instance);
 		setHardness(2.0F);
+		setCreativeTab(CreativeTabQuantumStorage.instance);
 	}
+	
 	
 	@Override
 	@SideOnly(Side.CLIENT)
@@ -47,13 +48,13 @@ public class BlockDsu extends BlockContainer
 						: side == 0 ? this.iconBottom
 								: (side == 0 ? this.iconTop : (side == metadata ? this.iconFront : this.blockIcon));
 	}
-	
-	@Override
-	protected void dropBlockAsItem(World world, int x, int y, int z, ItemStack stack) {}
 
 	@Override
 	public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) 
 	{
 		return null;
 	}
+	
+	@Override
+	protected void dropBlockAsItem(World world, int x, int y, int z, ItemStack stack) {}
 }

@@ -44,13 +44,47 @@ public class ModRecipes
 					"EEE", 
 					'E', new ItemStack(Items.diamond), 
 					'C', new ItemStack(ModBlocks.QuantumDsuMk2));	
+		
 		if(!ConfigQuantumStorage.disableqsumk4)
 			GameRegistry.addRecipe(new ItemStack(ModBlocks.QuantumDsuMk4), 
 					"EEE", 
 					"ECE", 
 					"EEE", 
 					'E', new ItemStack(Items.emerald), 
-					'C', new ItemStack(ModBlocks.QuantumDsuMk3));	
+					'C', new ItemStack(ModBlocks.QuantumDsuMk3));
+		
+		//Tanks
+		if(!ConfigQuantumStorage.disableTankMk1)
+			GameRegistry.addRecipe(new ItemStack(ModBlocks.QuantumTankMk1), 
+					"EEE", 
+					"ECE", 
+					"EEE", 
+					'E', new ItemStack(Items.bucket), 
+					'C', new ItemStack(ModItems.misc));	
+		
+		if(!ConfigQuantumStorage.disableTankMk2)
+			GameRegistry.addRecipe(new ItemStack(ModBlocks.QuantumTankMk2), 
+					"EEE", 
+					"ECE", 
+					"EEE", 
+					'E', new ItemStack(Items.gold_ingot), 
+					'C', new ItemStack(ModBlocks.QuantumTankMk1));	
+		
+		if(!ConfigQuantumStorage.disableTankMk3)
+			GameRegistry.addRecipe(new ItemStack(ModBlocks.QuantumTankMk3), 
+					"EEE", 
+					"ECE", 
+					"EEE", 
+					'E', new ItemStack(Items.diamond), 
+					'C', new ItemStack(ModBlocks.QuantumDsuMk2));
+		
+		if(!ConfigQuantumStorage.disableTankMk4)
+			GameRegistry.addRecipe(new ItemStack(ModBlocks.QuantumTankMk2), 
+					"EEE", 
+					"ECE", 
+					"EEE", 
+					'E', new ItemStack(Items.emerald), 
+					'C', new ItemStack(ModBlocks.QuantumTankMk3));	
 	}
 	
 	public static void addBagRecipes()

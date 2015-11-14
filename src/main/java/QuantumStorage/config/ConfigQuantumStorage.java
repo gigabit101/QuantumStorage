@@ -15,6 +15,11 @@ public class ConfigQuantumStorage
 	public static boolean disableqsumk3;
 	public static boolean disableqsumk4;
 	
+	public static boolean disableTankMk1;
+	public static boolean disableTankMk2;
+	public static boolean disableTankMk3;
+	public static boolean disableTankMk4;
+	
 	public static boolean disableMk2Upgrade;
 	public static boolean disableMk3Upgrade;
 	public static boolean disableMk4Upgrade;
@@ -29,6 +34,11 @@ public class ConfigQuantumStorage
 	public static int mk2MaxStorage;
 	public static int mk3MaxStorage;
 	public static int mk4MaxStorage;
+	
+	public static int mk1TankMaxStorage;
+	public static int mk2TankMaxStorage;
+	public static int mk3TankMaxStorage;
+	public static int mk4TankMaxStorage;
 	
 	public static Configuration config;
 	
@@ -71,6 +81,15 @@ public class ConfigQuantumStorage
         disableqsumk4 = config.get(CATEGORY_RECIPE,"Disable QuantumStorage Unit MK4",
                 false,"set to false to remove recipe from QuantumStorage Unit MK4").getBoolean();
         
+        disableTankMk1 = config.get(CATEGORY_RECIPE,"Disable QuantumStorage Tank MK1",
+                false,"set to false to remove recipe from QuantumStorage Tank MK1").getBoolean();
+        disableTankMk2 = config.get(CATEGORY_RECIPE,"Disable QuantumStorage Tank MK2",
+                false,"set to false to remove recipe from QuantumStorage Tank MK2").getBoolean();
+        disableTankMk3 = config.get(CATEGORY_RECIPE,"Disable QuantumStorage Tank MK3",
+                false,"set to false to remove recipe from QuantumStorage Tank MK3").getBoolean();
+        disableTankMk4 = config.get(CATEGORY_RECIPE,"Disable QuantumStorage Tank MK4",
+                false,"set to false to remove recipe from QuantumStorage Tank MK4").getBoolean();
+        
         disableMk2Upgrade= config.get(CATEGORY_RECIPE,"Disable MK2 Upgrade",
                 false,"set to false to remove recipe from MK2 upgrade").getBoolean();
         disableMk3Upgrade= config.get(CATEGORY_RECIPE,"Disable MK3 Upgrade",
@@ -96,6 +115,15 @@ public class ConfigQuantumStorage
                 1610612735,"set to change the max storage of the MK3 quantum storage unit").getInt();
         mk4MaxStorage= config.get(CATEGORY_TWEAKS,"MK4 Max Storage",
         		2147483647,"set to change the max storage of the MK4 quantum storage unit").getInt();
+        
+        mk1TankMaxStorage= config.get(CATEGORY_TWEAKS,"MK1 Tank Max Storage",
+                536870911,"set to change the max storage of the MK1 quantum storage tank").getInt();
+        mk2TankMaxStorage= config.get(CATEGORY_TWEAKS,"MK2 Tank Max Storage",
+                1073741823,"set to change the max storage of the MK2 quantum storage tank").getInt();
+        mk3TankMaxStorage= config.get(CATEGORY_TWEAKS,"MK3 Tank Max Storage",
+                1610612735,"set to change the max storage of the MK3 quantum storage tank").getInt();
+        mk4TankMaxStorage= config.get(CATEGORY_TWEAKS,"MK4 Tank Max Storage",
+        		2147483647,"set to change the max storage of the MK4 quantum storage tank").getInt();
        
         if (config.hasChanged())
             config.save();
