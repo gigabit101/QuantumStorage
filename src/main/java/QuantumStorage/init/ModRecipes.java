@@ -79,7 +79,7 @@ public class ModRecipes
 					'C', new ItemStack(ModBlocks.QuantumDsuMk2));
 		
 		if(!ConfigQuantumStorage.disableTankMk4)
-			GameRegistry.addRecipe(new ItemStack(ModBlocks.QuantumTankMk2), 
+			GameRegistry.addRecipe(new ItemStack(ModBlocks.QuantumTankMk4), 
 					"EEE", 
 					"ECE", 
 					"EEE", 
