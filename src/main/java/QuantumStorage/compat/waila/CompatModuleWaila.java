@@ -8,9 +8,8 @@ import QuantumStorage.tile.qsu.TileQuantumDsuMk1;
 import QuantumStorage.tile.qsu.TileQuantumDsuMk2;
 import QuantumStorage.tile.qsu.TileQuantumDsuMk3;
 import QuantumStorage.tile.qsu.TileQuantumDsuMk4;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLInterModComms;
-import mcp.mobius.waila.api.IWailaRegistrar;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLInterModComms;
 
 public class CompatModuleWaila {
 	public void init(FMLInitializationEvent event) 

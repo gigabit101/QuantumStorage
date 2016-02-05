@@ -5,6 +5,7 @@ import QuantumStorage.items.upgrades.ItemPickupUpgrade;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IChatComponent;
 
 public class InventoryPickupCard implements IInventory
 {
@@ -104,12 +105,6 @@ public class InventoryPickupCard implements IInventory
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int i) 
-	{
-		return getStackInSlot(i);
-	}
-
-	@Override
 	public void setInventorySlotContents(int i, ItemStack itemstack) 
 	{
 		ItemStack[] inventorySlots = getInventory();
@@ -135,32 +130,68 @@ public class InventoryPickupCard implements IInventory
 	}
 
 	@Override
-	public boolean hasCustomInventoryName() 
+	public void markDirty() 
 	{
+		// NO-OP
+	}
+
+	@Override
+	public String getName()
+	{
+		return "";
+	}
+
+	@Override
+	public boolean hasCustomName() {
+		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public void openInventory()
-	{
-		// NO-OP
+	public IChatComponent getDisplayName() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public void closeInventory()
-	{
-		// NO-OP
+	public ItemStack removeStackFromSlot(int index) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public String getInventoryName()
-	{
-		return "quantumbag";
+	public void openInventory(EntityPlayer player) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
-	public void markDirty() 
-	{
-		// NO-OP
+	public void closeInventory(EntityPlayer player) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getField(int id) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setField(int id, int value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getFieldCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void clear() {
+		// TODO Auto-generated method stub
+		
 	}
 }

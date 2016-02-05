@@ -3,13 +3,12 @@ package QuantumStorage.tile;
 import java.util.List;
 
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ITickable;
 
-public class TileQuantumStorage extends TileEntity
+public class TileQuantumStorage extends TileEntity implements ITickable
 {
+	public void addWailaInfo(List<String> info) {}
 
-	public void addWailaInfo(List<String> info) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	@Override
+	public void update() {}
 }

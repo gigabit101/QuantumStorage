@@ -7,10 +7,13 @@ import QuantumStorage.init.ModBlocks;
 import QuantumStorage.tile.qsu.TileQuantumDsuMk1;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
 public class BlockQuantumDsuMk1 extends BlockDsu
@@ -20,16 +23,15 @@ public class BlockQuantumDsuMk1 extends BlockDsu
 	public BlockQuantumDsuMk1(Material material) 
 	{
 		super(material);
-		setBlockName("quantumdsumk1");
+		setUnlocalizedName("quantumdsumk1");
 		setCreativeTab(CreativeTabQuantumStorage.instance);
 		setHardness(2.0F);
 	}
-
+	
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) 
-	{
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ) {
 		if (!player.isSneaking())
-			player.openGui(QuantumStorage.INSTANCE, GuiHandler.dsuMk1, world, x, y, z);
+			player.openGui(QuantumStorage.INSTANCE, GuiHandler.dsu, world, pos.getX(), pos.getY(), pos.getZ());
 		return true;
 	}
 
@@ -40,9 +42,9 @@ public class BlockQuantumDsuMk1 extends BlockDsu
 	}
 	
 	@Override
-	public void breakBlock(World world, int x, int y, int z, Block blockId, int meta)
+	public void breakBlock(World world, BlockPos pos, IBlockState state)
 	{
-		TileEntity te = world.getTileEntity(x, y, z);
+		TileEntity te = world.getTileEntity(pos);
 		if(te instanceof TileQuantumDsuMk1)
 		{
 			if (((TileQuantumDsuMk1) te).getStackInSlot(1) != null)
@@ -54,8 +56,7 @@ public class BlockQuantumDsuMk1 extends BlockDsu
 				ItemStack stacknbt = ((TileQuantumDsuMk1) te).getDropWithNBT();
 				int amountToDrop = Math.min(world.rand.nextInt(21) + 10, stacknbt.stackSize);
 
-				EntityItem entityitem = new EntityItem(world,
-						x + xOffset, y + yOffset, z + zOffset,
+				EntityItem entityitem = new EntityItem(world, pos.getX() + xOffset, pos.getY() + yOffset, pos.getZ() + zOffset,
 						stacknbt.splitStack(amountToDrop));
 				world.spawnEntityInWorld(entityitem);
 			}
@@ -66,8 +67,7 @@ public class BlockQuantumDsuMk1 extends BlockDsu
 				float zOffset = world.rand.nextFloat() * 0.8F + 0.1F;
 				ItemStack stack = new ItemStack(ModBlocks.QuantumDsuMk1);
 				
-				EntityItem entityitem = new EntityItem(world,
-						x + xOffset, y + yOffset, z + zOffset, stack);
+				EntityItem entityitem = new EntityItem(world, pos.getX() + xOffset, pos.getY() + yOffset, pos.getZ() + zOffset, stack);
 				world.spawnEntityInWorld(entityitem);
 			}
 		}

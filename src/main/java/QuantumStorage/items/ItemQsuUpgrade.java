@@ -4,40 +4,18 @@ import java.util.List;
 
 import org.lwjgl.input.Keyboard;
 
-import QuantumStorage.block.qst.BlockQuantumTankMk1;
-import QuantumStorage.block.qst.BlockQuantumTankMk2;
-import QuantumStorage.block.qst.BlockQuantumTankMk3;
-import QuantumStorage.block.qsu.BlockQuantumDsuMk1;
-import QuantumStorage.block.qsu.BlockQuantumDsuMk2;
-import QuantumStorage.block.qsu.BlockQuantumDsuMk3;
-import QuantumStorage.init.ModBlocks;
-import QuantumStorage.tile.qst.TileQuantumTankMk1;
-import QuantumStorage.tile.qst.TileQuantumTankMk2;
-import QuantumStorage.tile.qst.TileQuantumTankMk3;
-import QuantumStorage.tile.qst.TileQuantumTankMk4;
-import QuantumStorage.tile.qsu.TileQuantumDsuMk1;
-import QuantumStorage.tile.qsu.TileQuantumDsuMk2;
-import QuantumStorage.tile.qsu.TileQuantumDsuMk3;
-import QuantumStorage.tile.qsu.TileQuantumDsuMk4;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
-import net.minecraft.world.World;
-import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemQsuUpgrade extends ItemQuantumStorage
 {
 	public static final String[] types = new String[] {"mk2", "mk3", "mk4"};
-	private IIcon[] textures;
+//	private IIcon[] textures;
 	
 	public ItemQsuUpgrade()
 	{
@@ -46,26 +24,26 @@ public class ItemQsuUpgrade extends ItemQuantumStorage
 		setUnlocalizedName("quantumstorage.qsuupgrade");
 	}
 	
-    @Override
-    // Registers Textures For All Items
-    public void registerIcons(IIconRegister iconRegister)
-    {
-        textures = new IIcon[types.length];
-        for (int i = 0; i < types.length; ++i) 
-        {
-            textures[i] = iconRegister.registerIcon("quantumstorage:" + types[i]);
-        }
-    }
+//    @Override
+//    // Registers Textures For All Items
+//    public void registerIcons(IIconRegister iconRegister)
+//    {
+//        textures = new IIcon[types.length];
+//        for (int i = 0; i < types.length; ++i) 
+//        {
+//            textures[i] = iconRegister.registerIcon("quantumstorage:" + types[i]);
+//        }
+//    }
 
-    @Override
-    public IIcon getIconFromDamage(int meta) 
-    {
-        if (meta < 0 || meta >= textures.length) 
-        {
-            meta = 0;
-        }
-        return textures[meta];
-    }
+//    @Override
+//    public IIcon getIconFromDamage(int meta) 
+//    {
+//        if (meta < 0 || meta >= textures.length) 
+//        {
+//            meta = 0;
+//        }
+//        return textures[meta];
+//    }
 
     @Override
     public String getUnlocalizedName(ItemStack itemStack) 
@@ -85,177 +63,17 @@ public class ItemQsuUpgrade extends ItemQuantumStorage
             list.add(new ItemStack(item, 1, meta));
         }
     }
-    
-	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int p_77648_7_, float p_77648_8_, float p_77648_9_, float p_77648_10_) 
-	{
-		Block block = world.getBlock(x, y, z);
-		int meta = stack.getItemDamage();
-		if(player.isSneaking())
-		{
-			if(block instanceof BlockQuantumDsuMk1 && meta == 0)
-			{
-				//mk1
-				TileQuantumDsuMk1 te = (TileQuantumDsuMk1) world.getTileEntity(x, y, z);
-				//stored items
-				ItemStack storeditem = ((TileQuantumDsuMk1) te).storedItem;				
-				//clear out old
-				world.setBlockToAir(x, y, z);
-				EntityItem eni = whatsNear(world, x, y, z);
-				//Removes the old dsu drop
-				if(eni != null)
-					eni.setDead();
-				//set to new tile
-				world.setBlock(x, y, z, ModBlocks.QuantumDsuMk2);
-				//new tile
-				TileQuantumDsuMk2 te2 = (TileQuantumDsuMk2) world.getTileEntity(x, y, z);
-				//set stack for old tile
-				te2.storedItem = storeditem;
-				ItemStack upgrade = stack;
-				stack.stackSize -= 1;
-			}
-			if(block instanceof BlockQuantumDsuMk2 && meta == 1)
-			{
-				//mk1
-				TileQuantumDsuMk2 te = (TileQuantumDsuMk2) world.getTileEntity(x, y, z);
-				//stored items
-				ItemStack storeditem = ((TileQuantumDsuMk2) te).storedItem;				
-				//clear out old
-				world.setBlockToAir(x, y, z);
-				EntityItem eni = whatsNear(world, x, y, z);
-				//Removes the old dsu drop
-				if(eni != null)
-					eni.setDead();
-				//set to new tile
-				world.setBlock(x, y, z, ModBlocks.QuantumDsuMk3);
-				//new tile
-				TileQuantumDsuMk3 te2 = (TileQuantumDsuMk3) world.getTileEntity(x, y, z);
-				//set stack for old tile
-				te2.storedItem = storeditem;
-				ItemStack upgrade = stack;
-				stack.stackSize -= 1;
-			}
-			if(block instanceof BlockQuantumDsuMk3 && meta == 2)
-			{
-				//mk1
-				TileQuantumDsuMk3 te = (TileQuantumDsuMk3) world.getTileEntity(x, y, z);
-				//stored items
-				ItemStack storeditem = ((TileQuantumDsuMk3) te).storedItem;				
-				//clear out old
-				world.setBlockToAir(x, y, z);
-				EntityItem eni = whatsNear(world, x, y, z);
-				//Removes the old dsu drop
-				if(eni != null)
-					eni.setDead();
-				//set to new tile
-				world.setBlock(x, y, z, ModBlocks.QuantumDsuMk4);
-				//new tile
-				TileQuantumDsuMk4 te2 = (TileQuantumDsuMk4) world.getTileEntity(x, y, z);
-				//set stack for old tile
-				te2.storedItem = storeditem;
-				ItemStack upgrade = stack;
-				stack.stackSize -= 1;
-			}
-			if(block instanceof BlockQuantumTankMk1 && meta == 0)
-			{
-				//mk1
-				TileQuantumTankMk1 te = (TileQuantumTankMk1) world.getTileEntity(x, y, z);
-				//stored items
-				FluidStack storeditem = ((TileQuantumTankMk1) te).tank.getFluid();				
-				//clear out old
-				world.setBlockToAir(x, y, z);
-				EntityItem eni = whatsNear(world, x, y, z);
-				//Removes the old dsu drop
-				if(eni != null)
-					eni.setDead();
-				//set to new tile
-				world.setBlock(x, y, z, ModBlocks.QuantumTankMk2);
-				//new tile
-				TileQuantumTankMk2 te2 = (TileQuantumTankMk2) world.getTileEntity(x, y, z);
-				//set stack for old tile
-				te2.tank.setFluid(storeditem);
-				ItemStack upgrade = stack;
-				stack.stackSize -= 1;
-			}
-			if(block instanceof BlockQuantumTankMk2 && meta == 1)
-			{
-				//mk1
-				TileQuantumTankMk2 te = (TileQuantumTankMk2) world.getTileEntity(x, y, z);
-				//stored items
-				FluidStack storeditem = ((TileQuantumTankMk2) te).tank.getFluid();				
-				//clear out old
-				world.setBlockToAir(x, y, z);
-				EntityItem eni = whatsNear(world, x, y, z);
-				//Removes the old dsu drop
-				if(eni != null)
-					eni.setDead();
-				//set to new tile
-				world.setBlock(x, y, z, ModBlocks.QuantumTankMk3);
-				//new tile
-				TileQuantumTankMk3 te2 = (TileQuantumTankMk3) world.getTileEntity(x, y, z);
-				//set stack for old tile
-				te2.tank.setFluid(storeditem);
-				ItemStack upgrade = stack;
-				stack.stackSize -= 1;
-			}
-			if(block instanceof BlockQuantumTankMk3 && meta == 0)
-			{
-				//mk1
-				TileQuantumTankMk3 te = (TileQuantumTankMk3) world.getTileEntity(x, y, z);
-				//stored items
-				FluidStack storeditem = ((TileQuantumTankMk3) te).tank.getFluid();				
-				//clear out old
-				world.setBlockToAir(x, y, z);
-				EntityItem eni = whatsNear(world, x, y, z);
-				//Removes the old dsu drop
-				if(eni != null)
-					eni.setDead();
-				//set to new tile
-				world.setBlock(x, y, z, ModBlocks.QuantumTankMk4);
-				//new tile
-				TileQuantumTankMk4 te2 = (TileQuantumTankMk4) world.getTileEntity(x, y, z);
-				//set stack for old tile
-				te2.tank.setFluid(storeditem);
-				ItemStack upgrade = stack;
-				stack.stackSize -= 1;
-			}
-		}
-		return false;
-	}
 	
-	  List<EntityItem> getItems(World world, int X, int Y, int Z) 
-	  {
-		return world.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(X - 5, Y - 5, Z - 5, X + 5, Y + 5, Z + 5));
-	  }
-	  
-	  public EntityItem whatsNear(World world, int X, int Y, int Z)
-	  {
-	    List<EntityItem> items = getItems(world, X, Y, Z);
-	    //Turns the list into single Item Entity's
-	    for(EntityItem item : items) 
-	    {
-	    	EntityItem stack = item;  
-	    	
-	    	if(items != null)
-	    	{
-	    		return stack;
-	    	}
-	    }
-		return null;
-	  }
-	  
-		@Override
-		@SideOnly(Side.CLIENT)
-		public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean p_77624_4_) 
-		{
-			if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))
-			{
-				if(stack != null)
-				{
-					int meta = stack.getItemDamage();
-					list.add(StatCollector.translateToLocal(getUnlocalizedName().toLowerCase() + "." + types[meta] + ".tooltip"));
-				}
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean p_77624_4_) {
+		if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
+			if (stack != null) {
+				int meta = stack.getItemDamage();
+				list.add(StatCollector
+						.translateToLocal(getUnlocalizedName().toLowerCase() + "." + types[meta] + ".tooltip"));
 			}
-			else list.add(StatCollector.translateToLocal("quantumstorage.holdshiftmessage"));
-		}
+		} else
+			list.add(StatCollector.translateToLocal("quantumstorage.holdshiftmessage"));
+	}
 }

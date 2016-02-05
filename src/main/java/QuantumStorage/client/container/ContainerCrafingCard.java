@@ -6,12 +6,13 @@ import net.minecraft.inventory.ContainerWorkbench;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotCrafting;
+import net.minecraft.util.BlockPos;
 
 public class ContainerCrafingCard extends ContainerWorkbench 
 {
 	public ContainerCrafingCard(EntityPlayer player) 
 	{
-		super(player.inventory, player.worldObj, 0, 0, 0);
+		super(player.inventory, player.worldObj, new BlockPos(0, 0, 0));
 		int slot = player.inventory.currentItem;
 		IInventory playerInv = player.inventory;		
 		craftMatrix = new InventoryCraftingCard(this, 3, 3);

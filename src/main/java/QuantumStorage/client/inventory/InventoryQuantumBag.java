@@ -7,6 +7,7 @@ import QuantumStorage.items.upgrades.ItemUpgrade;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IChatComponent;
 
 public class InventoryQuantumBag implements IInventory
 {
@@ -124,11 +125,11 @@ public class InventoryQuantumBag implements IInventory
 		return null;
 	}
 
-	@Override
-	public ItemStack getStackInSlotOnClosing(int i) 
-	{
-		return getStackInSlot(i);
-	}
+//	@Override
+//	public ItemStack getStackInSlotOnClosing(int i) 
+//	{
+//		return getStackInSlot(i);
+//	}
 
 	@Override
 	public void setInventorySlotContents(int i, ItemStack itemstack) 
@@ -155,33 +156,93 @@ public class InventoryQuantumBag implements IInventory
 		return true;
 	}
 
-	@Override
-	public boolean hasCustomInventoryName() 
-	{
-		return false;
-	}
-
-	@Override
-	public void openInventory()
-	{
-		// NO-OP
-	}
-
-	@Override
-	public void closeInventory()
-	{
-		// NO-OP
-	}
-
-	@Override
-	public String getInventoryName()
-	{
-		return "quantumbag";
-	}
+//	@Override
+//	public boolean hasCustomInventoryName() 
+//	{
+//		return false;
+//	}
+//
+//	@Override
+//	public void openInventory()
+//	{
+//		// NO-OP
+//	}
+//
+//	@Override
+//	public void closeInventory()
+//	{
+//		// NO-OP
+//	}
+//
+//	@Override
+//	public String getInventoryName()
+//	{
+//		return "quantumbag";
+//	}
 
 	@Override
 	public void markDirty() 
 	{
 		// NO-OP
+	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean hasCustomName() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public IChatComponent getDisplayName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ItemStack removeStackFromSlot(int index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void openInventory(EntityPlayer player) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void closeInventory(EntityPlayer player) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getField(int id) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setField(int id, int value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getFieldCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void clear() {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -6,7 +6,6 @@ import org.lwjgl.input.Keyboard;
 
 import QuantumStorage.CreativeTabQuantumStorage;
 import QuantumStorage.lib.ModInfo;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -18,12 +17,6 @@ public class ItemQuantumStorage extends Item
 	{
 		setMaxStackSize(1);
 		setCreativeTab(CreativeTabQuantumStorage.instance);
-	}
-	
-	@Override
-	public void registerIcons(IIconRegister iconRegister) 
-	{
-		itemIcon = iconRegister.registerIcon(ModInfo.MOD_ID.toLowerCase() + ":" + getUnlocalizedName().toLowerCase().substring(5));
 	}
 	
 	@Override

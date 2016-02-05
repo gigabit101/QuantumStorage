@@ -3,6 +3,7 @@ package QuantumStorage;
 import QuantumStorage.init.ModBlocks;
 import QuantumStorage.lib.ModInfo;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 
 public class CreativeTabQuantumStorage extends CreativeTabs
@@ -17,6 +18,6 @@ public class CreativeTabQuantumStorage extends CreativeTabs
 	@Override
 	public Item getTabIconItem() 
 	{
-		return Item.getItemFromBlock(ModBlocks.QuantumDsuMk4);
+		return Items.apple;//Item.getItemFromBlock(ModBlocks.QuantumDsuMk4);
 	}
 }

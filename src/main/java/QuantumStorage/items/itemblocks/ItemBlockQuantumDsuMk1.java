@@ -4,13 +4,16 @@ import java.util.List;
 
 import QuantumStorage.init.ModBlocks;
 import QuantumStorage.tile.qsu.TileQuantumDsuMk1;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 public class ItemBlockQuantumDsuMk1 extends ItemBlock{
@@ -31,18 +34,18 @@ public class ItemBlockQuantumDsuMk1 extends ItemBlock{
                     			.getString("storedItemAsString")));
         }
     }
-
+    
     @Override
-    public boolean placeBlockAt(ItemStack stack, EntityPlayer player,  World world, int x, int y, int z, int side, float hitX, float hitY,  float hitZ, int metadata) {
-        if (!world.setBlock(x, y, z, ModBlocks.QuantumDsuMk1, metadata, 3)) {
+    public boolean placeBlockAt(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ, IBlockState newState) {
+        if (!world.setBlockState(pos, ModBlocks.QuantumDsuMk1.getDefaultState())) {
             return false;
         }
-        if (world.getBlock(x, y, z) == ModBlocks.QuantumDsuMk1) {
-            world.getBlock(x, y, z).onBlockPlacedBy(world, x, y, z, player, stack);
-            world.getBlock(x, y, z).onPostBlockPlaced(world, x, y, z, metadata);
+        if (world.getBlockState(pos) == ModBlocks.QuantumDsuMk1) {
+//            world.getBlockState(pos).onBlockPlacedBy(world, pos, player, stack);
+//            world.getBlockState(pos).onPostBlockPlaced(world, x, y, z, metadata);
         }
         if (stack != null && stack.hasTagCompound()) {
-            ((TileQuantumDsuMk1) world.getTileEntity(x, y, z))
+            ((TileQuantumDsuMk1) world.getTileEntity(pos))
                     .readFromNBTWithoutCoords(stack.getTagCompound()
                             .getCompoundTag("tileEntity"));
         }

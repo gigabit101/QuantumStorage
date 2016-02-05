@@ -5,9 +5,7 @@ import java.util.List;
 
 import QuantumStorage.QuantumStorage;
 import QuantumStorage.client.GuiHandler;
-import QuantumStorage.util.InventoryHelper;
 import QuantumStorage.util.ItemNBTHelper;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,8 +17,8 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import reborncore.common.util.ItemUtils;
 
 public class ItemQuantumBag extends ItemQuantumStorage
@@ -122,21 +120,21 @@ public class ItemQuantumBag extends ItemQuantumStorage
     @Override
     public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player) 
     {
-        player.openGui(QuantumStorage.INSTANCE, GuiHandler.quantumbag, world, 0, 0, 0);
+//        player.openGui(QuantumStorage.INSTANCE, GuiHandler.quantumbag, world, 0, 0, 0);
         return itemStack;
     }
     
 
-    @Override
-    public int getColorFromItemStack(ItemStack itemStack, int pass) {
-        int cachedColor = colorCache[itemStack.getItemDamage()];
-        if (cachedColor == 0) {
-            float[] colorArray = EntitySheep.fleeceColorTable[itemStack.getItemDamage()];
-            Color color = new Color(colorArray[0], colorArray[1], colorArray[2]).brighter();
-            colorCache[itemStack.getItemDamage()] = color.getRGB();
-        }
-        return cachedColor;
-    }
+//    @Override
+//    public int getColorFromItemStack(ItemStack itemStack, int pass) {
+//        int cachedColor = colorCache[itemStack.getItemDamage()];
+//        if (cachedColor == 0) {
+//            float[] colorArray = EntitySheep.fleeceColorTable[itemStack.getItemDamage()];
+//            Color color = new Color(colorArray[0], colorArray[1], colorArray[2]).brighter();
+//            colorCache[itemStack.getItemDamage()] = color.getRGB();
+//        }
+//        return cachedColor;
+//    }
 
     public String[] getNames() 
     {
@@ -161,49 +159,49 @@ public class ItemQuantumBag extends ItemQuantumStorage
         }
     }
     
-	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int s, float xs, float ys, float zs) 
-	{
-		TileEntity tile = world.getTileEntity(x, y, z);
-		if(tile != null && tile instanceof IInventory) 
-		{
-			if(!world.isRemote) {
-				ForgeDirection side = ForgeDirection.getOrientation(s);
-				IInventory inv = (IInventory) tile;
-				ItemStack[] stacks = loadStacks(stack);
-				ItemStack[] newStacks = new ItemStack[stacks.length];
-				boolean putAny = false;
-
-				int i = 0;
-				for(ItemStack petal : stacks) 
-				{
-					if(petal != null) {
-						int count = InventoryHelper.testInventoryInsertion(inv, petal, side);
-						InventoryHelper.insertItemIntoInventory(inv, petal, side, -1);
-
-						ItemStack newPetal = petal.copy();
-						if(newPetal.stackSize == 0)
-							newPetal = null;
-
-						newStacks[i] = newPetal;
-						putAny |= count > 0;
-					}
-
-					i++;
-				}
-
-				setStacks(stack, newStacks);
-				if(putAny && inv instanceof TileEntityChest) 
-				{
-					inv = InventoryHelper.getInventory(inv);
-					player.displayGUIChest(inv);
-				}
-			}
-
-			return true;
-		}
-		return false;
-	}
+//	@Override
+//	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int s, float xs, float ys, float zs) 
+//	{
+//		TileEntity tile = world.getTileEntity(x, y, z);
+//		if(tile != null && tile instanceof IInventory) 
+//		{
+//			if(!world.isRemote) {
+//				ForgeDirection side = ForgeDirection.getOrientation(s);
+//				IInventory inv = (IInventory) tile;
+//				ItemStack[] stacks = loadStacks(stack);
+//				ItemStack[] newStacks = new ItemStack[stacks.length];
+//				boolean putAny = false;
+//
+//				int i = 0;
+//				for(ItemStack petal : stacks) 
+//				{
+//					if(petal != null) {
+//						int count = InventoryHelper.testInventoryInsertion(inv, petal, side);
+//						InventoryHelper.insertItemIntoInventory(inv, petal, side, -1);
+//
+//						ItemStack newPetal = petal.copy();
+//						if(newPetal.stackSize == 0)
+//							newPetal = null;
+//
+//						newStacks[i] = newPetal;
+//						putAny |= count > 0;
+//					}
+//
+//					i++;
+//				}
+//
+//				setStacks(stack, newStacks);
+//				if(putAny && inv instanceof TileEntityChest) 
+//				{
+//					inv = InventoryHelper.getInventory(inv);
+//					player.displayGUIChest(inv);
+//				}
+//			}
+//
+//			return true;
+//		}
+//		return false;
+//	}
     
 	public static ItemStack[] loadStacks(ItemStack stack) 
 	{

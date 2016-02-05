@@ -10,10 +10,13 @@ import QuantumStorage.init.ModItems;
 import QuantumStorage.init.ModRecipes;
 import QuantumStorage.lib.ModInfo;
 import QuantumStorage.packet.PacketHandler;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.network.NetworkRegistry;
+import me.modmuss50.jsonDestroyer.JsonDestroyer;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @Mod(name = ModInfo.MOD_NAME, modid = ModInfo.MOD_ID, version = ModInfo.MOD_VERSION)
 public class QuantumStorage 
@@ -23,8 +26,10 @@ public class QuantumStorage
 	@Mod.Instance
 	public static QuantumStorage INSTANCE;
 	
+//	public static JsonDestroyer jsondestroyer = new JsonDestroyer();
+	
 	@Mod.EventHandler
-	public static void preinit(FMLPreInitializationEvent event)
+	public void preinit(FMLPreInitializationEvent event)
 	{
 		String path = event.getSuggestedConfigurationFile().getAbsolutePath().replace(ModInfo.MOD_ID, "QuantumStorage");
 		config = ConfigQuantumStorage.initialize(new File(path));
@@ -33,11 +38,13 @@ public class QuantumStorage
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) 
 	{	
-		ModItems.init();
+//		json.load();
+//		ModItems.init();
 		ModBlocks.init();
-		ModRecipes.init();
+//		ModRecipes.init();
 		NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, new GuiHandler());
-		PacketHandler.setChannels(NetworkRegistry.INSTANCE.newChannel(ModInfo.MOD_ID + "_packets", new PacketHandler()));
-		CompatManager.init(event);		
+//		PacketHandler.setChannels(NetworkRegistry.INSTANCE.newChannel(ModInfo.MOD_ID + "_packets", new PacketHandler()));
+//		CompatManager.init(event);	
+//		jsondestroyer.load();
 	}
 }

@@ -4,15 +4,12 @@ import java.util.List;
 
 import org.lwjgl.input.Keyboard;
 
-import QuantumStorage.QuantumStorage;
-import QuantumStorage.client.GuiHandler;
 import QuantumStorage.util.ItemNBTHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.StatCollector;
-import net.minecraft.world.World;
 
 public class ItemPickupUpgrade extends ItemUpgrade
 {
@@ -23,13 +20,13 @@ public class ItemPickupUpgrade extends ItemUpgrade
 	{
 		setUnlocalizedName("pickupupgrade");
 	}
-	
-    @Override
-    public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player) 
-    {
-        player.openGui(QuantumStorage.INSTANCE, GuiHandler.pickupcard, world, 0, 0, 0);
-        return itemStack;
-    }
+//	
+//    @Override
+//    public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player) 
+//    {
+//        player.openGui(QuantumStorage.INSTANCE, GuiHandler.pickupcard, world, 0, 0, 0);
+//        return itemStack;
+//    }
     
 	public static ItemStack[] loadStacks(ItemStack stack) 
 	{

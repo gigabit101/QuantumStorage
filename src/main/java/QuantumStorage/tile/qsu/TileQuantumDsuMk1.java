@@ -6,8 +6,6 @@ import QuantumStorage.config.ConfigQuantumStorage;
 import QuantumStorage.init.ModBlocks;
 import QuantumStorage.packet.PacketHandler;
 import QuantumStorage.tile.TileQuantumStorage;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
@@ -16,6 +14,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.IChatComponent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import powercrystals.minefactoryreloaded.api.IDeepStorageUnit;
 import reborncore.common.util.Inventory;
 import reborncore.common.util.ItemUtils;
@@ -24,13 +26,14 @@ public class TileQuantumDsuMk1 extends TileQuantumStorage implements IInventory,
 {
 	int storage = ConfigQuantumStorage.mk1MaxStorage;
 
-	public Inventory inventory = new Inventory(3, "TileQuantumDsuMk1", storage);
+	public Inventory inventory = new Inventory(3, "TileQuantumDsuMk1", storage, this);
 
 	public ItemStack storedItem;
 	public String storedItemAsString;
 	
+	
 	@Override
-	public void updateEntity() 
+	public void update() 
 	{
 		if (!worldObj.isRemote) 
 		{
@@ -100,14 +103,14 @@ public class TileQuantumDsuMk1 extends TileQuantumStorage implements IInventory,
 	{
 		NBTTagCompound nbtTag = new NBTTagCompound();
 		writeToNBT(nbtTag);
-		return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
+		return new S35PacketUpdateTileEntity(this.pos, 1, nbtTag);
 	}
 
 	@Override
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet) 
 	{
-		worldObj.markBlockRangeForRenderUpdate(xCoord, yCoord, zCoord, xCoord, yCoord, zCoord);
-		readFromNBT(packet.func_148857_g());
+		worldObj.markBlockRangeForRenderUpdate(this.pos, this.pos);
+		readFromNBT(packet.getNbtCompound());
 	}
 
 	@Override
@@ -174,27 +177,9 @@ public class TileQuantumDsuMk1 extends TileQuantumStorage implements IInventory,
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int slot) 
-	{
-		return inventory.getStackInSlotOnClosing(slot);
-	}
-
-	@Override
 	public void setInventorySlotContents(int slot, ItemStack stack) 
 	{
 		inventory.setInventorySlotContents(slot, stack);
-	}
-
-	@Override
-	public String getInventoryName() 
-	{
-		return inventory.getInventoryName();
-	}
-
-	@Override
-	public boolean hasCustomInventoryName() 
-	{
-		return inventory.hasCustomInventoryName();
 	}
 
 	@Override
@@ -207,18 +192,6 @@ public class TileQuantumDsuMk1 extends TileQuantumStorage implements IInventory,
 	public boolean isUseableByPlayer(EntityPlayer player) 
 	{
 		return inventory.isUseableByPlayer(player);
-	}
-
-	@Override
-	public void openInventory() 
-	{
-		inventory.openInventory();
-	}
-
-	@Override
-	public void closeInventory() 
-	{
-		inventory.closeInventory();
 	}
 
 	@Override
@@ -237,7 +210,7 @@ public class TileQuantumDsuMk1 extends TileQuantumStorage implements IInventory,
 		ItemStack dropStack = new ItemStack(ModBlocks.QuantumDsuMk1, 1);
 		writeToNBTWithoutCoords(tileEntity);
 		dropStack.setTagCompound(new NBTTagCompound());
-		dropStack.stackTagCompound.setTag("tileEntity", tileEntity);
+//		dropStack.stackTagCompound.setTag("tileEntity", tileEntity);
 		return dropStack;
 	}
 
@@ -303,15 +276,75 @@ public class TileQuantumDsuMk1 extends TileQuantumStorage implements IInventory,
 	}
 
 	@Override
-	public boolean canInsertItem(int slotIndex, ItemStack stack, int p_102007_3_) 
+	public String getName() 
 	{
-		if(ItemUtils.isItemEqual(storedItem, stack, true, true) || (getStackInSlot(1) == null));
-			return (slotIndex == 0 ? true : false);
+		return inventory.getName();
 	}
 
 	@Override
-	public boolean canExtractItem(int slotIndex, ItemStack p_102008_2_, int p_102008_3_) 
+	public boolean hasCustomName()
 	{
-		return (slotIndex == 1 ? true : false);
+		return inventory.hasCustomName();
 	}
+
+	@Override
+	public IChatComponent getDisplayName() 
+	{
+		return inventory.getDisplayName();
+	}
+
+	@Override
+	public int[] getSlotsForFace(EnumFacing side) 
+	{
+		return null;
+	}
+
+	@Override
+	public boolean canInsertItem(int index, ItemStack stack, EnumFacing direction) 
+	{
+		if(ItemUtils.isItemEqual(storedItem, stack, true, true) || (getStackInSlot(1) == null));
+			return (index == 0 ? true : false);
+	}
+
+	@Override
+	public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction) 
+	{
+		return (index == 1 ? true : false);	
+	}
+
+	@Override
+	public ItemStack removeStackFromSlot(int index) 
+	{
+		return inventory.removeStackFromSlot(index);
+	}
+
+	@Override
+	public void openInventory(EntityPlayer player) 
+	{
+		inventory.openInventory(player);
+	}
+
+	@Override
+	public void closeInventory(EntityPlayer player) 
+	{
+		inventory.closeInventory(player);
+	}
+
+	@Override
+	public int getField(int id) 
+	{
+		return 0;
+	}
+
+	@Override
+	public void setField(int id, int value) {}
+
+	@Override
+	public int getFieldCount() 
+	{
+		return 0;
+	}
+
+	@Override
+	public void clear() {}
 }

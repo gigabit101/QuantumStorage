@@ -6,8 +6,8 @@ import QuantumStorage.items.ItemQsuUpgrade;
 import QuantumStorage.items.ItemQuantumBag;
 import QuantumStorage.items.upgrades.ItemCraftingCardUpgrade;
 import QuantumStorage.items.upgrades.ItemPickupUpgrade;
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.Item;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ModItems 
 {
@@ -20,22 +20,22 @@ public class ModItems
 	
 	public static void init()
 	{
-		quantumBag = new ItemQuantumBag();
-		GameRegistry.registerItem(quantumBag, "quantumbag");
-		
-		quantumCraftingCard = new ItemCraftingCardUpgrade();
-		GameRegistry.registerItem(quantumCraftingCard, "quantumcraftingcard");
-		
-		linkedBag = new ItemLinkedBag();
-		GameRegistry.registerItem(linkedBag, "linkedbag");
-		
-		pickupCard = new ItemPickupUpgrade();
-		GameRegistry.registerItem(pickupCard, "pickupcard");
-		
-		misc = new ItemMisc();
-		GameRegistry.registerItem(misc, "misc");
-		
-		qsuUpgrades = new ItemQsuUpgrade();
-		GameRegistry.registerItem(qsuUpgrades, "qsuupgrade");
+//		quantumBag = new ItemQuantumBag();
+//		GameRegistry.registerItem(quantumBag, "quantumbag");
+//		
+//		quantumCraftingCard = new ItemCraftingCardUpgrade();
+//		GameRegistry.registerItem(quantumCraftingCard, "quantumcraftingcard");
+//		
+//		linkedBag = new ItemLinkedBag();
+//		GameRegistry.registerItem(linkedBag, "linkedbag");
+//		
+//		pickupCard = new ItemPickupUpgrade();
+//		GameRegistry.registerItem(pickupCard, "pickupcard");
+//		
+//		misc = new ItemMisc();
+//		GameRegistry.registerItem(misc, "misc");
+//		
+//		qsuUpgrades = new ItemQsuUpgrade();
+//		GameRegistry.registerItem(qsuUpgrades, "qsuupgrade");
 	}
 }

@@ -1,8 +1,8 @@
 package QuantumStorage.compat;
 
 import QuantumStorage.compat.waila.CompatModuleWaila;
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 
 public class CompatManager {
 	
