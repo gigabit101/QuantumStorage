@@ -6,7 +6,6 @@ import QuantumStorage.client.GuiHandler;
 import QuantumStorage.compat.CompatManager;
 import QuantumStorage.config.ConfigQuantumStorage;
 import QuantumStorage.init.ModBlocks;
-import QuantumStorage.init.ModItems;
 import QuantumStorage.init.ModRecipes;
 import QuantumStorage.lib.ModInfo;
 import QuantumStorage.packet.PacketHandler;
@@ -26,8 +25,6 @@ public class QuantumStorage
 	@Mod.Instance
 	public static QuantumStorage INSTANCE;
 	
-//	public static JsonDestroyer jsondestroyer = new JsonDestroyer();
-	
 	@Mod.EventHandler
 	public void preinit(FMLPreInitializationEvent event)
 	{
@@ -38,13 +35,10 @@ public class QuantumStorage
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) 
 	{	
-//		json.load();
-//		ModItems.init();
 		ModBlocks.init();
-//		ModRecipes.init();
+		ModRecipes.init();
 		NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, new GuiHandler());
-//		PacketHandler.setChannels(NetworkRegistry.INSTANCE.newChannel(ModInfo.MOD_ID + "_packets", new PacketHandler()));
+		PacketHandler.setChannels(NetworkRegistry.INSTANCE.newChannel(ModInfo.MOD_ID + "_packets", new PacketHandler()));
 //		CompatManager.init(event);	
-//		jsondestroyer.load();
 	}
 }

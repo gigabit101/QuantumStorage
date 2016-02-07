@@ -1,20 +1,20 @@
-package QuantumStorage.client.container.dsu;
+package QuantumStorage.client.container;
 
 import QuantumStorage.client.QuantumStorageContainer;
 import QuantumStorage.client.slot.SlotFake;
 import QuantumStorage.client.slot.SlotOutput;
 import QuantumStorage.config.ConfigQuantumStorage;
-import QuantumStorage.tile.qsu.TileQuantumDsuMk1;
+import QuantumStorage.tile.TileQuantumDsu;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;
 
-public class ContainerQuantumDsuMk1 extends QuantumStorageContainer 
+public class ContainerQuantumDsu extends QuantumStorageContainer 
 {
-	public TileQuantumDsuMk1 tile;
+	public TileQuantumDsu tile;
 	public EntityPlayer player;
 	public int stackamount;
 
-	public ContainerQuantumDsuMk1(TileQuantumDsuMk1 tilesimple, EntityPlayer player)
+	public ContainerQuantumDsu(TileQuantumDsu tilesimple, EntityPlayer player)
 	{
 		super();
 		this.tile = tilesimple;
@@ -22,7 +22,7 @@ public class ContainerQuantumDsuMk1 extends QuantumStorageContainer
 
 		this.addSlotToContainer(new Slot(tilesimple.inventory, 0, 80, 17));
 		this.addSlotToContainer(new SlotOutput(tilesimple.inventory, 1, 80, 53));
-		this.addSlotToContainer(new SlotFake(tilesimple.inventory, 2, 59, 42, false, false, ConfigQuantumStorage.mk1MaxStorage));
+		this.addSlotToContainer(new SlotFake(tilesimple.inventory, 2, 59, 42, false, false, ConfigQuantumStorage.dsuMaxStorage));
 
 		int i;
 

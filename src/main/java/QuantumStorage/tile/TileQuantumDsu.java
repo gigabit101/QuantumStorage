@@ -1,11 +1,10 @@
-package QuantumStorage.tile.qsu;
+package QuantumStorage.tile;
 
 import java.util.List;
 
 import QuantumStorage.config.ConfigQuantumStorage;
 import QuantumStorage.init.ModBlocks;
 import QuantumStorage.packet.PacketHandler;
-import QuantumStorage.tile.TileQuantumStorage;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
@@ -22,11 +21,11 @@ import powercrystals.minefactoryreloaded.api.IDeepStorageUnit;
 import reborncore.common.util.Inventory;
 import reborncore.common.util.ItemUtils;
 
-public class TileQuantumDsuMk1 extends TileQuantumStorage implements IInventory, ISidedInventory, IDeepStorageUnit 
+public class TileQuantumDsu extends TileQuantumStorage implements IInventory, ISidedInventory, IDeepStorageUnit 
 {
-	int storage = ConfigQuantumStorage.mk1MaxStorage;
+	int storage = ConfigQuantumStorage.dsuMaxStorage;
 
-	public Inventory inventory = new Inventory(3, "TileQuantumDsuMk1", storage, this);
+	public Inventory inventory = new Inventory(3, "TileQuantumDsu", storage, this);
 
 	public ItemStack storedItem;
 	public String storedItemAsString;
@@ -207,10 +206,10 @@ public class TileQuantumDsuMk1 extends TileQuantumStorage implements IInventory,
 	public ItemStack getDropWithNBT() 
 	{
 		NBTTagCompound tileEntity = new NBTTagCompound();
-		ItemStack dropStack = new ItemStack(ModBlocks.QuantumDsuMk1, 1);
+		ItemStack dropStack = new ItemStack(ModBlocks.QuantumDsu, 1);
 		writeToNBTWithoutCoords(tileEntity);
 		dropStack.setTagCompound(new NBTTagCompound());
-//		dropStack.stackTagCompound.setTag("tileEntity", tileEntity);
+		dropStack.getTagCompound().setTag("tileEntity", tileEntity);
 		return dropStack;
 	}
 

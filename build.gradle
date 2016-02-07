@@ -1,29 +1,45 @@
+
+// For those who want the bleeding edge
 buildscript {
     repositories {
-        mavenCentral()
+        jcenter()
         maven {
             name = "forge"
             url = "http://files.minecraftforge.net/maven"
         }
-        maven {
-            name = "sonatype"
-            url = "https://oss.sonatype.org/content/repositories/snapshots/"
-        }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.1-SNAPSHOT'
     }
 }
+apply plugin: 'net.minecraftforge.gradle.forge'
 
-apply plugin: 'forge'
-
-version = "1.5.0"
-group= "com.gigabit101.QuantumStorage" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+/*
+// for people who want stable - not yet functional for MC 1.8.8 - we require the forgegradle 2.1 snapshot
+plugins {
+    id "net.minecraftforge.gradle.forge" version "2.0.2"
+}
+*/
+version = "2.0.0"
+group= "com.yourname.modid" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "QuantumStorage"
 
+minecraft {
+    version = "1.8.9-11.15.0.1672"
+    runDir = "run"
+    
+    // the mappings can be changed at any time, and must be in the following format.
+    // snapshot_YYYYMMDD   snapshot are built nightly.
+    // stable_#            stables are built at the discretion of the MCP team.
+    // Use non-default mappings at your own risk. they may not allways work.
+    // simply re-run your setup task after changing the mappings to update your workspace.
+    mappings = "stable_20"
+    // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
+}
+
 def grabDep(name, url){
-	ant.get(src: url, dest: 'dep')
-	file("dep/" + url.substring(url.lastIndexOf("/"))).renameTo(file("dep/" + name + ".jar"))
+    ant.get(src: url, dest: 'dep')
+    file("dep/" + url.substring(url.lastIndexOf("/"))).renameTo(file("dep/" + name + ".jar"))
 }
 
 dependencies {
@@ -35,26 +51,14 @@ dependencies {
     if(!f.exists()){
         f.mkdir()
     }
-	println("  Downloading dependencies!")
-	grabDep('gbl', 'http://addons-origin.cursecdn.com/files/2230/518/Waila-1.5.10_1.7.10.jar')
-	grabDep('gbc', 'http://addons-origin.cursecdn.com/files/2266/366/RebornCore-1.0.0.8-dev.jar')
-	
-	println("  Adding dependencies!")
-    compile files("dep/gbl.jar")
-    compile files("dep/gbc.jar")
-	println("  Finished adding dependencies!")
-}
+    println("  Downloading dependencies!")
+    grabDep('RebornCore', 'http://modmuss50.me:8080/job/RebornCore-1.8.9/lastSuccessfulBuild/artifact/build/libs/RebornCore-1.8.9-1.4.1.15-dev.jar')
+    
 
-minecraft {
-    version = "1.7.10-10.13.0.1200"
-    assetDir = "eclipse/assets"
-}
 
-dependencies {
-	compile files (
-		'Waila-deobf.jar',
-		'RebornCore.jar'
-	)
+    println("  Adding dependencies!")
+     compile files("dep/RebornCore.jar")
+    println("  Finished adding dependencies!")
 }
 
 processResources
@@ -75,8 +79,4 @@ processResources
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
-}
-
-jar.doFirst {
-    version = project.minecraft.version + "-" + version;
 }
