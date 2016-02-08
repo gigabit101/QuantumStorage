@@ -5,7 +5,6 @@ import java.util.List;
 import QuantumStorage.config.ConfigQuantumStorage;
 import QuantumStorage.init.ModBlocks;
 import QuantumStorage.packet.PacketHandler;
-import QuantumStorage.tile.TileQuantumStorage;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -161,7 +160,6 @@ public class TileQuantumTank extends TileQuantumStorage implements IInventory, I
 			}
 		}
 		info.add("Capacity " + tank.getCapacity() + " mb");
-
 	}
 	
 	public void syncWithAll() 

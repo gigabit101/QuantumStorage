@@ -5,7 +5,6 @@ import java.util.List;
 import org.lwjgl.input.Keyboard;
 
 import QuantumStorage.CreativeTabQuantumStorage;
-import QuantumStorage.lib.ModInfo;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

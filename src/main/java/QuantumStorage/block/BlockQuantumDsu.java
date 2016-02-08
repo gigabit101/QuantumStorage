@@ -5,7 +5,6 @@ import QuantumStorage.QuantumStorage;
 import QuantumStorage.client.GuiHandler;
 import QuantumStorage.init.ModBlocks;
 import QuantumStorage.tile.TileQuantumDsu;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
@@ -30,7 +29,9 @@ public class BlockQuantumDsu extends BlockQuantumStorage
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ) {
 		if (!player.isSneaking())
+		{
 			player.openGui(QuantumStorage.INSTANCE, GuiHandler.dsu, world, pos.getX(), pos.getY(), pos.getZ());
+		}
 		return true;
 	}
 

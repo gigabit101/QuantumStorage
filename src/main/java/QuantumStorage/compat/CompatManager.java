@@ -12,9 +12,5 @@ public class CompatManager {
 		{
 			new CompatModuleWaila().init(event);
 		}
-		if(Loader.isModLoaded("Applied Energistics 2"));
-		{
-			System.out.print("AE2 Detected");
-		}	
 	}
 }

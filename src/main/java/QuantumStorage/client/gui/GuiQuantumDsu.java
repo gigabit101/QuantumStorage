@@ -1,21 +1,25 @@
 package QuantumStorage.client.gui;
 
+import java.io.IOException;
+
 import QuantumStorage.client.container.ContainerQuantumDsu;
 import QuantumStorage.tile.TileQuantumDsu;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 
-public class GuiQuantumDsu extends GuiContainer {
-
+public class GuiQuantumDsu extends GuiContainer 
+{
 	private static final ResourceLocation texture = new ResourceLocation("quantumstorage", "textures/gui/dsu.png");
 	private static Minecraft mc = Minecraft.getMinecraft();
 
 	TileQuantumDsu tile;
 	public int amoauntStored;
+	public String buttontxt;
 
 	public GuiQuantumDsu(EntityPlayer player, TileQuantumDsu tile) 
 	{
@@ -23,12 +27,37 @@ public class GuiQuantumDsu extends GuiContainer {
 		this.xSize = 176;
 		this.ySize = 167;
 		this.tile = tile;
+		buttonList.clear();
 	}
 	
 	@Override
 	public void initGui() 
 	{
 		super.initGui();
+		int k = (this.width - this.xSize) / 2 + 132;
+		int l = (this.height - this.ySize) / 2 + 60;
+		if(tile.isLocked)
+			buttontxt = "UNLOCK";
+		if(!tile.isLocked)
+			buttontxt = "LOCK";
+		
+		buttonList.add(new GuiButton(0, k, l, 40 , 20, buttontxt));
+	}
+	
+	@Override
+	public void actionPerformed(GuiButton button) throws IOException 
+	{
+		if(button.id == 0)
+		{
+			if(!tile.isLocked)
+			{
+				tile.lock();
+			}
+			else if(tile.isLocked)
+			{
+				tile.unlock();
+			}
+		}
 	}
 	
 	@Override

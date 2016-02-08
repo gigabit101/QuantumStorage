@@ -29,7 +29,8 @@ public class TileQuantumDsu extends TileQuantumStorage implements IInventory, IS
 
 	public ItemStack storedItem;
 	public String storedItemAsString;
-	
+	public boolean isLocked;
+	public ItemStack lockedStack;
 	
 	@Override
 	public void update() 
@@ -41,6 +42,8 @@ public class TileQuantumDsu extends TileQuantumStorage implements IInventory, IS
 				ItemStack fakeStack = storedItem.copy();
 				fakeStack.stackSize = 1;
 				setInventorySlotContents(2, fakeStack);
+				if(isLocked)
+					System.out.println("");
 			} 
 			else if (storedItem == null && getStackInSlot(1) != null)
 			{
@@ -48,7 +51,7 @@ public class TileQuantumDsu extends TileQuantumStorage implements IInventory, IS
 				fakeStack.stackSize = 1;
 				setInventorySlotContents(2, fakeStack);
 			}
-			else 
+			else
 			{
 				setInventorySlotContents(2, null);
 			}
@@ -96,6 +99,23 @@ public class TileQuantumDsu extends TileQuantumStorage implements IInventory, IS
 		{
 			syncWithAll();
 		}
+	}
+	
+	public void lock()
+	{
+		if(getStackInSlot(1) != null)
+		{
+			lockedStack = getStackInSlot(2);
+			isLocked = true;
+			System.out.println("LOCKED");
+		}
+	}
+	
+	public void unlock()
+	{
+		lockedStack = null;
+		isLocked = false;
+		System.out.println("UNLOCKED");
 	}
 
 	public Packet getDescriptionPacket() 
@@ -237,8 +257,7 @@ public class TileQuantumDsu extends TileQuantumStorage implements IInventory, IS
 			size += getStackInSlot(1).stackSize + storedItem.stackSize;
 		}
 		if (storedItem != null)
-		info.add(size + " " + name);
-	
+		info.add(size + " " + name);	
 	 }
 
 	@Override

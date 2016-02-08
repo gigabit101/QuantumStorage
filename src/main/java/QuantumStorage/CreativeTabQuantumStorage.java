@@ -3,7 +3,6 @@ package QuantumStorage;
 import QuantumStorage.init.ModBlocks;
 import QuantumStorage.lib.ModInfo;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 
 public class CreativeTabQuantumStorage extends CreativeTabs
