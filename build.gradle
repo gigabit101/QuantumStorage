@@ -20,8 +20,16 @@ plugins {
     id "net.minecraftforge.gradle.forge" version "2.0.2"
 }
 */
-version = "2.0.2"
-group= "com.yourname.modid" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+
+repositories {
+    maven {
+        name = "Modmuss50"
+        url = "http://maven.modmuss50.me/"
+    }
+}
+
+version = "1.8.9-2.0.3"
+group= "com.gigabit101.quantumstorage" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "QuantumStorage"
 
 minecraft {
@@ -52,13 +60,10 @@ dependencies {
         f.mkdir()
     }
     println("  Downloading dependencies!")
-    grabDep('RebornCore', 'http://modmuss50.me:8080/job/RebornCore-1.8.9/lastSuccessfulBuild/artifact/build/libs/RebornCore-1.8.9-1.4.1.15-dev.jar')
-    grabDep('Waila', 'http://addons-origin.cursecdn.com/files/2270/822/Waila-1.6.0-B3_1.8.8-dev.jar')
-    
-
+    grabDep('Waila', 'http://addons-origin.cursecdn.com/files/2270/822/Waila-1.6.0-B3_1.8.8-dev.jar')    
+    compile 'RebornCore:RebornCore-1.8.9:1.4.1.+:dev'
 
     println("  Adding dependencies!")
-     compile files("dep/RebornCore.jar")
      compile files("dep/Waila.jar")
     println("  Finished adding dependencies!")
 }

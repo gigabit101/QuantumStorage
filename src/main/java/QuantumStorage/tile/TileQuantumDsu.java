@@ -21,7 +21,7 @@ import powercrystals.minefactoryreloaded.api.IDeepStorageUnit;
 import reborncore.common.util.Inventory;
 import reborncore.common.util.ItemUtils;
 
-public class TileQuantumDsu extends TileQuantumStorage implements IInventory, ISidedInventory, IDeepStorageUnit 
+public class TileQuantumDsu extends TileQuantumStorage implements IInventory, IDeepStorageUnit 
 {
 	int storage = ConfigQuantumStorage.dsuMaxStorage;
 
@@ -216,11 +216,18 @@ public class TileQuantumDsu extends TileQuantumStorage implements IInventory, IS
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack stack) 
 	{
-		if(ItemUtils.isItemEqual(stack, storedItem, true, true) || (getStackInSlot(1) == null))
+		if(ItemUtils.isItemEqual(stack, getStackInSlot(1), true, true))
+		{
 			return true;
-		if(!ItemUtils.isItemEqual(stack, getStackInSlot(1), true, true))
+		}
+		else if(getStackInSlot(1) == null)
+		{
+				return true;
+		}
+		else 
+		{
 			return false;
-		return false;
+		}
 	}
 
 	public ItemStack getDropWithNBT() 
@@ -312,25 +319,6 @@ public class TileQuantumDsu extends TileQuantumStorage implements IInventory, IS
 	}
 
 	@Override
-	public int[] getSlotsForFace(EnumFacing side) 
-	{
-		return null;
-	}
-
-	@Override
-	public boolean canInsertItem(int index, ItemStack stack, EnumFacing direction) 
-	{
-		if(ItemUtils.isItemEqual(storedItem, stack, true, true) || (getStackInSlot(1) == null));
-			return (index == 0 ? true : false);
-	}
-
-	@Override
-	public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction) 
-	{
-		return (index == 1 ? true : false);	
-	}
-
-	@Override
 	public ItemStack removeStackFromSlot(int index) 
 	{
 		return inventory.removeStackFromSlot(index);
@@ -351,18 +339,24 @@ public class TileQuantumDsu extends TileQuantumStorage implements IInventory, IS
 	@Override
 	public int getField(int id) 
 	{
-		return 0;
+		return inventory.getField(id);
 	}
 
 	@Override
-	public void setField(int id, int value) {}
+	public void setField(int id, int value) 
+	{
+		inventory.setField(id, value);
+	}
 
 	@Override
 	public int getFieldCount() 
 	{
-		return 0;
+		return inventory.getFieldCount();
 	}
 
 	@Override
-	public void clear() {}
+	public void clear() 
+	{
+		inventory.clear();
+	}
 }
