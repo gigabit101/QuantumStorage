@@ -4,10 +4,9 @@ import QuantumStorage.client.container.ContainerQuantumTank;
 import QuantumStorage.tile.TileQuantumTank;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.text.translation.I18n;
 
 public class GuiQuantumTank extends GuiContainer 
 {
@@ -42,9 +41,9 @@ public class GuiQuantumTank extends GuiContainer
 
 	protected void drawGuiContainerForegroundLayer(int p_146979_1_, int p_146979_2_) 
 	{
-		String name = StatCollector.translateToLocal("tile.quantumtank.name");
+		String name = I18n.translateToLocal("tile.quantumtank.name");
 		this.fontRendererObj.drawString(name, this.xSize / 2 - this.fontRendererObj.getStringWidth(name) / 2, 6, 4210752);
-		this.fontRendererObj.drawString(I18n.format("container.inventory", new Object[0]), 8, this.ySize - 96 + 2, 4210752);
+		this.fontRendererObj.drawString(I18n.translateToLocalFormatted("container.inventory", new Object[0]), 8, this.ySize - 96 + 2, 4210752);
 		if(tile.tank.getFluid() != null)
 			this.fontRendererObj.drawString(tile.tank.getFluid().getLocalizedName() + " Amount", 10, 20, 16448255);
         this.fontRendererObj.drawString(tile.tank.getFluidAmount() + " mb", 10, 30, 16448255);

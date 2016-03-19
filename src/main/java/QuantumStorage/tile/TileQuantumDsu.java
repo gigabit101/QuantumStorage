@@ -7,14 +7,12 @@ import QuantumStorage.init.ModBlocks;
 import QuantumStorage.packet.PacketHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.IChatComponent;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import powercrystals.minefactoryreloaded.api.IDeepStorageUnit;
@@ -122,11 +120,11 @@ public class TileQuantumDsu extends TileQuantumStorage implements IInventory, ID
 	{
 		NBTTagCompound nbtTag = new NBTTagCompound();
 		writeToNBT(nbtTag);
-		return new S35PacketUpdateTileEntity(this.pos, 1, nbtTag);
+		return new SPacketUpdateTileEntity(this.pos, 1, nbtTag);
 	}
 
 	@Override
-	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet) 
+	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) 
 	{
 		worldObj.markBlockRangeForRenderUpdate(this.pos, this.pos);
 		readFromNBT(packet.getNbtCompound());
@@ -313,7 +311,7 @@ public class TileQuantumDsu extends TileQuantumStorage implements IInventory, ID
 	}
 
 	@Override
-	public IChatComponent getDisplayName() 
+	public ITextComponent getDisplayName() 
 	{
 		return inventory.getDisplayName();
 	}

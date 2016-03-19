@@ -7,7 +7,7 @@ import QuantumStorage.client.gui.GuiQuantumTank;
 import QuantumStorage.tile.TileQuantumDsu;
 import QuantumStorage.tile.TileQuantumTank;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 

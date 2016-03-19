@@ -11,10 +11,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.IChatComponent;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
@@ -60,11 +60,11 @@ public class TileQuantumTank extends TileQuantumStorage implements IInventory, I
 	{
 		NBTTagCompound nbtTag = new NBTTagCompound();
 		writeToNBT(nbtTag);
-		return new S35PacketUpdateTileEntity(this.pos, 1, nbtTag);
+		return new SPacketUpdateTileEntity(this.pos, 1, nbtTag);
 	}
 
 	@Override
-	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet) 
+	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) 
 	{
 		worldObj.markBlockRangeForRenderUpdate(pos, pos);
 		readFromNBT(packet.getNbtCompound());
@@ -183,7 +183,7 @@ public class TileQuantumTank extends TileQuantumStorage implements IInventory, I
 	}
 
 	@Override
-	public IChatComponent getDisplayName() 
+	public ITextComponent getDisplayName() 
 	{
 		return inventory.getDisplayName();
 	}
