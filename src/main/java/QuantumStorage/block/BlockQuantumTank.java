@@ -26,8 +26,11 @@ public class BlockQuantumTank extends BlockQuantumStorage
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) 
 	{
 		if (!player.isSneaking())
+		{
 			player.openGui(QuantumStorage.INSTANCE, GuiHandler.tank, world, pos.getX(), pos.getY(), pos.getZ());
-		return true;
+			return true;
+		}
+		return false;
 	}
 
 	@Override

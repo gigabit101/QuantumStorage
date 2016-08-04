@@ -33,6 +33,7 @@ public class BlockQuantumDsu extends BlockQuantumStorage
 		if (!player.isSneaking())
 		{
 			player.openGui(QuantumStorage.INSTANCE, GuiHandler.dsu, world, pos.getX(), pos.getY(), pos.getZ());
+			return true;
 		}
 		return false;
 	}
