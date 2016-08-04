@@ -1,9 +1,5 @@
 package QuantumStorage.packet;
 
-import java.io.IOException;
-import java.util.EnumMap;
-import java.util.logging.Logger;
-
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,6 +10,10 @@ import net.minecraftforge.fml.common.network.FMLEmbeddedChannel;
 import net.minecraftforge.fml.common.network.FMLIndexedMessageToMessageCodec;
 import net.minecraftforge.fml.common.network.FMLOutboundHandler;
 import net.minecraftforge.fml.relauncher.Side;
+
+import java.io.IOException;
+import java.util.EnumMap;
+import java.util.logging.Logger;
 
 public class PacketHandler extends FMLIndexedMessageToMessageCodec<SimplePacket> {
 	private static EnumMap<Side, FMLEmbeddedChannel> channels;
