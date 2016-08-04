@@ -8,12 +8,16 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidUtil;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandler;
 
 public class BlockQuantumTank extends BlockQuantumStorage
 {
@@ -27,7 +31,8 @@ public class BlockQuantumTank extends BlockQuantumStorage
 	{
 		if (!player.isSneaking())
 		{
-			player.openGui(QuantumStorage.INSTANCE, GuiHandler.tank, world, pos.getX(), pos.getY(), pos.getZ());
+            if(!fillBlockWithFluid(world, pos, player, heldItem, side))
+			    player.openGui(QuantumStorage.INSTANCE, GuiHandler.tank, world, pos.getX(), pos.getY(), pos.getZ());
 			return true;
 		}
 		return false;
@@ -38,6 +43,19 @@ public class BlockQuantumTank extends BlockQuantumStorage
 	{
 		return new TileQuantumTank();
 	}
+
+    public boolean fillBlockWithFluid(World worldIn, BlockPos pos, EntityPlayer playerIn, ItemStack heldItem, EnumFacing side)
+    {
+        TileEntity tile = worldIn.getTileEntity(pos);
+        if(tile == null || !tile.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side))
+        {
+            return false;
+        }
+
+        IFluidHandler fluidHandler = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side);
+        FluidUtil.interactWithFluidHandler(heldItem, fluidHandler, playerIn);
+        return heldItem != null && !(heldItem.getItem() instanceof ItemBlock);
+    }
 	
 	@Override
 	public void breakBlock(World world, BlockPos pos, IBlockState state) 
