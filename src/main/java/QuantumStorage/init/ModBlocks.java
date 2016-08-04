@@ -19,12 +19,12 @@ public class ModBlocks
 	public static void init() 
 	{
 		//MK1
-		QuantumDsu = new BlockQuantumDsu(Material.iron);
+		QuantumDsu = new BlockQuantumDsu(Material.IRON);
 		GameRegistry.registerBlock(QuantumDsu, ItemBlockQuantumDsu.class, "quantumdsu");
 		GameRegistry.registerTileEntity(TileQuantumDsu.class, "tilequantumdsu");
 
 		//Tanks
-		QuantumTank = new BlockQuantumTank(Material.iron);
+		QuantumTank = new BlockQuantumTank(Material.IRON);
 		GameRegistry.registerBlock(QuantumTank, ItemBlockQuantumTank.class, "quantumtank");
 		GameRegistry.registerTileEntity(TileQuantumTank.class, "tilequantumtank");
 	}

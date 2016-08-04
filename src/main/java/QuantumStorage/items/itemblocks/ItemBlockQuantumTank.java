@@ -11,6 +11,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.util.List;
+
 public class ItemBlockQuantumTank extends ItemBlock
 {
 	public ItemBlockQuantumTank(Block block) 
@@ -35,5 +37,11 @@ public class ItemBlockQuantumTank extends ItemBlock
 			((TileQuantumTank) world.getTileEntity(pos)).readFromNBTWithoutCoords(stack.getTagCompound().getCompoundTag("tileEntity"));
 		}
 		return true;	
+	}
+
+	@Override
+	public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced)
+	{
+		tooltip.add("WIP NEEDS REWRITE FOR MINECRAFT 1.9.4");
 	}
 }

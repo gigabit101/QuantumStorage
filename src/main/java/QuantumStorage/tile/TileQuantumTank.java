@@ -44,10 +44,10 @@ public class TileQuantumTank extends TileQuantumStorage implements IInventory, I
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound tagCompound) 
+	public NBTTagCompound writeToNBT(NBTTagCompound compound)
 	{
-		super.writeToNBT(tagCompound);
-		writeToNBTWithoutCoords(tagCompound);
+		writeToNBTWithoutCoords(compound);
+		return super.writeToNBT(compound);
 	}
 
 	public void writeToNBTWithoutCoords(NBTTagCompound tagCompound) 
@@ -66,7 +66,7 @@ public class TileQuantumTank extends TileQuantumStorage implements IInventory, I
 	@Override
 	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) 
 	{
-		worldObj.markBlockRangeForRenderUpdate(pos, pos);
+		worldObj.notifyBlockUpdate(this.pos,this.worldObj.getBlockState(this.pos),this.worldObj.getBlockState(this.pos),3);
 		readFromNBT(packet.getNbtCompound());
 	}
 

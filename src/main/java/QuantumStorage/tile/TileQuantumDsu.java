@@ -61,7 +61,7 @@ public class TileQuantumDsu extends TileQuantumStorage implements IInventory, ID
 					storedItem = getStackInSlot(0);
 					setInventorySlotContents(0, null);
 				} 
-				else if (ItemUtils.isItemEqual(storedItem, getStackInSlot(0), true, true)) 
+				else if (ItemUtils.isItemEqual(storedItem, getStackInSlot(0), true, true))
 				{
 					if (storedItem.stackSize <= storage - getStackInSlot(0).stackSize) 
 					{
@@ -126,7 +126,7 @@ public class TileQuantumDsu extends TileQuantumStorage implements IInventory, ID
 	@Override
 	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) 
 	{
-		worldObj.markBlockRangeForRenderUpdate(this.pos, this.pos);
+		worldObj.notifyBlockUpdate(this.pos,this.worldObj.getBlockState(this.pos),this.worldObj.getBlockState(this.pos),3);
 		readFromNBT(packet.getNbtCompound());
 	}
 
@@ -157,10 +157,10 @@ public class TileQuantumDsu extends TileQuantumStorage implements IInventory, ID
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound tagCompound)
+	public NBTTagCompound writeToNBT(NBTTagCompound compound)
 	{
-		super.writeToNBT(tagCompound);
-		writeToNBTWithoutCoords(tagCompound);
+		writeToNBTWithoutCoords(compound);
+		return super.writeToNBT(compound);
 	}
 
 	public void writeToNBTWithoutCoords(NBTTagCompound tagCompound) 

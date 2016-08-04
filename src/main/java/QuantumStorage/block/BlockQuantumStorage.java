@@ -21,7 +21,7 @@ public class BlockQuantumStorage extends BlockContainer implements ITexturedBloc
 	
 	public BlockQuantumStorage() 
 	{
-		super(Material.iron);
+		super(Material.IRON);
 		setCreativeTab(CreativeTabQuantumStorage.instance);
 		setHardness(2.0F);
 		RebornCore.jsonDestroyer.registerObject(this);
