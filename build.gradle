@@ -1,29 +1,63 @@
+
+// For those who want the bleeding edge
 buildscript {
     repositories {
-        mavenCentral()
+        jcenter()
         maven {
             name = "forge"
             url = "http://files.minecraftforge.net/maven"
         }
-        maven {
-            name = "sonatype"
-            url = "https://oss.sonatype.org/content/repositories/snapshots/"
-        }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
+    }
+}
+apply plugin: 'net.minecraftforge.gradle.forge'
+
+/*
+// for people who want stable - not yet functional for MC 1.8.8 - we require the forgegradle 2.1 snapshot
+plugins {
+    id "net.minecraftforge.gradle.forge" version "2.0.2"
+}
+*/
+
+repositories {
+    maven {
+        name = "Modmuss50"
+        url = "http://maven.modmuss50.me/"
     }
 }
 
-apply plugin: 'forge'
+group= "com.gigabit101.quantumstorage" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 
-version = "1.4.2"
-group= "com.gigabit101.QuantumStorage" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "QuantumStorage"
+// define the properties file
+ext.configFile = file "project.properties"
+
+configFile.withReader {
+    // read config.  it shall from now on be referenced as simply config or as project.config
+    def prop = new Properties()
+    prop.load(it)
+    project.ext.config = new ConfigSlurper().parse prop
+}
+
+version = "${config.mod_version}"
+if (hasProperty('appendBuildNumber')) {
+    version = version + "-" + appendBuildNumber.toString()
+}
+
+group = "${config.group_id}" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "${config.mod_name}-${config.minecraft_version}"
+
+minecraft {
+    version = "${config.forge_version}"
+    runDir = "run"
+    mappings = "snapshot_20160518"
+    replace '@VERSION@', project.version
+}
 
 def grabDep(name, url){
-	ant.get(src: url, dest: 'dep')
-	file("dep/" + url.substring(url.lastIndexOf("/"))).renameTo(file("dep/" + name + ".jar"))
+    ant.get(src: url, dest: 'dep')
+    file("dep/" + url.substring(url.lastIndexOf("/"))).renameTo(file("dep/" + name + ".jar"))
 }
 
 dependencies {
@@ -35,26 +69,13 @@ dependencies {
     if(!f.exists()){
         f.mkdir()
     }
-	println("  Downloading dependencies!")
-	grabDep('gbl', 'http://addons-origin.cursecdn.com/files/2230/518/Waila-1.5.10_1.7.10.jar')
-	grabDep('gbc', 'http://addons-origin.cursecdn.com/files/2266/366/RebornCore-1.0.0.8-dev.jar')
-	
-	println("  Adding dependencies!")
-    compile files("dep/gbl.jar")
-    compile files("dep/gbc.jar")
-	println("  Finished adding dependencies!")
-}
+    println("  Downloading dependencies!")
+    grabDep('Waila', 'http://addons-origin.cursecdn.com/files/2270/822/Waila-1.6.0-B3_1.8.8-dev.jar')    
+    compile 'RebornCore:RebornCore-1.9:2.0.0.+:dev'
 
-minecraft {
-    version = "1.7.10-10.13.0.1200"
-    assetDir = "eclipse/assets"
-}
-
-dependencies {
-	compile files (
-		'Waila-deobf.jar',
-		'RebornCore.jar'
-	)
+    println("  Adding dependencies!")
+     compile files("dep/Waila.jar")
+    println("  Finished adding dependencies!")
 }
 
 processResources
@@ -77,6 +98,9 @@ processResources
     }
 }
 
-jar.doFirst {
-    version = project.minecraft.version + "-" + version;
+task deobfJar(type: Jar) {
+    from sourceSets.main.output
+    classifier = 'dev'
 }
+
+build.dependsOn deobfJar

@@ -6,16 +6,15 @@ import QuantumStorage.client.GuiHandler;
 import QuantumStorage.compat.CompatManager;
 import QuantumStorage.config.ConfigQuantumStorage;
 import QuantumStorage.init.ModBlocks;
-import QuantumStorage.init.ModItems;
 import QuantumStorage.init.ModRecipes;
 import QuantumStorage.lib.ModInfo;
 import QuantumStorage.packet.PacketHandler;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 
-@Mod(name = ModInfo.MOD_NAME, modid = ModInfo.MOD_ID, version = ModInfo.MOD_VERSION)
+@Mod(name = ModInfo.MOD_NAME, modid = ModInfo.MOD_ID, version = ModInfo.MOD_VERSION, dependencies = ModInfo.MOD_DEPENDENCUIES)
 public class QuantumStorage 
 {
 	public static ConfigQuantumStorage config;
@@ -24,7 +23,7 @@ public class QuantumStorage
 	public static QuantumStorage INSTANCE;
 	
 	@Mod.EventHandler
-	public static void preinit(FMLPreInitializationEvent event)
+	public void preinit(FMLPreInitializationEvent event)
 	{
 		String path = event.getSuggestedConfigurationFile().getAbsolutePath().replace(ModInfo.MOD_ID, "QuantumStorage");
 		config = ConfigQuantumStorage.initialize(new File(path));
@@ -33,11 +32,10 @@ public class QuantumStorage
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) 
 	{	
-		ModItems.init();
 		ModBlocks.init();
 		ModRecipes.init();
 		NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, new GuiHandler());
 		PacketHandler.setChannels(NetworkRegistry.INSTANCE.newChannel(ModInfo.MOD_ID + "_packets", new PacketHandler()));
-		CompatManager.init(event);		
+		CompatManager.init(event);	
 	}
 }

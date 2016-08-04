@@ -109,7 +109,5 @@ public abstract class QuantumStorageContainer extends Container {
 			return false;
 		}
 		return true;
-
 	}
-
 }

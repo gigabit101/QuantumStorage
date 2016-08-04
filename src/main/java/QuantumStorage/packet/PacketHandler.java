@@ -1,19 +1,19 @@
 package QuantumStorage.packet;
 
-import java.io.IOException;
-import java.util.EnumMap;
-import java.util.logging.Logger;
-
-import cpw.mods.fml.common.network.FMLEmbeddedChannel;
-import cpw.mods.fml.common.network.FMLIndexedMessageToMessageCodec;
-import cpw.mods.fml.common.network.FMLOutboundHandler;
-import cpw.mods.fml.relauncher.Side;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.Packet;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.FMLEmbeddedChannel;
+import net.minecraftforge.fml.common.network.FMLIndexedMessageToMessageCodec;
+import net.minecraftforge.fml.common.network.FMLOutboundHandler;
+import net.minecraftforge.fml.relauncher.Side;
+
+import java.io.IOException;
+import java.util.EnumMap;
+import java.util.logging.Logger;
 
 public class PacketHandler extends FMLIndexedMessageToMessageCodec<SimplePacket> {
 	private static EnumMap<Side, FMLEmbeddedChannel> channels;
@@ -52,7 +52,7 @@ public class PacketHandler extends FMLIndexedMessageToMessageCodec<SimplePacket>
 		for (Object player : world.playerEntities) {
 			if (player instanceof EntityPlayerMP)
 				if (player != null)
-					((EntityPlayerMP) player).playerNetServerHandler.sendPacket(packet);
+					((EntityPlayerMP) player).connection.sendPacket(packet);
 		}
 	}
 

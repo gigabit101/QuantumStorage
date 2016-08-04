@@ -17,6 +17,6 @@ public class CreativeTabQuantumStorage extends CreativeTabs
 	@Override
 	public Item getTabIconItem() 
 	{
-		return Item.getItemFromBlock(ModBlocks.QuantumDsuMk4);
+		return Item.getItemFromBlock(ModBlocks.QuantumDsu);
 	}
 }
