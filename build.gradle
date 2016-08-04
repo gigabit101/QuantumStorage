@@ -28,7 +28,7 @@ repositories {
     }
 }
 
-version = "1.9-3.1.0"
+version = "1.9.4-3.1.0"
 group= "com.gigabit101.quantumstorage" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "QuantumStorage"
 

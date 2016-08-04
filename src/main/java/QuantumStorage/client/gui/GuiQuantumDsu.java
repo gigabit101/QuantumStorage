@@ -35,12 +35,12 @@ public class GuiQuantumDsu extends GuiContainer
 		super.initGui();
 		int k = (this.width - this.xSize) / 2 + 132;
 		int l = (this.height - this.ySize) / 2 + 60;
-		if(tile.isLocked)
-			buttontxt = "UNLOCK";
-		if(!tile.isLocked)
-			buttontxt = "LOCK";
-		
-		buttonList.add(new GuiButton(0, k, l, 40 , 20, buttontxt));
+//		if(tile.isLocked)
+//			buttontxt = "UNLOCK";
+//		if(!tile.isLocked)
+//			buttontxt = "LOCK";
+//
+//		buttonList.add(new GuiButton(0, k, l, 40 , 20, buttontxt));
 	}
 	
 	@Override
