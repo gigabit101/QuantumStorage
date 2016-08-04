@@ -28,14 +28,31 @@ repositories {
     }
 }
 
-version = "1.9-3.1.0"
 group= "com.gigabit101.quantumstorage" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "QuantumStorage"
+
+// define the properties file
+ext.configFile = file "project.properties"
+
+configFile.withReader {
+    // read config.  it shall from now on be referenced as simply config or as project.config
+    def prop = new Properties()
+    prop.load(it)
+    project.ext.config = new ConfigSlurper().parse prop
+}
+
+version = "${config.mod_version}"
+if (hasProperty('appendBuildNumber')) {
+    version = version + "-" + appendBuildNumber.toString()
+}
+
+group = "${config.group_id}" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "${config.mod_name}-${config.minecraft_version}"
 
 minecraft {
-    version = "1.9.4-12.17.0.1950"
+    version = "${config.forge_version}"
     runDir = "run"
     mappings = "snapshot_20160518"
+    replace '@VERSION@', project.version
 }
 
 def grabDep(name, url){
@@ -80,3 +97,10 @@ processResources
         exclude 'mcmod.info'
     }
 }
+
+task deobfJar(type: Jar) {
+    from sourceSets.main.output
+    classifier = 'dev'
+}
+
+build.dependsOn deobfJar

@@ -1,1 +1,13 @@
-Talismans 2.iml
+*.iml
+*.ipr
+*.iws
+/.idea/
+/build/
+/.gradle/
+/assets/
+/libs/
+/run/
+/classes/
+out/
+dep/
+
