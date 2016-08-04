@@ -66,7 +66,6 @@ public class TileQuantumTank extends TileQuantumStorage implements IInventory, I
 	@Override
 	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) 
 	{
-		worldObj.notifyBlockUpdate(this.pos,this.worldObj.getBlockState(this.pos),this.worldObj.getBlockState(this.pos),3);
 		readFromNBT(packet.getNbtCompound());
 	}
 
