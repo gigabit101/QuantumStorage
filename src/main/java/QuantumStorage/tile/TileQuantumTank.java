@@ -1,7 +1,5 @@
 package QuantumStorage.tile;
 
-import java.util.List;
-
 import QuantumStorage.config.ConfigQuantumStorage;
 import QuantumStorage.init.ModBlocks;
 import QuantumStorage.packet.PacketHandler;
@@ -23,6 +21,8 @@ import reborncore.api.IListInfoProvider;
 import reborncore.common.util.FluidUtils;
 import reborncore.common.util.Inventory;
 import reborncore.common.util.Tank;
+
+import java.util.List;
 
 public class TileQuantumTank extends TileQuantumStorage implements IInventory, IFluidHandler, IListInfoProvider, ITickable
 {
@@ -66,7 +66,7 @@ public class TileQuantumTank extends TileQuantumStorage implements IInventory, I
 	@Override
 	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) 
 	{
-		worldObj.markBlockRangeForRenderUpdate(pos, pos);
+		worldObj.notifyBlockUpdate(this.pos,this.worldObj.getBlockState(this.pos),this.worldObj.getBlockState(this.pos),3);
 		readFromNBT(packet.getNbtCompound());
 	}
 

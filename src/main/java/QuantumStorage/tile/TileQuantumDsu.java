@@ -1,7 +1,5 @@
 package QuantumStorage.tile;
 
-import java.util.List;
-
 import QuantumStorage.config.ConfigQuantumStorage;
 import QuantumStorage.init.ModBlocks;
 import QuantumStorage.packet.PacketHandler;
@@ -18,6 +16,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import powercrystals.minefactoryreloaded.api.IDeepStorageUnit;
 import reborncore.common.util.Inventory;
 import reborncore.common.util.ItemUtils;
+
+import java.util.List;
 
 public class TileQuantumDsu extends TileQuantumStorage implements IInventory, IDeepStorageUnit 
 {
@@ -126,7 +126,7 @@ public class TileQuantumDsu extends TileQuantumStorage implements IInventory, ID
 	@Override
 	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) 
 	{
-		worldObj.markBlockRangeForRenderUpdate(this.pos, this.pos);
+		worldObj.notifyBlockUpdate(this.pos,this.worldObj.getBlockState(this.pos),this.worldObj.getBlockState(this.pos),3);
 		readFromNBT(packet.getNbtCompound());
 	}
 
