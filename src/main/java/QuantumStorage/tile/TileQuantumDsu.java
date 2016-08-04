@@ -158,9 +158,8 @@ public class TileQuantumDsu extends TileQuantumStorage implements IInventory, ID
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound tagCompound)
 	{
-		super.writeToNBT(tagCompound);
 		writeToNBTWithoutCoords(tagCompound);
-		return tagCompound;
+		return super.writeToNBT(tagCompound);
 	}
 
 	public void writeToNBTWithoutCoords(NBTTagCompound tagCompound) 
