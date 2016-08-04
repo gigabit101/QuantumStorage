@@ -70,8 +70,8 @@ dependencies {
         f.mkdir()
     }
     println("  Downloading dependencies!")
-    grabDep('Waila', 'http://addons-origin.cursecdn.com/files/2270/822/Waila-1.6.0-B3_1.8.8-dev.jar')    
-    compile 'RebornCore:RebornCore-1.9:2.0.0.+:dev'
+    grabDep('Waila', 'http://addons-origin.cursecdn.com/files/2301/859/Waila-1.7.0-B3_1.9.4.jar')
+    compile 'RebornCore:RebornCore-1.9.4:+:dev'
 
     println("  Adding dependencies!")
      compile files("dep/Waila.jar")
