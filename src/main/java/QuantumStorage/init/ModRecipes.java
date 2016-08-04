@@ -20,8 +20,8 @@ public class ModRecipes
 					"EEE", 
 					"ECE", 
 					"EEE", 
-					'E', new ItemStack(Blocks.chest), 
-					'C', new ItemStack(Items.emerald));	
+					'E', new ItemStack(Blocks.CHEST),
+					'C', new ItemStack(Items.EMERALD));
 		
 		
 		if(!ConfigQuantumStorage.disableTank)
@@ -29,7 +29,7 @@ public class ModRecipes
 					"EEE", 
 					"ECE", 
 					"EEE", 
-					'E', new ItemStack(Items.bucket), 
-					'C', new ItemStack(Items.emerald));	
+					'E', new ItemStack(Items.BUCKET),
+					'C', new ItemStack(Items.EMERALD));
 	}
 }
