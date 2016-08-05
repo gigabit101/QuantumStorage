@@ -6,7 +6,6 @@ import QuantumStorage.client.slot.SlotOutput;
 import QuantumStorage.tile.TileQuantumTank;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;
-import reborncore.client.gui.SlotFluid;
 
 public class ContainerQuantumTank extends QuantumStorageContainer
 {
@@ -19,7 +18,7 @@ public class ContainerQuantumTank extends QuantumStorageContainer
 		this.tile = tile;
 		this.player = player;
 		
-        this.addSlotToContainer(new SlotFluid(tile.inventory, 0, 80, 17));
+//        this.addSlotToContainer(new SlotFluid(tile.inventory, 0, 80, 17));
         this.addSlotToContainer(new SlotOutput(tile.inventory, 1, 80, 53));
         this.addSlotToContainer(new SlotFake(tile.inventory, 2, 59, 42, false, false, 1));
 

@@ -24,12 +24,12 @@ public class ModRecipes
 					'C', new ItemStack(Items.EMERALD));
 		
 		
-		if(!ConfigQuantumStorage.disableTank)
-			GameRegistry.addRecipe(new ItemStack(ModBlocks.QuantumTank), 
-					"EEE", 
-					"ECE", 
-					"EEE", 
-					'E', new ItemStack(Items.BUCKET),
-					'C', new ItemStack(Items.EMERALD));
+//		if(!ConfigQuantumStorage.disableTank)
+//			GameRegistry.addRecipe(new ItemStack(ModBlocks.QuantumTank),
+//					"EEE",
+//					"ECE",
+//					"EEE",
+//					'E', new ItemStack(Items.BUCKET),
+//					'C', new ItemStack(Items.EMERALD));
 	}
 }

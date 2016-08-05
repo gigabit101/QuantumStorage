@@ -44,11 +44,10 @@ public class TileQuantumTank extends TileQuantumStorage implements IInventory, I
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound tagCompound)
+	public NBTTagCompound writeToNBT(NBTTagCompound compound)
 	{
-		super.writeToNBT(tagCompound);
-		writeToNBTWithoutCoords(tagCompound);
-		return tagCompound;
+		writeToNBTWithoutCoords(compound);
+		return super.writeToNBT(compound);
 	}
 
 	public void writeToNBTWithoutCoords(NBTTagCompound tagCompound) 

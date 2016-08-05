@@ -72,7 +72,7 @@ public class TileQuantumDsu extends TileQuantumStorage implements IInventory, ID
             {
                 ItemStack itemStack = storedItem.copy();
                 itemStack.stackSize = itemStack.getMaxStackSize();
-                inventory.contents[1] = itemStack;
+                setInventorySlotContents(1, itemStack);
                 storedItem.stackSize -= itemStack.getMaxStackSize();
             }
             else if (ItemUtils.isItemEqual(getStackInSlot(1), storedItem, true, true))
@@ -231,6 +231,14 @@ public class TileQuantumDsu extends TileQuantumStorage implements IInventory, ID
         return dropStack;
     }
 
+	public void syncWithAll() 
+	{
+		if (!worldObj.isRemote) 
+		{
+			PacketHandler.sendPacketToAllPlayers(getDescriptionPacket(), worldObj);
+		}
+	}
+	
     @SideOnly(Side.CLIENT)
     public void addWailaInfo(List<String> info)
     {
