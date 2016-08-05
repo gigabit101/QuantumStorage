@@ -26,6 +26,10 @@ repositories {
         name = "Modmuss50"
         url = "http://maven.modmuss50.me/"
     }
+    maven { // The repo from which to get waila
+        name = "Mobius Repo"
+        url = "http://mobiusstrip.eu/maven"
+    }
 }
 
 group= "com.gigabit101.quantumstorage" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
@@ -70,12 +74,9 @@ dependencies {
         f.mkdir()
     }
     println("  Downloading dependencies!")
-    grabDep('Waila', 'http://addons-origin.cursecdn.com/files/2301/859/Waila-1.7.0-B3_1.9.4.jar')
-    compile 'RebornCore:RebornCore-1.9.4:+:dev'
+    deobfCompile 'RebornCore:RebornCore-1.9.4:+:dev'
+    deobfCompile "mcp.mobius.waila:Waila:${config.waila_version}"
 
-    println("  Adding dependencies!")
-     compile files("dep/Waila.jar")
-    println("  Finished adding dependencies!")
 }
 
 processResources
