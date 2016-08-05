@@ -210,22 +210,20 @@ public class TileQuantumDsu extends TileQuantumStorage implements IInventory, ID
 		return inventory.isUseableByPlayer(player);
 	}
 
-	@Override
-	public boolean isItemValidForSlot(int slot, ItemStack stack) 
-	{
-		if(ItemUtils.isItemEqual(stack, getStackInSlot(1), true, true))
-		{
-			return true;
-		}
-		else if(getStackInSlot(1) == null)
-		{
-				return true;
-		}
-		else 
-		{
-			return false;
-		}
-	}
+    	@Override
+    	public boolean isItemValidForSlot(int slot, ItemStack stack) 
+    	{
+	        if (slot == 0 &&ItemUtils.isItemEqual(stack, getStackInSlot(1), true, true) ) 
+	        {
+            		return true;
+        	} else if (slot == 0 && getStackInSlot(1) == null) 
+        	{
+            		return true;
+        	} else 
+        	{
+            		return false;
+        	}
+    	}
 
 	public ItemStack getDropWithNBT() 
 	{
