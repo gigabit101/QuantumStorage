@@ -230,14 +230,6 @@ public class TileQuantumDsu extends TileQuantumStorage implements IInventory, ID
         dropStack.getTagCompound().setTag("tileEntity", tileEntity);
         return dropStack;
     }
-
-	public void syncWithAll() 
-	{
-		if (!worldObj.isRemote) 
-		{
-			PacketHandler.sendPacketToAllPlayers(getDescriptionPacket(), worldObj);
-		}
-	}
 	
     @SideOnly(Side.CLIENT)
     public void addWailaInfo(List<String> info)
