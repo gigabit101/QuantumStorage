@@ -1,7 +1,5 @@
 package QuantumStorage;
 
-import java.io.File;
-
 import QuantumStorage.client.GuiHandler;
 import QuantumStorage.compat.CompatManager;
 import QuantumStorage.config.ConfigQuantumStorage;
@@ -14,7 +12,9 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
-@Mod(name = ModInfo.MOD_NAME, modid = ModInfo.MOD_ID, version = ModInfo.MOD_VERSION, dependencies = ModInfo.MOD_DEPENDENCUIES)
+import java.io.File;
+
+@Mod(name = ModInfo.MOD_NAME, modid = ModInfo.MOD_ID, version = ModInfo.MOD_VERSION, dependencies = ModInfo.MOD_DEPENDENCUIES, acceptedMinecraftVersions = "[1.9.4,1.10.2]")
 public class QuantumStorage 
 {
 	public static ConfigQuantumStorage config;
