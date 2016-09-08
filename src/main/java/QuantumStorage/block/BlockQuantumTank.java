@@ -32,9 +32,9 @@ public class BlockQuantumTank extends BlockQuantumStorage
 		if (!player.isSneaking())
 		{
             if(!fillBlockWithFluid(world, pos, player, heldItem, side))
-			    player.openGui(QuantumStorage.INSTANCE, GuiHandler.tank, world, pos.getX(), pos.getY(), pos.getZ());
-			return true;
-		}
+                player.openGui(QuantumStorage.INSTANCE, GuiHandler.tank, world, pos.getX(), pos.getY(), pos.getZ());
+				return true;
+        }
 		return false;
 	}
 
@@ -54,6 +54,8 @@ public class BlockQuantumTank extends BlockQuantumStorage
 
         IFluidHandler fluidHandler = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side);
         FluidUtil.interactWithFluidHandler(heldItem, fluidHandler, playerIn);
+        TileQuantumTank tank = (TileQuantumTank) tile;
+        tank.syncWithAll();
         return heldItem != null && !(heldItem.getItem() instanceof ItemBlock);
     }
 	

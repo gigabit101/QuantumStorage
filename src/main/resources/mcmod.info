@@ -3,7 +3,8 @@
   "modid": "QuantumStorage",
   "name": "QuantumStorage",
   "description": "",
-  "version": "3.0.0",
+  "version": "$version",
+  "mcversion": "$mcversion",
   "url": "",
   "updateUrl": "",
   "authorList": [

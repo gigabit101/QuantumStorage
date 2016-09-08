@@ -17,19 +17,21 @@ public class ModRecipes
 	{
 		if(!ConfigQuantumStorage.disableDsu)
 			GameRegistry.addRecipe(new ItemStack(ModBlocks.QuantumDsu), 
-					"EEE", 
-					"ECE", 
-					"EEE", 
-					'E', new ItemStack(Blocks.CHEST),
-					'C', new ItemStack(Items.EMERALD));
+					"OOO",
+					"ICI",
+					"III",
+					'I', new ItemStack(Items.IRON_INGOT),
+					'O', new ItemStack(Blocks.OBSIDIAN),
+					'C', new ItemStack(Blocks.CHEST));
 		
 		
-//		if(!ConfigQuantumStorage.disableTank)
-//			GameRegistry.addRecipe(new ItemStack(ModBlocks.QuantumTank),
-//					"EEE",
-//					"ECE",
-//					"EEE",
-//					'E', new ItemStack(Items.BUCKET),
-//					'C', new ItemStack(Items.EMERALD));
+		if(!ConfigQuantumStorage.disableTank)
+			GameRegistry.addRecipe(new ItemStack(ModBlocks.QuantumTank),
+					"OOO",
+					"IBI",
+					"III",
+					'I', new ItemStack(Items.IRON_INGOT),
+                    'O', new ItemStack(Blocks.OBSIDIAN),
+					'B', new ItemStack(Items.BUCKET));
 	}
 }

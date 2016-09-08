@@ -1,7 +1,5 @@
 package QuantumStorage.tile;
 
-import java.util.List;
-
 import QuantumStorage.config.ConfigQuantumStorage;
 import QuantumStorage.init.ModBlocks;
 import QuantumStorage.packet.PacketHandler;
@@ -18,26 +16,29 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTankInfo;
-import net.minecraftforge.fluids.IFluidHandler;
+import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidTankProperties;
+import net.minecraftforge.items.IItemHandler;
 import reborncore.api.IListInfoProvider;
-import reborncore.common.util.FluidUtils;
 import reborncore.common.util.Inventory;
 import reborncore.common.util.Tank;
 
-public class TileQuantumTank extends TileQuantumStorage implements IInventory, IFluidHandler, IListInfoProvider, ITickable
+import java.util.List;
+
+public class TileQuantumTank extends TileQuantumStorage implements IInventory, IListInfoProvider, ITickable, IItemHandler
 {
 	public int storage = ConfigQuantumStorage.tankMaxStorage;
 	public Tank tank = new Tank("TileQuantumTank", storage, this);
-	public Inventory inventory = new Inventory(3, "TileQuantumTank", 64, this);
+	public Inventory inventory = new Inventory(3, "TileQuantumTank", 1, this);
 
 	@Override
 	public void readFromNBT(NBTTagCompound tagCompound) 
 	{
-		super.readFromNBT(tagCompound);
 		readFromNBTWithoutCoords(tagCompound);
-	}
+        super.readFromNBT(tagCompound);
+    }
 
 	public void readFromNBTWithoutCoords(NBTTagCompound tagCompound) 
 	{
@@ -68,7 +69,6 @@ public class TileQuantumTank extends TileQuantumStorage implements IInventory, I
 	@Override
 	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) 
 	{
-		worldObj.notifyBlockUpdate(this.pos,this.worldObj.getBlockState(this.pos),this.worldObj.getBlockState(this.pos),3);
 		readFromNBT(packet.getNbtCompound());
 	}
 
@@ -78,19 +78,43 @@ public class TileQuantumTank extends TileQuantumStorage implements IInventory, I
 		super.update();
 		if (!worldObj.isRemote) 
 		{
-			FluidUtils.drainContainers(this, inventory, 0, 1);
-			FluidUtils.fillContainers(this, inventory, 0, 1, tank.getFluidType());
-			if (tank.getFluidType() != null && getStackInSlot(2) == null) 
-			{
-//				inventory.setInventorySlotContents(2, new ItemStack(tank.getFluidType().getBlock()));
-			} 
-			else if (tank.getFluidType() == null && getStackInSlot(2) != null) 
-			{
-				setInventorySlotContents(2, null);
-			}
-			tank.compareAndUpdate();
-		}
+            emptyContainer();
+            fillContainer();
+            tank.compareAndUpdate();
+        }
 	}
+
+    public void emptyContainer()
+    {
+        if(FluidUtil.tryEmptyContainerAndStow(getStackInSlot(0), this.tank, this, Fluid.BUCKET_VOLUME, null))
+        {
+            moveStack(0, 1);
+
+            syncWithAll();
+        }
+    }
+
+    public void fillContainer()
+    {
+        if(FluidUtil.tryFillContainerAndStow(getStackInSlot(0), this.tank, this, Fluid.BUCKET_VOLUME, null))
+        {
+            moveStack(0, 1);
+
+            syncWithAll();
+        }
+    }
+
+    public boolean moveStack(int from, int to)
+    {
+        ItemStack stackToMove = getStackInSlot(from).copy();
+        if(stackToMove != null && getStackInSlot(to) == null)
+        {
+            setInventorySlotContents(from, null);
+            setInventorySlotContents(to, stackToMove);
+            return true;
+        }
+        return false;
+    }
 
 	@Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing facing)
@@ -119,13 +143,31 @@ public class TileQuantumTank extends TileQuantumStorage implements IInventory, I
 		return inventory.getSizeInventory();
 	}
 
-	@Override
+    @Override
+    public int getSlots()
+    {
+        return inventory.getSizeInventory();
+    }
+
+    @Override
 	public ItemStack getStackInSlot(int slot) 
 	{
 		return inventory.getStackInSlot(slot);
 	}
 
-	@Override
+    @Override
+    public ItemStack insertItem(int slot, ItemStack stack, boolean simulate)
+    {
+        return null;
+    }
+
+    @Override
+    public ItemStack extractItem(int slot, int amount, boolean simulate)
+    {
+        return null;
+    }
+
+    @Override
 	public ItemStack decrStackSize(int slotId, int count) 
 	{
 		ItemStack stack = inventory.decrStackSize(slotId, count);
@@ -169,7 +211,7 @@ public class TileQuantumTank extends TileQuantumStorage implements IInventory, I
 	}
 
 	@Override
-	public void addInfo(List<String> info, boolean isRealTile) 
+	public void addInfo(List<String> info, boolean isRealTile)
 	{
 		if (isRealTile) {
 			if (tank.getFluid() != null)
@@ -211,48 +253,6 @@ public class TileQuantumTank extends TileQuantumStorage implements IInventory, I
 	}
 
 	@Override
-	public int fill(EnumFacing from, FluidStack resource, boolean doFill) 
-	{
-		int fill = tank.fill(resource, doFill);
-		tank.compareAndUpdate();
-		return fill;
-	}
-
-	@Override
-	public FluidStack drain(EnumFacing from, FluidStack resource, boolean doDrain)
-	{
-		FluidStack drain = tank.drain(resource.amount, doDrain);
-		tank.compareAndUpdate();
-		return drain;
-	}
-
-	@Override
-	public FluidStack drain(EnumFacing from, int maxDrain, boolean doDrain) 
-	{
-		FluidStack drain = tank.drain(maxDrain, doDrain);
-		tank.compareAndUpdate();
-		return drain;
-	}
-
-	@Override
-	public boolean canFill(EnumFacing from, Fluid fluid) 
-	{
-		return tank.getFluid() == null || tank.getFluid().getFluid() == fluid;	
-	}
-
-	@Override
-	public boolean canDrain(EnumFacing from, Fluid fluid) 
-	{
-		return tank.getFluid() == null || tank.getFluid().getFluid() == fluid;
-	}
-
-	@Override
-	public FluidTankInfo[] getTankInfo(EnumFacing from) 
-	{
-		return new FluidTankInfo[] { tank.getInfo() };
-	}
-
-	@Override
 	public ItemStack removeStackFromSlot(int index) 
 	{
 		return inventory.removeStackFromSlot(index);
@@ -268,7 +268,6 @@ public class TileQuantumTank extends TileQuantumStorage implements IInventory, I
 	public void closeInventory(EntityPlayer player) 
 	{
 		inventory.closeInventory(player);
-		
 	}
 
 	@Override

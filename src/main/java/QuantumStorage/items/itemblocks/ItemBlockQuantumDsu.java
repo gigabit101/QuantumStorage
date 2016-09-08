@@ -40,10 +40,6 @@ public class ItemBlockQuantumDsu extends ItemBlock{
         if (!world.setBlockState(pos, ModBlocks.QuantumDsu.getDefaultState())) {
             return false;
         }
-        if (world.getBlockState(pos) == ModBlocks.QuantumDsu) {
-//            world.getBlockState(pos).onBlockPlacedBy(world, pos, player, stack);
-//            world.getBlockState(pos).onPostBlockPlaced(world, x, y, z, metadata);
-        }
         if (stack != null && stack.hasTagCompound()) {
             ((TileQuantumDsu) world.getTileEntity(pos))
                     .readFromNBTWithoutCoords(stack.getTagCompound()

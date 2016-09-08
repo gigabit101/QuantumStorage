@@ -26,57 +26,66 @@ repositories {
         name = "Modmuss50"
         url = "http://maven.modmuss50.me/"
     }
+    maven { // The repo from which to get waila
+        name "Mobius Repo"
+        url "http://mobiusstrip.eu/maven"
+    }
 }
 
-version = "1.9.4-3.1.0"
-group= "com.gigabit101.quantumstorage" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "QuantumStorage"
+// define the properties file
+ext.configFile = file "project.properties"
+
+configFile.withReader {
+    // read config.  it shall from now on be referenced as simply config or as project.config
+    def prop = new Properties()
+    prop.load(it)
+    project.ext.config = new ConfigSlurper().parse prop
+}
+
+version = "${config.mod_version}"
+if (hasProperty('appendBuildNumber')) {
+    version = version + "-" + appendBuildNumber.toString()
+}
+
+group = "${config.group_id}" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "${config.mod_name}-${config.minecraft_version}"
 
 minecraft {
-    version = "1.9.4-12.17.0.1950"
+    version = "${config.forge_version}"
     runDir = "run"
     mappings = "snapshot_20160518"
-}
-
-def grabDep(name, url){
-    ant.get(src: url, dest: 'dep')
-    file("dep/" + url.substring(url.lastIndexOf("/"))).renameTo(file("dep/" + name + ".jar"))
+    replace '@VERSION@', project.version
 }
 
 dependencies {
-    def f = new File('dep/')
-    if(f.exists()){
-        f.delete()
-    }
-    f.mkdirs()
-    if(!f.exists()){
-        f.mkdir()
-    }
-    println("  Downloading dependencies!")
-    grabDep('Waila', 'http://addons-origin.cursecdn.com/files/2301/859/Waila-1.7.0-B3_1.9.4.jar')
-    compile 'RebornCore:RebornCore-1.9.4:+:dev'
+    compile "mcp.mobius.waila:Waila:1.7.0-B3_1.9.4"
+    compile 'RebornCore:RebornCore-1.10.2:+:dev'
 
-    println("  Adding dependencies!")
-     compile files("dep/Waila.jar")
-    println("  Finished adding dependencies!")
 }
 
 processResources
-{
-    // this will ensure that this task is redone when the versions change.
-    inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
+        {
+            // this will ensure that this task is redone when the versions change.
+            inputs.property "version", project.version
+            inputs.property "mcversion", project.minecraft.version
 
-    // replace stuff in mcmod.info, nothing else
-    from(sourceSets.main.resources.srcDirs) {
-        include 'mcmod.info'
-                
-        // replace version and mcversion
-        expand 'version':project.version, 'mcversion':project.minecraft.version
-    }
-        
-    // copy everything else, thats not the mcmod.info
-    from(sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info'
-    }
+            // replace stuff in mcmod.info, nothing else
+            from(sourceSets.main.resources.srcDirs) {
+                include 'mcmod.info'
+
+                // replace version and mcversion
+                expand 'version':project.version, 'mcversion':project.minecraft.version
+            }
+
+            // copy everything else, thats not the mcmod.info
+            from(sourceSets.main.resources.srcDirs) {
+                exclude 'mcmod.info'
+            }
+        }
+
+task deobfJar(type: Jar) {
+    from sourceSets.main.output
+    classifier = 'dev'
 }
+
+build.dependsOn deobfJar
