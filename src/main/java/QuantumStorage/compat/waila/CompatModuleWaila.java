@@ -1,7 +1,6 @@
 package QuantumStorage.compat.waila;
 
-import QuantumStorage.tile.TileQuantumDsu;
-import QuantumStorage.tile.TileQuantumTank;
+import QuantumStorage.tile.TileQuantumStorage;
 import mcp.mobius.waila.api.IWailaRegistrar;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLInterModComms;
@@ -15,7 +14,6 @@ public class CompatModuleWaila
 
 	public static void callbackRegister(IWailaRegistrar registar)
 	{
-		registar.registerBodyProvider(new WailaProviderQuantumStorage(), TileQuantumDsu.class);
-		registar.registerBodyProvider(new WailaProviderQuantumStorage(), TileQuantumTank.class);
+		registar.registerBodyProvider(new WailaProviderQuantumStorage(), TileQuantumStorage.class);
 	}
 }

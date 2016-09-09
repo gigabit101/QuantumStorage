@@ -225,8 +225,22 @@ public class TileQuantumTank extends TileQuantumStorage implements IInventory, I
 		}
 		info.add("Capacity " + tank.getCapacity() + " mb");
 	}
-	
-	public void syncWithAll() 
+
+	@Override
+	public void addWailaInfo(List<String> info)
+	{
+		if (tank.getFluid() != null)
+		{
+			info.add(tank.getFluidAmount() + " of " + tank.getFluidType().getName());
+		}
+		else
+		{
+			info.add("Empty");
+		}
+		info.add("Capacity " + tank.getCapacity() + " mb");
+	}
+
+	public void syncWithAll()
 	{
 		if (!worldObj.isRemote) 
 		{

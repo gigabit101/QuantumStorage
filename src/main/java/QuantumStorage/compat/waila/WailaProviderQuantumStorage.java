@@ -23,7 +23,6 @@ public class WailaProviderQuantumStorage implements IWailaDataProvider
 	{
 		TileQuantumStorage tile = (TileQuantumStorage) accessor.getTileEntity();
 
-
 		tile.addWailaInfo(info);
 
 		tip.addAll(info);
