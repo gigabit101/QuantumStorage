@@ -9,7 +9,9 @@ import QuantumStorage.init.ModBlocks;
 import QuantumStorage.init.ModRecipes;
 import QuantumStorage.lib.ModInfo;
 import QuantumStorage.packet.PacketHandler;
+import QuantumStorage.proxy.CommonProxy;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
@@ -21,19 +23,23 @@ public class QuantumStorage
 	
 	@Mod.Instance
 	public static QuantumStorage INSTANCE;
+
+    @SidedProxy(clientSide = ModInfo.CLIENT_PROXY_LOC, serverSide = ModInfo.COMMON_PROXY_LOC)
+    public static CommonProxy proxy;
 	
 	@Mod.EventHandler
 	public void preinit(FMLPreInitializationEvent event)
 	{
 		String path = event.getSuggestedConfigurationFile().getAbsolutePath().replace(ModInfo.MOD_ID, "QuantumStorage");
 		config = ConfigQuantumStorage.initialize(new File(path));
+        ModBlocks.init();
+        ModRecipes.init();
+        proxy.registerRenders();
 	}
 
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) 
-	{	
-		ModBlocks.init();
-		ModRecipes.init();
+	{
 		NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, new GuiHandler());
 		PacketHandler.setChannels(NetworkRegistry.INSTANCE.newChannel(ModInfo.MOD_ID + "_packets", new PacketHandler()));
 		CompatManager.init(event);	

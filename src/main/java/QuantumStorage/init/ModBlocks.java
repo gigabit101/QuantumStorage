@@ -8,7 +8,10 @@ import QuantumStorage.tile.TileQuantumDsu;
 import QuantumStorage.tile.TileQuantumTank;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+
+import java.lang.reflect.InvocationTargetException;
 
 public class ModBlocks 
 {
@@ -20,12 +23,34 @@ public class ModBlocks
 	{
 		//MK1
 		QuantumDsu = new BlockQuantumDsu(Material.IRON);
-		GameRegistry.registerBlock(QuantumDsu, ItemBlockQuantumDsu.class, "quantumdsu");
+        registerBlock(QuantumDsu, "quantumdsu");
 		GameRegistry.registerTileEntity(TileQuantumDsu.class, "tilequantumdsu");
 
-		//Tanks
+		//Tank
 		QuantumTank = new BlockQuantumTank(Material.IRON);
-		GameRegistry.registerBlock(QuantumTank, ItemBlockQuantumTank.class, "quantumtank");
+        registerBlock(QuantumTank, "quantumtank");
 		GameRegistry.registerTileEntity(TileQuantumTank.class, "tilequantumtank");
+	}
+
+	public static void registerBlock(Block block, String name)
+	{
+		block.setRegistryName(name);
+		GameRegistry.register(block);
+		GameRegistry.register(new ItemBlock(block), block.getRegistryName());
+	}
+
+	public static void registerBlock(Block block, Class<? extends ItemBlock> itemclass, String name)
+	{
+		block.setRegistryName(name);
+		GameRegistry.register(block);
+		try
+		{
+			ItemBlock itemBlock = itemclass.getConstructor(Block.class).newInstance(block);
+			itemBlock.setRegistryName(name);
+			GameRegistry.register(itemBlock);
+		} catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e)
+		{
+			e.printStackTrace();
+		}
 	}
 }
