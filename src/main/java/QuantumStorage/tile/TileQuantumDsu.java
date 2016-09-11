@@ -5,11 +5,13 @@ import QuantumStorage.init.ModBlocks;
 import QuantumStorage.packet.PacketHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -19,7 +21,7 @@ import reborncore.common.util.ItemUtils;
 
 import java.util.List;
 
-public class TileQuantumDsu extends TileQuantumStorage implements IInventory, IDeepStorageUnit 
+public class TileQuantumDsu extends TileQuantumStorage implements IInventory, IDeepStorageUnit, ISidedInventory
 {
 	int storage = ConfigQuantumStorage.dsuMaxStorage;
 
@@ -291,11 +293,6 @@ public class TileQuantumDsu extends TileQuantumStorage implements IInventory, ID
 	{
 		return this.storage;
 	}
-	
-	public int[] getAccessibleSlotsFromSide(int p_94128_1_)
-	{
-		return new int[] {0, 1};
-	}
 
 	@Override
 	public String getName() 
@@ -355,5 +352,27 @@ public class TileQuantumDsu extends TileQuantumStorage implements IInventory, ID
 	public void clear() 
 	{
 		inventory.clear();
+	}
+
+	@Override
+	public int[] getSlotsForFace(EnumFacing side)
+	{
+		return new int[]{0, 1};
+	}
+
+	@Override
+	public boolean canInsertItem(int index, ItemStack itemStackIn, EnumFacing direction)
+	{
+		if(index == 0)
+			return true;
+		return false;
+	}
+
+	@Override
+	public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction)
+	{
+		if(index == 1)
+			return true;
+		return false;
 	}
 }
