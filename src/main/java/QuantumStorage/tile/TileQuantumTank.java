@@ -63,7 +63,7 @@ public class TileQuantumTank extends TileQuantumStorage implements IInventory, I
 	{
 		NBTTagCompound nbtTag = new NBTTagCompound();
 		writeToNBT(nbtTag);
-		return new SPacketUpdateTileEntity(this.pos, 1, nbtTag);
+		return new SPacketUpdateTileEntity(this.pos, 0, nbtTag);
 	}
 
 	@Override

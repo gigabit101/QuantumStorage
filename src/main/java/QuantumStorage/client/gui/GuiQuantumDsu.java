@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import QuantumStorage.client.container.ContainerQuantumDsu;
 import QuantumStorage.tile.TileQuantumDsu;
+import QuantumStorage.util.StringUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -77,6 +78,6 @@ public class GuiQuantumDsu extends GuiContainer
 		if (tile.storedItem != null && tile.getStackInSlot(1) != null)
 			this.fontRendererObj.drawString(tile.storedItem.stackSize + tile.getStackInSlot(1).stackSize + "", 10, 30, 16448255);
 		if (tile.storedItem == null && tile.getStackInSlot(1) != null)
-			this.fontRendererObj.drawString(tile.getStackInSlot(1).stackSize + "", 10, 30, 16448255);
+			this.fontRendererObj.drawString(StringUtil.getRoundedString(tile.getStackInSlot(1).stackSize, ""), 10, 30, 16448255);
 	}
 }

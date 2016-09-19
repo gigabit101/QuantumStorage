@@ -2,11 +2,20 @@ package QuantumStorage.client.gui;
 
 import QuantumStorage.client.container.ContainerQuantumTank;
 import QuantumStorage.tile.TileQuantumTank;
+import QuantumStorage.util.StringUtil;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.translation.I18n;
+import net.minecraftforge.fluids.FluidTank;
+import reborncore.client.RenderUtil;
+import reborncore.client.gui.GuiUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GuiQuantumTank extends GuiContainer 
 {
@@ -37,6 +46,8 @@ public class GuiQuantumTank extends GuiContainer
 		int k = (this.width - this.xSize) / 2;
 		int l = (this.height - this.ySize) / 2;
 		this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
+
+		RenderUtil.renderGuiTank(tile.tank.getFluid(), 1, 1, k + 59, l + 42, zLevel, 16, 16);
 	}
 
 	protected void drawGuiContainerForegroundLayer(int p_146979_1_, int p_146979_2_) 
@@ -46,6 +57,8 @@ public class GuiQuantumTank extends GuiContainer
 		this.fontRendererObj.drawString(I18n.translateToLocalFormatted("container.inventory", new Object[0]), 8, this.ySize - 96 + 2, 4210752);
 		if(tile.tank.getFluid() != null)
 			this.fontRendererObj.drawString(tile.tank.getFluid().getLocalizedName() + " Amount", 10, 20, 16448255);
-        this.fontRendererObj.drawString(tile.tank.getFluidAmount() + " mb", 10, 30, 16448255);
+        this.fontRendererObj.drawString(StringUtil.getRoundedString(tile.tank.getFluidAmount() , "mb"), 10, 30, 16448255);
+
+
 	}
 }
