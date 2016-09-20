@@ -53,10 +53,13 @@ public class BlockQuantumTank extends BlockQuantumStorage
         }
 
         IFluidHandler fluidHandler = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side);
-        FluidUtil.interactWithFluidHandler(heldItem, fluidHandler, playerIn);
-        TileQuantumTank tank = (TileQuantumTank) tile;
-        tank.syncWithAll();
-        return heldItem != null && !(heldItem.getItem() instanceof ItemBlock);
+		boolean inserted = FluidUtil.interactWithFluidHandler(heldItem, fluidHandler, playerIn);
+		if(!worldIn.isRemote){
+			TileQuantumTank tank = (TileQuantumTank) tile;
+			tank.syncWithAll();
+		}
+
+        return inserted;
     }
 	
 	@Override
