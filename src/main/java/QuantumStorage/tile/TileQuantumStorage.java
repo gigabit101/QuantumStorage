@@ -1,9 +1,9 @@
 package QuantumStorage.tile;
 
-import java.util.List;
-
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
+
+import java.util.List;
 
 public class TileQuantumStorage extends TileEntity implements ITickable
 {

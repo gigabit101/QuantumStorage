@@ -1,20 +1,19 @@
 package QuantumStorage;
 
-import java.io.File;
-
 import QuantumStorage.client.GuiHandler;
 import QuantumStorage.compat.CompatManager;
 import QuantumStorage.config.ConfigQuantumStorage;
 import QuantumStorage.init.ModBlocks;
 import QuantumStorage.init.ModRecipes;
 import QuantumStorage.lib.ModInfo;
-import QuantumStorage.packet.PacketHandler;
 import QuantumStorage.proxy.CommonProxy;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+
+import java.io.File;
 
 @Mod(name = ModInfo.MOD_NAME, modid = ModInfo.MOD_ID, version = ModInfo.MOD_VERSION, dependencies = ModInfo.MOD_DEPENDENCUIES)
 public class QuantumStorage 
@@ -41,7 +40,6 @@ public class QuantumStorage
 	public void init(FMLInitializationEvent event) 
 	{
 		NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, new GuiHandler());
-		PacketHandler.setChannels(NetworkRegistry.INSTANCE.newChannel(ModInfo.MOD_ID + "_packets", new PacketHandler()));
 		CompatManager.init(event);	
 	}
 }

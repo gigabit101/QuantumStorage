@@ -1,8 +1,5 @@
 package QuantumStorage.compat.waila;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import QuantumStorage.tile.TileQuantumStorage;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
@@ -13,6 +10,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class WailaProviderQuantumStorage implements IWailaDataProvider
 {

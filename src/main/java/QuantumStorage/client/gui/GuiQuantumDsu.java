@@ -1,16 +1,15 @@
 package QuantumStorage.client.gui;
 
-import java.io.IOException;
-
 import QuantumStorage.client.container.ContainerQuantumDsu;
 import QuantumStorage.tile.TileQuantumDsu;
-import QuantumStorage.util.StringUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.translation.I18n;
+
+import java.io.IOException;
 
 public class GuiQuantumDsu extends GuiContainer 
 {
@@ -20,6 +19,7 @@ public class GuiQuantumDsu extends GuiContainer
 	TileQuantumDsu tile;
 	public int amoauntStored;
 	public String buttontxt;
+	ContainerQuantumDsu containerQuantumDsu;
 
 	public GuiQuantumDsu(EntityPlayer player, TileQuantumDsu tile) 
 	{
@@ -28,6 +28,7 @@ public class GuiQuantumDsu extends GuiContainer
 		this.ySize = 167;
 		this.tile = tile;
 		buttonList.clear();
+		containerQuantumDsu = (ContainerQuantumDsu) this.inventorySlots;
 	}
 	
 	@Override
@@ -75,9 +76,34 @@ public class GuiQuantumDsu extends GuiContainer
 		this.fontRendererObj.drawString(name, this.xSize / 2 - this.fontRendererObj.getStringWidth(name) / 2, 6, 4210752);
 		this.fontRendererObj.drawString(I18n.translateToLocalFormatted("container.inventory", new Object[0]), 8, this.ySize - 96 + 2, 4210752);
 		this.fontRendererObj.drawString("Amount", 10, 20, 16448255);
-		if (tile.storedItem != null && tile.getStackInSlot(1) != null)
-			this.fontRendererObj.drawString(tile.storedItem.stackSize + tile.getStackInSlot(1).stackSize + "", 10, 30, 16448255);
-		if (tile.storedItem == null && tile.getStackInSlot(1) != null)
-			this.fontRendererObj.drawString(StringUtil.getRoundedString(tile.getStackInSlot(1).stackSize, ""), 10, 30, 16448255);
+		if ((tile.storedItem != null && tile.storedItem.stackSize != 0) && tile.getStackInSlot(1) != null){
+			this.fontRendererObj.drawString(getStringToDraw(containerQuantumDsu.stackamount, containerQuantumDsu.stackSizeType), 10, 30, 16448255);
+		}
+
+		if ((tile.storedItem == null || tile.storedItem.stackSize == 0)  && tile.getStackInSlot(1) != null){
+			this.fontRendererObj.drawString(getStringToDraw(tile.getStackInSlot(1).stackSize, 0), 10, 30, 16448255);
+		}
+
+	}
+
+	private String getStringToDraw(int size, int sizeType){
+		String sizeStrType = "";
+		String sizeStr = Integer.toString(size);
+		if(sizeType == 0){
+			return Integer.toString(size);
+		} else if(sizeType == 1){
+			sizeStrType = "K";
+		} else if(sizeType == 2){
+			sizeStrType = "M";
+		} else if(sizeType == 3){
+			sizeStrType = "B";
+		}
+
+		String number = sizeStr.substring(0, sizeStr.length() -1);
+		String decimal = sizeStr.substring(sizeStr.length() -1);
+		if(decimal.equals("0")){
+			return number + " " + sizeStrType;
+		}
+		return number + "." + decimal + " " + sizeStrType;
 	}
 }
