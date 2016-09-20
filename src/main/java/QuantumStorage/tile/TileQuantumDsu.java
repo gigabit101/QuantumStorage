@@ -2,7 +2,6 @@ package QuantumStorage.tile;
 
 import QuantumStorage.config.ConfigQuantumStorage;
 import QuantumStorage.init.ModBlocks;
-import QuantumStorage.packet.PacketHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
@@ -13,9 +12,11 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import powercrystals.minefactoryreloaded.api.IDeepStorageUnit;
+import reborncore.common.network.packet.CustomDescriptionPacket;
 import reborncore.common.util.Inventory;
 import reborncore.common.util.ItemUtils;
 
@@ -122,7 +123,7 @@ public class TileQuantumDsu extends TileQuantumStorage implements IInventory, ID
 	{
 		NBTTagCompound nbtTag = new NBTTagCompound();
 		writeToNBT(nbtTag);
-		return new SPacketUpdateTileEntity(this.pos, 1, nbtTag);
+		return new SPacketUpdateTileEntity(this.pos, 0, nbtTag);
 	}
 
 	@Override
@@ -243,7 +244,7 @@ public class TileQuantumDsu extends TileQuantumStorage implements IInventory, ID
 	{
 		if (!worldObj.isRemote) 
 		{
-			PacketHandler.sendPacketToAllPlayers(getDescriptionPacket(), worldObj);
+			reborncore.common.network.NetworkManager.sendToAllAround(new CustomDescriptionPacket(this), new NetworkRegistry.TargetPoint(worldObj.provider.getDimension(), getPos().getX(), getPos().getY(), getPos().getZ(), 20));
 		}
 	}
 	

@@ -1,17 +1,22 @@
 package QuantumStorage.client.container;
 
-import QuantumStorage.client.QuantumStorageContainer;
 import QuantumStorage.client.slot.SlotFake;
 import QuantumStorage.client.slot.SlotOutput;
 import QuantumStorage.tile.TileQuantumTank;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.Slot;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import reborncore.client.gui.SlotFluid;
+import reborncore.common.container.RebornContainer;
 
-public class ContainerQuantumTank extends QuantumStorageContainer
+public class ContainerQuantumTank extends RebornContainer
 {
 	public TileQuantumTank tile;
 	public EntityPlayer player;
+    public int stackamount = -1;
+    public int stackSizeType = -1;
 	
 	public ContainerQuantumTank(TileQuantumTank tile, EntityPlayer player) 
 	{
@@ -46,4 +51,72 @@ public class ContainerQuantumTank extends QuantumStorageContainer
 	{
 		return true;
 	}
+
+    @Override
+    public void detectAndSendChanges() {
+        super.detectAndSendChanges();
+        for (int i = 0; i < this.listeners.size(); i++) {
+            IContainerListener IContainerListener = this.listeners.get(i);
+            if(tile.tank != null && tile.tank.getFluidAmount() != 0){
+                if (this.stackamount != getHStackAmount(tile.tank.getFluidAmount())) {
+                    IContainerListener.sendProgressBarUpdate(this, 0, getHStackAmount(tile.tank.getFluidAmount()));
+                }
+                if (this.stackSizeType != getHStackAmountType(tile.tank.getFluidAmount())) {
+                    IContainerListener.sendProgressBarUpdate(this, 1, getHStackAmountType(tile.tank.getFluidAmount()));
+                }
+            } else if(tile.tank.getFluidAmount() == 0)  {
+                if (this.stackamount != 0) {
+                    IContainerListener.sendProgressBarUpdate(this, 0, 0);
+                }
+                if (this.stackSizeType != 0) {
+                    IContainerListener.sendProgressBarUpdate(this, 1, 0);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void addListener(IContainerListener crafting) {
+        super.addListener(crafting);
+        if(tile.tank != null){
+            crafting.sendProgressBarUpdate(this, 0, getHStackAmount(tile.tank.getFluidAmount()));
+            crafting.sendProgressBarUpdate(this, 1, getHStackAmountType(tile.tank.getFluidAmount()));
+        }
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void updateProgressBar(int id, int value) {
+        if (id == 0) {
+            this.stackamount = value;
+        } else if (id == 1) {
+            this.stackSizeType = value;
+        }
+    }
+
+    public int getHStackAmount(int amount) {
+        if (amount <= 1000) {
+            return amount;
+        } else if (amount >= 1000 && amount < 1000000) {
+            return amount / 100;
+        } else if (amount >= 1000000 && amount < 1000000000) {
+            return amount / 100000;
+        } else if (amount >= 1000000000) {
+            return amount / 100000000;
+        }
+        return amount;
+    }
+
+    public int getHStackAmountType(int amount) {
+        if (amount <= 1000) {
+            return 0;
+        } else if (amount >= 1000 && amount < 1000000) {
+            return 1;
+        } else if (amount >= 1000000 && amount < 1000000000) {
+            return 2;
+        } else if (amount >= 1000000000) {
+            return 3;
+        }
+        return 0;
+    }
 }

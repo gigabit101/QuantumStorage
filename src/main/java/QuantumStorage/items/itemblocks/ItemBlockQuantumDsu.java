@@ -1,7 +1,5 @@
 package QuantumStorage.items.itemblocks;
 
-import java.util.List;
-
 import QuantumStorage.init.ModBlocks;
 import QuantumStorage.tile.TileQuantumDsu;
 import net.minecraft.block.Block;
@@ -14,6 +12,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
 
 public class ItemBlockQuantumDsu extends ItemBlock{
 

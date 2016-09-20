@@ -2,7 +2,6 @@ package QuantumStorage.tile;
 
 import QuantumStorage.config.ConfigQuantumStorage;
 import QuantumStorage.init.ModBlocks;
-import QuantumStorage.packet.PacketHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -15,13 +14,12 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidTankProperties;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.items.IItemHandler;
 import reborncore.api.IListInfoProvider;
+import reborncore.common.network.packet.CustomDescriptionPacket;
 import reborncore.common.util.Inventory;
 import reborncore.common.util.Tank;
 
@@ -244,7 +242,7 @@ public class TileQuantumTank extends TileQuantumStorage implements IInventory, I
 	{
 		if (!worldObj.isRemote) 
 		{
-			PacketHandler.sendPacketToAllPlayers(getDescriptionPacket(), worldObj);
+			reborncore.common.network.NetworkManager.sendToAllAround(new CustomDescriptionPacket(this), new NetworkRegistry.TargetPoint(worldObj.provider.getDimension(), getPos().getX(), getPos().getY(), getPos().getZ(), 20));;
 		}
 	}
 
