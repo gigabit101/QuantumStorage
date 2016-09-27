@@ -24,9 +24,9 @@ public class ContainerQuantumTank extends RebornContainer
 		this.tile = tile;
 		this.player = player;
 		
-        this.addSlotToContainer(new SlotFluid(tile.inventory, 0, 80, 17));
-        this.addSlotToContainer(new SlotOutput(tile.inventory, 1, 80, 53));
-        this.addSlotToContainer(new SlotFake(tile.inventory, 2, 59, 42, false, false, 1));
+        this.addSlotToContainer(new SlotFluid(tile.inventory, 0, 116, 17));
+        this.addSlotToContainer(new SlotOutput(tile.inventory, 1, 116, 53));
+        this.addSlotToContainer(new SlotFake(tile.inventory, 2, 95, 51, false, false, 1));
 
         int i;
 

@@ -22,9 +22,9 @@ public class ContainerQuantumDsu extends RebornContainer {
         this.tile = tilesimple;
         this.player = player;
 
-        this.addSlotToContainer(new Slot(tilesimple.inventory, 0, 80, 17));
-        this.addSlotToContainer(new SlotOutput(tilesimple.inventory, 1, 80, 53));
-        this.addSlotToContainer(new SlotFake(tilesimple.inventory, 2, 59, 42, false, false, ConfigQuantumStorage.dsuMaxStorage));
+        this.addSlotToContainer(new Slot(tilesimple.inventory, 0, 116, 17));
+        this.addSlotToContainer(new SlotOutput(tilesimple.inventory, 1, 116, 53));
+        this.addSlotToContainer(new SlotFake(tilesimple.inventory, 2, 95, 51, false, false, ConfigQuantumStorage.dsuMaxStorage));
 
         int i;
 
