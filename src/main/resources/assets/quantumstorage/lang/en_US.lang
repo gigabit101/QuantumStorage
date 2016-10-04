@@ -1,4 +1,4 @@
 tile.quantumdsu.name=Quantum Storage Unit
 tile.quantumtank.name=Quantum Tank
 
-itemGroup.QuantumStorage=QuantumStorage
+itemGroup.quantumstorage=Quantum Storage
