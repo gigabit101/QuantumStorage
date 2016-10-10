@@ -12,9 +12,12 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.CapabilityItemHandler;
 import powercrystals.minefactoryreloaded.api.IDeepStorageUnit;
 import reborncore.common.network.packet.CustomDescriptionPacket;
 import reborncore.common.util.Inventory;
@@ -175,6 +178,26 @@ public class TileQuantumDsu extends TileQuantumStorage implements IInventory, ID
 			tagCompound.setString("storedItemAsString", storedItem.getDisplayName());
 		} else
 			tagCompound.setInteger("storedQuantity", 0);
+	}
+
+	@Override
+	public boolean hasCapability(Capability<?> capability, EnumFacing facing)
+	{
+		if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+		{
+			return true;
+		}
+		return super.hasCapability(capability, facing);
+	}
+
+	@Override
+	public <T> T getCapability(Capability<T> capability, EnumFacing facing)
+	{
+		if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+		{
+			return (T) inventory;
+		}
+		return super.getCapability(capability, facing);
 	}
 
 	@Override
