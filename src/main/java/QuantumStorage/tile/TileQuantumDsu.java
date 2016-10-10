@@ -18,6 +18,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.wrapper.InvWrapper;
 import powercrystals.minefactoryreloaded.api.IDeepStorageUnit;
 import reborncore.common.network.packet.CustomDescriptionPacket;
 import reborncore.common.util.Inventory;
@@ -195,7 +196,7 @@ public class TileQuantumDsu extends TileQuantumStorage implements IInventory, ID
 	{
 		if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
 		{
-			return (T) this;
+			return (T) new InvWrapper(this);
 		}
 		return super.getCapability(capability, facing);
 	}
