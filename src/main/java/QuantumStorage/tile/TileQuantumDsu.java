@@ -195,7 +195,7 @@ public class TileQuantumDsu extends TileQuantumStorage implements IInventory, ID
 	{
 		if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
 		{
-			return (T) inventory;
+			return (T) this;
 		}
 		return super.getCapability(capability, facing);
 	}
