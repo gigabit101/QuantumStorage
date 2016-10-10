@@ -5,6 +5,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import reborncore.RebornRegistry;
+import reborncore.common.util.CraftingHelper;
 
 public class ModRecipes 
 {
@@ -16,17 +18,17 @@ public class ModRecipes
 	public static void addBlockRecipes()
 	{
 		if(!ConfigQuantumStorage.disableDsu)
-			GameRegistry.addRecipe(new ItemStack(ModBlocks.QuantumDsu), 
+			CraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.QuantumDsu),
 					"OOO",
 					"ICI",
 					"III",
 					'I', new ItemStack(Items.IRON_INGOT),
 					'O', new ItemStack(Blocks.OBSIDIAN),
-					'C', new ItemStack(Blocks.CHEST));
+					'C', "chest");
 		
 		
 		if(!ConfigQuantumStorage.disableTank)
-			GameRegistry.addRecipe(new ItemStack(ModBlocks.QuantumTank),
+			CraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.QuantumTank),
 					"OOO",
 					"IBI",
 					"III",
