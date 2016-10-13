@@ -50,10 +50,10 @@ public class ConfigQuantumStorage
     public static void Configs() 
     {
         disableDsu = config.get(CATEGORY_RECIPE,"Disable QuantumStorage Unit MK1",
-                false,"set to false to remove recipe from QuantumStorage Unit MK1").getBoolean();
+                false,"set to true to remove recipe from QuantumStorage Unit MK1").getBoolean();
         
         disableTank = config.get(CATEGORY_RECIPE,"Disable QuantumStorage Tank MK1",
-                false,"set to false to remove recipe from QuantumStorage Tank MK1").getBoolean();
+                false,"set to true to remove recipe from QuantumStorage Tank MK1").getBoolean();
 
         
         dsuMaxStorage = config.get(CATEGORY_TWEAKS,"DSU Max Storage",
