@@ -1,16 +1,22 @@
 package QuantumStorage.client.container;
 
 import QuantumStorage.client.slot.SlotFake;
+import QuantumStorage.client.slot.SlotFiltered;
 import QuantumStorage.client.slot.SlotOutput;
 import QuantumStorage.config.ConfigQuantumStorage;
 import QuantumStorage.tile.TileQuantumDsu;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import reborncore.client.gui.slots.SlotFilteredVoid;
 import reborncore.common.container.RebornContainer;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContainerQuantumDsu extends RebornContainer {
     public TileQuantumDsu tile;
@@ -23,7 +29,7 @@ public class ContainerQuantumDsu extends RebornContainer {
         this.tile = tilesimple;
         this.player = player;
 
-        this.addSlotToContainer(new Slot(tilesimple.inventory, 0, 116, 17));
+        this.addSlotToContainer(new SlotFiltered(tilesimple.inventory, 0, 116, 17, tilesimple.getStackInSlot(1)));
         this.addSlotToContainer(new SlotOutput(tilesimple.inventory, 1, 116, 53));
         this.addSlotToContainer(new SlotFake(tilesimple.inventory, 2, 95, 51, false, false, ConfigQuantumStorage.dsuMaxStorage));
 

@@ -21,6 +21,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 import net.minecraftforge.items.wrapper.SidedInvWrapper;
 import powercrystals.minefactoryreloaded.api.IDeepStorageUnit;
+import reborncore.api.IListInfoProvider;
 import reborncore.common.network.packet.CustomDescriptionPacket;
 import reborncore.common.util.Inventory;
 import reborncore.common.util.ItemUtils;

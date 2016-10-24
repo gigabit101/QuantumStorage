@@ -43,8 +43,9 @@ public class BlockQuantumDsu extends BlockQuantumStorage
 	{
 		return new TileQuantumDsu();
 	}
-	
-	@Override
+
+
+    @Override
 	public void breakBlock(World world, BlockPos pos, IBlockState state)
 	{
 		TileEntity te = world.getTileEntity(pos);
@@ -55,7 +56,7 @@ public class BlockQuantumDsu extends BlockQuantumStorage
 				float xOffset = world.rand.nextFloat() * 0.8F + 0.1F;
 				float yOffset = world.rand.nextFloat() * 0.8F + 0.1F;
 				float zOffset = world.rand.nextFloat() * 0.8F + 0.1F;
-						
+
 				ItemStack stacknbt = ((TileQuantumDsu) te).getDropWithNBT();
 				int amountToDrop = Math.min(world.rand.nextInt(21) + 10, stacknbt.stackSize);
 
@@ -63,13 +64,13 @@ public class BlockQuantumDsu extends BlockQuantumStorage
 				stacknbt.splitStack(amountToDrop));
 				world.spawnEntityInWorld(entityitem);
 			}
-			else 
+			else
 			{
 				float xOffset = world.rand.nextFloat() * 0.8F + 0.1F;
 				float yOffset = world.rand.nextFloat() * 0.8F + 0.1F;
 				float zOffset = world.rand.nextFloat() * 0.8F + 0.1F;
 				ItemStack stack = new ItemStack(ModBlocks.QuantumDsu);
-				
+
 				EntityItem entityitem = new EntityItem(world, pos.getX() + xOffset, pos.getY() + yOffset, pos.getZ() + zOffset, stack);
 				world.spawnEntityInWorld(entityitem);
 			}

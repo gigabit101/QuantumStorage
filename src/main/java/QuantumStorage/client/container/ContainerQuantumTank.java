@@ -8,7 +8,7 @@ import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.Slot;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import reborncore.client.gui.SlotFluid;
+import reborncore.client.gui.slots.SlotFluid;
 import reborncore.common.container.RebornContainer;
 
 public class ContainerQuantumTank extends RebornContainer
