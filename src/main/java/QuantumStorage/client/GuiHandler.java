@@ -1,11 +1,14 @@
 package QuantumStorage.client;
 
+import QuantumStorage.client.container.ContainerQChest;
 import QuantumStorage.client.container.ContainerQuantumDsu;
 import QuantumStorage.client.container.ContainerQuantumTank;
+import QuantumStorage.client.gui.GuiQChest;
 import QuantumStorage.client.gui.GuiQuantumDsu;
 import QuantumStorage.client.gui.GuiQuantumTank;
 import QuantumStorage.tile.TileQuantumDsu;
 import QuantumStorage.tile.TileQuantumTank;
+import QuantumStorage.tile.prefab.TileQChest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -15,6 +18,7 @@ public class GuiHandler implements IGuiHandler
 {
 	public static final int dsu = 0;
 	public static final int tank = 1;
+	public static final int chest = 2;
 
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) 
@@ -27,6 +31,10 @@ public class GuiHandler implements IGuiHandler
 		{
 			return new ContainerQuantumTank((TileQuantumTank) world.getTileEntity(new BlockPos (x, y, z)), player);
 		}
+        if (ID == chest)
+        {
+            return new ContainerQChest((TileQChest) world.getTileEntity(new BlockPos (x, y, z)), player);
+        }
 		return null;
 	}
 
@@ -41,6 +49,10 @@ public class GuiHandler implements IGuiHandler
 		{
 			return new GuiQuantumTank(player, (TileQuantumTank) world.getTileEntity(new BlockPos(x, y, z)));
 		}
+        if (ID == chest)
+        {
+            return new GuiQChest(player, (TileQChest) world.getTileEntity(new BlockPos(x, y, z)));
+        }
 		return null;
 	}
 }

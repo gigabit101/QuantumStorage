@@ -2,6 +2,7 @@ package QuantumStorage.tile;
 
 import QuantumStorage.config.ConfigQuantumStorage;
 import QuantumStorage.init.ModBlocks;
+import QuantumStorage.tile.prefab.TileQuantumStorage;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -16,8 +17,12 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.wrappers.FluidBlockWrapper;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.wrapper.InvWrapper;
+import net.minecraftforge.items.wrapper.SidedInvWrapper;
 import reborncore.api.IListInfoProvider;
 import reborncore.common.network.packet.CustomDescriptionPacket;
 import reborncore.common.util.Inventory;
@@ -129,7 +134,11 @@ public class TileQuantumTank extends TileQuantumStorage implements IInventory, I
 	{
 		if(capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
 		{
-			return (T) tank;
+			return (T) this;
+		}
+		if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+		{
+			return (T) new InvWrapper(this);
 		}
 		return super.getCapability(capability, facing);
 	}

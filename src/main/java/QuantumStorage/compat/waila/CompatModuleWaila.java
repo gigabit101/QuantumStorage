@@ -1,6 +1,6 @@
 package QuantumStorage.compat.waila;
 
-import QuantumStorage.tile.TileQuantumStorage;
+import QuantumStorage.tile.prefab.TileQuantumStorage;
 import mcp.mobius.waila.api.IWailaRegistrar;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLInterModComms;

@@ -1,4 +1,4 @@
-package QuantumStorage.tile;
+package QuantumStorage.tile.prefab;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;

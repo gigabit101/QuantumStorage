@@ -8,15 +8,10 @@ import QuantumStorage.tile.TileQuantumDsu;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.Slot;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import reborncore.client.gui.slots.SlotFilteredVoid;
 import reborncore.common.container.RebornContainer;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ContainerQuantumDsu extends RebornContainer {
     public TileQuantumDsu tile;

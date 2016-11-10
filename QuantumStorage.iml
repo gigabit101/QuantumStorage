@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="JAVA_MODULE" version="4">
-  <component name="NewModuleRootManager" inherit-compiler-output="true">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
@@ -9,5 +9,26 @@
     <orderEntry type="jdk" jdkName="1.8" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="1.10.2" />
+    <orderEntry type="module" module-name="RebornCore" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../1.10.2/run/mods/hjson-2.1.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../1.10.2/run/mods/Mantle-1.10-0.10.3.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../1.10.2/run/mods/Baubles-1.10.2-1.3.2.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../1.10.2/run/mods/Waila-1.7.0-B3_1.9.4.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../1.10.2/run/mods/jei_1.10.2-3.12.0.285.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../1.10.2/run/mods/LootBags-1.10.2-2.1.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../1.10.2/run/mods/Tesla-1.10.2-1.2.1.41.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../1.10.2/run/mods/TConstruct-1.10-2.3.3a.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../1.10.2/run/mods/theoneprobe-1.10-1.1.2.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../1.10.2/run/mods/MCMultiPart-1.2.0-universal.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../1.10.2/run/mods/CraftTweaker-Dev-1.10.2-3.0.10.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../1.10.2/run/mods/Json-Destroyer-1.9.4-2.2.2-dev.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

@@ -4,8 +4,6 @@ import QuantumStorage.config.ConfigQuantumStorage;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import reborncore.RebornRegistry;
 import reborncore.common.util.CraftingHelper;
 
 public class ModRecipes 
