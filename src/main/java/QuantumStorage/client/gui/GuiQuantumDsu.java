@@ -20,6 +20,7 @@ public class GuiQuantumDsu extends GuiContainer
 	public int amoauntStored;
 	public String buttontxt;
 	ContainerQuantumDsu containerQuantumDsu;
+    EntityPlayer player;
 
 	public GuiQuantumDsu(EntityPlayer player, TileQuantumDsu tile) 
 	{
@@ -27,6 +28,7 @@ public class GuiQuantumDsu extends GuiContainer
 		this.xSize = 176;
 		this.ySize = 167;
 		this.tile = tile;
+        this.player = player;
 		buttonList.clear();
 		containerQuantumDsu = (ContainerQuantumDsu) this.inventorySlots;
 	}
@@ -76,6 +78,13 @@ public class GuiQuantumDsu extends GuiContainer
 		this.fontRendererObj.drawString(name, this.xSize / 2 - this.fontRendererObj.getStringWidth(name) / 2, 6, 4210752);
 		this.fontRendererObj.drawString(I18n.translateToLocalFormatted("container.inventory", new Object[0]), 8, this.ySize - 96 + 2, 4210752);
 		this.fontRendererObj.drawString("Amount", 10, 20, 16448255);
+
+        if(player.getDisplayNameString().toLowerCase().contains("darkosto"))
+        {
+            this.fontRendererObj.drawString("HAPPY BIRTHDAY", 10, 40, 16448255);
+            this.fontRendererObj.drawString("DARKOSTO", 10, 50, 16448255);
+        }
+
 		if ((tile.storedItem != null && tile.storedItem.stackSize != 0) && tile.getStackInSlot(1) != null){
 			this.fontRendererObj.drawString(getStringToDraw(containerQuantumDsu.stackamount, containerQuantumDsu.stackSizeType), 10, 30, 16448255);
 		}
