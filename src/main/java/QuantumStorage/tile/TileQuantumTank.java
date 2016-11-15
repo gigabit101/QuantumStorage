@@ -134,7 +134,7 @@ public class TileQuantumTank extends TileQuantumStorage implements IInventory, I
 	{
 		if(capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
 		{
-			return (T) this;
+			return (T) tank;
 		}
 		if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
 		{
