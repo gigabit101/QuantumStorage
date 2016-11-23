@@ -1,10 +1,9 @@
 [
 {
-  "modid": "QuantumStorage",
+  "modid": "quantumstorage",
   "name": "QuantumStorage",
   "description": "",
   "version": "$version",
-  "mcversion": "$mcversion",
   "url": "",
   "updateUrl": "",
   "authorList": [
