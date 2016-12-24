@@ -17,7 +17,7 @@ public class GuiQChest extends GuiContainer
     public GuiQChest(EntityPlayer player, TileQChest inventorySlotsIn)
     {
         super(new ContainerQChest(inventorySlotsIn, player));
-        this.size = inventorySlotsIn.getInvSize();
+        this.size = inventorySlotsIn.getSizeInventory();
         this.xSize = 250;
         this.ySize = 240;
     }

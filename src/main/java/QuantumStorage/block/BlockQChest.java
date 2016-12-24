@@ -97,11 +97,6 @@ public class BlockQChest extends BlockQuantumStorage
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta)
     {
-//        if(meta == 0)
-//            return new TileQChest(52);
-//        if(meta == 1)
-//            return new TileQChest(65);
-//        return new TileQChest(78);
         if(meta == 0)
         {
             return new TileIronChest();

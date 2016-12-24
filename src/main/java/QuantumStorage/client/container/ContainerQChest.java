@@ -21,7 +21,7 @@ public class ContainerQChest extends RebornContainer
     public ContainerQChest(TileQChest tile, EntityPlayer player)
     {
         super();
-        this.size = tile.getInvSize();
+        this.size = tile.getSizeInventory();
 
         int j;
         int k;

@@ -4,6 +4,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import reborncore.common.util.Inventory;
@@ -13,17 +15,20 @@ import javax.annotation.Nullable;
 /**
  * Created by Gigabit101 on 01/11/2016.
  */
-public class TileQChest extends TileEntity implements IInventory, ITickable
+public abstract class TileQChest extends TileEntity implements IInventory
 {
-    final int invSize;
+    int invSize;
 
-    Inventory inv = null;//= new Inventory(invSize, "", 64, this);
+    Inventory inv;// = new Inventory(invSize, "", 64, this);
 
-    public TileQChest(int size)
+    public Inventory getInv()
     {
-        this.invSize = size;
-        if(this.inv == null)
-            this.inv = new Inventory(size, "", 64, this);
+        return this.inv;
+    }
+
+    public void setInv(Inventory inv)
+    {
+        this.inv = inv;
     }
 
     @Override
@@ -124,39 +129,32 @@ public class TileQChest extends TileEntity implements IInventory, ITickable
         return invSize;
     }
 
-//    @Nullable
-//    @Override
-//    public SPacketUpdateTileEntity getUpdatePacket()
-//    {
-//        return new SPacketUpdateTileEntity(getPos(), getBlockMetadata(), writeToNBT(new NBTTagCompound()));
-//    }
-//
-//    @Override
-//    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet)
-//    {
-//        readFromNBT(packet.getNbtCompound());
-//    }
+    @Nullable
+    @Override
+    public SPacketUpdateTileEntity getUpdatePacket()
+    {
+        return new SPacketUpdateTileEntity(getPos(), getBlockMetadata(), writeToNBT(new NBTTagCompound()));
+    }
+
+    @Override
+    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet)
+    {
+        readFromNBT(packet.getNbtCompound());
+    }
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {
         inv.writeToNBT(compound);
-        System.out.print("SAVED NBT");
+        System.out.print("---------------------SAVED NBT-------------------------------");
         return compound;
     }
 
     @Override
     public void readFromNBT(NBTTagCompound compound)
     {
-        //super.readFromNBT(compound);
         inv.readFromNBT(compound);
         System.out.print("---------------------LOADED NBT------------------------------");
-    }
-
-    @Override
-    public void update()
-    {
-
     }
 
 //    @Override

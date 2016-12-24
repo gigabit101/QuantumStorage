@@ -47,8 +47,6 @@ public class TileQuantumDsu extends TileQuantumStorage implements IInventory, ID
 				ItemStack fakeStack = storedItem.copy();
 				fakeStack.stackSize = 1;
 				setInventorySlotContents(2, fakeStack);
-				if(isLocked)
-					System.out.println("");
 			} 
 			else if (storedItem == null && getStackInSlot(1) != null)
 			{
@@ -78,21 +76,30 @@ public class TileQuantumDsu extends TileQuantumStorage implements IInventory, ID
 				}
 			}
 
+            //TODO move this change to 1.11
 			if (storedItem != null && getStackInSlot(1) == null) 
 			{
 				ItemStack itemStack = storedItem.copy();
-				itemStack.stackSize = itemStack.getMaxStackSize();
-				setInventorySlotContents(1, itemStack);
-				storedItem.stackSize -= itemStack.getMaxStackSize();
-			} 
+                if(storedItem.stackSize >= itemStack.getMaxStackSize())
+                {
+                    itemStack.stackSize = itemStack.getMaxStackSize();
+                    storedItem.stackSize -= itemStack.getMaxStackSize();
+                    setInventorySlotContents(1, itemStack);
+                }
+                else
+                {
+                    storedItem = null;
+                    setInventorySlotContents(1, itemStack);
+                }
+			}
 			else if (ItemUtils.isItemEqual(getStackInSlot(1), storedItem, true, true)) 
 			{
 				int wanted = getStackInSlot(1).getMaxStackSize() - getStackInSlot(1).stackSize;
 				if (storedItem.stackSize >= wanted) 
 				{
-					decrStackSize(1, -wanted);
-					storedItem.stackSize -= wanted;
-				} 
+                    storedItem.stackSize -= wanted;
+                    decrStackSize(1, -wanted);
+				}
 				else 
 				{
 					decrStackSize(1, -storedItem.stackSize);
@@ -103,6 +110,7 @@ public class TileQuantumDsu extends TileQuantumStorage implements IInventory, ID
 		if(inventory.hasChanged)
 		{
 			syncWithAll();
+            inventory.markDirty();
 		}
 	}
 	
@@ -240,6 +248,10 @@ public class TileQuantumDsu extends TileQuantumStorage implements IInventory, ID
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack stack) 
 	{
+		if(slot == 2)
+		{
+			return false;
+		}
 		if(ItemUtils.isItemEqual(stack, getStackInSlot(1), true, true))
 		{
 			return true;
@@ -396,7 +408,7 @@ public class TileQuantumDsu extends TileQuantumStorage implements IInventory, ID
 	@Override
 	public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction)
 	{
-		if(index == 1)
+		if(index == 1 && stack != null)
 			return true;
 		return false;
 	}
