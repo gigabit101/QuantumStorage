@@ -109,7 +109,7 @@ public class TileQuantumDsu extends TileQuantumStorage implements IInventory, ID
 		}
 		if(inventory.hasChanged)
 		{
-			syncWithAll();
+			//syncWithAll();
             inventory.markDirty();
 		}
 	}
