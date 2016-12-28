@@ -15,6 +15,8 @@ public class ConfigQuantumStorage
 	
 	public static boolean disableTank;
 	public static int tankMaxStorage;
+
+    public static boolean disableRender;
 	
 	
 	public static Configuration config;
@@ -61,6 +63,9 @@ public class ConfigQuantumStorage
         
         tankMaxStorage = config.get(CATEGORY_TWEAKS,"Quantum Tank Max Storage",
                 536870911,"set to change the max storage of the quantum storage tank").getInt();
+
+        disableRender = config.get(CATEGORY_TWEAKS, "Disable Dsu Item Render",
+                false, "set to true to disable the render").getBoolean();
        
         if (config.hasChanged())
             config.save();

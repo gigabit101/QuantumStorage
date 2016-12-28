@@ -15,6 +15,7 @@ public class ModelHelper
     {
         registerItemModel(ModBlocks.QuantumDsu, 0);
         registerItemModel(ModBlocks.QuantumTank, 0);
+        registerItemModel(ModItems.renderUpgrade, 0);
     }
 
     static void registerItemModel(Item i, int meta)

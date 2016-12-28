@@ -33,5 +33,13 @@ public class ModRecipes
 					'I', new ItemStack(Items.IRON_INGOT),
                     'O', new ItemStack(Blocks.OBSIDIAN),
 					'B', new ItemStack(Items.BUCKET));
+
+		CraftingHelper.addShapedOreRecipe(new ItemStack(ModItems.renderUpgrade),
+				"OOO",
+				"IBI",
+				"III",
+				'I', new ItemStack(Items.IRON_INGOT),
+				'O', new ItemStack(Blocks.OBSIDIAN),
+				'B', new ItemStack(Items.ITEM_FRAME));
 	}
 }

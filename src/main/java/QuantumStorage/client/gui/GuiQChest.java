@@ -1,7 +1,7 @@
 package QuantumStorage.client.gui;
 
 import QuantumStorage.client.container.ContainerQChest;
-import QuantumStorage.tile.prefab.TileQChest;
+import QuantumStorage.beta.chest.TileQChest;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import reborncore.client.guibuilder.GuiBuilder;

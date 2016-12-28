@@ -1,4 +1,5 @@
 tile.quantumdsu.name=Quantum Storage Unit
 tile.quantumtank.name=Quantum Tank
+item.quantumstorage.renderupgrade.name=Upgrade Render
 
 itemGroup.quantumstorage=Quantum Storage

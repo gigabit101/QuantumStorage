@@ -1,6 +1,6 @@
 package QuantumStorage.client.container;
 
-import QuantumStorage.tile.prefab.TileQChest;
+import QuantumStorage.beta.chest.TileQChest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.inventory.Slot;

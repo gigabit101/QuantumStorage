@@ -76,4 +76,16 @@ public class BlockQuantumDsu extends BlockQuantumStorage
 			}
 		}
 	}
+
+	@Override
+	public boolean isFullCube(IBlockState state)
+	{
+		return false;
+	}
+
+	@Override
+	public boolean isOpaqueCube(IBlockState state)
+	{
+		return false;
+	}
 }

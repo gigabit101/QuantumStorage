@@ -4,6 +4,7 @@ import QuantumStorage.client.GuiHandler;
 import QuantumStorage.compat.CompatManager;
 import QuantumStorage.config.ConfigQuantumStorage;
 import QuantumStorage.init.ModBlocks;
+import QuantumStorage.init.ModItems;
 import QuantumStorage.init.ModRecipes;
 import QuantumStorage.lib.ModInfo;
 import QuantumStorage.proxy.CommonProxy;
@@ -32,6 +33,7 @@ public class QuantumStorage
 		String path = event.getSuggestedConfigurationFile().getAbsolutePath().replace(ModInfo.MOD_ID, "QuantumStorage");
 		config = ConfigQuantumStorage.initialize(new File(path));
         ModBlocks.init();
+		ModItems.init();
         ModRecipes.init();
         proxy.registerRenders();
 	}

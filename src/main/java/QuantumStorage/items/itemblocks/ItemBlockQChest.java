@@ -1,6 +1,7 @@
 package QuantumStorage.items.itemblocks;
 
-import QuantumStorage.block.BlockQChest;
+import QuantumStorage.beta.BetaInit;
+import QuantumStorage.beta.chest.BlockQChest;
 import QuantumStorage.init.ModBlocks;
 import net.minecraft.block.Block;
 import reborncore.common.itemblock.ItemBlockBase;
@@ -12,6 +13,6 @@ public class ItemBlockQChest extends ItemBlockBase
 {
     public ItemBlockQChest(Block block)
     {
-        super(ModBlocks.QChest, ModBlocks.QChest, BlockQChest.types);
+        super(BetaInit.QChest, BetaInit.QChest, BlockQChest.types);
     }
 }

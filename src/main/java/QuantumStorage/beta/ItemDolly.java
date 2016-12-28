@@ -1,5 +1,6 @@
-package QuantumStorage.items;
+package QuantumStorage.beta;
 
+import QuantumStorage.items.ItemQuantumStorage;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;

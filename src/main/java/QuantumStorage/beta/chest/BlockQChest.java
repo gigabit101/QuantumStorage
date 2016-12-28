@@ -1,10 +1,11 @@
-package QuantumStorage.block;
+package QuantumStorage.beta.chest;
 
 import QuantumStorage.QuantumStorage;
+import QuantumStorage.block.BlockQuantumStorage;
 import QuantumStorage.client.GuiHandler;
-import QuantumStorage.tile.chest.TileDiamondChest;
-import QuantumStorage.tile.chest.TileGoldChest;
-import QuantumStorage.tile.chest.TileIronChest;
+import QuantumStorage.beta.chest.TileDiamondChest;
+import QuantumStorage.beta.chest.TileGoldChest;
+import QuantumStorage.beta.chest.TileIronChest;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;

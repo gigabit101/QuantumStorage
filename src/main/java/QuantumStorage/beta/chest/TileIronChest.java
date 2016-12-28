@@ -1,6 +1,5 @@
-package QuantumStorage.tile.chest;
+package QuantumStorage.beta.chest;
 
-import QuantumStorage.tile.prefab.TileQChest;
 import net.minecraft.nbt.NBTTagCompound;
 import reborncore.common.util.Inventory;
 

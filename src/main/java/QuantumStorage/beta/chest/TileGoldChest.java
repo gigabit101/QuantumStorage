@@ -1,6 +1,5 @@
-package QuantumStorage.tile.chest;
+package QuantumStorage.beta.chest;
 
-import QuantumStorage.tile.prefab.TileQChest;
 import reborncore.common.util.Inventory;
 
 /**
