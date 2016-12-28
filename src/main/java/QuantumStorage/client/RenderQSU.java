@@ -19,11 +19,11 @@ public class RenderQSU extends TileEntitySpecialRenderer<TileQuantumDsu>
     {
         if (te != null && te.getTileData().hasKey(ItemRenderUpgrade.NBT_KEY))
         {
-            if (te.getStoredItemType() != null)
+            if (te.getStackInSlot(1) != null)
             {
                 GlStateManager.pushMatrix();
 
-                ItemStack stack = te.getStoredItemType();
+                ItemStack stack = te.getStackInSlot(1);
                 if(stack != null)
                 {
                     double spin = Minecraft.getSystemTime() / 1000D;
