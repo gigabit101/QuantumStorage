@@ -280,7 +280,7 @@ public class TileQuantumDsu extends TileQuantumStorage implements IInventory, ID
 	{
 		if (!worldObj.isRemote) 
 		{
-			reborncore.common.network.NetworkManager.sendToAllAround(new CustomDescriptionPacket(this), new NetworkRegistry.TargetPoint(worldObj.provider.getDimension(), getPos().getX(), getPos().getY(), getPos().getZ(), 20));
+			reborncore.common.network.NetworkManager.sendToAllAround(new CustomDescriptionPacket(this), new NetworkRegistry.TargetPoint(worldObj.provider.getDimension(), getPos().getX(), getPos().getY(), getPos().getZ(), 5));
 		}
 	}
 	
