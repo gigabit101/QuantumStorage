@@ -40,8 +40,12 @@ public class TileQuantumDsu extends TileQuantumStorage implements IInventory, ID
 	@Override
 	public void update() 
 	{
-		if (!worldObj.isRemote) 
+		if (!world.isRemote)
 		{
+            if(getStackInSlot(1) != null && getStackInSlot(1).stackSize == 0)
+            {
+                setInventorySlotContents(1, null);
+            }
 			if (storedItem != null) 
 			{
 				ItemStack fakeStack = storedItem.copy();
@@ -240,9 +244,9 @@ public class TileQuantumDsu extends TileQuantumStorage implements IInventory, ID
 	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer player) 
+	public boolean isUsableByPlayer(EntityPlayer player)
 	{
-		return inventory.isUseableByPlayer(player);
+		return inventory.isUsableByPlayer(player);
 	}
 
 	@Override
@@ -278,9 +282,9 @@ public class TileQuantumDsu extends TileQuantumStorage implements IInventory, ID
 
 	public void syncWithAll() 
 	{
-		if (!worldObj.isRemote) 
+		if (!world.isRemote)
 		{
-			reborncore.common.network.NetworkManager.sendToAllAround(new CustomDescriptionPacket(this), new NetworkRegistry.TargetPoint(worldObj.provider.getDimension(), getPos().getX(), getPos().getY(), getPos().getZ(), 5));
+			reborncore.common.network.NetworkManager.sendToAllAround(new CustomDescriptionPacket(this), new NetworkRegistry.TargetPoint(world.provider.getDimension(), getPos().getX(), getPos().getY(), getPos().getZ(), 5));
 		}
 	}
 	
@@ -306,7 +310,7 @@ public class TileQuantumDsu extends TileQuantumStorage implements IInventory, ID
 	@Override
 	public ItemStack getStoredItemType() 
 	{
-		return this.storedItem;
+		return storedItem;
 	}
 
 	@Override

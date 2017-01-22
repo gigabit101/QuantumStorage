@@ -45,20 +45,28 @@ public class BlockQuantumTank extends BlockQuantumStorage
 
     public boolean fillBlockWithFluid(World worldIn, BlockPos pos, EntityPlayer playerIn, ItemStack heldItem, EnumFacing side)
     {
-        TileEntity tile = worldIn.getTileEntity(pos);
-        if(tile == null || !tile.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side))
-        {
-            return false;
-        }
+		try
+		{
+			TileEntity tile = worldIn.getTileEntity(pos);
+			if (tile == null || !tile.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side))
+			{
+				return false;
+			}
 
-        IFluidHandler fluidHandler = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side);
-		boolean inserted = FluidUtil.interactWithFluidHandler(heldItem, fluidHandler, playerIn);
-		if(!worldIn.isRemote){
-			TileQuantumTank tank = (TileQuantumTank) tile;
-			tank.syncWithAll();
+			IFluidHandler fluidHandler = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side);
+			boolean inserted = FluidUtil.interactWithFluidHandler(heldItem, fluidHandler, playerIn);
+			if (!worldIn.isRemote)
+			{
+				TileQuantumTank tank = (TileQuantumTank) tile;
+				tank.syncWithAll();
+			}
+			return inserted;
 		}
+		catch (Exception e)
+		{
 
-        return inserted;
+		}
+        return false;
     }
 	
 	@Override
@@ -79,7 +87,7 @@ public class BlockQuantumTank extends BlockQuantumStorage
 				EntityItem entityitem = new EntityItem(world,
 						pos.getX() + xOffset, pos.getY() + yOffset, pos.getZ() + zOffset,
 						stacknbt.splitStack(amountToDrop));
-				world.spawnEntityInWorld(entityitem);
+				world.spawnEntity(entityitem);
 			}
 			else 
 			{
@@ -90,7 +98,7 @@ public class BlockQuantumTank extends BlockQuantumStorage
 				
 				EntityItem entityitem = new EntityItem(world,
 						pos.getX() + xOffset, pos.getY() + yOffset, pos.getZ() + zOffset, stack);
-				world.spawnEntityInWorld(entityitem);
+				world.spawnEntity(entityitem);
 			}
 		}
 	}

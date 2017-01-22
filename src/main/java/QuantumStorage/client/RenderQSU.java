@@ -1,6 +1,6 @@
 package QuantumStorage.client;
 
-import QuantumStorage.items.ItemRenderUpgrade;
+import QuantumStorage.items.upgrades.ItemRenderUpgrade;
 import QuantumStorage.tile.TileQuantumDsu;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;

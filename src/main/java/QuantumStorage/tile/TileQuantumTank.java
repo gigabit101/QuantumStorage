@@ -17,6 +17,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.FluidTankPropertiesWrapper;
 import net.minecraftforge.fluids.capability.wrappers.FluidBlockWrapper;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -79,7 +80,7 @@ public class TileQuantumTank extends TileQuantumStorage implements IInventory, I
 	public void update() 
 	{
 		super.update();
-		if (!worldObj.isRemote) 
+		if (!world.isRemote)
 		{
             emptyContainer();
             fillContainer();
@@ -134,7 +135,7 @@ public class TileQuantumTank extends TileQuantumStorage implements IInventory, I
 	{
 		if(capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
 		{
-			return (T) tank;
+			return (T) new FluidTankPropertiesWrapper(tank);
 		}
 		if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
 		{
@@ -196,9 +197,9 @@ public class TileQuantumTank extends TileQuantumStorage implements IInventory, I
 	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer player) 
+	public boolean isUsableByPlayer(EntityPlayer player)
 	{
-		return inventory.isUseableByPlayer(player);
+		return inventory.isUsableByPlayer(player);
 	}
 
 	@Override
@@ -249,9 +250,9 @@ public class TileQuantumTank extends TileQuantumStorage implements IInventory, I
 
 	public void syncWithAll()
 	{
-		if (!worldObj.isRemote) 
+		if (!world.isRemote)
 		{
-			reborncore.common.network.NetworkManager.sendToAllAround(new CustomDescriptionPacket(this), new NetworkRegistry.TargetPoint(worldObj.provider.getDimension(), getPos().getX(), getPos().getY(), getPos().getZ(), 20));;
+			reborncore.common.network.NetworkManager.sendToAllAround(new CustomDescriptionPacket(this), new NetworkRegistry.TargetPoint(world.provider.getDimension(), getPos().getX(), getPos().getY(), getPos().getZ(), 20));;
 		}
 	}
 

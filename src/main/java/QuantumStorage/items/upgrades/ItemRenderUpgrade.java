@@ -1,5 +1,6 @@
-package QuantumStorage.items;
+package QuantumStorage.items.upgrades;
 
+import QuantumStorage.items.ItemQuantumStorage;
 import QuantumStorage.lib.ModInfo;
 import QuantumStorage.tile.TileQuantumDsu;
 import net.minecraft.entity.player.EntityPlayer;

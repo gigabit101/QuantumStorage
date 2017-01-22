@@ -1,6 +1,6 @@
 package QuantumStorage.init;
 
-import QuantumStorage.items.ItemRenderUpgrade;
+import QuantumStorage.items.upgrades.ItemRenderUpgrade;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 

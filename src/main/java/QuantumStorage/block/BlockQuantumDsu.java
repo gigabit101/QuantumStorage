@@ -62,7 +62,7 @@ public class BlockQuantumDsu extends BlockQuantumStorage
 
 				EntityItem entityitem = new EntityItem(world, pos.getX() + xOffset, pos.getY() + yOffset, pos.getZ() + zOffset,
 				stacknbt.splitStack(amountToDrop));
-				world.spawnEntityInWorld(entityitem);
+				world.spawnEntity(entityitem);
 			}
 			else
 			{
@@ -72,7 +72,7 @@ public class BlockQuantumDsu extends BlockQuantumStorage
 				ItemStack stack = new ItemStack(ModBlocks.QuantumDsu);
 
 				EntityItem entityitem = new EntityItem(world, pos.getX() + xOffset, pos.getY() + yOffset, pos.getZ() + zOffset, stack);
-				world.spawnEntityInWorld(entityitem);
+				world.spawnEntity(entityitem);
 			}
 		}
 	}
