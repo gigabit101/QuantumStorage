@@ -55,7 +55,7 @@ archivesBaseName = "${config.mod_name}-${config.minecraft_version}"
 minecraft {
     version = "${config.forge_version}"
     runDir = "run"
-    mappings = "snapshot_20160518"
+    mappings = "stable_29"
     replace '@VERSION@', project.version
 }
 
