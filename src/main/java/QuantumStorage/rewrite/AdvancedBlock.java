@@ -55,6 +55,16 @@ public class AdvancedBlock extends BlockContainer
     }
 
     @Override
+    public void onBlockClicked(World worldIn, BlockPos pos, EntityPlayer playerIn)
+    {
+        if(advancedTileEntity != null)
+        {
+            advancedTileEntity.onBlockClicked(worldIn, pos, playerIn);
+        }
+        super.onBlockClicked(worldIn, pos, playerIn);
+    }
+
+    @Override
     public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, IBlockState state, float chance, int fortune) {}
 
     @Override
@@ -73,5 +83,17 @@ public class AdvancedBlock extends BlockContainer
             EntityItem entityitem = new EntityItem(world, pos.getX() + xOffset, pos.getY() + yOffset, pos.getZ() + zOffset, stacknbt.splitStack(amountToDrop));
             world.spawnEntity(entityitem);
         }
+    }
+
+    @Override
+    public boolean isFullCube(IBlockState state)
+    {
+        return false;
+    }
+
+    @Override
+    public boolean isOpaqueCube(IBlockState state)
+    {
+        return false;
     }
 }

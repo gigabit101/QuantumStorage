@@ -1,5 +1,6 @@
 package QuantumStorage;
 
+import QuantumStorage.client.RenderBarrel;
 import QuantumStorage.client.RenderDsu;
 import QuantumStorage.compat.CompatHandler;
 import QuantumStorage.init.ModBlocks;
@@ -7,6 +8,7 @@ import QuantumStorage.init.ModItems;
 import QuantumStorage.init.ModRecipes;
 import QuantumStorage.init.ModelHandler;
 import QuantumStorage.proxy.CommonProxy;
+import QuantumStorage.rewrite.tiles.TileQuantumBarrel;
 import QuantumStorage.rewrite.tiles.TileQuantumStorageUnit;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -43,6 +45,7 @@ public class QuantumStorage
         {
             ModelHandler.init();
             ClientRegistry.bindTileEntitySpecialRenderer(TileQuantumStorageUnit.class, new RenderDsu());
+            ClientRegistry.bindTileEntitySpecialRenderer(TileQuantumBarrel.class, new RenderBarrel());
         }
         NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, new GuiHandler());
     }

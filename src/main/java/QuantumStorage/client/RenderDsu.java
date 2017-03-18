@@ -18,7 +18,7 @@ public class RenderDsu extends TileEntitySpecialRenderer<TileQuantumStorageUnit>
     {
         if (te.getTileData().hasKey("facing"))
         {
-            if (te.inv.getStackInSlot(2) != null)
+            if (te.inv.getStackInSlot(2) != ItemStack.EMPTY)
             {
                 GlStateManager.pushMatrix();
 

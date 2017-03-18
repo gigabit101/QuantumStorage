@@ -102,6 +102,9 @@ public abstract class AdvancedTileEntity extends TileEntity
         }
     }
 
+    public void onBlockClicked(World worldIn, BlockPos pos, EntityPlayer playerIn){}
+
+
     //NBT
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound)
