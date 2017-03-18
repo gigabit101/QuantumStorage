@@ -1,5 +1,15 @@
-tile.quantumdsu.name=Quantum Storage Unit
-tile.quantumtank.name=Quantum Tank
-item.quantumstorage.renderupgrade.name=Upgrade Render
-
 itemGroup.quantumstorage=Quantum Storage
+
+tile.quantumstorage.quantum_storage_unit.name=Quantum Storage Unit
+tile.quantumstorage.quantum_tank.name=Quantum Tank
+tile.quantumstorage.controller.name=Controller
+
+item.quantumstorage.upgrade.render.name=Render Upgrade
+tooltipitem.quantumstorage.upgrade.render=Shift Click on DSU to allow Special Render
+
+item.quantumstorage.upgrade.void.name=Void Upgrade
+tooltipitem.quantumstorage.upgrade.void=Shift Click on DSU to allow voiding of excess Items
+
+item.quantumstorage.upgrade.creative.name=Creative Upgrade
+tooltipitem.quantumstorage.upgrade.creative=Shift Click on DSU to Fill the DSU with whats stored in the DSU
+

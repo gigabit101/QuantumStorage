@@ -28,10 +28,6 @@ repositories {
         name = "Modmuss50"
         url = "http://maven.modmuss50.me/"
     }
-    maven { // The repo from which to get waila
-        name "Mobius Repo"
-        url "http://mobiusstrip.eu/maven"
-    }
 }
 
 // define the properties file
@@ -60,9 +56,9 @@ minecraft {
 }
 
 dependencies {
-    compile "mcp.mobius.waila:Waila:1.7.0-B3_1.9.4"
-    compile 'RebornCore:RebornCore-1.10.2:+:dev'
-
+    deobfCompile ('RebornCore:RebornCore-1.11.2:+:universal'){
+        transitive = false
+    }
 }
 
 processResources
