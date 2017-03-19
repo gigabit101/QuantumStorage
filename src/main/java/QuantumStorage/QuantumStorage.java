@@ -44,8 +44,8 @@ public class QuantumStorage
         if(event.getSide() == Side.CLIENT)
         {
             ModelHandler.init();
-            ClientRegistry.bindTileEntitySpecialRenderer(TileQuantumStorageUnit.class, new RenderDsu());
-            ClientRegistry.bindTileEntitySpecialRenderer(TileQuantumBarrel.class, new RenderBarrel());
+//            ClientRegistry.bindTileEntitySpecialRenderer(TileQuantumStorageUnit.class, new RenderDsu());
+//            ClientRegistry.bindTileEntitySpecialRenderer(TileQuantumBarrel.class, new RenderBarrel());
         }
         NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, new GuiHandler());
     }
