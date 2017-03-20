@@ -20,6 +20,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import reborncore.common.util.CraftingHelper;
@@ -124,13 +126,14 @@ public class TileQuantumStorageUnit extends AdvancedTileEntity implements ITicka
         return true;
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
     public void drawGuiContainerForegroundLayer(int mouseX, int mouseY, GuiContainer gui, int guiLeft, int guiTop)
     {
         super.drawGuiContainerForegroundLayer(mouseX, mouseY, gui, guiLeft, guiTop);
         int amount = getInv().getStackInSlot(0).getCount() + getInv().getStackInSlot(2).getCount();
-        builder.drawString(gui, TextFormatting.BLACK + "Stored  " + amount, 10, 10);
-        builder.drawString(gui, TextFormatting.BLACK + "" + getInv().getStackInSlot(2).getDisplayName(), 10, 20);
+        getBuilder().drawString(gui, TextFormatting.BLACK + "Stored  " + amount, 10, 10);
+        getBuilder().drawString(gui, TextFormatting.BLACK + "" + getInv().getStackInSlot(2).getDisplayName(), 10, 20);
     }
 
     @Override

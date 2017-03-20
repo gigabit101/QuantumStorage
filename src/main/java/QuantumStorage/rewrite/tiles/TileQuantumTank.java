@@ -21,6 +21,8 @@ import net.minecraftforge.fluids.FluidActionResult;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.SlotItemHandler;
 import reborncore.common.util.CraftingHelper;
 import reborncore.common.util.Tank;
@@ -70,11 +72,12 @@ public class TileQuantumTank extends AdvancedTileEntity
         return true;
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
     public void drawGuiContainerForegroundLayer(int mouseX, int mouseY, GuiContainer gui, int guiLeft, int guiTop)
     {
         super.drawGuiContainerForegroundLayer(mouseX, mouseY, gui, guiLeft, guiTop);
-        builder.drawTank(gui, tank, 10, 10, 5.0F, 20, 80, mouseX - guiLeft, mouseY - guiTop);
+        getBuilder().drawTank(gui, tank, 10, 10, 5.0F, 20, 80, mouseX - guiLeft, mouseY - guiTop);
     }
 
     @Override

@@ -38,14 +38,17 @@ public abstract class AdvancedTileEntity extends TileEntity
 
     public boolean hasInv()
     {
-        if(getInvSize() != 0)
+        if (getInvSize() != 0)
         {
             return true;
         }
         return false;
     }
 
-    public ItemStackHandler getInv() { return this.inv; }
+    public ItemStackHandler getInv()
+    {
+        return this.inv;
+    }
 
     @Override
     public boolean hasCapability(Capability<?> capability, EnumFacing facing)
@@ -60,25 +63,25 @@ public abstract class AdvancedTileEntity extends TileEntity
     }
 
     //Gui
-    @SideOnly(Side.CLIENT)
+//    @SideOnly(Side.CLIENT)
     public GuiBuilder builder = new GuiBuilder(GuiBuilder.defaultTextureSheet);
 
     @SideOnly(Side.CLIENT)
     public GuiBuilder getBuilder()
     {
-        return this.builder;
+        return builder;
     }
 
     @SideOnly(Side.CLIENT)
     public void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY, int guiLeft, int guiTop, int xSize, int ySize, GuiContainer gui)
     {
-        builder.drawDefaultBackground(gui, guiLeft, guiTop, xSize, ySize);
-        builder.drawPlayerSlots(gui, guiLeft + xSize / 2, guiTop + 93, true);
+        getBuilder().drawDefaultBackground(gui, guiLeft, guiTop, xSize, ySize);
+        getBuilder().drawPlayerSlots(gui, guiLeft + xSize / 2, guiTop + 93, true);
         if (getSlots() != null)
         {
             for (Slot s : getSlots())
             {
-                builder.drawSlot(gui, guiLeft + s.xPos - 1, guiTop + s.yPos - 1);
+                getBuilder().drawSlot(gui, guiLeft + s.xPos - 1, guiTop + s.yPos - 1);
             }
         }
     }
@@ -96,14 +99,13 @@ public abstract class AdvancedTileEntity extends TileEntity
 
     public void openGui(EntityPlayer player, AdvancedTileEntity machine)
     {
-        if(!player.isSneaking())
+        if (!player.isSneaking())
         {
             player.openGui(QuantumStorage.INSTANCE, 0, machine.world, machine.pos.getX(), machine.pos.getY(), machine.pos.getZ());
         }
     }
 
-    public void onBlockClicked(World worldIn, BlockPos pos, EntityPlayer playerIn){}
-
+    public void onBlockClicked(World worldIn, BlockPos pos, EntityPlayer playerIn) {}
 
     //NBT
     @Override
@@ -125,7 +127,8 @@ public abstract class AdvancedTileEntity extends TileEntity
     }
 
     @Override
-    public NBTTagCompound getUpdateTag() {
+    public NBTTagCompound getUpdateTag()
+    {
         return this.writeToNBT(new NBTTagCompound());
     }
 
