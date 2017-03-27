@@ -172,7 +172,11 @@ public class TileQuantumStorageUnit extends AdvancedTileEntity implements ITicka
     @Override
     public boolean hasCapability(Capability<?> capability, EnumFacing facing)
     {
-        return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
+        if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+        {
+            return true;
+        }
+        return super.hasCapability(capability, facing);
     }
 
     @Override

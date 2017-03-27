@@ -53,13 +53,21 @@ public abstract class AdvancedTileEntity extends TileEntity
     @Override
     public boolean hasCapability(Capability<?> capability, EnumFacing facing)
     {
-        return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
+        if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+        {
+            return true;
+        }
+        return super.hasCapability(capability, facing);
     }
 
     @Override
     public <T> T getCapability(Capability<T> capability, EnumFacing facing)
     {
-        return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(inv);
+        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+        {
+            return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(inv);
+        }
+        return super.getCapability(capability, facing);
     }
 
     //Gui
