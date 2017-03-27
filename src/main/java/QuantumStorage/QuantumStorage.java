@@ -1,21 +1,19 @@
 package QuantumStorage;
 
-import QuantumStorage.client.RenderBarrel;
-import QuantumStorage.client.RenderDsu;
 import QuantumStorage.compat.CompatHandler;
+import QuantumStorage.config.ConfigQuantumStorage;
 import QuantumStorage.init.ModBlocks;
 import QuantumStorage.init.ModItems;
 import QuantumStorage.init.ModRecipes;
 import QuantumStorage.init.ModelHandler;
 import QuantumStorage.proxy.CommonProxy;
-import QuantumStorage.rewrite.tiles.TileQuantumBarrel;
-import QuantumStorage.rewrite.tiles.TileQuantumStorageUnit;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
+
+import java.io.File;
 
 /**
  * Created by Gigabit101 on 27/01/2017.
@@ -28,6 +26,8 @@ public class QuantumStorage
     public static final String MOD_VERSION = "@VERSION@";
     public static final String MOD_DEPENDENCUIES ="required-after:reborncore";
 
+    public static ConfigQuantumStorage config;
+
     @Mod.Instance
     public static QuantumStorage INSTANCE;
 
@@ -37,6 +37,11 @@ public class QuantumStorage
     @Mod.EventHandler
     public void preinit(FMLPreInitializationEvent event)
     {
+        INSTANCE = this;
+
+        String path = event.getSuggestedConfigurationFile().getAbsolutePath().replace(QuantumStorage.MOD_ID, "QuantumStorage");
+        config = ConfigQuantumStorage.init(new File(path));
+
         ModBlocks.init();
         ModItems.init();
         ModRecipes.init();
