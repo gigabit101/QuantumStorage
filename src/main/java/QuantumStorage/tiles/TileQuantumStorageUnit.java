@@ -92,6 +92,7 @@ public class TileQuantumStorageUnit extends AdvancedTileEntity implements ITicka
         {
             e.printStackTrace();
         }
+        sync();
     }
 
     @Override
