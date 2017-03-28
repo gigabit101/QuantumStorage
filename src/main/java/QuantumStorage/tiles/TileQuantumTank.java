@@ -54,7 +54,7 @@ public class TileQuantumTank extends AdvancedTileEntity
         List<Slot> slots = new ArrayList<>();
         slots.add(new SlotItemHandler(inv, 0, 100, 20));
         slots.add(new SlotItemHandler(inv, 1, 100, 60));
-        return slots;
+        return null;
     }
 
     @Override
