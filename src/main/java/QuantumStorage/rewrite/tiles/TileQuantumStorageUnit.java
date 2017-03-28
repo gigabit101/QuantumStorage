@@ -2,6 +2,7 @@ package QuantumStorage.rewrite.tiles;
 
 import QuantumStorage.init.ModBlocks;
 import QuantumStorage.inventory.DsuInventoryHandler;
+import QuantumStorage.rewrite.AdvancedGui;
 import QuantumStorage.rewrite.AdvancedTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -27,8 +28,11 @@ import net.minecraftforge.items.SlotItemHandler;
 import reborncore.common.util.CraftingHelper;
 import reborncore.common.util.ItemUtils;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by Gigabit101 on 17/03/2017.
@@ -69,7 +73,7 @@ public class TileQuantumStorageUnit extends AdvancedTileEntity implements ITicka
                     if (inv.getStackInSlot(STORAGE).getCount() >= size)
                     {
                         inv.setStackInSlot(OUTPUT, inv.getStackInSlot(STORAGE).copy());
-                        inv.getStackInSlot(STORAGE).setCount(size);
+                        inv.getStackInSlot(OUTPUT).setCount(size);
                         inv.getStackInSlot(STORAGE).shrink(size);
                         sync();
                     } else
@@ -114,8 +118,8 @@ public class TileQuantumStorageUnit extends AdvancedTileEntity implements ITicka
     public List<Slot> getSlots()
     {
         List<Slot> slots = new ArrayList<>();
-        slots.add(new SlotItemHandler(inv, 1, 100, 20));
-        slots.add(new SlotItemHandler(inv, 2, 100, 60));
+        slots.add(new SlotItemHandler(inv, 1, 80, 20));
+        slots.add(new SlotItemHandler(inv, 2, 80, 70));
         return slots;
     }
 
@@ -137,9 +141,33 @@ public class TileQuantumStorageUnit extends AdvancedTileEntity implements ITicka
     public void drawGuiContainerForegroundLayer(int mouseX, int mouseY, GuiContainer gui, int guiLeft, int guiTop)
     {
         super.drawGuiContainerForegroundLayer(mouseX, mouseY, gui, guiLeft, guiTop);
-        int amount = getInv().getStackInSlot(0).getCount() + getInv().getStackInSlot(2).getCount();
-        getBuilder().drawString(gui, TextFormatting.BLACK + "Stored  " + amount, 10, 10);
-        getBuilder().drawString(gui, TextFormatting.BLACK + "" + getInv().getStackInSlot(2).getDisplayName(), 10, 20);
+        if (this.getInv().getStackInSlot(STORAGE) != ItemStack.EMPTY && this.getInv().getStackInSlot(OUTPUT) != null)
+        {
+            this.builder.drawBigBlueBar((AdvancedGui) gui, 31, 43, this.getInv().getStackInSlot(STORAGE).getCount() + this.getInv().getStackInSlot(OUTPUT).getCount(), Integer.MAX_VALUE, mouseX - guiLeft, mouseY - guiTop, "Stored", getInv().getStackInSlot(OUTPUT).getDisplayName(),
+                    formatQuantity(this.getInv().getStackInSlot(STORAGE).getCount() + this.getInv().getStackInSlot(OUTPUT).getCount()));
+        }
+        if (this.getInv().getStackInSlot(STORAGE) == ItemStack.EMPTY && this.getInv().getStackInSlot(OUTPUT) != ItemStack.EMPTY)
+        {
+            this.builder.drawBigBlueBar((AdvancedGui) gui, 31, 43, this.getInv().getStackInSlot(OUTPUT).getCount(), Integer.MAX_VALUE, mouseX - guiLeft, mouseY - guiTop, "Stored", getInv().getStackInSlot(OUTPUT).getDisplayName(),
+                    formatQuantity(this.getInv().getStackInSlot(STORAGE).getCount() + this.getInv().getStackInSlot(OUTPUT).getCount()));
+        }
+    }
+
+    //TODO move to RC
+    public static final DecimalFormat QUANTITY_FORMATTER = new DecimalFormat("####0.#", DecimalFormatSymbols.getInstance(Locale.US));
+
+    //TODO move to RC
+    public static String formatQuantity(int qty)
+    {
+        if (qty >= 1000000)
+        {
+            return QUANTITY_FORMATTER.format((float) qty / 1000000F) + "M";
+        }
+        else if (qty >= 1000)
+        {
+            return QUANTITY_FORMATTER.format((float) qty / 1000F) + "K";
+        }
+        return String.valueOf(qty);
     }
 
     @Override

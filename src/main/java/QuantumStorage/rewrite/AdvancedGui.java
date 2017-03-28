@@ -1,6 +1,7 @@
 package QuantumStorage.rewrite;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
 
 /**
@@ -31,5 +32,18 @@ public class AdvancedGui extends GuiContainer
     public void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
     {
         machine.drawGuiContainerForegroundLayer(mouseX, mouseY, this, guiLeft, guiTop);
+    }
+
+    public void drawCentredString(String string, int y, int colour)
+    {
+        drawString(string, (xSize / 2 - mc.fontRendererObj.getStringWidth(string) / 2), y, colour);
+    }
+
+    public void drawString(String string, int x, int y, int colour)
+    {
+        int factorX = 0;
+        int factorY = 0;
+        mc.fontRendererObj.drawString(string, x + factorX, y + factorY, colour);
+        GlStateManager.color(1, 1, 1, 1);
     }
 }

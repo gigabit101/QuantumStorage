@@ -1,6 +1,7 @@
 package QuantumStorage.rewrite;
 
 import QuantumStorage.QuantumStorage;
+import QuantumStorage.client.GuiBuilderQuantumStorage;
 import QuantumStorage.reborncore.VanillaPacketDispatcher;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -70,10 +71,10 @@ public abstract class AdvancedTileEntity extends TileEntity
         return super.getCapability(capability, facing);
     }
 
-    public GuiBuilder builder = new GuiBuilder(GuiBuilder.defaultTextureSheet);
+    public GuiBuilderQuantumStorage builder = new GuiBuilderQuantumStorage();
 
     @SideOnly(Side.CLIENT)
-    public GuiBuilder getBuilder()
+    public GuiBuilderQuantumStorage getBuilder()
     {
         return builder;
     }

@@ -47,7 +47,7 @@ public class ItemUpgrade extends ItemBase
             {
                 if(dsu.inv.getStackInSlot(0) != ItemStack.EMPTY)
                 {//TODO change max int to config value
-                    dsu.inv.getStackInSlot(0).setCount(Integer.MAX_VALUE - 64);
+                    dsu.inv.getStackInSlot(0).setCount(Integer.MAX_VALUE / 2 - 64);
                 }
             }
         }
