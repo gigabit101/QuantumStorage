@@ -44,45 +44,51 @@ public class TileQuantumStorageUnit extends AdvancedTileEntity implements ITicka
     @Override
     public void update()
     {
-        if(inv.getStackInSlot(INPUT) != ItemStack.EMPTY)
+        try
         {
-            if(inv.getStackInSlot(STORAGE) == ItemStack.EMPTY || inv.getStackInSlot(STORAGE).getCount() == 0)
+            if (inv.getStackInSlot(INPUT) != ItemStack.EMPTY)
             {
-                inv.setStackInSlot(STORAGE, inv.getStackInSlot(INPUT));
-                inv.setStackInSlot(INPUT, ItemStack.EMPTY);
-                sync();
+                if (inv.getStackInSlot(STORAGE) == ItemStack.EMPTY || inv.getStackInSlot(STORAGE).getCount() == 0)
+                {
+                    inv.setStackInSlot(STORAGE, inv.getStackInSlot(INPUT).copy());
+                    inv.setStackInSlot(INPUT, ItemStack.EMPTY);
+                    sync();
+                } else if (inv.getStackInSlot(STORAGE).getCount() != 0 && ItemUtils.isItemEqual(inv.getStackInSlot(INPUT), inv.getStackInSlot(STORAGE), true, true))
+                {
+                    inv.getStackInSlot(STORAGE).grow(inv.getStackInSlot(INPUT).getCount());
+                    inv.setStackInSlot(INPUT, ItemStack.EMPTY);
+                    sync();
+                }
             }
-            else if(inv.getStackInSlot(STORAGE).getCount() != 0 && ItemUtils.isItemEqual(inv.getStackInSlot(INPUT), inv.getStackInSlot(STORAGE), true, true))
+
+            if (inv.getStackInSlot(STORAGE) != ItemStack.EMPTY)
             {
-                inv.getStackInSlot(STORAGE).grow(inv.getStackInSlot(INPUT).getCount());
-                inv.setStackInSlot(INPUT, ItemStack.EMPTY);
-                sync();
+                int size = inv.getStackInSlot(STORAGE).getMaxStackSize();
+                if (inv.getStackInSlot(OUTPUT) == ItemStack.EMPTY || inv.getStackInSlot(OUTPUT).getCount() == 0)
+                {
+                    if (inv.getStackInSlot(STORAGE).getCount() >= size)
+                    {
+                        inv.setStackInSlot(OUTPUT, inv.getStackInSlot(STORAGE).copy());
+                        inv.getStackInSlot(STORAGE).setCount(size);
+                        inv.getStackInSlot(STORAGE).shrink(size);
+                        sync();
+                    } else
+                    {
+                        inv.setStackInSlot(OUTPUT, inv.getStackInSlot(STORAGE));
+                        inv.setStackInSlot(STORAGE, ItemStack.EMPTY);
+                        sync();
+                    }
+                }
+                if (inv.getStackInSlot(STORAGE).getCount() != 0 && ItemUtils.isItemEqual(inv.getStackInSlot(STORAGE), inv.getStackInSlot(OUTPUT), true, true) && inv.getStackInSlot(OUTPUT).getCount() <= size - 1)
+                {
+                    inv.getStackInSlot(OUTPUT).grow(1);
+                    inv.getStackInSlot(STORAGE).shrink(1);
+                }
             }
         }
-
-        if(inv.getStackInSlot(STORAGE) != ItemStack.EMPTY)
+        catch (Exception e)
         {
-            int size = inv.getStackInSlot(STORAGE).getMaxStackSize();
-            if(inv.getStackInSlot(OUTPUT) == ItemStack.EMPTY || inv.getStackInSlot(OUTPUT).getCount() == 0)
-            {
-                if(inv.getStackInSlot(STORAGE).getCount() >= size)
-                {
-                    inv.setStackInSlot(OUTPUT, new ItemStack(inv.getStackInSlot(STORAGE).getItem(), size));
-                    inv.getStackInSlot(STORAGE).shrink(size);
-                    sync();
-                }
-                else
-                {
-                    inv.setStackInSlot(OUTPUT, inv.getStackInSlot(STORAGE));
-                    inv.setStackInSlot(STORAGE, ItemStack.EMPTY);
-                    sync();
-                }
-            }
-            if(inv.getStackInSlot(STORAGE).getCount() != 0 && ItemUtils.isItemEqual(inv.getStackInSlot(STORAGE), inv.getStackInSlot(OUTPUT), true, true) && inv.getStackInSlot(OUTPUT).getCount() <= size -1)
-            {
-                inv.getStackInSlot(OUTPUT).grow(1);
-                inv.getStackInSlot(STORAGE).shrink(1);
-            }
+            e.printStackTrace();
         }
     }
 

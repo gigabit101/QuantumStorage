@@ -70,8 +70,6 @@ public abstract class AdvancedTileEntity extends TileEntity
         return super.getCapability(capability, facing);
     }
 
-    //Gui
-//    @SideOnly(Side.CLIENT)
     public GuiBuilder builder = new GuiBuilder(GuiBuilder.defaultTextureSheet);
 
     @SideOnly(Side.CLIENT)
