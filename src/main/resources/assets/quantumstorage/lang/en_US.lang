@@ -3,10 +3,12 @@ itemGroup.quantumstorage=Quantum Storage
 tile.quantumstorage.quantum_storage_unit.name=Quantum Storage Unit
 tile.quantumstorage.quantum_tank.name=Quantum Tank
 tile.quantumstorage.quantum_barrel.name=Quantum Barrel
+tile.quantumstorage.crater.name=Crating Machine
 
 tile.quantumstorage.controller.name=Controller
 
 item.quantumstorage.upgrade.render.name=Render Upgrade
+item.quantumstorage.crate.name=Crate
 tooltipitem.quantumstorage.upgrade.render=Shift Click on DSU to allow Special Render
 
 item.quantumstorage.upgrade.void.name=Void Upgrade

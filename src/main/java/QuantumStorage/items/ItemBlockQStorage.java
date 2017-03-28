@@ -32,7 +32,8 @@ public class ItemBlockQStorage extends ItemBlock
     {
         if(stack != null && stack.hasTagCompound())
         {
-            tooltip.add(TextFormatting.RED + "COMING SOON!!!");
+            //TODO
+//            tooltip.add(TextFormatting.RED + "COMING SOON!!!");
 //            tooltip.add(stack.getTagCompound().toString());
         }
     }

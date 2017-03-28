@@ -4,6 +4,7 @@ import QuantumStorage.QuantumStorage;
 import QuantumStorage.items.ItemBlockQStorage;
 import QuantumStorage.rewrite.AdvancedBlock;
 import QuantumStorage.rewrite.AdvancedTileEntity;
+import QuantumStorage.rewrite.tiles.TileCrater;
 import QuantumStorage.rewrite.tiles.TileQuantumBarrel;
 import QuantumStorage.rewrite.tiles.TileQuantumStorageUnit;
 import QuantumStorage.rewrite.tiles.TileQuantumTank;
@@ -19,6 +20,7 @@ public class ModBlocks
     public static Block DSU;
     public static Block TANK;
     public static Block BARREL;
+    public static Block CRATER;
 
     public static void init()
     {
@@ -30,6 +32,9 @@ public class ModBlocks
 
         BARREL = new AdvancedBlock(new TileQuantumBarrel()).setUnlocalizedName(QuantumStorage.MOD_ID + ".quantum_barrel");
         registerAdvanced(BARREL, new TileQuantumBarrel());
+
+        CRATER = new AdvancedBlock(new TileCrater()).setUnlocalizedName(QuantumStorage.MOD_ID + ".crater");
+        registerAdvanced(CRATER, new TileCrater());
     }
 
     static void registerAdvanced(Block block, AdvancedTileEntity advancedTileEntity)
