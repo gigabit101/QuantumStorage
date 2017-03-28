@@ -1,13 +1,9 @@
 package QuantumStorage.init;
 
 import QuantumStorage.QuantumStorage;
+import QuantumStorage.blocks.AdvancedBlock;
 import QuantumStorage.items.ItemBlockQStorage;
-import QuantumStorage.rewrite.AdvancedBlock;
-import QuantumStorage.rewrite.AdvancedTileEntity;
-import QuantumStorage.rewrite.tiles.TileCrater;
-import QuantumStorage.rewrite.tiles.TileQuantumBarrel;
-import QuantumStorage.rewrite.tiles.TileQuantumStorageUnit;
-import QuantumStorage.rewrite.tiles.TileQuantumTank;
+import QuantumStorage.tiles.*;
 import net.minecraft.block.Block;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import reborncore.RebornRegistry;

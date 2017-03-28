@@ -1,7 +1,6 @@
-package QuantumStorage.rewrite.tiles;
+package QuantumStorage.tiles;
 
 import QuantumStorage.init.ModBlocks;
-import QuantumStorage.rewrite.AdvancedTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.inventory.GuiContainer;

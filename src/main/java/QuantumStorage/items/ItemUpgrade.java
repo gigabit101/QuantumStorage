@@ -2,7 +2,7 @@ package QuantumStorage.items;
 
 import QuantumStorage.QuantumStorage;
 import QuantumStorage.items.prefab.ItemBase;
-import QuantumStorage.rewrite.tiles.TileQuantumStorageUnit;
+import QuantumStorage.tiles.TileQuantumStorageUnit;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;

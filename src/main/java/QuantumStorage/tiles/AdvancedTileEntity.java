@@ -1,4 +1,4 @@
-package QuantumStorage.rewrite;
+package QuantumStorage.tiles;
 
 import QuantumStorage.QuantumStorage;
 import QuantumStorage.client.GuiBuilderQuantumStorage;
@@ -22,7 +22,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
-import reborncore.client.guibuilder.GuiBuilder;
 
 import java.util.List;
 

@@ -1,8 +1,6 @@
 package QuantumStorage.client;
 
 import QuantumStorage.QuantumStorage;
-import QuantumStorage.rewrite.AdvancedGui;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;

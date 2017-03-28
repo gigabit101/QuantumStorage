@@ -1,8 +1,8 @@
 package QuantumStorage;
 
-import QuantumStorage.rewrite.AdvancedContainer;
-import QuantumStorage.rewrite.AdvancedGui;
-import QuantumStorage.rewrite.AdvancedTileEntity;
+import QuantumStorage.client.AdvancedGui;
+import QuantumStorage.inventory.AdvancedContainer;
+import QuantumStorage.tiles.AdvancedTileEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

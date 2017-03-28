@@ -1,9 +1,8 @@
-package QuantumStorage.rewrite.tiles;
+package QuantumStorage.tiles;
 
+import QuantumStorage.client.AdvancedGui;
 import QuantumStorage.init.ModBlocks;
 import QuantumStorage.inventory.DsuInventoryHandler;
-import QuantumStorage.rewrite.AdvancedGui;
-import QuantumStorage.rewrite.AdvancedTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -18,7 +17,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.relauncher.Side;

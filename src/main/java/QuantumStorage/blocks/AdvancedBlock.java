@@ -1,6 +1,7 @@
-package QuantumStorage.rewrite;
+package QuantumStorage.blocks;
 
 import QuantumStorage.client.CreativeTabQuantumStorage;
+import QuantumStorage.tiles.AdvancedTileEntity;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

@@ -1,12 +1,10 @@
 package QuantumStorage.client;
 
-import QuantumStorage.rewrite.tiles.TileQuantumBarrel;
-import net.minecraft.block.state.IBlockState;
+import QuantumStorage.tiles.TileQuantumBarrel;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import reborncore.client.RenderUtil;
