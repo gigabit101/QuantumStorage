@@ -16,6 +16,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
+
 public class BlockQuantumDsu extends BlockQuantumStorage
 {
 	public TileQuantumDsu dsu;
@@ -45,10 +47,9 @@ public class BlockQuantumDsu extends BlockQuantumStorage
 	}
 
 
-    @Override
-	public void breakBlock(World world, BlockPos pos, IBlockState state)
+	@Override
+	public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, @Nullable ItemStack stack)
 	{
-		TileEntity te = world.getTileEntity(pos);
 		if(te instanceof TileQuantumDsu)
 		{
 			if (((TileQuantumDsu) te).getStackInSlot(1) != null)
@@ -60,19 +61,12 @@ public class BlockQuantumDsu extends BlockQuantumStorage
 				ItemStack stacknbt = ((TileQuantumDsu) te).getDropWithNBT();
 				int amountToDrop = Math.min(world.rand.nextInt(21) + 10, stacknbt.stackSize);
 
-				EntityItem entityitem = new EntityItem(world, pos.getX() + xOffset, pos.getY() + yOffset, pos.getZ() + zOffset,
-				stacknbt.splitStack(amountToDrop));
+				EntityItem entityitem = new EntityItem(world, pos.getX() + xOffset, pos.getY() + yOffset, pos.getZ() + zOffset, stacknbt.splitStack(amountToDrop));
 				world.spawnEntity(entityitem);
 			}
 			else
 			{
-				float xOffset = world.rand.nextFloat() * 0.8F + 0.1F;
-				float yOffset = world.rand.nextFloat() * 0.8F + 0.1F;
-				float zOffset = world.rand.nextFloat() * 0.8F + 0.1F;
-				ItemStack stack = new ItemStack(ModBlocks.QuantumDsu);
-
-				EntityItem entityitem = new EntityItem(world, pos.getX() + xOffset, pos.getY() + yOffset, pos.getZ() + zOffset, stack);
-				world.spawnEntity(entityitem);
+                super.harvestBlock(world, player, pos, state, te, stack);
 			}
 		}
 	}

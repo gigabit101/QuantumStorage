@@ -3,6 +3,7 @@ package QuantumStorage.block;
 import QuantumStorage.QuantumStorage;
 import QuantumStorage.client.GuiHandler;
 import QuantumStorage.init.ModBlocks;
+import QuantumStorage.tile.TileQuantumDsu;
 import QuantumStorage.tile.TileQuantumTank;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -17,6 +18,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+
+import javax.annotation.Nullable;
 
 public class BlockQuantumTank extends BlockQuantumStorage
 {
@@ -68,37 +71,27 @@ public class BlockQuantumTank extends BlockQuantumStorage
 		}
         return false;
     }
-	
+
 	@Override
-	public void breakBlock(World world, BlockPos pos, IBlockState state) 
+	public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, @Nullable ItemStack stack)
 	{
-		TileEntity te = world.getTileEntity(pos);
-		if(te instanceof TileQuantumTank)
+		if(te instanceof TileQuantumDsu)
 		{
-			if (((TileQuantumTank) te).tank.getFluid() != null)
+			if (((TileQuantumDsu) te).getStackInSlot(1) != null)
 			{
 				float xOffset = world.rand.nextFloat() * 0.8F + 0.1F;
 				float yOffset = world.rand.nextFloat() * 0.8F + 0.1F;
 				float zOffset = world.rand.nextFloat() * 0.8F + 0.1F;
-						
-				ItemStack stacknbt = ((TileQuantumTank) te).getDropWithNBT();
+
+				ItemStack stacknbt = ((TileQuantumDsu) te).getDropWithNBT();
 				int amountToDrop = Math.min(world.rand.nextInt(21) + 10, stacknbt.stackSize);
 
-				EntityItem entityitem = new EntityItem(world,
-						pos.getX() + xOffset, pos.getY() + yOffset, pos.getZ() + zOffset,
-						stacknbt.splitStack(amountToDrop));
+				EntityItem entityitem = new EntityItem(world, pos.getX() + xOffset, pos.getY() + yOffset, pos.getZ() + zOffset, stacknbt.splitStack(amountToDrop));
 				world.spawnEntity(entityitem);
 			}
-			else 
+			else
 			{
-				float xOffset = world.rand.nextFloat() * 0.8F + 0.1F;
-				float yOffset = world.rand.nextFloat() * 0.8F + 0.1F;
-				float zOffset = world.rand.nextFloat() * 0.8F + 0.1F;
-				ItemStack stack = new ItemStack(ModBlocks.QuantumTank);
-				
-				EntityItem entityitem = new EntityItem(world,
-						pos.getX() + xOffset, pos.getY() + yOffset, pos.getZ() + zOffset, stack);
-				world.spawnEntity(entityitem);
+				super.harvestBlock(world, player, pos, state, te, stack);
 			}
 		}
 	}
