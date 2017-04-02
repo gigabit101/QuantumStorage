@@ -75,24 +75,21 @@ public class BlockQuantumTank extends BlockQuantumStorage
 	@Override
 	public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, @Nullable ItemStack stack)
 	{
-		if(te instanceof TileQuantumDsu)
+		if(te instanceof TileQuantumTank)
 		{
-			if (((TileQuantumDsu) te).getStackInSlot(1) != null)
-			{
-				float xOffset = world.rand.nextFloat() * 0.8F + 0.1F;
-				float yOffset = world.rand.nextFloat() * 0.8F + 0.1F;
-				float zOffset = world.rand.nextFloat() * 0.8F + 0.1F;
+			float xOffset = world.rand.nextFloat() * 0.8F + 0.1F;
+			float yOffset = world.rand.nextFloat() * 0.8F + 0.1F;
+			float zOffset = world.rand.nextFloat() * 0.8F + 0.1F;
 
-				ItemStack stacknbt = ((TileQuantumDsu) te).getDropWithNBT();
-				int amountToDrop = Math.min(world.rand.nextInt(21) + 10, stacknbt.stackSize);
+			ItemStack stacknbt = ((TileQuantumTank) te).getDropWithNBT();
+			int amountToDrop = Math.min(world.rand.nextInt(21) + 10, stacknbt.stackSize);
 
-				EntityItem entityitem = new EntityItem(world, pos.getX() + xOffset, pos.getY() + yOffset, pos.getZ() + zOffset, stacknbt.splitStack(amountToDrop));
-				world.spawnEntity(entityitem);
-			}
-			else
-			{
-				super.harvestBlock(world, player, pos, state, te, stack);
-			}
+			EntityItem entityitem = new EntityItem(world, pos.getX() + xOffset, pos.getY() + yOffset, pos.getZ() + zOffset, stacknbt.splitStack(amountToDrop));
+			world.spawnEntity(entityitem);
+		}
+		else
+		{
+			super.harvestBlock(world, player, pos, state, te, stack);
 		}
 	}
 }

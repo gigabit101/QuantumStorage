@@ -24,8 +24,8 @@ public class BlockQuantumStorage extends BlockContainer
 		return null;
 	}
 	
-	@Override
-	public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, IBlockState state, float chance, int fortune) {}
+//	@Override
+//	public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, IBlockState state, float chance, int fortune) {}
 
 	@Override
 	public EnumBlockRenderType getRenderType(IBlockState state)
