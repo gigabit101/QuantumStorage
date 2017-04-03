@@ -1,11 +1,14 @@
 package QuantumStorage.client;
 
 import QuantumStorage.QuantumStorage;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fml.client.config.GuiUtils;
+import reborncore.client.RenderUtil;
 import reborncore.client.guibuilder.GuiBuilder;
 
 import java.util.ArrayList;
@@ -91,6 +94,25 @@ public class GuiBuilderQuantumStorage extends GuiBuilder
             GuiUtils.drawHoveringText(list, mouseX, mouseY, gui.width, gui.height, -1, gui.mc.fontRendererObj);
             GlStateManager.disableLighting();
             GlStateManager.color(1, 1, 1, 1);
+        }
+    }
+
+    public void drawTankWithOverlay(GuiScreen gui, FluidTank tank, int x, int y, float zLevel, int width, int height, int mouseX, int mouseY)
+    {
+        gui.mc.getTextureManager().bindTexture(GUI_SHEET);
+        gui.drawTexturedModalRect(x, y, 229, 18, width, height);
+
+
+        RenderUtil.renderGuiTank(tank, x + 2, y - 3, zLevel, width - 4, height);
+        if (isInRect(x, y, 14, height, mouseX, mouseY)) {
+            List<String> list = new ArrayList<String>();
+            if (tank.getFluid() != null) {
+                list.add(tank.getFluidAmount() + " / " + tank.getCapacity() + " " + tank.getFluid().getLocalizedName());
+            } else {
+                list.add("empty");
+            }
+            net.minecraftforge.fml.client.config.GuiUtils.drawHoveringText(list, mouseX, mouseY, gui.width, gui.height, -1, gui.mc.fontRendererObj);
+            GlStateManager.disableLighting();
         }
     }
 }

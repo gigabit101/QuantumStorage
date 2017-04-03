@@ -1,22 +1,15 @@
 package QuantumStorage;
 
-import QuantumStorage.client.RenderChest;
 import QuantumStorage.compat.CompatHandler;
 import QuantumStorage.config.ConfigQuantumStorage;
 import QuantumStorage.init.ModBlocks;
 import QuantumStorage.init.ModItems;
 import QuantumStorage.init.ModRecipes;
-import QuantumStorage.init.ModelHandler;
 import QuantumStorage.proxy.CommonProxy;
-import QuantumStorage.tiles.TileChestDiamond;
-import QuantumStorage.tiles.TileChestGold;
-import QuantumStorage.tiles.TileChestIron;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
-import net.minecraftforge.fml.relauncher.Side;
 
 import java.io.File;
 

@@ -1,4 +1,4 @@
-package QuantumStorage.client;
+package QuantumStorage.client.render;
 
 import QuantumStorage.tiles.TileQuantumStorageUnit;
 import net.minecraft.client.Minecraft;

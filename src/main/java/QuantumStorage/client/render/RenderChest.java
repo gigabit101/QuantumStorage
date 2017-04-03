@@ -1,4 +1,4 @@
-package QuantumStorage.client;
+package QuantumStorage.client.render;
 
 import QuantumStorage.QuantumStorage;
 import QuantumStorage.tiles.AdvancedTileEntity;

@@ -14,6 +14,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.FluidActionResult;
@@ -76,7 +77,18 @@ public class TileQuantumTank extends AdvancedTileEntity
     public void drawGuiContainerForegroundLayer(int mouseX, int mouseY, GuiContainer gui, int guiLeft, int guiTop)
     {
         super.drawGuiContainerForegroundLayer(mouseX, mouseY, gui, guiLeft, guiTop);
-        getBuilder().drawTank(gui, tank, 10, 10, 5.0F, 20, 80, mouseX - guiLeft, mouseY - guiTop);
+        getBuilder().drawTankWithOverlay(gui, tank, 140, 20, 5.0F, 20, 56, mouseX - guiLeft, mouseY - guiTop);
+        int amount = 0;
+        String name = "Empty";
+
+        if(tank.getFluid() != null)
+        {
+            amount = tank.getFluidAmount();
+            name = tank.getFluidType().getName();
+        }
+
+        gui.mc.fontRendererObj.drawString("Stored Fluid: " + name, 10, 10, TextFormatting.BLACK.getColorIndex());
+        gui.mc.fontRendererObj.drawString("Stored Amount: " + amount, 10, 20, TextFormatting.BLACK.getColorIndex());
     }
 
     @Override

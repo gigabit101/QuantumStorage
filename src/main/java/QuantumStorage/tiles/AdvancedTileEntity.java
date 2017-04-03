@@ -240,6 +240,9 @@ public abstract class AdvancedTileEntity extends TileEntity
 
     public abstract void addRecipe();
 
+    @SideOnly(Side.CLIENT)
+    public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced){}
+
     //Test Chest
     public boolean isOpen;
 }

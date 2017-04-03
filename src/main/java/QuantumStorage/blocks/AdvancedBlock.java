@@ -168,6 +168,10 @@ public class AdvancedBlock extends BlockContainer
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced)
     {
+        if(advancedTileEntity != null)
+        {
+            advancedTileEntity.addInformation(stack, player, tooltip, advanced);
+        }
         super.addInformation(stack, player, tooltip, advanced);
     }
 }

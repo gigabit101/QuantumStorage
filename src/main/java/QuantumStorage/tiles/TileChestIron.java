@@ -84,8 +84,6 @@ public class TileChestIron extends AdvancedTileEntity
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
     {
         openGui(playerIn, (AdvancedTileEntity) worldIn.getTileEntity(pos));
-        isOpen = true;
-        lidAngle = 0;
         return true;
     }
 

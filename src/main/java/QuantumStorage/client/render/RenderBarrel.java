@@ -1,4 +1,4 @@
-package QuantumStorage.client;
+package QuantumStorage.client.render;
 
 import QuantumStorage.tiles.TileQuantumBarrel;
 import net.minecraft.client.renderer.GlStateManager;

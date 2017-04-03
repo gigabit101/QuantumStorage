@@ -1,8 +1,8 @@
 package QuantumStorage.proxy;
 
-import QuantumStorage.client.RenderBarrel;
-import QuantumStorage.client.RenderChest;
-import QuantumStorage.client.RenderDsu;
+import QuantumStorage.client.render.RenderBarrel;
+import QuantumStorage.client.render.RenderChest;
+import QuantumStorage.client.render.RenderDsu;
 import QuantumStorage.init.ModelHandler;
 import QuantumStorage.tiles.*;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
