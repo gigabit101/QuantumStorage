@@ -239,4 +239,7 @@ public abstract class AdvancedTileEntity extends TileEntity
     }
 
     public abstract void addRecipe();
+
+    //Test Chest
+    public boolean isOpen;
 }

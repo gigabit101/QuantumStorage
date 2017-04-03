@@ -98,7 +98,10 @@ public class AdvancedBlock extends BlockContainer
             EntityItem entityitem = new EntityItem(world, pos.getX() + xOffset, pos.getY() + yOffset, pos.getZ() + zOffset, stacknbt.splitStack(amountToDrop));
             world.spawnEntity(entityitem);
         }
-        super.harvestBlock(world, player, pos, state, te, stack);
+        else
+        {
+            super.harvestBlock(world, player, pos, state, te, stack);
+        }
     }
 
     @Override
