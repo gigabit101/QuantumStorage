@@ -12,7 +12,6 @@ import reborncore.client.RenderUtil;
 /**
  * Created by Gigabit101 on 18/03/2017.
  */
-@Deprecated
 public class RenderBarrel extends TileEntitySpecialRenderer<TileQuantumBarrel>
 {
     @Override

@@ -191,7 +191,7 @@ public class TileQuantumStorageUnit extends AdvancedTileEntity implements ITicka
                 "III",
                 'I', new ItemStack(Items.IRON_INGOT),
                 'O', new ItemStack(Blocks.OBSIDIAN),
-                'C', "chest");
+                'C', new ItemStack(ModBlocks.CHEST_DIAMOND));
     }
 
     @Override

@@ -1,6 +1,7 @@
 package QuantumStorage.tiles;
 
 import QuantumStorage.QuantumStorage;
+import QuantumStorage.client.AdvancedGui;
 import QuantumStorage.client.GuiBuilderQuantumStorage;
 import QuantumStorage.reborncore.VanillaPacketDispatcher;
 import net.minecraft.block.Block;
@@ -107,8 +108,18 @@ public abstract class AdvancedTileEntity extends TileEntity
         return builder;
     }
 
+    public int getXSize()
+    {
+        return 176;
+    }
+
+    public int getYsize()
+    {
+        return 176;
+    }
+
     @SideOnly(Side.CLIENT)
-    public void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY, int guiLeft, int guiTop, int xSize, int ySize, GuiContainer gui)
+    public void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY, int guiLeft, int guiTop, int xSize, int ySize, AdvancedGui gui)
     {
         getBuilder().drawDefaultBackground(gui, guiLeft, guiTop, xSize, ySize);
         getBuilder().drawPlayerSlots(gui, guiLeft + xSize / 2, guiTop + 93, true);
@@ -126,6 +137,16 @@ public abstract class AdvancedTileEntity extends TileEntity
 
     //Container
     public abstract List<Slot> getSlots();
+
+    public int inventoryOffsetX()
+    {
+        return 8;
+    }
+
+    public int inventoryOffsetY()
+    {
+        return 94;
+    }
 
     //Block
     public abstract TileEntity createNewTileEntity(World world, int meta);

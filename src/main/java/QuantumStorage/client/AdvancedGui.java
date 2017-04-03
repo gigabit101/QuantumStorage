@@ -11,8 +11,8 @@ import net.minecraft.entity.player.EntityPlayer;
  */
 public class AdvancedGui extends GuiContainer
 {
-    public int xSize = 176;
-    public int ySize = 176;
+//    public int xSize = 176;
+//    public int ySize = 176;
     public AdvancedTileEntity machine;
     public EntityPlayer player;
 
@@ -21,6 +21,8 @@ public class AdvancedGui extends GuiContainer
         super(new AdvancedContainer(player, machine));
         this.machine = machine;
         this.player = player;
+        this.xSize = machine.getXSize();
+        this.ySize = machine.getYsize();
         buttonList.clear();
     }
 

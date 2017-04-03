@@ -23,8 +23,8 @@ public class AdvancedContainer extends RebornContainer
                 addSlotToContainer(s);
             }
         }
-        drawPlayersInv(player, 8, 94);
-        drawPlayersHotBar(player, 8, 152);
+        drawPlayersInv(player, machine.inventoryOffsetX(), machine.inventoryOffsetY());
+        drawPlayersHotBar(player, machine.inventoryOffsetX(), machine.inventoryOffsetY() + 58);
     }
 
     @Override

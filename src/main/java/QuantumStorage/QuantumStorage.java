@@ -8,6 +8,8 @@ import QuantumStorage.init.ModItems;
 import QuantumStorage.init.ModRecipes;
 import QuantumStorage.init.ModelHandler;
 import QuantumStorage.proxy.CommonProxy;
+import QuantumStorage.tiles.TileChestDiamond;
+import QuantumStorage.tiles.TileChestGold;
 import QuantumStorage.tiles.TileChestIron;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -34,7 +36,7 @@ public class QuantumStorage
     @Mod.Instance
     public static QuantumStorage INSTANCE;
 
-    @SidedProxy(clientSide = "QuantumStorage.proxy.CommonProxy", serverSide = "QuantumStorage.proxy.ClientProxy")
+    @SidedProxy(clientSide = "QuantumStorage.proxy.ClientProxy", serverSide = "QuantumStorage.proxy.CommonProxy")
     public static CommonProxy proxy;
 
     @Mod.EventHandler
@@ -50,13 +52,17 @@ public class QuantumStorage
 
         ModRecipes.init();
         CompatHandler.init();
-        if(event.getSide() == Side.CLIENT)
-        {
-            ModelHandler.init();
-            ClientRegistry.bindTileEntitySpecialRenderer(TileChestIron.class, new RenderChest());
-//            ClientRegistry.bindTileEntitySpecialRenderer(TileQuantumStorageUnit.class, new RenderDsu());
-//            ClientRegistry.bindTileEntitySpecialRenderer(TileQuantumBarrel.class, new RenderBarrel());
-        }
+        proxy.registerRenders();
+//        if(event.getSide() == Side.CLIENT)
+//        {
+//            ModelHandler.init();
+//            ClientRegistry.bindTileEntitySpecialRenderer(TileChestIron.class, new RenderChest());
+//            ClientRegistry.bindTileEntitySpecialRenderer(TileChestGold.class, new RenderChest());
+//            ClientRegistry.bindTileEntitySpecialRenderer(TileChestDiamond.class, new RenderChest());
+//
+////            ClientRegistry.bindTileEntitySpecialRenderer(TileQuantumStorageUnit.class, new RenderDsu());
+////            ClientRegistry.bindTileEntitySpecialRenderer(TileQuantumBarrel.class, new RenderBarrel());
+//        }
         NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, new GuiHandler());
     }
 }

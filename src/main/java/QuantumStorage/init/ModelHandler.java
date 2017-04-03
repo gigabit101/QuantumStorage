@@ -20,6 +20,8 @@ public class ModelHandler
         registerItemModel(ModBlocks.BARREL, 0);
         registerItemModel(ModBlocks.CRATER, 0);
         registerItemModel(ModBlocks.CHEST_IRON, 0);
+        registerItemModel(ModBlocks.CHEST_GOLD, 0);
+        registerItemModel(ModBlocks.CHEST_DIAMOND, 0);
 
         //Items
         int i;

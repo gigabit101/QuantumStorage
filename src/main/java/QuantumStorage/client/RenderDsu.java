@@ -11,7 +11,6 @@ import reborncore.client.RenderUtil;
 /**
  * Created by Gigabit101 on 07/03/2017.
  */
-@Deprecated
 public class RenderDsu extends TileEntitySpecialRenderer<TileQuantumStorageUnit>
 {
     @Override

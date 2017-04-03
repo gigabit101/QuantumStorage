@@ -1,17 +1,20 @@
 package QuantumStorage.client;
 
 import QuantumStorage.QuantumStorage;
+import QuantumStorage.tiles.AdvancedTileEntity;
+import QuantumStorage.tiles.TileChestGold;
 import QuantumStorage.tiles.TileChestIron;
 import net.minecraft.client.model.ModelChest;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 
 /**
  * Created by Gigabit101 on 29/03/2017.
  */
-public class RenderChest extends TileEntitySpecialRenderer<TileChestIron>
+public class RenderChest extends TileEntitySpecialRenderer
 {
     private ModelChest model;
     private static float halfPI = (float) (Math.PI / 2D);
@@ -26,12 +29,14 @@ public class RenderChest extends TileEntitySpecialRenderer<TileChestIron>
     }
 
     @Override
-    public void renderTileEntityAt(TileChestIron te, double x, double y, double z, float partialTicks, int destroyStage)
+    public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float partialTicks, int destroyStage)
     {
-        if (te == null || te.isInvalid())
+        if (tile == null || tile.isInvalid())
         {
             return;
         }
+
+        AdvancedTileEntity te = (AdvancedTileEntity)tile;
 
         EnumFacing facing = EnumFacing.NORTH;
         if(te.hasWorld())

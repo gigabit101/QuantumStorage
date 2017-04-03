@@ -19,15 +19,14 @@ public class ModBlocks
     public static Block BARREL;
     public static Block CRATER;
     public static Block CHEST_IRON;
+    public static Block CHEST_GOLD;
+    public static Block CHEST_DIAMOND;
 
     public static Block CONTROLLER;
     public static Block CABLE;
 
     public static void init()
     {
-        DSU = new AdvancedBlock(new TileQuantumStorageUnit()).setUnlocalizedName(QuantumStorage.MOD_ID + ".quantum_storage_unit");
-        registerAdvanced(DSU, new TileQuantumStorageUnit());
-
         TANK = new AdvancedBlock(new TileQuantumTank()).setUnlocalizedName(QuantumStorage.MOD_ID + ".quantum_tank");
         registerAdvanced(TANK, new TileQuantumTank());
 
@@ -39,6 +38,15 @@ public class ModBlocks
 
         CHEST_IRON = new AdvancedBlock(new TileChestIron()).setUnlocalizedName(QuantumStorage.MOD_ID + ".chest_iron");
         registerAdvanced(CHEST_IRON, new TileChestIron());
+
+        CHEST_GOLD = new AdvancedBlock(new TileChestGold()).setUnlocalizedName(QuantumStorage.MOD_ID + ".chest_gold");
+        registerAdvanced(CHEST_GOLD, new TileChestGold());
+
+        CHEST_DIAMOND = new AdvancedBlock(new TileChestDiamond()).setUnlocalizedName(QuantumStorage.MOD_ID + ".chest_diamond");
+        registerAdvanced(CHEST_DIAMOND, new TileChestDiamond());
+
+        DSU = new AdvancedBlock(new TileQuantumStorageUnit()).setUnlocalizedName(QuantumStorage.MOD_ID + ".quantum_storage_unit");
+        registerAdvanced(DSU, new TileQuantumStorageUnit());
 
 //        CONTROLLER = new AdvancedBlock(new TileController()).setUnlocalizedName(QuantumStorage.MOD_ID + ".controller");
 //        registerAdvanced(CONTROLLER, new TileController());
