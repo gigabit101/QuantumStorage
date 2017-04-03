@@ -18,7 +18,7 @@ public class RenderBarrel extends TileEntitySpecialRenderer<TileQuantumBarrel>
     public void renderTileEntityAt(TileQuantumBarrel te, double x, double y, double z, float partialTicks, int destroyStage)
     {
         final ItemStackHandler stackHandler = (ItemStackHandler) te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-        if(stackHandler.getStackInSlot(0) != ItemStack.EMPTY)
+        if(!stackHandler.getStackInSlot(0).isEmpty())
         {
             ItemStack stack = stackHandler.getStackInSlot(0);
             GlStateManager.pushMatrix();
