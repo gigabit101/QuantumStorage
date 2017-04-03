@@ -48,9 +48,9 @@ public class TileQuantumStorageUnit extends AdvancedTileEntity implements ITicka
     {
         try
         {
-            if (inv.getStackInSlot(INPUT) != ItemStack.EMPTY)
+            if (!inv.getStackInSlot(INPUT).isEmpty())
             {
-                if (inv.getStackInSlot(STORAGE) == ItemStack.EMPTY || inv.getStackInSlot(STORAGE).getCount() == 0)
+                if (inv.getStackInSlot(STORAGE).isEmpty())
                 {
                     inv.setStackInSlot(STORAGE, inv.getStackInSlot(INPUT).copy());
                     inv.setStackInSlot(INPUT, ItemStack.EMPTY);
@@ -63,7 +63,7 @@ public class TileQuantumStorageUnit extends AdvancedTileEntity implements ITicka
                 }
             }
 
-            if (inv.getStackInSlot(STORAGE) != ItemStack.EMPTY)
+            if (!inv.getStackInSlot(STORAGE).isEmpty())
             {
                 int size = inv.getStackInSlot(STORAGE).getMaxStackSize();
                 if (inv.getStackInSlot(OUTPUT) == ItemStack.EMPTY || inv.getStackInSlot(OUTPUT).getCount() == 0)

@@ -14,12 +14,17 @@ public class ModelHandler
 {
     public static void init()
     {
+        //Blocks
         registerItemModel(ModBlocks.DSU, 0);
         registerItemModel(ModBlocks.TANK, 0);
         registerItemModel(ModBlocks.BARREL, 0);
         registerItemModel(ModBlocks.CRATER, 0);
+        registerItemModel(ModBlocks.CHEST_IRON, 0);
+
+        //Items
         int i;
-        for (i = 0; i < ItemUpgrade.types.length; ++i) {
+        for (i = 0; i < ItemUpgrade.types.length; ++i)
+        {
             String[] name = ItemUpgrade.types.clone();
             registerItemModel(ModItems.UPGRADE, i, name[i]);
         }

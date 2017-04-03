@@ -5,6 +5,7 @@ import QuantumStorage.tiles.AdvancedTileEntity;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -12,10 +13,13 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 /**
  * Created by Gigabit101 on 17/03/2017.
@@ -35,7 +39,21 @@ public class AdvancedBlock extends BlockContainer
     @Override
     public EnumBlockRenderType getRenderType(IBlockState state)
     {
+        if(advancedTileEntity != null)
+        {
+            return advancedTileEntity.getRenderType(state);
+        }
         return EnumBlockRenderType.MODEL;
+    }
+
+    @Override
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+    {
+        if(advancedTileEntity != null)
+        {
+            return advancedTileEntity.getBoundingBox(state, source, pos);
+        }
+        return super.getBoundingBox(state, source, pos);
     }
 
     @Nullable
@@ -66,12 +84,8 @@ public class AdvancedBlock extends BlockContainer
     }
 
     @Override
-    public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, IBlockState state, float chance, int fortune) {}
-
-    @Override
-    public void breakBlock(World world, BlockPos pos, IBlockState state)
+    public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack)
     {
-        TileEntity te = world.getTileEntity(pos);
         if(te instanceof AdvancedTileEntity)
         {
             float xOffset = world.rand.nextFloat() * 0.8F + 0.1F;
@@ -84,6 +98,28 @@ public class AdvancedBlock extends BlockContainer
             EntityItem entityitem = new EntityItem(world, pos.getX() + xOffset, pos.getY() + yOffset, pos.getZ() + zOffset, stacknbt.splitStack(amountToDrop));
             world.spawnEntity(entityitem);
         }
+        super.harvestBlock(world, player, pos, state, te, stack);
+    }
+
+    @Override
+    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
+    {
+        super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
+        AdvancedTileEntity adva = (AdvancedTileEntity) worldIn.getTileEntity(pos);
+
+        if(stack.hasTagCompound())
+            adva.readFromNBTWithoutCoords(stack.getTagCompound().getCompoundTag("tileEntity"));
+
+        adva.setFacing(placer.getHorizontalFacing().getOpposite());
+
+        worldIn.notifyBlockUpdate(pos, state, state, 3);
+    }
+
+    @Override
+    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
+    {
+        super.onBlockAdded(worldIn, pos, state);
+        worldIn.notifyBlockUpdate(pos, state, state, 3);
     }
 
     @Override
@@ -96,5 +132,39 @@ public class AdvancedBlock extends BlockContainer
     public boolean isOpaqueCube(IBlockState state)
     {
         return false;
+    }
+
+    private static final EnumFacing[] validRotationAxes = new EnumFacing[] { EnumFacing.UP, EnumFacing.DOWN };
+
+    @Override
+    public EnumFacing[] getValidRotations(World worldObj, BlockPos pos)
+    {
+        return validRotationAxes;
+    }
+
+    @Override
+    public boolean rotateBlock(World worldObj, BlockPos pos, EnumFacing axis)
+    {
+        if (worldObj.isRemote)
+        {
+            return false;
+        }
+        if (axis == EnumFacing.UP || axis == EnumFacing.DOWN)
+        {
+            TileEntity tileEntity = worldObj.getTileEntity(pos);
+            if (tileEntity instanceof AdvancedTileEntity)
+            {
+                AdvancedTileEntity icte = (AdvancedTileEntity) tileEntity;
+                icte.rotateAround();
+            }
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced)
+    {
+        super.addInformation(stack, player, tooltip, advanced);
     }
 }

@@ -1,5 +1,6 @@
 package QuantumStorage;
 
+import QuantumStorage.client.RenderChest;
 import QuantumStorage.compat.CompatHandler;
 import QuantumStorage.config.ConfigQuantumStorage;
 import QuantumStorage.init.ModBlocks;
@@ -7,6 +8,8 @@ import QuantumStorage.init.ModItems;
 import QuantumStorage.init.ModRecipes;
 import QuantumStorage.init.ModelHandler;
 import QuantumStorage.proxy.CommonProxy;
+import QuantumStorage.tiles.TileChestIron;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -50,6 +53,7 @@ public class QuantumStorage
         if(event.getSide() == Side.CLIENT)
         {
             ModelHandler.init();
+            ClientRegistry.bindTileEntitySpecialRenderer(TileChestIron.class, new RenderChest());
 //            ClientRegistry.bindTileEntitySpecialRenderer(TileQuantumStorageUnit.class, new RenderDsu());
 //            ClientRegistry.bindTileEntitySpecialRenderer(TileQuantumBarrel.class, new RenderBarrel());
         }

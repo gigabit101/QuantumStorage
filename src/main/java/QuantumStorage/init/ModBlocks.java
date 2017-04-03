@@ -2,6 +2,7 @@ package QuantumStorage.init;
 
 import QuantumStorage.QuantumStorage;
 import QuantumStorage.blocks.AdvancedBlock;
+import QuantumStorage.blocks.BlockCable;
 import QuantumStorage.items.ItemBlockQStorage;
 import QuantumStorage.tiles.*;
 import net.minecraft.block.Block;
@@ -17,6 +18,10 @@ public class ModBlocks
     public static Block TANK;
     public static Block BARREL;
     public static Block CRATER;
+    public static Block CHEST_IRON;
+
+    public static Block CONTROLLER;
+    public static Block CABLE;
 
     public static void init()
     {
@@ -31,11 +36,20 @@ public class ModBlocks
 
         CRATER = new AdvancedBlock(new TileCrater()).setUnlocalizedName(QuantumStorage.MOD_ID + ".crater");
         registerAdvanced(CRATER, new TileCrater());
+
+        CHEST_IRON = new AdvancedBlock(new TileChestIron()).setUnlocalizedName(QuantumStorage.MOD_ID + ".chest_iron");
+        registerAdvanced(CHEST_IRON, new TileChestIron());
+
+//        CONTROLLER = new AdvancedBlock(new TileController()).setUnlocalizedName(QuantumStorage.MOD_ID + ".controller");
+//        registerAdvanced(CONTROLLER, new TileController());
+//
+//        CABLE = new BlockCable();
+//        RebornRegistry.registerBlock(CABLE, "cable");
     }
 
     static void registerAdvanced(Block block, AdvancedTileEntity advancedTileEntity)
     {
-        RebornRegistry.registerBlock(block, ItemBlockQStorage.class, advancedTileEntity.getName());
+        RebornRegistry.registerBlock(block, advancedTileEntity.getName());
         GameRegistry.registerTileEntity(advancedTileEntity.getClass(), advancedTileEntity.getName());
         advancedTileEntity.addRecipe();
     }

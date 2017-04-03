@@ -13,9 +13,12 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.relauncher.Side;
@@ -30,6 +33,32 @@ import java.util.List;
  */
 public abstract class AdvancedTileEntity extends TileEntity
 {
+    private EnumFacing facing;
+    public float prevLidAngle;
+    public float lidAngle;
+
+    protected AdvancedTileEntity()
+    {
+        super();
+        this.facing = EnumFacing.NORTH;
+    }
+
+    public EnumFacing getFacing()
+    {
+        return facing;
+    }
+
+    public void setFacing(EnumFacing facing)
+    {
+        this.facing = facing;
+    }
+
+    public void rotateAround()
+    {
+        this.setFacing(this.getFacing().rotateY());
+        this.world.addBlockEvent(this.pos, getBlock(), 2, this.getFacing().ordinal());
+    }
+
     public abstract String getName();
 
     public ItemStackHandler inv = new ItemStackHandler(getInvSize());
@@ -111,19 +140,34 @@ public abstract class AdvancedTileEntity extends TileEntity
         }
     }
 
+    public EnumBlockRenderType getRenderType(IBlockState state)
+    {
+        return EnumBlockRenderType.MODEL;
+    }
+
+    public static final AxisAlignedBB FULL_BLOCK_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
+
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+    {
+        return FULL_BLOCK_AABB;
+    }
+
     public void onBlockClicked(World worldIn, BlockPos pos, EntityPlayer playerIn) {}
 
     //NBT
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {
-        return super.writeToNBT(compound);
+        compound = super.writeToNBT(compound);
+        compound.setByte("facing", (byte) getFacing().ordinal());
+        return compound;
     }
 
     @Override
     public void readFromNBT(NBTTagCompound compound)
     {
         super.readFromNBT(compound);
+        this.facing = EnumFacing.VALUES[compound.getByte("facing")];
     }
 
     @Override

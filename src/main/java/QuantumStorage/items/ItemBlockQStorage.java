@@ -15,6 +15,7 @@ import java.util.List;
 /**
  * Created by Gigabit101 on 17/03/2017.
  */
+@Deprecated
 public class ItemBlockQStorage extends ItemBlock
 {
     Block block;
@@ -47,6 +48,7 @@ public class ItemBlockQStorage extends ItemBlock
 
         if (stack != null && stack.hasTagCompound())
         {
+            ((AdvancedTileEntity) world.getTileEntity(pos)).setFacing(player.getHorizontalFacing().getOpposite());
             ((AdvancedTileEntity) world.getTileEntity(pos)).readFromNBTWithoutCoords(stack.getTagCompound().getCompoundTag("tileEntity"));
         }
         return true;

@@ -4,6 +4,7 @@ tile.quantumstorage.quantum_storage_unit.name=Quantum Storage Unit
 tile.quantumstorage.quantum_tank.name=Quantum Tank
 tile.quantumstorage.quantum_barrel.name=Quantum Barrel
 tile.quantumstorage.crater.name=Crating Machine
+tile.quantumstorage.chest_iron.name=Reinforced Iron Chest
 
 tile.quantumstorage.controller.name=Controller
 
