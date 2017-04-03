@@ -2,8 +2,6 @@ package QuantumStorage.init;
 
 import QuantumStorage.QuantumStorage;
 import QuantumStorage.blocks.AdvancedBlock;
-import QuantumStorage.blocks.BlockCable;
-import QuantumStorage.items.ItemBlockQStorage;
 import QuantumStorage.tiles.*;
 import net.minecraft.block.Block;
 import net.minecraftforge.fml.common.registry.GameRegistry;
