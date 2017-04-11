@@ -46,16 +46,6 @@ public class QuantumStorage
         ModRecipes.init();
         CompatHandler.init();
         proxy.registerRenders();
-//        if(event.getSide() == Side.CLIENT)
-//        {
-//            ModelHandler.init();
-//            ClientRegistry.bindTileEntitySpecialRenderer(TileChestIron.class, new RenderChest());
-//            ClientRegistry.bindTileEntitySpecialRenderer(TileChestGold.class, new RenderChest());
-//            ClientRegistry.bindTileEntitySpecialRenderer(TileChestDiamond.class, new RenderChest());
-//
-////            ClientRegistry.bindTileEntitySpecialRenderer(TileQuantumStorageUnit.class, new RenderDsu());
-////            ClientRegistry.bindTileEntitySpecialRenderer(TileQuantumBarrel.class, new RenderBarrel());
-//        }
         NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, new GuiHandler());
     }
 }

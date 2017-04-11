@@ -60,7 +60,7 @@ public class TileCrater extends AdvancedTileEntity implements ITickable
 
     public boolean canWork()
     {
-        if(getInv().getStackInSlot(0) != ItemStack.EMPTY && getInv().getStackInSlot(0).getItem() instanceof ItemCrate && getInv().getStackInSlot(2) == ItemStack.EMPTY)
+        if(getInv().getStackInSlot(0) != ItemStack.EMPTY && getInv().getStackInSlot(0).getItem() instanceof ItemCrate && !getInv().getStackInSlot(0).hasTagCompound() && getInv().getStackInSlot(2) == ItemStack.EMPTY)
         {
             if(getInv().getStackInSlot(1) != ItemStack.EMPTY && getInv().getStackInSlot(1).getCount() == getInv().getStackInSlot(1).getMaxStackSize())
             {
