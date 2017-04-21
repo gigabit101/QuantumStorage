@@ -18,6 +18,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.FluidActionResult;
+import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
@@ -35,7 +36,7 @@ import java.util.List;
  */
 public class TileQuantumTank extends AdvancedTileEntity
 {
-    Tank tank = new Tank("", Integer.MAX_VALUE, this);
+    FluidTank tank = new FluidTank(Integer.MAX_VALUE);
 
     @Override
     public String getName()
@@ -52,9 +53,6 @@ public class TileQuantumTank extends AdvancedTileEntity
     @Override
     public List<Slot> getSlots()
     {
-        List<Slot> slots = new ArrayList<>();
-        slots.add(new SlotItemHandler(inv, 0, 100, 20));
-        slots.add(new SlotItemHandler(inv, 1, 100, 60));
         return null;
     }
 
@@ -84,7 +82,7 @@ public class TileQuantumTank extends AdvancedTileEntity
         if(tank.getFluid() != null)
         {
             amount = tank.getFluidAmount();
-            name = tank.getFluidType().getName();
+            name = tank.getFluid().getFluid().getName();
         }
 
         gui.mc.fontRendererObj.drawString("Stored Fluid: " + name, 10, 10, TextFormatting.BLACK.getColorIndex());

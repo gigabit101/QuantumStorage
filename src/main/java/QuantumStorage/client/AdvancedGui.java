@@ -11,8 +11,6 @@ import net.minecraft.entity.player.EntityPlayer;
  */
 public class AdvancedGui extends GuiContainer
 {
-//    public int xSize = 176;
-//    public int ySize = 176;
     public AdvancedTileEntity machine;
     public EntityPlayer player;
 
