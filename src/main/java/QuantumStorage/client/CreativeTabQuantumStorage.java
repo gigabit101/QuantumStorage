@@ -3,6 +3,7 @@ package QuantumStorage.client;
 import QuantumStorage.QuantumStorage;
 import QuantumStorage.init.ModBlocks;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 

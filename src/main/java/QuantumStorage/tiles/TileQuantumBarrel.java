@@ -13,6 +13,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
@@ -27,7 +28,7 @@ import java.util.List;
 /**
  * Created by Gigabit101 on 18/03/2017.
  */
-public class TileQuantumBarrel extends AdvancedTileEntity
+public class TileQuantumBarrel extends AdvancedTileEntity implements ITickable
 {
     public BarrelInventoryHandler inv = new BarrelInventoryHandler();
 
@@ -174,5 +175,11 @@ public class TileQuantumBarrel extends AdvancedTileEntity
                 'I', new ItemStack(Items.IRON_INGOT),
                 'O', "plankWood",
                 'C', "chest");
+    }
+
+    @Override
+    public void update()
+    {
+        sync();
     }
 }

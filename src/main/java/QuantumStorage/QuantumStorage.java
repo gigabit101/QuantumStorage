@@ -6,10 +6,14 @@ import QuantumStorage.init.ModBlocks;
 import QuantumStorage.init.ModItems;
 import QuantumStorage.init.ModRecipes;
 import QuantumStorage.proxy.CommonProxy;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.io.File;
 
@@ -42,20 +46,11 @@ public class QuantumStorage
 
         ModItems.init();
         ModBlocks.init();
-
         ModRecipes.init();
+
         CompatHandler.init();
+
         proxy.registerRenders();
-//        if(event.getSide() == Side.CLIENT)
-//        {
-//            ModelHandler.init();
-//            ClientRegistry.bindTileEntitySpecialRenderer(TileChestIron.class, new RenderChest());
-//            ClientRegistry.bindTileEntitySpecialRenderer(TileChestGold.class, new RenderChest());
-//            ClientRegistry.bindTileEntitySpecialRenderer(TileChestDiamond.class, new RenderChest());
-//
-////            ClientRegistry.bindTileEntitySpecialRenderer(TileQuantumStorageUnit.class, new RenderDsu());
-////            ClientRegistry.bindTileEntitySpecialRenderer(TileQuantumBarrel.class, new RenderBarrel());
-//        }
         NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, new GuiHandler());
     }
 }
