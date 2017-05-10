@@ -1,6 +1,7 @@
 package QuantumStorage.tiles;
 
 import QuantumStorage.client.AdvancedGui;
+import QuantumStorage.config.ConfigQuantumStorage;
 import QuantumStorage.init.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -171,14 +172,17 @@ public class TileChestDiamond extends AdvancedTileEntity
     @Override
     public void addRecipe()
     {
-        CraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.CHEST_DIAMOND),
-                "WWW",
-                "ICI",
-                "WBW",
-                'W', "plankWood",
-                'I', new ItemStack(Items.DIAMOND),
-                'B', new ItemStack(Blocks.DIAMOND_BLOCK),
-                'C', new ItemStack(ModBlocks.CHEST_GOLD));
+        if(!ConfigQuantumStorage.disableChests)
+        {
+            CraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.CHEST_DIAMOND),
+                    "WWW",
+                    "ICI",
+                    "WBW",
+                    'W', "plankWood",
+                    'I', new ItemStack(Items.DIAMOND),
+                    'B', new ItemStack(Blocks.DIAMOND_BLOCK),
+                    'C', new ItemStack(ModBlocks.CHEST_GOLD));
+        }
     }
 
     @Override

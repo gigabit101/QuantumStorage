@@ -1,6 +1,7 @@
 package QuantumStorage.tiles;
 
 import QuantumStorage.client.AdvancedGui;
+import QuantumStorage.config.ConfigQuantumStorage;
 import QuantumStorage.init.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -109,13 +110,16 @@ public class TileQuantumTank extends AdvancedTileEntity
     @Override
     public void addRecipe()
     {
-        CraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.TANK),
-                "OOO",
-                "IBI",
-                "III",
-                'I', new ItemStack(Items.IRON_INGOT),
-                'O', new ItemStack(Blocks.OBSIDIAN),
-                'B', new ItemStack(Items.BUCKET));
+        if(!ConfigQuantumStorage.disableQuantumTank)
+        {
+            CraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.TANK),
+                    "OOO",
+                    "IBI",
+                    "III",
+                    'I', new ItemStack(Items.IRON_INGOT),
+                    'O', new ItemStack(Blocks.OBSIDIAN),
+                    'B', new ItemStack(Items.BUCKET));
+        }
     }
 
     @Override

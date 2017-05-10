@@ -1,6 +1,7 @@
 package QuantumStorage.tiles;
 
 import QuantumStorage.client.AdvancedGui;
+import QuantumStorage.config.ConfigQuantumStorage;
 import QuantumStorage.init.ModBlocks;
 import QuantumStorage.inventory.DsuInventoryHandler;
 import net.minecraft.block.Block;
@@ -187,13 +188,16 @@ public class TileQuantumStorageUnit extends AdvancedTileEntity implements ITicka
     @Override
     public void addRecipe()
     {
-        CraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.DSU),
-                "OOO",
-                "ICI",
-                "III",
-                'I', new ItemStack(Items.IRON_INGOT),
-                'O', new ItemStack(Blocks.OBSIDIAN),
-                'C', new ItemStack(ModBlocks.CHEST_DIAMOND));
+        if(!ConfigQuantumStorage.disableQuantumStorageUnit)
+        {
+            CraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.DSU),
+                    "OOO",
+                    "ICI",
+                    "III",
+                    'I', new ItemStack(Items.IRON_INGOT),
+                    'O', new ItemStack(Blocks.OBSIDIAN),
+                    'C', new ItemStack(ModBlocks.CHEST_DIAMOND));
+        }
     }
 
     @Override

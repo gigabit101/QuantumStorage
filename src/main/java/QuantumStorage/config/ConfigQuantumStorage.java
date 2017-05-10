@@ -11,8 +11,17 @@ public class ConfigQuantumStorage
 {
     private static ConfigQuantumStorage INSTANCE = null;
     public static String CATEGORY_GENERAL = "general";
-    public static boolean blameWyld;
+    public static String CATEGORY_RECIPE = "recipe";
 
+    public static boolean disableChests;
+    public static boolean disableQuantumTank;
+    public static boolean disableQuantumCrafter;
+    public static boolean disableQuantumDisk;
+    public static boolean disableQuantumStorageUnit;
+    public static boolean disableCrateingMachine;
+    public static boolean disableBarrel;
+
+    public static int defaultDiskTime;
 
     public static Configuration config;
 
@@ -50,7 +59,15 @@ public class ConfigQuantumStorage
 
     public static void Configs()
     {
-        blameWyld =  config.get(CATEGORY_GENERAL, "WYLD SAID I NEEED A CONFIG FILE", true).getBoolean();
+        disableChests = config.get(CATEGORY_RECIPE, "disable default recipe for quantum chests", false).getBoolean();
+        disableQuantumCrafter = config.get(CATEGORY_RECIPE, "disable default recipe for quantum crafter", false).getBoolean();
+        disableQuantumDisk = config.get(CATEGORY_RECIPE, "disable default recipe for quantum disk", false).getBoolean();
+        disableQuantumTank = config.get(CATEGORY_RECIPE, "disable default recipe for quantum tank", false).getBoolean();
+        disableQuantumStorageUnit = config.get(CATEGORY_RECIPE, "disable default recipe for quantum storage unit", false).getBoolean();
+        disableCrateingMachine = config.get(CATEGORY_RECIPE, "disable default recipe for crating machine", false).getBoolean();
+        disableBarrel = config.get(CATEGORY_RECIPE, "disable default recipe for quantum barrel", false).getBoolean();
+
+        defaultDiskTime = config.get(CATEGORY_RECIPE, "how long in ticks it takes to craft a quantum disk", 10000000).getInt();
 
         if(config.hasChanged())
         {

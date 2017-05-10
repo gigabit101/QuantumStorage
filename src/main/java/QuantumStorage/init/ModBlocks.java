@@ -19,6 +19,7 @@ public class ModBlocks
     public static Block CHEST_IRON;
     public static Block CHEST_GOLD;
     public static Block CHEST_DIAMOND;
+    public static Block QUANTUM_CRAFTER;
 
     public static Block CONTROLLER;
     public static Block CABLE;
@@ -45,6 +46,9 @@ public class ModBlocks
 
         DSU = new AdvancedBlock(new TileQuantumStorageUnit()).setUnlocalizedName(QuantumStorage.MOD_ID + ".quantum_storage_unit");
         registerAdvanced(DSU, new TileQuantumStorageUnit());
+
+        QUANTUM_CRAFTER = new AdvancedBlock(new TileQuantumCrafter()).setUnlocalizedName(QuantumStorage.MOD_ID + ".quantumcrafter");
+        registerAdvanced(QUANTUM_CRAFTER, new TileQuantumCrafter());
 
 //        CONTROLLER = new AdvancedBlock(new TileController()).setUnlocalizedName(QuantumStorage.MOD_ID + ".controller");
 //        registerAdvanced(CONTROLLER, new TileController());

@@ -1,5 +1,6 @@
 package QuantumStorage.tiles;
 
+import QuantumStorage.config.ConfigQuantumStorage;
 import QuantumStorage.init.ModBlocks;
 import QuantumStorage.inventory.BarrelInventoryHandler;
 import net.minecraft.block.Block;
@@ -168,13 +169,16 @@ public class TileQuantumBarrel extends AdvancedTileEntity implements ITickable
     @Override
     public void addRecipe()
     {
-        CraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.BARREL),
-                "OOO",
-                "ICI",
-                "III",
-                'I', new ItemStack(Items.IRON_INGOT),
-                'O', "plankWood",
-                'C', "chest");
+        if(!ConfigQuantumStorage.disableBarrel)
+        {
+            CraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.BARREL),
+                    "OOO",
+                    "ICI",
+                    "III",
+                    'I', new ItemStack(Items.IRON_INGOT),
+                    'O', "plankWood",
+                    'C', "chest");
+        }
     }
 
     @Override

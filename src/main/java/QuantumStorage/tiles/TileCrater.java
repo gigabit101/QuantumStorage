@@ -1,5 +1,6 @@
 package QuantumStorage.tiles;
 
+import QuantumStorage.config.ConfigQuantumStorage;
 import QuantumStorage.init.ModBlocks;
 import QuantumStorage.init.ModItems;
 import QuantumStorage.items.ItemCrate;
@@ -115,14 +116,17 @@ public class TileCrater extends AdvancedTileEntity implements ITickable
     @Override
     public void addRecipe()
     {
-        CraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.CRATER),
-                "IXI",
-                "ICI",
-                "IPI",
-                'I', new ItemStack(Items.IRON_INGOT),
-                'P', new ItemStack(Blocks.PISTON),
-                'X', new ItemStack(ModItems.CRATE),
-                'C', "chest");
+        if(!ConfigQuantumStorage.disableCrateingMachine)
+        {
+            CraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.CRATER),
+                    "IXI",
+                    "ICI",
+                    "IPI",
+                    'I', new ItemStack(Items.IRON_INGOT),
+                    'P', new ItemStack(Blocks.PISTON),
+                    'X', new ItemStack(ModItems.CRATE),
+                    'C', "chest");
+        }
     }
 
     @SideOnly(Side.CLIENT)

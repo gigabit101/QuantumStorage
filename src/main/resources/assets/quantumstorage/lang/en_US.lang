@@ -7,6 +7,7 @@ tile.quantumstorage.crater.name=Crating Machine
 tile.quantumstorage.chest_iron.name=Reinforced Iron Chest
 tile.quantumstorage.chest_gold.name=Reinforced Gold Chest
 tile.quantumstorage.chest_diamond.name=Reinforced Diamond Chest
+tile.quantumstorage.quantumcrafter.name=Quantum Crafter
 
 tile.quantumstorage.controller.name=Controller
 
@@ -21,4 +22,6 @@ item.quantumstorage.upgrade.creative.name=Creative Upgrade
 tooltipitem.quantumstorage.upgrade.creative=Shift Click on DSU to Fill the DSU with whats stored in the DSU
 
 item.quantumstorage.quantumstoragedisk.name=Quantum Storage Disk
+
+gui.quantumstorage.crafter=Quantum Crafter Recipe
 

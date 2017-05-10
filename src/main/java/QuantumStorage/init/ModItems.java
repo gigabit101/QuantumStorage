@@ -1,8 +1,10 @@
 package QuantumStorage.init;
 
+import QuantumStorage.compat.ItemQuantumStorageDisk;
 import QuantumStorage.items.ItemCrate;
 import QuantumStorage.items.ItemUpgrade;
 import net.minecraft.item.Item;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 /**
@@ -12,6 +14,8 @@ public class ModItems
 {
     public static Item UPGRADE;
     public static Item CRATE;
+    public static Item DISK;
+
 
     public static void init()
     {
@@ -20,5 +24,12 @@ public class ModItems
 
         CRATE = new ItemCrate();
         GameRegistry.register(CRATE);
+
+        DISK = new ItemQuantumStorageDisk();
+
+        if(Loader.isModLoaded("refinedstorage"))
+        {
+            GameRegistry.register(DISK);
+        }
     }
 }
