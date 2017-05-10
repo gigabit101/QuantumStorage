@@ -20,3 +20,5 @@ tooltipitem.quantumstorage.upgrade.void=Shift Click on DSU to allow voiding of e
 item.quantumstorage.upgrade.creative.name=Creative Upgrade
 tooltipitem.quantumstorage.upgrade.creative=Shift Click on DSU to Fill the DSU with whats stored in the DSU
 
+item.quantumstorage.quantumstoragedisk.name=Quantum Storage Disk
+

@@ -180,4 +180,11 @@ public class TileChestDiamond extends AdvancedTileEntity
                 'B', new ItemStack(Blocks.DIAMOND_BLOCK),
                 'C', new ItemStack(ModBlocks.CHEST_GOLD));
     }
+
+    @Override
+    public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced)
+    {
+        tooltip.add("Keeps Inventory when broken");
+        super.addInformation(stack, player, tooltip, advanced);
+    }
 }

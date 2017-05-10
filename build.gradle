@@ -28,6 +28,9 @@ repositories {
         name = "Modmuss50"
         url = "http://maven.modmuss50.me/"
     }
+    maven {
+        url  "https://dl.bintray.com/raoulvdberge/dev/"
+    }
 }
 
 // define the properties file
@@ -57,6 +60,9 @@ minecraft {
 
 dependencies {
     deobfCompile ('RebornCore:RebornCore-1.11.2:+:universal'){
+        transitive = false
+    }
+    deobfCompile ('refinedstorage:refinedstorage:1.4.1+'){
         transitive = false
     }
 }

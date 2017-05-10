@@ -1,5 +1,6 @@
 package QuantumStorage.tiles;
 
+import QuantumStorage.client.AdvancedGui;
 import QuantumStorage.init.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -75,7 +76,6 @@ public class TileQuantumTank extends AdvancedTileEntity
     public void drawGuiContainerForegroundLayer(int mouseX, int mouseY, GuiContainer gui, int guiLeft, int guiTop)
     {
         super.drawGuiContainerForegroundLayer(mouseX, mouseY, gui, guiLeft, guiTop);
-        getBuilder().drawTankWithOverlay(gui, tank, 140, 20, 5.0F, 20, 56, mouseX - guiLeft, mouseY - guiTop);
         int amount = 0;
         String name = "Empty";
 
@@ -84,6 +84,9 @@ public class TileQuantumTank extends AdvancedTileEntity
             amount = tank.getFluidAmount();
             name = tank.getFluid().getFluid().getName();
         }
+
+        getBuilder().drawBigBlueBar((AdvancedGui) gui, 30, 50, amount, tank.getCapacity(), mouseX - guiLeft, mouseY - guiTop, "", "Fluid Type: " + name, amount + " mb " + name);
+
 
         gui.mc.fontRendererObj.drawString("Stored Fluid: " + name, 10, 10, TextFormatting.BLACK.getColorIndex());
         gui.mc.fontRendererObj.drawString("Stored Amount: " + amount, 10, 20, TextFormatting.BLACK.getColorIndex());

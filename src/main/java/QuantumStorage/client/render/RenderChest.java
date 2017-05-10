@@ -21,11 +21,12 @@ public class RenderChest extends TileEntitySpecialRenderer
     private static float[][] shifts = { { 0.3F, 0.45F, 0.3F }, { 0.7F, 0.45F, 0.3F }, { 0.3F, 0.45F, 0.7F }, { 0.7F, 0.45F, 0.7F }, { 0.3F, 0.1F, 0.3F },
             { 0.7F, 0.1F, 0.3F }, { 0.3F, 0.1F, 0.7F }, { 0.7F, 0.1F, 0.7F }, { 0.5F, 0.32F, 0.5F }, };
 
-    private static final ResourceLocation TEXTURE_NORMAL = new ResourceLocation(QuantumStorage.MOD_ID + ":textures/blocks/chest_iron.png");
+    ResourceLocation TEXTURE_NORMAL = null;
 
-    public RenderChest()
+    public RenderChest(ResourceLocation resourceLocation)
     {
         this.model = new ModelChest();
+        this.TEXTURE_NORMAL = resourceLocation;
     }
 
     @Override

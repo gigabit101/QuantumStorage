@@ -140,4 +140,11 @@ public class TileChestIron extends AdvancedTileEntity
         }
         return super.getCapability(capability, facing);
     }
+
+    @Override
+    public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced)
+    {
+        tooltip.add("Keeps Inventory when broken");
+        super.addInformation(stack, player, tooltip, advanced);
+    }
 }
