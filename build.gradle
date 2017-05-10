@@ -31,6 +31,10 @@ repositories {
     maven {
         url  "https://dl.bintray.com/raoulvdberge/dev/"
     }
+    maven {
+        name "jei"
+        url "http://dvs1.progwml6.com/files/maven"
+    }
 }
 
 // define the properties file
@@ -65,6 +69,7 @@ dependencies {
     deobfCompile ('refinedstorage:refinedstorage:1.4.1+'){
         transitive = false
     }
+    deobfCompile "mezz.jei:jei_1.11.2:+"
 }
 
 processResources
