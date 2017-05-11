@@ -187,6 +187,7 @@ public class TileChestGold extends AdvancedTileEntity
         }
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced)
     {
