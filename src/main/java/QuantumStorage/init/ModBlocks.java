@@ -2,6 +2,8 @@ package QuantumStorage.init;
 
 import QuantumStorage.QuantumStorage;
 import QuantumStorage.blocks.AdvancedBlock;
+import QuantumStorage.multiblock.BlockCrate;
+import QuantumStorage.multiblock.TileCrate;
 import QuantumStorage.tiles.*;
 import net.minecraft.block.Block;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -20,6 +22,7 @@ public class ModBlocks
     public static Block CHEST_GOLD;
     public static Block CHEST_DIAMOND;
     public static Block QUANTUM_CRAFTER;
+    public static Block CRATE;
 
     public static Block CONTROLLER;
     public static Block CABLE;
@@ -49,6 +52,10 @@ public class ModBlocks
 
         QUANTUM_CRAFTER = new AdvancedBlock(new TileQuantumCrafter()).setUnlocalizedName(QuantumStorage.MOD_ID + ".quantumcrafter");
         registerAdvanced(QUANTUM_CRAFTER, new TileQuantumCrafter());
+
+        CRATE = new BlockCrate();
+        RebornRegistry.registerBlock(CRATE, "multiblockcrate");
+        GameRegistry.registerTileEntity(TileCrate.class, QuantumStorage.MOD_ID + "multiblockcrate");
 
 //        CONTROLLER = new AdvancedBlock(new TileController()).setUnlocalizedName(QuantumStorage.MOD_ID + ".controller");
 //        registerAdvanced(CONTROLLER, new TileController());

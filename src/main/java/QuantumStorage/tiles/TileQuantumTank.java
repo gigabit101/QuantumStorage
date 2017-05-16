@@ -15,6 +15,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
@@ -36,7 +37,7 @@ import java.util.List;
 /**
  * Created by Gigabit101 on 17/03/2017.
  */
-public class TileQuantumTank extends AdvancedTileEntity
+public class TileQuantumTank extends AdvancedTileEntity implements ITickable
 {
     FluidTank tank = new FluidTank(Integer.MAX_VALUE);
 
@@ -190,5 +191,11 @@ public class TileQuantumTank extends AdvancedTileEntity
         }
         catch (Exception e) {}
         return FluidActionResult.FAILURE;
+    }
+
+    @Override
+    public void update()
+    {
+        sync();
     }
 }
