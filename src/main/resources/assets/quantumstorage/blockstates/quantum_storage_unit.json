@@ -10,9 +10,7 @@
   "variants":{
     "inventory":{
       "transform":"forge:default-block",
-      "textures":{
-
-      }
+      "textures":{}
     },
     "facing":{
       "north":{
@@ -31,7 +29,6 @@
     "active":{
       "true":{
         "textures":{
-          "front": "blocks/stone"
         }
       },
       "false":{
@@ -42,9 +39,7 @@
     },
     "inventory": {
       "model": "quantumstorage:quantum_storage_unit",
-      "textures": {
-
-      }
+      "textures": {}
     }
   }
 }

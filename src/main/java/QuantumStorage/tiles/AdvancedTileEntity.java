@@ -243,6 +243,16 @@ public abstract class AdvancedTileEntity extends TileEntity
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced){}
 
+    @Override
+    public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate)
+    {
+        if(oldState.getBlock() != newSate.getBlock())
+        {
+            return true;
+        }
+        return false;
+    }
+
     //Test Chest
     public boolean isOpen;
 }

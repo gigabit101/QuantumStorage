@@ -64,7 +64,7 @@ public class AdvancedBlock extends BlockContainer
     @Override
     public BlockRenderLayer getBlockLayer()
     {
-        return BlockRenderLayer.CUTOUT;
+        return BlockRenderLayer.TRANSLUCENT;
     }
 
     @Override
@@ -132,10 +132,12 @@ public class AdvancedBlock extends BlockContainer
         AdvancedTileEntity adva = (AdvancedTileEntity) worldIn.getTileEntity(pos);
 
         if(stack.hasTagCompound())
+        {
             adva.readFromNBTWithoutCoords(stack.getTagCompound().getCompoundTag("tileEntity"));
+        }
 
-        adva.setFacing(placer.getHorizontalFacing().getOpposite());
         setFacing(placer.getHorizontalFacing().getOpposite(), worldIn, pos);
+        adva.setFacing(placer.getHorizontalFacing().getOpposite());
 
         worldIn.notifyBlockUpdate(pos, state, state, 3);
     }
@@ -235,7 +237,7 @@ public class AdvancedBlock extends BlockContainer
     @Override
     public boolean isOpaqueCube(IBlockState state)
     {
-        return false;
+        return true;
     }
 
     private static final EnumFacing[] validRotationAxes = new EnumFacing[] { EnumFacing.UP, EnumFacing.DOWN };

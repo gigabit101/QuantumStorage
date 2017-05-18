@@ -59,7 +59,7 @@ public class TileQuantumStorageUnit extends AdvancedTileEntity implements ITicka
                     inv.setStackInSlot(STORAGE, inv.getStackInSlot(INPUT).copy());
                     inv.setStackInSlot(INPUT, ItemStack.EMPTY);
                     sync();
-                } else if (inv.getStackInSlot(STORAGE).getCount() != 0 && ItemUtils.isItemEqual(inv.getStackInSlot(INPUT), inv.getStackInSlot(STORAGE), true, true))
+                } else if (!inv.getStackInSlot(STORAGE).isEmpty() && ItemUtils.isItemEqual(inv.getStackInSlot(INPUT), inv.getStackInSlot(STORAGE), true, true))
                 {
                     inv.getStackInSlot(STORAGE).grow(inv.getStackInSlot(INPUT).getCount());
                     inv.setStackInSlot(INPUT, ItemStack.EMPTY);
