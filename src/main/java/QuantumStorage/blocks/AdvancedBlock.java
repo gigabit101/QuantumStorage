@@ -62,12 +62,6 @@ public class AdvancedBlock extends BlockContainer
     }
 
     @Override
-    public BlockRenderLayer getBlockLayer()
-    {
-        return BlockRenderLayer.TRANSLUCENT;
-    }
-
-    @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
         if(advancedTileEntity != null)
@@ -237,7 +231,7 @@ public class AdvancedBlock extends BlockContainer
     @Override
     public boolean isOpaqueCube(IBlockState state)
     {
-        return true;
+        return false;
     }
 
     private static final EnumFacing[] validRotationAxes = new EnumFacing[] { EnumFacing.UP, EnumFacing.DOWN };
@@ -266,6 +260,10 @@ public class AdvancedBlock extends BlockContainer
             return true;
         }
         return false;
+    }
+
+    public EnumFacing getFacing(IBlockState state) {
+        return state.getValue(FACING);
     }
 
     @Override

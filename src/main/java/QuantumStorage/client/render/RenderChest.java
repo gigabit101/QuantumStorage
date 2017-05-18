@@ -1,6 +1,7 @@
 package QuantumStorage.client.render;
 
 import QuantumStorage.QuantumStorage;
+import QuantumStorage.blocks.AdvancedBlock;
 import QuantumStorage.tiles.AdvancedTileEntity;
 import QuantumStorage.tiles.TileChestGold;
 import QuantumStorage.tiles.TileChestIron;
@@ -42,7 +43,8 @@ public class RenderChest extends TileEntitySpecialRenderer
         EnumFacing facing = EnumFacing.NORTH;
         if(te.hasWorld())
         {
-            facing = te.getFacing();
+            AdvancedBlock b = (AdvancedBlock) te.getBlock();
+            facing = b.getFacing(b.getBlockState().getBaseState());
         }
 
         if (destroyStage >= 0)
