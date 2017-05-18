@@ -16,7 +16,6 @@ public class ModItems
     public static Item CRATE;
     public static Item DISK;
 
-
     public static void init()
     {
         UPGRADE = new ItemUpgrade();
@@ -25,10 +24,9 @@ public class ModItems
         CRATE = new ItemCrate();
         GameRegistry.register(CRATE);
 
-        DISK = new ItemQuantumStorageDisk();
-
         if(Loader.isModLoaded("refinedstorage"))
         {
+            DISK = new ItemQuantumStorageDisk();
             GameRegistry.register(DISK);
         }
     }
