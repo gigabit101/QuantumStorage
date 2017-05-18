@@ -1,38 +1,44 @@
 {
-   "forge_marker":1,
-   "defaults":{
-      "transform":"forge:default-block",
-      "model":"orientable",
-      "textures":{
-         "particle":"quantumstorage:blocks/dsutop",
-         "top":"quantumstorage:blocks/dsutop",
-         "down":"quantumstorage:blocks/dsubottom"
+   "forge_marker": 1,
+   "defaults": {
+      "transform": "forge:default-block",
+      "model": "orientable",
+      "textures": {
+         "particle": "quantumstorage:blocks/dsuside",
+         "top": "quantumstorage:blocks/dsutop",
+         "down": "quantumstorage:blocks/dsubottom",
+         "side": "quantumstorage:blocks/dsuside",
+         "front": "quantumstorage:blocks/dsuside",
+         "front-on": "quantumstorage:blocks/dsuside"
       }
    },
-   "variants":{
+   "variants": {
       "inventory":{
          "transform":"forge:default-block",
          "textures":{
-            "front":"quantumstorage:blocks/dsuside",
-            "side":"quantumstorage:blocks/dsuside"
          }
       },
-      "normal":{
-         "transform":"forge:default-block",
-         "textures":{
-               "front":"quantumstorage:blocks/dsuside",
-               "side":"quantumstorage:blocks/dsuside",
-			   "down": "quantumstorage:blocks/dsubottom"
+      "facing": {
+         "north": {},
+         "east": {
+            "y": 90
+         },
+         "south": {
+            "y": 180
+         },
+         "west": {
+            "y": 270
+         }
+      },
+      "active": {
+         "true": {
+            "textures": {
+               "particle": "#front-on",
+               "front": "#front-on"
             }
          },
-      "inventory": {
-         "model": "orientable",
-         "textures": {
-            "particle": "quantumstorage:blocks/dsuside",
-            "top": "quantumstorage:blocks/dsutop",
-            "down": "quantumstorage:blocks/dsubottom",
-            "side": "quantumstorage:blocks/dsuside",
-            "front": "quantumstorage:blocks/dsuside"
+         "false": {
+            "textures": {}
          }
       }
    }

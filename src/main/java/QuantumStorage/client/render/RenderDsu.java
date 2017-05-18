@@ -16,7 +16,7 @@ public class RenderDsu extends TileEntitySpecialRenderer<TileQuantumStorageUnit>
     @Override
     public void renderTileEntityAt(TileQuantumStorageUnit te, double x, double y, double z, float partialTicks, int destroyStage)
     {
-        if (te.getTileData().hasKey("facing"))
+        if (te.getFacing() != null)
         {
             if (!te.inv.getStackInSlot(2).isEmpty())
             {

@@ -1,7 +1,7 @@
 {
     "__comment": "Model generated using MrCrayfish's Model Creator (http://mrcrayfish.com/modelcreator/)",
     "textures": {
-        "0": "blocks/stone",
+        "0": "quantumstorage:blocks/dsuside",
         "1": "blocks/log_oak",
         "2": "blocks/cauldron_inner"
     },

@@ -1,15 +1,50 @@
 {
-   "forge_marker":1,
-   "defaults":{
+  "forge_marker":1,
+  "defaults":{
+    "transform":"forge:default-block",
+    "model":"quantumstorage:quantum_storage_unit",
+    "textures":{
+      "particle":"quantumstorage:blocks/dsutop"
+    }
+  },
+  "variants":{
+    "inventory":{
       "transform":"forge:default-block",
-      "model":"quantumstorage:quantum_storage_unit"
-   },
-   "variants": {
-      "inventory": {
-         "transform": "forge:default-block"
-      },
-      "normal": {
-         "transform": "forge:default-block"
+      "textures":{
+
       }
-   }
+    },
+    "facing":{
+      "north":{
+
+      },
+      "east":{
+        "y":90
+      },
+      "south":{
+        "y":180
+      },
+      "west":{
+        "y":270
+      }
+    },
+    "active":{
+      "true":{
+        "textures":{
+          "front": "blocks/stone"
+        }
+      },
+      "false":{
+        "textures":{
+
+        }
+      }
+    },
+    "inventory": {
+      "model": "quantumstorage:quantum_storage_unit",
+      "textures": {
+
+      }
+    }
+  }
 }

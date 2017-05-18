@@ -2,8 +2,12 @@ package QuantumStorage.blocks;
 
 import QuantumStorage.client.CreativeTabQuantumStorage;
 import QuantumStorage.tiles.AdvancedTileEntity;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -28,6 +32,8 @@ import java.util.List;
 public class AdvancedBlock extends BlockContainer
 {
     public AdvancedTileEntity advancedTileEntity;
+    public static PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
+    public static PropertyBool ACTIVE = PropertyBool.create("active");
 
     public AdvancedBlock(AdvancedTileEntity advancedTileEntity)
     {
@@ -35,6 +41,14 @@ public class AdvancedBlock extends BlockContainer
         this.advancedTileEntity = advancedTileEntity;
         setCreativeTab(CreativeTabQuantumStorage.INSTANCE);
         setHardness(2.0F);
+        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(ACTIVE, false));
+    }
+
+    protected BlockStateContainer createBlockState()
+    {
+        FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
+        ACTIVE = PropertyBool.create("active");
+        return new BlockStateContainer(this, FACING, ACTIVE);
     }
 
     @Override
@@ -121,8 +135,14 @@ public class AdvancedBlock extends BlockContainer
             adva.readFromNBTWithoutCoords(stack.getTagCompound().getCompoundTag("tileEntity"));
 
         adva.setFacing(placer.getHorizontalFacing().getOpposite());
+        setFacing(placer.getHorizontalFacing().getOpposite(), worldIn, pos);
 
         worldIn.notifyBlockUpdate(pos, state, state, 3);
+    }
+
+    public void setFacing(EnumFacing facing, World world, BlockPos pos)
+    {
+        world.setBlockState(pos, world.getBlockState(pos).withProperty(FACING, facing));
     }
 
     @Override
@@ -130,6 +150,80 @@ public class AdvancedBlock extends BlockContainer
     {
         super.onBlockAdded(worldIn, pos, state);
         worldIn.notifyBlockUpdate(pos, state, state, 3);
+        this.setDefaultFacing(worldIn, pos, state);
+    }
+
+    private void setDefaultFacing(World worldIn, BlockPos pos, IBlockState state)
+    {
+        if (!worldIn.isRemote)
+        {
+            IBlockState sate = worldIn.getBlockState(pos.north());
+            Block block = sate.getBlock();
+            IBlockState state1 = worldIn.getBlockState(pos.south());
+            Block block1 = state1.getBlock();
+            IBlockState state2 = worldIn.getBlockState(pos.west());
+            Block block2 = state2.getBlock();
+            IBlockState state3 = worldIn.getBlockState(pos.east());
+            Block block3 = state3.getBlock();
+            EnumFacing enumfacing = (EnumFacing) state.getValue(FACING);
+
+            if (enumfacing == EnumFacing.NORTH && block.isFullBlock(state) && !block1.isFullBlock(state1)) {
+                enumfacing = EnumFacing.SOUTH;
+            } else if (enumfacing == EnumFacing.SOUTH && block1.isFullBlock(state1) && !block.isFullBlock(state)) {
+                enumfacing = EnumFacing.NORTH;
+            } else if (enumfacing == EnumFacing.WEST && block2.isFullBlock(state2) && !block3.isFullBlock(state2)) {
+                enumfacing = EnumFacing.EAST;
+            } else if (enumfacing == EnumFacing.EAST && block3.isFullBlock(state3) && !block2.isFullBlock(state2)) {
+                enumfacing = EnumFacing.WEST;
+            }
+
+            worldIn.setBlockState(pos, state.withProperty(FACING, enumfacing), 2);
+        }
+    }
+
+    public EnumFacing getSideFromint(int i) {
+        if (i == 0) {
+            return EnumFacing.NORTH;
+        } else if (i == 1) {
+            return EnumFacing.SOUTH;
+        } else if (i == 2) {
+            return EnumFacing.EAST;
+        } else if (i == 3) {
+            return EnumFacing.WEST;
+        }
+        return EnumFacing.NORTH;
+    }
+
+    public int getSideFromEnum(EnumFacing facing) {
+        if (facing == EnumFacing.NORTH) {
+            return 0;
+        } else if (facing == EnumFacing.SOUTH) {
+            return 1;
+        } else if (facing == EnumFacing.EAST) {
+            return 2;
+        } else if (facing == EnumFacing.WEST) {
+            return 3;
+        }
+        return 0;
+    }
+
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        int facingInt = getSideFromEnum(state.getValue(FACING));
+        int activeInt = state.getValue(ACTIVE) ? 0 : 4;
+        return facingInt + activeInt;
+    }
+
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        boolean active = false;
+        int facingInt = meta;
+        if (facingInt > 4) {
+            active = true;
+            facingInt = facingInt - 4;
+        }
+        EnumFacing facing = getSideFromint(facingInt);
+        return this.getDefaultState().withProperty(FACING, facing).withProperty(ACTIVE, active);
     }
 
     @Override
