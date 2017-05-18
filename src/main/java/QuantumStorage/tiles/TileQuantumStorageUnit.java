@@ -14,7 +14,6 @@ import net.minecraft.init.Items;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -22,7 +21,6 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -91,8 +89,7 @@ public class TileQuantumStorageUnit extends AdvancedTileEntity implements ITicka
                     inv.getStackInSlot(STORAGE).shrink(1);
                 }
             }
-        }
-        catch (Exception e)
+        } catch (Exception e)
         {
             e.printStackTrace();
         }
@@ -165,8 +162,7 @@ public class TileQuantumStorageUnit extends AdvancedTileEntity implements ITicka
         if (qty >= 1000000)
         {
             return QUANTITY_FORMATTER.format((float) qty / 1000000F) + "M";
-        }
-        else if (qty >= 1000)
+        } else if (qty >= 1000)
         {
             return QUANTITY_FORMATTER.format((float) qty / 1000F) + "K";
         }
@@ -189,7 +185,7 @@ public class TileQuantumStorageUnit extends AdvancedTileEntity implements ITicka
     @Override
     public void addRecipe()
     {
-        if(!ConfigQuantumStorage.disableQuantumStorageUnit)
+        if (!ConfigQuantumStorage.disableQuantumStorageUnit)
         {
             CraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.DSU),
                     "OOO",
@@ -212,7 +208,7 @@ public class TileQuantumStorageUnit extends AdvancedTileEntity implements ITicka
     @Override
     public boolean hasCapability(Capability<?> capability, EnumFacing facing)
     {
-        if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
         {
             return true;
         }
@@ -222,7 +218,7 @@ public class TileQuantumStorageUnit extends AdvancedTileEntity implements ITicka
     @Override
     public <T> T getCapability(Capability<T> capability, EnumFacing facing)
     {
-        if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
         {
             return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(inv);
         }

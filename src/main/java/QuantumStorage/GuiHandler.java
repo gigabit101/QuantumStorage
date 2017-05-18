@@ -25,7 +25,7 @@ public class GuiHandler implements IGuiHandler
         {
             return new ContainerMultiBlockCrate(player, getMultiBlock(world, x, y, z));
         }
-        if(world.getTileEntity(new BlockPos(x, y, z)) != null && world.getTileEntity(new BlockPos(x, y, z)) instanceof AdvancedTileEntity)
+        if (world.getTileEntity(new BlockPos(x, y, z)) != null && world.getTileEntity(new BlockPos(x, y, z)) instanceof AdvancedTileEntity)
         {
             AdvancedTileEntity machine = (AdvancedTileEntity) world.getTileEntity(new BlockPos(x, y, z));
             return new AdvancedContainer(player, machine);
@@ -40,7 +40,7 @@ public class GuiHandler implements IGuiHandler
         {
             return new GuiMultiBlockCrate(player, getMultiBlock(world, x, y, z), new BlockPos(x, y, z));
         }
-        if(world.getTileEntity(new BlockPos(x, y, z)) != null && world.getTileEntity(new BlockPos(x, y, z)) instanceof AdvancedTileEntity)
+        if (world.getTileEntity(new BlockPos(x, y, z)) != null && world.getTileEntity(new BlockPos(x, y, z)) instanceof AdvancedTileEntity)
         {
             AdvancedTileEntity machine = (AdvancedTileEntity) world.getTileEntity(new BlockPos(x, y, z));
             return new AdvancedGui(player, machine);

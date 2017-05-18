@@ -37,11 +37,10 @@ public class ConfigQuantumStorage
 
     public static ConfigQuantumStorage init(File configfile)
     {
-        if(INSTANCE == null)
+        if (INSTANCE == null)
         {
             INSTANCE = new ConfigQuantumStorage(configfile);
-        }
-        else
+        } else
         {
             throw new IllegalStateException("Cannot init QuantumStorage config twice");
         }
@@ -67,9 +66,9 @@ public class ConfigQuantumStorage
         disableCrateingMachine = config.get(CATEGORY_RECIPE, "disable default recipe for crating machine", false).getBoolean();
         disableBarrel = config.get(CATEGORY_RECIPE, "disable default recipe for quantum barrel", false).getBoolean();
 
-        defaultDiskTime = config.get(CATEGORY_RECIPE, "how long in ticks it takes to craft a quantum disk", 10000000).getInt();
+        defaultDiskTime = config.get(CATEGORY_RECIPE, "how long in ticks it takes to craft a quantum disk", 100000).getInt();
 
-        if(config.hasChanged())
+        if (config.hasChanged())
         {
             config.save();
         }

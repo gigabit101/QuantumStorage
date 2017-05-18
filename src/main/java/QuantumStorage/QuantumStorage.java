@@ -6,14 +6,10 @@ import QuantumStorage.init.ModBlocks;
 import QuantumStorage.init.ModItems;
 import QuantumStorage.init.ModRecipes;
 import QuantumStorage.proxy.CommonProxy;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.io.File;
 
@@ -24,9 +20,9 @@ import java.io.File;
 public class QuantumStorage
 {
     public static final String MOD_ID = "quantumstorage";
-    public static final String MOD_NAME  = "QuantumStorage";
+    public static final String MOD_NAME = "QuantumStorage";
     public static final String MOD_VERSION = "@VERSION@";
-    public static final String MOD_DEPENDENCUIES ="required-after:reborncore";
+    public static final String MOD_DEPENDENCUIES = "required-after:reborncore";
 
     public static ConfigQuantumStorage config;
 

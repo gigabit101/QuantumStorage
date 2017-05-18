@@ -1,8 +1,6 @@
 package QuantumStorage.compat.jei;
 
 import QuantumStorage.api.QuantumStorageAPI;
-import QuantumStorage.compat.jei.CrafterRecipeCategory;
-import QuantumStorage.compat.jei.CrafterRecipeHandler;
 import QuantumStorage.init.ModBlocks;
 import mezz.jei.api.*;
 import net.minecraft.item.ItemStack;

@@ -5,7 +5,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -16,12 +15,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-import reborncore.common.util.ItemUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.PriorityQueue;
-import java.util.Queue;
 
 /**
  * Created by Gigabit101 on 29/03/2017.
@@ -32,16 +28,19 @@ public class TileController extends AdvancedTileEntity implements ITickable
 
     public void addInv(IItemHandler handler)
     {
-        if(!l.contains(handler))
+        if (!l.contains(handler))
             l.add(handler);
     }
 
-    public List<IItemHandler> getItemHandlers(){return l;}
+    public List<IItemHandler> getItemHandlers()
+    {
+        return l;
+    }
 
     @Override
     public void update()
     {
-        if(!world.isRemote)
+        if (!world.isRemote)
         {
             TileController controller = (TileController) world.getTileEntity(pos);
             if (controller != null)
@@ -71,7 +70,7 @@ public class TileController extends AdvancedTileEntity implements ITickable
         }
     }
 
-    public static <T> List<T> getConnectedCapabilities (Capability<T> capability, World world, BlockPos pos)
+    public static <T> List<T> getConnectedCapabilities(Capability<T> capability, World world, BlockPos pos)
     {
         final List<T> capabilities = new ArrayList<T>();
 
@@ -112,7 +111,7 @@ public class TileController extends AdvancedTileEntity implements ITickable
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
     {
-        if(getItemHandlers() != null)
+        if (getItemHandlers() != null)
         {
             TileController te = (TileController) worldIn.getTileEntity(pos);
 

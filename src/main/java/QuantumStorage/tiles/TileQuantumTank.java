@@ -27,11 +27,8 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.items.SlotItemHandler;
 import reborncore.common.util.CraftingHelper;
-import reborncore.common.util.Tank;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -68,7 +65,7 @@ public class TileQuantumTank extends AdvancedTileEntity implements ITickable
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
     {
-        if(fillBlockWithFluid(worldIn, pos, playerIn, hand, side) == FluidActionResult.FAILURE)
+        if (fillBlockWithFluid(worldIn, pos, playerIn, hand, side) == FluidActionResult.FAILURE)
             openGui(playerIn, (AdvancedTileEntity) worldIn.getTileEntity(pos));
         return true;
     }
@@ -81,7 +78,7 @@ public class TileQuantumTank extends AdvancedTileEntity implements ITickable
         int amount = 0;
         String name = "Empty";
 
-        if(tank.getFluid() != null)
+        if (tank.getFluid() != null)
         {
             amount = tank.getFluidAmount();
             name = tank.getFluid().getFluid().getName();
@@ -111,7 +108,7 @@ public class TileQuantumTank extends AdvancedTileEntity implements ITickable
     @Override
     public void addRecipe()
     {
-        if(!ConfigQuantumStorage.disableQuantumTank)
+        if (!ConfigQuantumStorage.disableQuantumTank)
         {
             CraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.TANK),
                     "OOO",
@@ -149,7 +146,7 @@ public class TileQuantumTank extends AdvancedTileEntity implements ITickable
     @Override
     public boolean hasCapability(Capability<?> capability, EnumFacing facing)
     {
-        if(capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
+        if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
         {
             return true;
         }
@@ -159,7 +156,7 @@ public class TileQuantumTank extends AdvancedTileEntity implements ITickable
     @Override
     public <T> T getCapability(Capability<T> capability, EnumFacing facing)
     {
-        if(capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
+        if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
         {
             return CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY.cast(tank);
         }
@@ -178,7 +175,7 @@ public class TileQuantumTank extends AdvancedTileEntity implements ITickable
 
             IFluidHandler fluidHandler = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side);
             FluidActionResult inserted = FluidUtil.interactWithFluidHandler(playerIn.getHeldItem(hand), fluidHandler, playerIn);
-            if(inserted != FluidActionResult.FAILURE)
+            if (inserted != FluidActionResult.FAILURE)
             {
                 playerIn.setHeldItem(hand, inserted.getResult());
             }
@@ -188,8 +185,9 @@ public class TileQuantumTank extends AdvancedTileEntity implements ITickable
                 sync();
             }
             return inserted;
+        } catch (Exception e)
+        {
         }
-        catch (Exception e) {}
         return FluidActionResult.FAILURE;
     }
 

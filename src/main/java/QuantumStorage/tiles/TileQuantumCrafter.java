@@ -3,13 +3,11 @@ package QuantumStorage.tiles;
 import QuantumStorage.api.RecipeQuantumCrafter;
 import QuantumStorage.config.ConfigQuantumStorage;
 import QuantumStorage.init.ModBlocks;
-import QuantumStorage.init.ModItems;
 import QuantumStorage.inventory.SlotOutputItemHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -44,16 +42,16 @@ public class TileQuantumCrafter extends AdvancedTileEntity implements ITickable
     {
         final ItemStackHandler inventory = (ItemStackHandler) world.getTileEntity(pos).getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
 
-        if(!world.isRemote)
+        if (!world.isRemote)
         {
             if (!inventory.getStackInSlot(0).isEmpty() && inventory.getStackInSlot(1).isEmpty())
             {
                 ItemStack input = inventory.getStackInSlot(0);
 
-                if(RecipeQuantumCrafter.getOutputFrom(input) != null)
+                if (RecipeQuantumCrafter.getOutputFrom(input) != null)
                 {
                     progress++;
-                    if(progress >= RecipeQuantumCrafter.getTimeFromStack(input))
+                    if (progress >= RecipeQuantumCrafter.getTimeFromStack(input))
                     {
                         inventory.setStackInSlot(1, RecipeQuantumCrafter.getOutputFrom(input));
                         inventory.setStackInSlot(0, ItemStack.EMPTY);
@@ -71,7 +69,7 @@ public class TileQuantumCrafter extends AdvancedTileEntity implements ITickable
     {
         int max = 100;
 
-        if(RecipeQuantumCrafter.getTimeFromStack(inv.getStackInSlot(0)) != 0)
+        if (RecipeQuantumCrafter.getTimeFromStack(inv.getStackInSlot(0)) != 0)
         {
             max = RecipeQuantumCrafter.getTimeFromStack(inv.getStackInSlot(0));
         }
@@ -125,7 +123,7 @@ public class TileQuantumCrafter extends AdvancedTileEntity implements ITickable
     @Override
     public void addRecipe()
     {
-        if(!ConfigQuantumStorage.disableQuantumCrafter)
+        if (!ConfigQuantumStorage.disableQuantumCrafter)
         {
             CraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.QUANTUM_CRAFTER),
                     "IXI",
@@ -157,7 +155,7 @@ public class TileQuantumCrafter extends AdvancedTileEntity implements ITickable
     @Override
     public boolean hasCapability(Capability<?> capability, EnumFacing facing)
     {
-        if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
         {
             return true;
         }
@@ -167,7 +165,7 @@ public class TileQuantumCrafter extends AdvancedTileEntity implements ITickable
     @Override
     public <T> T getCapability(Capability<T> capability, EnumFacing facing)
     {
-        if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
         {
             return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(getInv());
         }

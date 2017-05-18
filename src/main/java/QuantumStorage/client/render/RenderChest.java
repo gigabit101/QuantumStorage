@@ -1,10 +1,7 @@
 package QuantumStorage.client.render;
 
-import QuantumStorage.QuantumStorage;
 import QuantumStorage.blocks.AdvancedBlock;
 import QuantumStorage.tiles.AdvancedTileEntity;
-import QuantumStorage.tiles.TileChestGold;
-import QuantumStorage.tiles.TileChestIron;
 import net.minecraft.client.model.ModelChest;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -19,8 +16,8 @@ public class RenderChest extends TileEntitySpecialRenderer
 {
     private ModelChest model;
     private static float halfPI = (float) (Math.PI / 2D);
-    private static float[][] shifts = { { 0.3F, 0.45F, 0.3F }, { 0.7F, 0.45F, 0.3F }, { 0.3F, 0.45F, 0.7F }, { 0.7F, 0.45F, 0.7F }, { 0.3F, 0.1F, 0.3F },
-            { 0.7F, 0.1F, 0.3F }, { 0.3F, 0.1F, 0.7F }, { 0.7F, 0.1F, 0.7F }, { 0.5F, 0.32F, 0.5F }, };
+    private static float[][] shifts = {{0.3F, 0.45F, 0.3F}, {0.7F, 0.45F, 0.3F}, {0.3F, 0.45F, 0.7F}, {0.7F, 0.45F, 0.7F}, {0.3F, 0.1F, 0.3F},
+            {0.7F, 0.1F, 0.3F}, {0.3F, 0.1F, 0.7F}, {0.7F, 0.1F, 0.7F}, {0.5F, 0.32F, 0.5F},};
 
     ResourceLocation TEXTURE_NORMAL = null;
 
@@ -38,10 +35,10 @@ public class RenderChest extends TileEntitySpecialRenderer
             return;
         }
 
-        AdvancedTileEntity te = (AdvancedTileEntity)tile;
+        AdvancedTileEntity te = (AdvancedTileEntity) tile;
 
         EnumFacing facing = EnumFacing.NORTH;
-        if(te.hasWorld())
+        if (te.hasWorld())
         {
             AdvancedBlock b = (AdvancedBlock) te.getBlock();
             facing = b.getFacing(b.getBlockState().getBaseState());
@@ -55,8 +52,7 @@ public class RenderChest extends TileEntitySpecialRenderer
             GlStateManager.scale(4F, 4F, 1F);
             GlStateManager.translate(0.0625F, 0.0625F, 0.0625F);
             GlStateManager.matrixMode(5888);
-        }
-        else
+        } else
         {
             this.bindTexture(TEXTURE_NORMAL);
         }

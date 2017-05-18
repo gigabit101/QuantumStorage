@@ -152,7 +152,7 @@ public class TileChestDiamond extends AdvancedTileEntity
     @Override
     public boolean hasCapability(Capability<?> capability, EnumFacing facing)
     {
-        if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
         {
             return true;
         }
@@ -162,7 +162,7 @@ public class TileChestDiamond extends AdvancedTileEntity
     @Override
     public <T> T getCapability(Capability<T> capability, EnumFacing facing)
     {
-        if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
         {
             return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(getInv());
         }
@@ -172,7 +172,7 @@ public class TileChestDiamond extends AdvancedTileEntity
     @Override
     public void addRecipe()
     {
-        if(!ConfigQuantumStorage.disableChests)
+        if (!ConfigQuantumStorage.disableChests)
         {
             CraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.CHEST_DIAMOND),
                     "WWW",

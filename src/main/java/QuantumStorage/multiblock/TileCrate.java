@@ -1,21 +1,14 @@
 package QuantumStorage.multiblock;
 
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
-import org.lwjgl.Sys;
 import reborncore.common.multiblock.MultiblockControllerBase;
 import reborncore.common.multiblock.MultiblockTileEntityBase;
-import reborncore.common.multiblock.MultiblockValidationException;
-import reborncore.common.multiblock.rectangular.RectangularMultiblockTileEntityBase;
-import reborncore.common.util.Inventory;
 
 import javax.annotation.Nullable;
-import java.util.Optional;
 
 /**
  * Created by Gigabit101 on 12/05/2017.
@@ -23,10 +16,14 @@ import java.util.Optional;
 public class TileCrate extends MultiblockTileEntityBase
 {
     @Override
-    public void onMachineActivated() {}
+    public void onMachineActivated()
+    {
+    }
 
     @Override
-    public void onMachineDeactivated() {}
+    public void onMachineDeactivated()
+    {
+    }
 
     @Override
     public MultiblockControllerBase createNewMultiblock()
@@ -46,7 +43,9 @@ public class TileCrate extends MultiblockTileEntityBase
     }
 
     @Override
-    public void update() {}
+    public void update()
+    {
+    }
 
     boolean isCrate()
     {
@@ -55,7 +54,9 @@ public class TileCrate extends MultiblockTileEntityBase
 
     ItemStackHandler invTile = new ItemStackHandler(5);
 
-    public TileCrate() {}
+    public TileCrate()
+    {
+    }
 
     @Override
     public void readFromNBT(NBTTagCompound data)
@@ -66,7 +67,7 @@ public class TileCrate extends MultiblockTileEntityBase
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data)
     {
-       return super.writeToNBT(data);
+        return super.writeToNBT(data);
     }
 
     @Override
@@ -84,7 +85,7 @@ public class TileCrate extends MultiblockTileEntityBase
     @Override
     public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing)
     {
-        if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && getMultiBlock() != null)
+        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && getMultiBlock() != null)
         {
             return true;
         }
@@ -95,7 +96,7 @@ public class TileCrate extends MultiblockTileEntityBase
     @Override
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing)
     {
-        if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && getMultiBlock() != null)
+        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && getMultiBlock() != null)
         {
             return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(getMultiBlock().getInv());
         }

@@ -16,9 +16,9 @@ public class AdvancedContainer extends RebornContainer
     {
         super();
         this.machine = machine;
-        if(machine.getSlots() != null)
+        if (machine.getSlots() != null)
         {
-            for(Slot s : machine.getSlots())
+            for (Slot s : machine.getSlots())
             {
                 addSlotToContainer(s);
             }

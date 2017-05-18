@@ -1,11 +1,9 @@
 package QuantumStorage.multiblock;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Slot;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import reborncore.common.container.RebornContainer;
-import reborncore.common.util.Inventory;
 
 /**
  * Created by Gigabit101 on 12/05/2017.
@@ -17,10 +15,11 @@ public class ContainerMultiBlockCrate extends RebornContainer
     public ContainerMultiBlockCrate(EntityPlayer player, MultiBlockCrate multiBlockCrate)
     {
         this.multiBlockCrate = multiBlockCrate;
-        if (multiBlockCrate != null) {
+        if (multiBlockCrate != null)
+        {
             ItemStackHandler handler = multiBlockCrate.getInv();
 //            if (handler != null) {
-                drawSlotsForPage(handler);
+            drawSlotsForPage(handler);
 //            }
 
             drawPlayersInv(player, 45, 141);
@@ -35,7 +34,7 @@ public class ContainerMultiBlockCrate extends RebornContainer
         {
             for (int j1 = 0; j1 < 13; ++j1)
             {
-                if(i != handler.getSlots())
+                if (i != handler.getSlots())
                 {
                     this.addSlotToContainer(new SlotItemHandler(handler, i, 9 + j1 * 18, 21 + l * 18));
                     i++;

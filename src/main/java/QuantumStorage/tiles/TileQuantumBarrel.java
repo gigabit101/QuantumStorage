@@ -68,7 +68,7 @@ public class TileQuantumBarrel extends AdvancedTileEntity implements ITickable
     {
         final ItemStackHandler stackHandler = (ItemStackHandler) worldIn.getTileEntity(pos).getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, side);
 
-        if(!worldIn.isRemote)
+        if (!worldIn.isRemote)
         {
             if (playerIn.isSneaking())
             {
@@ -82,8 +82,7 @@ public class TileQuantumBarrel extends AdvancedTileEntity implements ITickable
                     stackHandler.setStackInSlot(0, playerIn.getHeldItem(hand));
                     playerIn.setHeldItem(hand, ItemStack.EMPTY);
                     return true;
-                }
-                else if(ItemUtils.isItemEqual(stackHandler.getStackInSlot(0), playerIn.getHeldItem(hand), true, true))
+                } else if (ItemUtils.isItemEqual(stackHandler.getStackInSlot(0), playerIn.getHeldItem(hand), true, true))
                 {
                     int amout = playerIn.getHeldItem(hand).getCount();
                     stackHandler.getStackInSlot(0).grow(amout);
@@ -99,23 +98,21 @@ public class TileQuantumBarrel extends AdvancedTileEntity implements ITickable
     public void onBlockClicked(World worldIn, BlockPos pos, EntityPlayer playerIn)
     {
         final ItemStackHandler stackHandler = (ItemStackHandler) worldIn.getTileEntity(pos).getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-        if(stackHandler.getStackInSlot(0) != ItemStack.EMPTY && !worldIn.isRemote)
+        if (stackHandler.getStackInSlot(0) != ItemStack.EMPTY && !worldIn.isRemote)
         {
             boolean sneeking = playerIn.isSneaking();
             ItemStack stack = stackHandler.getStackInSlot(0).copy();
-            if(sneeking)
+            if (sneeking)
             {
                 stack.setCount(1);
                 stackHandler.getStackInSlot(0).shrink(1);
-            }
-            else
+            } else
             {
-                if(stack.getCount() >= stack.getMaxStackSize())
+                if (stack.getCount() >= stack.getMaxStackSize())
                 {
                     stack.setCount(stack.getMaxStackSize());
                     stackHandler.getStackInSlot(0).shrink(stack.getMaxStackSize());
-                }
-                else
+                } else
                 {
                     stackHandler.setStackInSlot(0, ItemStack.EMPTY);
                 }
@@ -149,7 +146,7 @@ public class TileQuantumBarrel extends AdvancedTileEntity implements ITickable
     @Override
     public boolean hasCapability(Capability<?> capability, EnumFacing facing)
     {
-        if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
         {
             return true;
         }
@@ -159,7 +156,7 @@ public class TileQuantumBarrel extends AdvancedTileEntity implements ITickable
     @Override
     public <T> T getCapability(Capability<T> capability, EnumFacing facing)
     {
-        if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
         {
             return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(getInv());
         }
@@ -169,7 +166,7 @@ public class TileQuantumBarrel extends AdvancedTileEntity implements ITickable
     @Override
     public void addRecipe()
     {
-        if(!ConfigQuantumStorage.disableBarrel)
+        if (!ConfigQuantumStorage.disableBarrel)
         {
             CraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.BARREL),
                     "OOO",

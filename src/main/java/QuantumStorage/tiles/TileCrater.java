@@ -38,10 +38,10 @@ public class TileCrater extends AdvancedTileEntity implements ITickable
     @Override
     public void update()
     {
-        if(canWork())
+        if (canWork())
         {
             ++progress;
-            if(progress >= 100)
+            if (progress >= 100)
             {
                 ItemStack copy = getInv().getStackInSlot(1).copy();
                 ItemStack blankCrate = new ItemStack(ModItems.CRATE, 1);
@@ -61,9 +61,9 @@ public class TileCrater extends AdvancedTileEntity implements ITickable
 
     public boolean canWork()
     {
-        if(!getInv().getStackInSlot(0).isEmpty() && getInv().getStackInSlot(0).getItem() instanceof ItemCrate && !getInv().getStackInSlot(0).hasTagCompound() && getInv().getStackInSlot(2).isEmpty())
+        if (!getInv().getStackInSlot(0).isEmpty() && getInv().getStackInSlot(0).getItem() instanceof ItemCrate && !getInv().getStackInSlot(0).hasTagCompound() && getInv().getStackInSlot(2).isEmpty())
         {
-            if(!getInv().getStackInSlot(1).isEmpty() && getInv().getStackInSlot(1).getCount() == getInv().getStackInSlot(1).getMaxStackSize())
+            if (!getInv().getStackInSlot(1).isEmpty() && getInv().getStackInSlot(1).getCount() == getInv().getStackInSlot(1).getMaxStackSize())
             {
                 return true;
             }
@@ -116,7 +116,7 @@ public class TileCrater extends AdvancedTileEntity implements ITickable
     @Override
     public void addRecipe()
     {
-        if(!ConfigQuantumStorage.disableCrateingMachine)
+        if (!ConfigQuantumStorage.disableCrateingMachine)
         {
             CraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.CRATER),
                     "IXI",

@@ -35,7 +35,7 @@ public class ModelHandler
         }
         registerItemModel(ModItems.CRATE, 0);
 
-        if(Loader.isModLoaded("refinedstorage"))
+        if (Loader.isModLoaded("refinedstorage"))
         {
             registerItemModel(ModItems.DISK, 0);
         }

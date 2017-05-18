@@ -5,12 +5,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
-import org.lwjgl.Sys;
 import reborncore.common.multiblock.IMultiblockPart;
 import reborncore.common.multiblock.MultiblockControllerBase;
 import reborncore.common.multiblock.MultiblockValidationException;
-import reborncore.common.multiblock.rectangular.RectangularMultiblockControllerBase;
-import reborncore.common.network.VanillaPacketDispatcher;
 
 /**
  * Created by Gigabit101 on 12/05/2017.
@@ -34,7 +31,9 @@ public class MultiBlockCrate extends MultiblockControllerBase
     }
 
     @Override
-    protected void onBlockAdded(IMultiblockPart newPart) {}
+    protected void onBlockAdded(IMultiblockPart newPart)
+    {
+    }
 
     @Override
     protected void onBlockRemoved(IMultiblockPart oldPart)
@@ -49,13 +48,19 @@ public class MultiBlockCrate extends MultiblockControllerBase
     }
 
     @Override
-    protected void onMachineRestored() {}
+    protected void onMachineRestored()
+    {
+    }
 
     @Override
-    protected void onMachinePaused() {}
+    protected void onMachinePaused()
+    {
+    }
 
     @Override
-    protected void onMachineDisassembled() {}
+    protected void onMachineDisassembled()
+    {
+    }
 
     @Override
     protected int getMinimumNumberOfBlocksForAssembledMachine()
@@ -64,37 +69,45 @@ public class MultiBlockCrate extends MultiblockControllerBase
     }
 
     @Override
-    protected int getMaximumXSize() {
+    protected int getMaximumXSize()
+    {
         return 16;
     }
 
     @Override
-    protected int getMaximumZSize() {
+    protected int getMaximumZSize()
+    {
         return 16;
     }
 
     @Override
-    protected int getMaximumYSize() {
+    protected int getMaximumYSize()
+    {
         return 16;
     }
 
     @Override
-    protected int getMinimumXSize() {
+    protected int getMinimumXSize()
+    {
         return 1;
     }
 
     @Override
-    protected int getMinimumYSize() {
+    protected int getMinimumYSize()
+    {
         return 1;
     }
 
     @Override
-    protected int getMinimumZSize() {
+    protected int getMinimumZSize()
+    {
         return 1;
     }
 
     @Override
-    protected void isMachineWhole() throws MultiblockValidationException {}
+    protected void isMachineWhole() throws MultiblockValidationException
+    {
+    }
 
     @Override
     protected void onAssimilate(MultiblockControllerBase assimilated)
@@ -115,7 +128,9 @@ public class MultiBlockCrate extends MultiblockControllerBase
     }
 
     @Override
-    protected void updateClient() {}
+    protected void updateClient()
+    {
+    }
 
     @Override
     public void writeToNBT(NBTTagCompound data)
@@ -127,12 +142,11 @@ public class MultiBlockCrate extends MultiblockControllerBase
     @Override
     public void readFromNBT(NBTTagCompound data)
     {
-        if(data.hasKey("invSize"))
+        if (data.hasKey("invSize"))
         {
             inv = new ItemStackHandler(data.getInteger("invSize"));
             size = data.getInteger("invSize");
-        }
-        else
+        } else
         {
             inv = new ItemStackHandler(5);
         }
@@ -154,9 +168,9 @@ public class MultiBlockCrate extends MultiblockControllerBase
     public void updateInfo()
     {
         size = 0;
-        for(IMultiblockPart part : connectedParts)
+        for (IMultiblockPart part : connectedParts)
         {
-            if(part.isConnected() && !part.isVisited())
+            if (part.isConnected() && !part.isVisited())
             {
                 size += 5;
                 part.setVisited();
@@ -164,7 +178,7 @@ public class MultiBlockCrate extends MultiblockControllerBase
             part.setUnvisited();
             setSize(size);
         }
-        if(connectedParts.size() == 1)
+        if (connectedParts.size() == 1)
         {
             setSize(5);
         }
@@ -173,14 +187,14 @@ public class MultiBlockCrate extends MultiblockControllerBase
     public void setSize(int size)
     {
         this.size = size;
-        if(isAssembled())
+        if (isAssembled())
         {
             ItemStackHandler copy = new ItemStackHandler(size);
             int slot = 0;
             while (slot < Math.min(inv.getSlots(), copy.getSlots()))
             {
                 ItemStack stack = this.inv.getStackInSlot(slot);
-                if(!stack.isEmpty())
+                if (!stack.isEmpty())
                 {
                     copy.setStackInSlot(slot, stack);
                     inv.setStackInSlot(slot, ItemStack.EMPTY);

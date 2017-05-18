@@ -83,7 +83,7 @@ public abstract class AdvancedTileEntity extends TileEntity
     @Override
     public boolean hasCapability(Capability<?> capability, EnumFacing facing)
     {
-        if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
         {
             return true;
         }
@@ -133,7 +133,9 @@ public abstract class AdvancedTileEntity extends TileEntity
     }
 
     @SideOnly(Side.CLIENT)
-    public void drawGuiContainerForegroundLayer(int mouseX, int mouseY, GuiContainer gui, int guiLeft, int guiTop) {}
+    public void drawGuiContainerForegroundLayer(int mouseX, int mouseY, GuiContainer gui, int guiLeft, int guiTop)
+    {
+    }
 
     //Container
     public abstract List<Slot> getSlots();
@@ -173,7 +175,9 @@ public abstract class AdvancedTileEntity extends TileEntity
         return FULL_BLOCK_AABB;
     }
 
-    public void onBlockClicked(World worldIn, BlockPos pos, EntityPlayer playerIn) {}
+    public void onBlockClicked(World worldIn, BlockPos pos, EntityPlayer playerIn)
+    {
+    }
 
     //NBT
     @Override
@@ -241,12 +245,14 @@ public abstract class AdvancedTileEntity extends TileEntity
     public abstract void addRecipe();
 
     @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced){}
+    public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced)
+    {
+    }
 
     @Override
     public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate)
     {
-        if(oldState.getBlock() != newSate.getBlock())
+        if (oldState.getBlock() != newSate.getBlock())
         {
             return true;
         }

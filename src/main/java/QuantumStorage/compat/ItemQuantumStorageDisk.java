@@ -48,8 +48,7 @@ public class ItemQuantumStorageDisk extends ItemBase implements IStorageDiskProv
             if (storage.getCapacity() == -1)
             {
                 tooltip.add(I18n.format("misc.refinedstorage:storage.stored", storage.getStored()));
-            }
-            else
+            } else
             {
                 tooltip.add(I18n.format("misc.refinedstorage:storage.stored_capacity", storage.getStored(), storage.getCapacity()));
             }

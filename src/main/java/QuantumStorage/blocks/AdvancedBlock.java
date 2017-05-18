@@ -14,7 +14,6 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -54,7 +53,7 @@ public class AdvancedBlock extends BlockContainer
     @Override
     public EnumBlockRenderType getRenderType(IBlockState state)
     {
-        if(advancedTileEntity != null)
+        if (advancedTileEntity != null)
         {
             return advancedTileEntity.getRenderType(state);
         }
@@ -64,7 +63,7 @@ public class AdvancedBlock extends BlockContainer
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
-        if(advancedTileEntity != null)
+        if (advancedTileEntity != null)
         {
             return advancedTileEntity.getBoundingBox(state, source, pos);
         }
@@ -81,7 +80,7 @@ public class AdvancedBlock extends BlockContainer
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
-        if(advancedTileEntity != null)
+        if (advancedTileEntity != null)
         {
             return advancedTileEntity.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
         }
@@ -91,7 +90,7 @@ public class AdvancedBlock extends BlockContainer
     @Override
     public void onBlockClicked(World worldIn, BlockPos pos, EntityPlayer playerIn)
     {
-        if(advancedTileEntity != null)
+        if (advancedTileEntity != null)
         {
             advancedTileEntity.onBlockClicked(worldIn, pos, playerIn);
         }
@@ -101,7 +100,7 @@ public class AdvancedBlock extends BlockContainer
     @Override
     public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack)
     {
-        if(te instanceof AdvancedTileEntity)
+        if (te instanceof AdvancedTileEntity)
         {
             float xOffset = world.rand.nextFloat() * 0.8F + 0.1F;
             float yOffset = world.rand.nextFloat() * 0.8F + 0.1F;
@@ -112,8 +111,7 @@ public class AdvancedBlock extends BlockContainer
 
             EntityItem entityitem = new EntityItem(world, pos.getX() + xOffset, pos.getY() + yOffset, pos.getZ() + zOffset, stacknbt.splitStack(amountToDrop));
             world.spawnEntity(entityitem);
-        }
-        else
+        } else
         {
             super.harvestBlock(world, player, pos, state, te, stack);
         }
@@ -125,7 +123,7 @@ public class AdvancedBlock extends BlockContainer
         super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
         AdvancedTileEntity adva = (AdvancedTileEntity) worldIn.getTileEntity(pos);
 
-        if(stack.hasTagCompound())
+        if (stack.hasTagCompound())
         {
             adva.readFromNBTWithoutCoords(stack.getTagCompound().getCompoundTag("tileEntity"));
         }
@@ -163,13 +161,17 @@ public class AdvancedBlock extends BlockContainer
             Block block3 = state3.getBlock();
             EnumFacing enumfacing = (EnumFacing) state.getValue(FACING);
 
-            if (enumfacing == EnumFacing.NORTH && block.isFullBlock(state) && !block1.isFullBlock(state1)) {
+            if (enumfacing == EnumFacing.NORTH && block.isFullBlock(state) && !block1.isFullBlock(state1))
+            {
                 enumfacing = EnumFacing.SOUTH;
-            } else if (enumfacing == EnumFacing.SOUTH && block1.isFullBlock(state1) && !block.isFullBlock(state)) {
+            } else if (enumfacing == EnumFacing.SOUTH && block1.isFullBlock(state1) && !block.isFullBlock(state))
+            {
                 enumfacing = EnumFacing.NORTH;
-            } else if (enumfacing == EnumFacing.WEST && block2.isFullBlock(state2) && !block3.isFullBlock(state2)) {
+            } else if (enumfacing == EnumFacing.WEST && block2.isFullBlock(state2) && !block3.isFullBlock(state2))
+            {
                 enumfacing = EnumFacing.EAST;
-            } else if (enumfacing == EnumFacing.EAST && block3.isFullBlock(state3) && !block2.isFullBlock(state2)) {
+            } else if (enumfacing == EnumFacing.EAST && block3.isFullBlock(state3) && !block2.isFullBlock(state2))
+            {
                 enumfacing = EnumFacing.WEST;
             }
 
@@ -177,44 +179,57 @@ public class AdvancedBlock extends BlockContainer
         }
     }
 
-    public EnumFacing getSideFromint(int i) {
-        if (i == 0) {
+    public EnumFacing getSideFromint(int i)
+    {
+        if (i == 0)
+        {
             return EnumFacing.NORTH;
-        } else if (i == 1) {
+        } else if (i == 1)
+        {
             return EnumFacing.SOUTH;
-        } else if (i == 2) {
+        } else if (i == 2)
+        {
             return EnumFacing.EAST;
-        } else if (i == 3) {
+        } else if (i == 3)
+        {
             return EnumFacing.WEST;
         }
         return EnumFacing.NORTH;
     }
 
-    public int getSideFromEnum(EnumFacing facing) {
-        if (facing == EnumFacing.NORTH) {
+    public int getSideFromEnum(EnumFacing facing)
+    {
+        if (facing == EnumFacing.NORTH)
+        {
             return 0;
-        } else if (facing == EnumFacing.SOUTH) {
+        } else if (facing == EnumFacing.SOUTH)
+        {
             return 1;
-        } else if (facing == EnumFacing.EAST) {
+        } else if (facing == EnumFacing.EAST)
+        {
             return 2;
-        } else if (facing == EnumFacing.WEST) {
+        } else if (facing == EnumFacing.WEST)
+        {
             return 3;
         }
         return 0;
     }
 
     @Override
-    public int getMetaFromState(IBlockState state) {
+    public int getMetaFromState(IBlockState state)
+    {
         int facingInt = getSideFromEnum(state.getValue(FACING));
         int activeInt = state.getValue(ACTIVE) ? 0 : 4;
         return facingInt + activeInt;
     }
 
     @Override
-    public IBlockState getStateFromMeta(int meta) {
+    public IBlockState getStateFromMeta(int meta)
+    {
         boolean active = false;
         int facingInt = meta;
-        if (facingInt > 4) {
+        if (facingInt > 4)
+        {
             active = true;
             facingInt = facingInt - 4;
         }
@@ -234,7 +249,7 @@ public class AdvancedBlock extends BlockContainer
         return false;
     }
 
-    private static final EnumFacing[] validRotationAxes = new EnumFacing[] { EnumFacing.UP, EnumFacing.DOWN };
+    private static final EnumFacing[] validRotationAxes = new EnumFacing[]{EnumFacing.UP, EnumFacing.DOWN};
 
     @Override
     public EnumFacing[] getValidRotations(World worldObj, BlockPos pos)
@@ -262,14 +277,15 @@ public class AdvancedBlock extends BlockContainer
         return false;
     }
 
-    public EnumFacing getFacing(IBlockState state) {
+    public EnumFacing getFacing(IBlockState state)
+    {
         return state.getValue(FACING);
     }
 
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced)
     {
-        if(advancedTileEntity != null)
+        if (advancedTileEntity != null)
         {
             advancedTileEntity.addInformation(stack, player, tooltip, advanced);
         }

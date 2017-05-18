@@ -23,7 +23,7 @@ public class DsuInventoryHandler extends ItemStackHandler
     @Override
     protected int getStackLimit(int slot, ItemStack stack)
     {
-        if(slot == STORAGE)
+        if (slot == STORAGE)
         {
             return Integer.MAX_VALUE;
         }

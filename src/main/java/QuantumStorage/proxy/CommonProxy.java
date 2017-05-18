@@ -5,5 +5,7 @@ package QuantumStorage.proxy;
  */
 public class CommonProxy
 {
-    public void registerRenders() {}
+    public void registerRenders()
+    {
+    }
 }

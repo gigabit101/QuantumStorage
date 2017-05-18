@@ -35,17 +35,17 @@ public class ItemUpgrade extends ItemBase
     @Override
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
-        if(worldIn.getTileEntity(pos) != null && worldIn.getTileEntity(pos) instanceof TileQuantumStorageUnit)
+        if (worldIn.getTileEntity(pos) != null && worldIn.getTileEntity(pos) instanceof TileQuantumStorageUnit)
         {
             TileQuantumStorageUnit dsu = (TileQuantumStorageUnit) worldIn.getTileEntity(pos);
             int meta = player.getHeldItem(hand).getItemDamage();
-            if(meta == 0)
+            if (meta == 0)
             {
                 dsu.getTileData().setInteger("facing", facing.getIndex());
             }
-            if(meta == 2)//Creative
+            if (meta == 2)//Creative
             {
-                if(dsu.inv.getStackInSlot(0) != ItemStack.EMPTY)
+                if (dsu.inv.getStackInSlot(0) != ItemStack.EMPTY)
                 {//TODO change max int to config value
                     dsu.inv.getStackInSlot(0).setCount(Integer.MAX_VALUE / 2 - 64);
                 }

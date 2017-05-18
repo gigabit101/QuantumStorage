@@ -27,16 +27,15 @@ public class ItemCrate extends ItemBase
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
     {
-        if(!worldIn.isRemote && playerIn.getHeldItem(handIn).hasTagCompound())
+        if (!worldIn.isRemote && playerIn.getHeldItem(handIn).hasTagCompound())
         {
             ItemStack crate = playerIn.getHeldItem(handIn);
             ItemStack stack = new ItemStack(crate.getTagCompound());
             worldIn.spawnEntity(new EntityItem(worldIn, playerIn.posX, playerIn.posY, playerIn.posZ, stack));
-            if(crate.getCount() == 1)
+            if (crate.getCount() == 1)
             {
                 playerIn.setHeldItem(handIn, ItemStack.EMPTY);
-            }
-            else
+            } else
             {
                 playerIn.getHeldItem(handIn).shrink(1);
             }
@@ -47,10 +46,10 @@ public class ItemCrate extends ItemBase
     @Override
     public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced)
     {
-        if(stack.hasTagCompound())
+        if (stack.hasTagCompound())
         {
             ItemStack stack1 = new ItemStack(stack.getTagCompound());
-            tooltip.add(TextFormatting.RED + "Stored Item: " + stack1.getCount() + " " +  stack1.getDisplayName());
+            tooltip.add(TextFormatting.RED + "Stored Item: " + stack1.getCount() + " " + stack1.getDisplayName());
         }
         super.addInformation(stack, playerIn, tooltip, advanced);
     }

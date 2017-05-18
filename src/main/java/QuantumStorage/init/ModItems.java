@@ -24,7 +24,7 @@ public class ModItems
         CRATE = new ItemCrate();
         GameRegistry.register(CRATE);
 
-        if(Loader.isModLoaded("refinedstorage"))
+        if (Loader.isModLoaded("refinedstorage"))
         {
             DISK = new ItemQuantumStorageDisk();
             GameRegistry.register(DISK);

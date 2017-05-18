@@ -17,7 +17,7 @@ import net.minecraft.util.ResourceLocation;
 public class CrafterRecipeCategory extends BlankRecipeCategory<CrafterRecipeWrapper>
 {
     public static final String ID = QuantumStorage.MOD_ID + ".quantumcrafter";
-    public static final ResourceLocation texture = new ResourceLocation(QuantumStorage.MOD_ID.toLowerCase() + ":" +"textures/gui/gui_sheet.png");
+    public static final ResourceLocation texture = new ResourceLocation(QuantumStorage.MOD_ID.toLowerCase() + ":" + "textures/gui/gui_sheet.png");
 
     private IDrawable background;
 

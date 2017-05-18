@@ -14,7 +14,6 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import reborncore.common.multiblock.BlockMultiblockBase;
 import reborncore.common.util.ChatUtils;
-import QuantumStorage.GuiHandler;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -43,9 +42,9 @@ public class BlockCrate extends BlockMultiblockBase
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
         TileCrate crate = (TileCrate) worldIn.getTileEntity(pos);
-        if(crate.getMultiblockController() != null)
+        if (crate.getMultiblockController() != null)
         {
-            if(!crate.getMultiblockController().isAssembled())
+            if (!crate.getMultiblockController().isAssembled())
             {
                 if (crate.getMultiblockController().getLastValidationException() != null)
                 {
@@ -55,8 +54,7 @@ public class BlockCrate extends BlockMultiblockBase
                     }
                     return false;
                 }
-            }
-            else
+            } else
             {
                 playerIn.openGui(QuantumStorage.INSTANCE, 0, worldIn, pos.getX(), pos.getY(), pos.getZ());
                 return true;

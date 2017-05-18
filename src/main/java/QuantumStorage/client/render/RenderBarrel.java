@@ -2,20 +2,17 @@ package QuantumStorage.client.render;
 
 import QuantumStorage.tiles.TileQuantumBarrel;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
-import reborncore.client.RenderUtil;
 
 /**
  * Created by Gigabit101 on 18/03/2017.
@@ -28,7 +25,7 @@ public class RenderBarrel extends TileEntitySpecialRenderer<TileQuantumBarrel>
     public void renderTileEntityAt(TileQuantumBarrel te, double x, double y, double z, float partialTicks, int destroyStage)
     {
         final ItemStackHandler stackHandler = (ItemStackHandler) te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-        if(!stackHandler.getStackInSlot(0).isEmpty())
+        if (!stackHandler.getStackInSlot(0).isEmpty())
         {
             ItemStack stack = stackHandler.getStackInSlot(0);
             GlStateManager.pushMatrix();
@@ -50,24 +47,21 @@ public class RenderBarrel extends TileEntitySpecialRenderer<TileQuantumBarrel>
             float f3 = 0.015625F * f1;
             GlStateManager.pushMatrix();
 
-            if(f == EnumFacing.SOUTH)
+            if (f == EnumFacing.SOUTH)
             {
-                GlStateManager.translate(0.8, 0.4+(0.5F * f1), 0.96+(0.01f * f1));
-            }
-            else if(f == EnumFacing.NORTH)
+                GlStateManager.translate(0.8, 0.4 + (0.5F * f1), 0.96 + (0.01f * f1));
+            } else if (f == EnumFacing.NORTH)
             {
                 GlStateManager.rotate(180, 0.0F, 1.0F, 0);
-                GlStateManager.translate(-0.8, 0.4+(0.5F * f1), -0.04+(0.01f * f1));
-            }
-            else if(f == EnumFacing.WEST)
+                GlStateManager.translate(-0.8, 0.4 + (0.5F * f1), -0.04 + (0.01f * f1));
+            } else if (f == EnumFacing.WEST)
             {
-                GlStateManager.translate(0.8, 0.4+(0.5F * f1), 0.5+(0.01f * f1));
+                GlStateManager.translate(0.8, 0.4 + (0.5F * f1), 0.5 + (0.01f * f1));
                 GlStateManager.rotate(90, 0.0F, 1.0F, 0);
-            }
-            else if(f == EnumFacing.EAST)
+            } else if (f == EnumFacing.EAST)
             {
                 GlStateManager.rotate(-90, 0.0F, 1.0F, 0);
-                GlStateManager.translate(0.8, 0.4+(0.5F * f1), -0.04+(0.01f * f1));
+                GlStateManager.translate(0.8, 0.4 + (0.5F * f1), -0.04 + (0.01f * f1));
             }
 
             GlStateManager.scale(f3, -f3, f3);
@@ -78,17 +72,14 @@ public class RenderBarrel extends TileEntitySpecialRenderer<TileQuantumBarrel>
             if (f == EnumFacing.SOUTH)
             {
                 GlStateManager.translate(0.5, 0.4, 0.96);
-            }
-            else if(f == EnumFacing.NORTH)
+            } else if (f == EnumFacing.NORTH)
             {
                 GlStateManager.translate(0.5, 0.4, 0.04);
-            }
-            else if(f == EnumFacing.EAST)
+            } else if (f == EnumFacing.EAST)
             {
                 GlStateManager.translate(0.96, 0.4, 0.5);
                 GlStateManager.rotate(90, 0.0F, 1.0F, 0);
-            }
-            else if(f == EnumFacing.WEST)
+            } else if (f == EnumFacing.WEST)
             {
                 GlStateManager.translate(0.0, 0.4, 0.5);
                 GlStateManager.rotate(90, 0.0F, 1.0F, 0);
@@ -100,8 +91,8 @@ public class RenderBarrel extends TileEntitySpecialRenderer<TileQuantumBarrel>
             GlStateManager.pushMatrix();
             GlStateManager.disableLighting();
 
-            GlStateManager.rotate(180f,1.0f,0.0f,0.0f);
-            GlStateManager.rotate(180f,0.0f,0.0f,1.0f);
+            GlStateManager.rotate(180f, 1.0f, 0.0f, 0.0f);
+            GlStateManager.rotate(180f, 0.0f, 0.0f, 1.0f);
             GlStateManager.scale(0.4F, 0.4F, 0.4F);
             GlStateManager.depthMask(true);
             GlStateManager.pushAttrib();

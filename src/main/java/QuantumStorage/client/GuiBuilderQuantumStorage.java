@@ -61,11 +61,14 @@ public class GuiBuilderQuantumStorage extends GuiBuilder
 
     public TextFormatting getPercentageColour(int percentage)
     {
-        if (percentage <= 10) {
+        if (percentage <= 10)
+        {
             return TextFormatting.RED;
-        } else if (percentage >= 75) {
+        } else if (percentage >= 75)
+        {
             return TextFormatting.GREEN;
-        } else {
+        } else
+        {
             return TextFormatting.YELLOW;
         }
     }
@@ -87,7 +90,8 @@ public class GuiBuilderQuantumStorage extends GuiBuilder
             j = 0;
         gui.drawTexturedModalRect(x, y, 166, 20, j, 16);
 
-        if (isInRect(x, y, 26, 5, mouseX, mouseY)) {
+        if (isInRect(x, y, 26, 5, mouseX, mouseY))
+        {
             int percentage = percentage(maxProgress, progress);
             List<String> list = new ArrayList<>();
             list.add(getPercentageColour(percentage) + "" + percentage + "%");
@@ -104,11 +108,14 @@ public class GuiBuilderQuantumStorage extends GuiBuilder
 
 
         RenderUtil.renderGuiTank(tank, x + 2, y - 3, zLevel, width - 4, height);
-        if (isInRect(x, y, 14, height, mouseX, mouseY)) {
+        if (isInRect(x, y, 14, height, mouseX, mouseY))
+        {
             List<String> list = new ArrayList<String>();
-            if (tank.getFluid() != null) {
+            if (tank.getFluid() != null)
+            {
                 list.add(tank.getFluidAmount() + " / " + tank.getCapacity() + " " + tank.getFluid().getLocalizedName());
-            } else {
+            } else
+            {
                 list.add("empty");
             }
             net.minecraftforge.fml.client.config.GuiUtils.drawHoveringText(list, mouseX, mouseY, gui.width, gui.height, -1, gui.mc.fontRendererObj);

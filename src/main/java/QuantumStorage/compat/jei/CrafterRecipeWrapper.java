@@ -3,14 +3,11 @@ package QuantumStorage.compat.jei;
 import QuantumStorage.api.RecipeQuantumCrafter;
 import QuantumStorage.client.GuiBuilderQuantumStorage;
 import com.google.common.collect.ImmutableList;
-import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IJeiHelpers;
-import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IDrawableAnimated;
 import mezz.jei.api.gui.IDrawableStatic;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.BlankRecipeWrapper;
-import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
@@ -36,11 +33,11 @@ public class CrafterRecipeWrapper extends BlankRecipeWrapper
         int ticksPerCycle = 1000 / 4;
         this.progress = guiHelper.getGuiHelper().createAnimatedDrawable(progressStatic, ticksPerCycle, IDrawableAnimated.StartDirection.LEFT, false);
 
-        if(recipe.getInput() instanceof ItemStack)
+        if (recipe.getInput() instanceof ItemStack)
         {
             builder.add(recipe.getInput());
         }
-        if(recipe.getInput() instanceof String)
+        if (recipe.getInput() instanceof String)
         {
             builder.add(OreDictionary.getOres(((String) recipe.getInput())));
         }

@@ -1,7 +1,6 @@
 package QuantumStorage.init;
 
 import QuantumStorage.api.QuantumStorageAPI;
-import QuantumStorage.compat.CompatHandler;
 import QuantumStorage.config.ConfigQuantumStorage;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -22,7 +21,7 @@ public class ModRecipes
                 'W', "plankWood",
                 'P', new ItemStack(Items.PAPER));
 
-        if(Loader.isModLoaded("refinedstorage"))
+        if (Loader.isModLoaded("refinedstorage"))
         {
             QuantumStorageAPI.addAltarRecipe(new ItemStack(Items.NETHER_STAR, 1), new ItemStack(ModItems.DISK, 1), ConfigQuantumStorage.defaultDiskTime);
         }
