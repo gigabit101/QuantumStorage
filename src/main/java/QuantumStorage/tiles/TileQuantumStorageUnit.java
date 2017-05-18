@@ -15,6 +15,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ITickable;
@@ -203,6 +204,12 @@ public class TileQuantumStorageUnit extends AdvancedTileEntity implements ITicka
         compound = super.writeToNBT(compound);
         compound.merge(inv.serializeNBT());
         return compound;
+    }
+
+    @Override
+    public BlockRenderLayer getBlockLayer()
+    {
+        return BlockRenderLayer.CUTOUT;
     }
 
     @Override
