@@ -9,6 +9,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.lwjgl.Sys;
 import reborncore.common.multiblock.MultiblockControllerBase;
+import reborncore.common.multiblock.MultiblockTileEntityBase;
 import reborncore.common.multiblock.MultiblockValidationException;
 import reborncore.common.multiblock.rectangular.RectangularMultiblockTileEntityBase;
 import reborncore.common.util.Inventory;
@@ -19,48 +20,8 @@ import java.util.Optional;
 /**
  * Created by Gigabit101 on 12/05/2017.
  */
-public class TileCrate extends RectangularMultiblockTileEntityBase
+public class TileCrate extends MultiblockTileEntityBase
 {
-    @Override
-    public void isGoodForFrame() throws MultiblockValidationException
-    {
-        if (!isCrate()) {
-            throw new MultiblockValidationException("is not valid for the frame of the block");
-        }
-    }
-
-    @Override
-    public void isGoodForSides() throws MultiblockValidationException
-    {
-        if (!isCrate()) {
-            throw new MultiblockValidationException("is not valid for the sides of the block");
-        }
-    }
-
-    @Override
-    public void isGoodForTop() throws MultiblockValidationException
-    {
-        if (!isCrate()) {
-            throw new MultiblockValidationException(" is not valid for the sides of the block");
-        }
-    }
-
-    @Override
-    public void isGoodForBottom() throws MultiblockValidationException
-    {
-        if (!isCrate()) {
-            throw new MultiblockValidationException(" is not valid for the sides of the block");
-        }
-    }
-
-    @Override
-    public void isGoodForInterior() throws MultiblockValidationException
-    {
-        if (!isCrate()) {
-            throw new MultiblockValidationException(" is not valid for the inside of the block");
-        }
-    }
-
     @Override
     public void onMachineActivated() {}
 
@@ -87,25 +48,6 @@ public class TileCrate extends RectangularMultiblockTileEntityBase
     @Override
     public void update() {}
 
-//    @Nullable
-//    @Override
-//    public SPacketUpdateTileEntity getUpdatePacket()
-//    {
-//        return new SPacketUpdateTileEntity(getPos(), 0, writeToNBT(new NBTTagCompound()));
-//    }
-//
-//    @Override
-//    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt)
-//    {
-//        super.onDataPacket(net, pkt);
-//        readFromNBT(pkt.getNbtCompound());
-//    }
-//
-//    @Override
-//    public NBTTagCompound getUpdateTag() {
-//        return writeToNBT(new NBTTagCompound());
-//    }
-
     boolean isCrate()
     {
         return getWorld().getBlockState(getPos()).getBlock() instanceof BlockCrate;
@@ -119,15 +61,24 @@ public class TileCrate extends RectangularMultiblockTileEntityBase
     public void readFromNBT(NBTTagCompound data)
     {
         super.readFromNBT(data);
-        invTile.deserializeNBT(data);
     }
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data)
     {
-        data = super.writeToNBT(data);
-        data.merge(invTile.serializeNBT());
-        return data;
+       return super.writeToNBT(data);
+    }
+
+    @Override
+    public void onMachineAssembled(MultiblockControllerBase multiblockControllerBase)
+    {
+
+    }
+
+    @Override
+    public void onMachineBroken()
+    {
+
     }
 
     @Override

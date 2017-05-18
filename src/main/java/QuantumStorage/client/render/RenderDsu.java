@@ -29,10 +29,10 @@ public class RenderDsu extends TileEntitySpecialRenderer<TileQuantumStorageUnit>
 
                     if (stack.getItem() instanceof ItemBlock)
                     {
-                        GlStateManager.translate(x + .5, y + 1.45, z + .5);
+                        GlStateManager.translate(x + .5, y + 0.65, z + .5);
                     } else
                     {
-                        GlStateManager.translate(x + .5, y + 1.45, z + .5);
+                        GlStateManager.translate(x + .5, y + 0.65, z + .5);
                     }
                     GlStateManager.rotate((float) (((spin * 40D) % 360)), 0, 1, 0);
 
