@@ -4,6 +4,7 @@ import QuantumStorage.client.AdvancedGui;
 import QuantumStorage.config.ConfigQuantumStorage;
 import QuantumStorage.init.ModBlocks;
 import QuantumStorage.inventory.DsuInventoryHandler;
+import QuantumStorage.inventory.SlotOutputItemHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -121,7 +122,7 @@ public class TileQuantumStorageUnit extends AdvancedTileEntity implements ITicka
     {
         List<Slot> slots = new ArrayList<>();
         slots.add(new SlotItemHandler(inv, 1, 80, 20));
-        slots.add(new SlotItemHandler(inv, 2, 80, 70));
+        slots.add(new SlotOutputItemHandler(inv, 2, 80, 70));
         return slots;
     }
 

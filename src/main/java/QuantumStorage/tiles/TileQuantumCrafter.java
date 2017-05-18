@@ -4,6 +4,7 @@ import QuantumStorage.api.RecipeQuantumCrafter;
 import QuantumStorage.config.ConfigQuantumStorage;
 import QuantumStorage.init.ModBlocks;
 import QuantumStorage.init.ModItems;
+import QuantumStorage.inventory.SlotOutputItemHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -98,7 +99,7 @@ public class TileQuantumCrafter extends AdvancedTileEntity implements ITickable
     {
         List<Slot> slots = new ArrayList<>();
         slots.add(new SlotItemHandler(getInv(), 0, 40, 40));
-        slots.add(new SlotItemHandler(getInv(), 1, 120, 40));
+        slots.add(new SlotOutputItemHandler(getInv(), 1, 120, 40));
         return slots;
     }
 
