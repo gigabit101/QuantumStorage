@@ -6,6 +6,7 @@ import QuantumStorage.init.ModBlocks;
 import QuantumStorage.init.ModItems;
 import QuantumStorage.init.ModRecipes;
 import QuantumStorage.proxy.CommonProxy;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -44,7 +45,10 @@ public class QuantumStorage
         ModBlocks.init();
         ModRecipes.init();
 
-        CompatHandler.init();
+        if (Loader.isModLoaded("refinedstorage"))
+        {
+            CompatHandler.init();
+        }
 
         proxy.registerRenders();
         NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, new GuiHandler());
