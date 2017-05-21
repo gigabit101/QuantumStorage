@@ -1,5 +1,6 @@
 package QuantumStorage.init;
 
+import QuantumStorage.compat.CompatHandler;
 import QuantumStorage.items.ItemUpgrade;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -37,7 +38,7 @@ public class ModelHandler
 
         if (Loader.isModLoaded("refinedstorage"))
         {
-            registerItemModel(ModItems.DISK, 0);
+            registerItemModel(CompatHandler.DISK, 0);
         }
     }
 
