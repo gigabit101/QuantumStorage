@@ -3,6 +3,7 @@ package QuantumStorage.items;
 import QuantumStorage.QuantumStorage;
 import QuantumStorage.items.prefab.ItemBase;
 import QuantumStorage.tiles.TileQuantumStorageUnit;
+import QuantumStorage.tiles.TileQuantumTank;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,7 +24,7 @@ import java.util.List;
  */
 public class ItemUpgrade extends ItemBase
 {
-    public static final String[] types = new String[]{"render", "void", "creative"};
+    public static final String[] types = new String[]{"render", "void", "creative", "water"};
 
     public ItemUpgrade()
     {
@@ -49,6 +50,16 @@ public class ItemUpgrade extends ItemBase
                 {//TODO change max int to config value
                     dsu.inv.getStackInSlot(0).setCount(Integer.MAX_VALUE / 2 - 64);
                 }
+            }
+        }
+        int meta = player.getHeldItem(hand).getItemDamage();
+        if (worldIn.getTileEntity(pos) != null && worldIn.getTileEntity(pos) instanceof TileQuantumTank)
+        {
+            TileQuantumTank tank = (TileQuantumTank) worldIn.getTileEntity(pos);
+
+            if(meta == 3)//water
+            {
+                tank.getTileData().setBoolean("infin_water", true);
             }
         }
         return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);

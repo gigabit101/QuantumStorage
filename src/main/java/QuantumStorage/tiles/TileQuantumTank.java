@@ -20,9 +20,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.fluids.FluidActionResult;
-import net.minecraftforge.fluids.FluidTank;
-import net.minecraftforge.fluids.FluidUtil;
+import net.minecraftforge.fluids.*;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.relauncher.Side;
@@ -195,5 +193,13 @@ public class TileQuantumTank extends AdvancedTileEntity implements ITickable
     public void update()
     {
         sync();
+        if(this.getTileData().hasKey("infin_water") && this.tank.getFluid() != null && this.tank.getFluid().getFluid() == FluidRegistry.WATER)
+        {
+            if(tank.canFill())
+            {
+                tank.fill(tank.getFluid(), true);
+//                tank.setFluid(new FluidStack(FluidRegistry.WATER, this.tank.getCapacity()));
+            }
+        }
     }
 }

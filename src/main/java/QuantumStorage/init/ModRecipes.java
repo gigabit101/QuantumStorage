@@ -22,6 +22,13 @@ public class ModRecipes
                 'W', "plankWood",
                 'P', new ItemStack(Items.PAPER));
 
+        CraftingHelper.addShapedOreRecipe(new ItemStack(ModItems.UPGRADE, 1, 3),
+                " W ",
+                "WPW",
+                " W ",
+                'W', new ItemStack(Items.PAPER),
+                'P', new ItemStack(Items.WATER_BUCKET));
+
         if (Loader.isModLoaded("refinedstorage"))
         {
             QuantumStorageAPI.addAltarRecipe(new ItemStack(Items.NETHER_STAR, 1), new ItemStack(CompatHandler.DISK, 1), ConfigQuantumStorage.defaultDiskTime);

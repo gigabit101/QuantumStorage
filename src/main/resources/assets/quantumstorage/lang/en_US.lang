@@ -21,6 +21,9 @@ tooltipitem.quantumstorage.upgrade.void=Shift Click on DSU to allow voiding of e
 item.quantumstorage.upgrade.creative.name=Creative Upgrade
 tooltipitem.quantumstorage.upgrade.creative=Shift Click on DSU to Fill the DSU with whats stored in the DSU
 
+item.quantumstorage.upgrade.water.name=Infinite Water Upgrade
+tooltipitem.quantumstorage.upgrade.water=Shift Click on QuantumTank to have the tank auto generate water
+
 item.quantumstorage.quantumstoragedisk.name=Quantum Storage Disk
 
 gui.quantumstorage.crafter=Quantum Crafter Recipe

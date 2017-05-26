@@ -23,6 +23,11 @@
         "textures": {
           "layer0": "quantumstorage:items/renderupgrade"
         }
+      },
+      "water": {
+        "textures": {
+          "layer0": "quantumstorage:items/water"
+        }
       }
     }
   }
