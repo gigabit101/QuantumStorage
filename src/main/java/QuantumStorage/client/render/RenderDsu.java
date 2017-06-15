@@ -2,6 +2,7 @@ package QuantumStorage.client.render;
 
 import QuantumStorage.tiles.TileQuantumStorageUnit;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.ItemBlock;
@@ -14,7 +15,7 @@ import reborncore.client.RenderUtil;
 public class RenderDsu extends TileEntitySpecialRenderer<TileQuantumStorageUnit>
 {
     @Override
-    public void renderTileEntityAt(TileQuantumStorageUnit te, double x, double y, double z, float partialTicks, int destroyStage)
+    public void func_192841_a(TileQuantumStorageUnit te, double x, double y, double z, float p_192841_8_, int p_192841_9_, float p_192841_10_)
     {
         if (te.getFacing() != null)
         {

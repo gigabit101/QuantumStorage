@@ -26,8 +26,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
-import reborncore.common.util.CraftingHelper;
 import reborncore.common.util.ItemUtils;
+import reborncore.common.util.RebornCraftingHelper;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -188,7 +188,7 @@ public class TileQuantumStorageUnit extends AdvancedTileEntity implements ITicka
     {
         if (!ConfigQuantumStorage.disableQuantumStorageUnit)
         {
-            CraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.DSU),
+            RebornCraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.DSU),
                     "OOO",
                     "ICI",
                     "III",

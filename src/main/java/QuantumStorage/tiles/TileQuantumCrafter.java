@@ -25,7 +25,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
-import reborncore.common.util.CraftingHelper;
+import reborncore.common.util.RebornCraftingHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -125,7 +125,7 @@ public class TileQuantumCrafter extends AdvancedTileEntity implements ITickable
     {
         if (!ConfigQuantumStorage.disableQuantumCrafter)
         {
-            CraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.QUANTUM_CRAFTER),
+            RebornCraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.QUANTUM_CRAFTER),
                     "IXI",
                     "ICI",
                     "III",

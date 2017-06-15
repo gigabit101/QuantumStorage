@@ -13,7 +13,7 @@ public class CompatHandler
 
     public static void init()
     {
-        DISK = new ItemQuantumStorageDisk();
-        GameRegistry.register(DISK);
+//        DISK = new ItemQuantumStorageDisk();
+//        GameRegistry.register(DISK);
     }
 }

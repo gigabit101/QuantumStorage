@@ -5,6 +5,7 @@ import QuantumStorage.items.prefab.ItemBase;
 import QuantumStorage.tiles.TileQuantumStorageUnit;
 import QuantumStorage.tiles.TileQuantumTank;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -17,6 +18,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 /**
@@ -66,11 +68,11 @@ public class ItemUpgrade extends ItemBase
     }
 
     @Override
-    public void getSubItems(Item item, CreativeTabs tab, NonNullList<ItemStack> list)
+    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list)
     {
         for (int meta = 0; meta < types.length; meta++)
         {
-            list.add(new ItemStack(item, 1, meta));
+            list.add(new ItemStack(this, 1, meta));
         }
     }
 
@@ -86,7 +88,7 @@ public class ItemUpgrade extends ItemBase
     }
 
     @Override
-    public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced)
+    public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag advanced)
     {
         tooltip.add(TextFormatting.DARK_PURPLE + I18n.format("tooltip" + getUnlocalizedName(stack)));
     }

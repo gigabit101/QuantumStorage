@@ -2,6 +2,7 @@ package QuantumStorage.client.render;
 
 import QuantumStorage.tiles.TileQuantumBarrel;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.RenderItem;
@@ -9,6 +10,7 @@ import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -22,7 +24,7 @@ public class RenderBarrel extends TileEntitySpecialRenderer<TileQuantumBarrel>
     public static Minecraft mc = Minecraft.getMinecraft();
 
     @Override
-    public void renderTileEntityAt(TileQuantumBarrel te, double x, double y, double z, float partialTicks, int destroyStage)
+    public void func_192841_a(TileQuantumBarrel te, double x, double y, double z, float p_192841_8_, int destroyStage, float partialTicks)
     {
         final ItemStackHandler stackHandler = (ItemStackHandler) te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
         if (!stackHandler.getStackInSlot(0).isEmpty())

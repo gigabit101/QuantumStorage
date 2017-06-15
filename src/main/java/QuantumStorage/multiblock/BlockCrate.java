@@ -4,6 +4,7 @@ import QuantumStorage.QuantumStorage;
 import QuantumStorage.client.CreativeTabQuantumStorage;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -65,10 +66,10 @@ public class BlockCrate extends BlockMultiblockBase
     }
 
     @Override
-    public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced)
+    public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag advanced)
     {
         tooltip.add("WIP Do not use yet");
 
-        super.addInformation(stack, player, tooltip, advanced);
+        super.addInformation(stack, world, tooltip, advanced);
     }
 }

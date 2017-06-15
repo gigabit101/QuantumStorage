@@ -25,7 +25,7 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import reborncore.common.util.CraftingHelper;
+import reborncore.common.util.RebornCraftingHelper;
 
 import java.util.List;
 
@@ -108,7 +108,7 @@ public class TileQuantumTank extends AdvancedTileEntity implements ITickable
     {
         if (!ConfigQuantumStorage.disableQuantumTank)
         {
-            CraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.TANK),
+            RebornCraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.TANK),
                     "OOO",
                     "IBI",
                     "III",

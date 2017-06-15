@@ -2,7 +2,9 @@ package QuantumStorage.client.render;
 
 import QuantumStorage.blocks.AdvancedBlock;
 import QuantumStorage.tiles.AdvancedTileEntity;
+import QuantumStorage.tiles.TileQuantumStorageUnit;
 import net.minecraft.client.model.ModelChest;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
@@ -28,7 +30,7 @@ public class RenderChest extends TileEntitySpecialRenderer
     }
 
     @Override
-    public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float partialTicks, int destroyStage)
+    public void func_192841_a(TileEntity tile, double x, double y, double z, float p_192841_8_, int destroyStage, float partialTicks)
     {
         if (tile == null || tile.isInvalid())
         {

@@ -6,7 +6,7 @@ import QuantumStorage.config.ConfigQuantumStorage;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Loader;
-import reborncore.common.util.CraftingHelper;
+import reborncore.common.util.RebornCraftingHelper;
 
 /**
  * Created by Gigabit101 on 07/03/2017.
@@ -15,14 +15,14 @@ public class ModRecipes
 {
     public static void init()
     {
-        CraftingHelper.addShapedOreRecipe(new ItemStack(ModItems.CRATE, 16),
+        RebornCraftingHelper.addShapedOreRecipe(new ItemStack(ModItems.CRATE, 16),
                 " W ",
                 "WPW",
                 " W ",
                 'W', "plankWood",
                 'P', new ItemStack(Items.PAPER));
 
-        CraftingHelper.addShapedOreRecipe(new ItemStack(ModItems.UPGRADE, 1, 3),
+        RebornCraftingHelper.addShapedOreRecipe(new ItemStack(ModItems.UPGRADE, 1, 3),
                 " W ",
                 "WPW",
                 " W ",

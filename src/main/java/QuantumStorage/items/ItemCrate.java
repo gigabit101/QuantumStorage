@@ -2,6 +2,7 @@ package QuantumStorage.items;
 
 import QuantumStorage.QuantumStorage;
 import QuantumStorage.items.prefab.ItemBase;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -10,6 +11,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 /**
@@ -44,13 +46,13 @@ public class ItemCrate extends ItemBase
     }
 
     @Override
-    public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced)
+    public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag advanced)
     {
         if (stack.hasTagCompound())
         {
             ItemStack stack1 = new ItemStack(stack.getTagCompound());
             tooltip.add(TextFormatting.RED + "Stored Item: " + stack1.getCount() + " " + stack1.getDisplayName());
         }
-        super.addInformation(stack, playerIn, tooltip, advanced);
+        super.addInformation(stack, world, tooltip, advanced);
     }
 }

@@ -4,6 +4,7 @@ import QuantumStorage.config.ConfigQuantumStorage;
 import QuantumStorage.init.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -23,8 +24,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
-import reborncore.common.util.CraftingHelper;
+import reborncore.common.util.RebornCraftingHelper;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -99,7 +101,7 @@ public class TileChestIron extends AdvancedTileEntity
     {
         if (!ConfigQuantumStorage.disableChests)
         {
-            CraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.CHEST_IRON),
+            RebornCraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.CHEST_IRON),
                     "WWW",
                     "ICI",
                     "WBW",
@@ -147,9 +149,9 @@ public class TileChestIron extends AdvancedTileEntity
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced)
+    public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag advanced)
     {
         tooltip.add("Keeps Inventory when broken");
-        super.addInformation(stack, player, tooltip, advanced);
+        super.addInformation(stack, world, tooltip, advanced);
     }
 }

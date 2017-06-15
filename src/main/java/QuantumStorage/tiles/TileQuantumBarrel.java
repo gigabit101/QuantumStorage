@@ -21,8 +21,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
-import reborncore.common.util.CraftingHelper;
 import reborncore.common.util.ItemUtils;
+import reborncore.common.util.RebornCraftingHelper;
 
 import java.util.List;
 
@@ -168,7 +168,7 @@ public class TileQuantumBarrel extends AdvancedTileEntity implements ITickable
     {
         if (!ConfigQuantumStorage.disableBarrel)
         {
-            CraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.BARREL),
+            RebornCraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.BARREL),
                     "OOO",
                     "ICI",
                     "III",

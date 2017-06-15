@@ -23,7 +23,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.SlotItemHandler;
-import reborncore.common.util.CraftingHelper;
+import reborncore.common.util.RebornCraftingHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -118,7 +118,7 @@ public class TileCrater extends AdvancedTileEntity implements ITickable
     {
         if (!ConfigQuantumStorage.disableCrateingMachine)
         {
-            CraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.CRATER),
+            RebornCraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.CRATER),
                     "IXI",
                     "ICI",
                     "IPI",

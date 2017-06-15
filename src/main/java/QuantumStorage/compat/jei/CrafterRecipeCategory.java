@@ -39,6 +39,12 @@ public class CrafterRecipeCategory extends BlankRecipeCategory<CrafterRecipeWrap
     }
 
     @Override
+    public String getModName()
+    {
+        return QuantumStorage.MOD_NAME;
+    }
+
+    @Override
     public IDrawable getBackground()
     {
         return background;
