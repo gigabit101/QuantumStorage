@@ -70,6 +70,11 @@ public class ItemUpgrade extends ItemBase
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list)
     {
+        if(!func_194125_a(tab))
+        {
+            return;
+        }
+
         for (int meta = 0; meta < types.length; meta++)
         {
             list.add(new ItemStack(this, 1, meta));
