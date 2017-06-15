@@ -78,6 +78,13 @@ public class GuiMultiBlockCrate extends GuiContainer
     }
 
     @Override
+    public void drawScreen(int mouseX, int mouseY, float partialTicks)
+    {
+        super.drawScreen(mouseX, mouseY, partialTicks);
+        this.func_191948_b(mouseX, mouseY);
+    }
+
+    @Override
     protected void actionPerformed(GuiButton button) throws IOException
     {
         super.actionPerformed(button);

@@ -24,6 +24,14 @@ public class AdvancedGui extends GuiContainer
         buttonList.clear();
     }
 
+
+    @Override
+    public void drawScreen(int mouseX, int mouseY, float partialTicks)
+    {
+        super.drawScreen(mouseX, mouseY, partialTicks);
+        this.func_191948_b(mouseX, mouseY);
+    }
+
     @Override
     public void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
     {
