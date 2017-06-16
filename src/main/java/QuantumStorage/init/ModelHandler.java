@@ -38,7 +38,7 @@ public class ModelHandler
 
         if (Loader.isModLoaded("refinedstorage"))
         {
-            registerItemModel(CompatHandler.DISK, 0);
+//            registerItemModel(CompatHandler.DISK, 0);
         }
     }
 
