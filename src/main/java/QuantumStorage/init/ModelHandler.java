@@ -1,20 +1,25 @@
 package QuantumStorage.init;
 
-import QuantumStorage.compat.CompatHandler;
 import QuantumStorage.items.ItemUpgrade;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
 
 /**
  * Created by Gigabit101 on 07/03/2017.
  */
+@Mod.EventBusSubscriber(Side.CLIENT)
 public class ModelHandler
 {
-    public static void init()
+    @SubscribeEvent
+    public static void init(ModelRegistryEvent event)
     {
         //Blocks
         registerItemModel(ModBlocks.DSU, 0);
@@ -26,6 +31,8 @@ public class ModelHandler
         registerItemModel(ModBlocks.CHEST_DIAMOND, 0);
         registerItemModel(ModBlocks.QUANTUM_CRAFTER, 0);
         registerItemModel(ModBlocks.CRATE, 0);
+        registerItemModel(ModBlocks.TRASH_CAN, 0);
+        registerItemModel(ModBlocks.TRASH_CAN_FLUID, 0);
 
         //Items
         int i;
@@ -34,6 +41,7 @@ public class ModelHandler
             String[] name = ItemUpgrade.types.clone();
             registerItemModel(ModItems.UPGRADE, i, name[i]);
         }
+
         registerItemModel(ModItems.CRATE, 0);
 
         if (Loader.isModLoaded("refinedstorage"))

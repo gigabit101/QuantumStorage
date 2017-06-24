@@ -10,6 +10,8 @@ tile.quantumstorage.chest_diamond.name=Reinforced Diamond Chest
 tile.quantumstorage.quantumcrafter.name=Quantum Crafter
 
 tile.quantumstorage.controller.name=Controller
+tile.quantumstorage.trashcan.name=Trash Can
+tile.quantumstorage.trashcanfluid.name=Fluid Trash Can
 
 item.quantumstorage.upgrade.render.name=Render Upgrade
 item.quantumstorage.crate.name=Crate

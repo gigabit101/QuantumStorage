@@ -6,6 +6,10 @@ import QuantumStorage.multiblock.BlockCrate;
 import QuantumStorage.multiblock.TileCrate;
 import QuantumStorage.tiles.*;
 import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import reborncore.RebornRegistry;
 
@@ -23,6 +27,8 @@ public class ModBlocks
     public static Block CHEST_DIAMOND;
     public static Block QUANTUM_CRAFTER;
     public static Block CRATE;
+    public static Block TRASH_CAN;
+    public static Block TRASH_CAN_FLUID;
 
     public static Block CONTROLLER;
     public static Block CABLE;
@@ -56,6 +62,12 @@ public class ModBlocks
         CRATE = new BlockCrate();
         RebornRegistry.registerBlock(CRATE, "multiblockcrate");
         GameRegistry.registerTileEntity(TileCrate.class, QuantumStorage.MOD_ID + "multiblockcrate");
+
+        TRASH_CAN = new AdvancedBlock(new TileTrashcan()).setUnlocalizedName(QuantumStorage.MOD_ID + ".trashcan");
+        registerAdvanced(TRASH_CAN, new TileTrashcan());
+
+        TRASH_CAN_FLUID = new AdvancedBlock(new TileTrashcanFluid()).setUnlocalizedName(QuantumStorage.MOD_ID + ".trashcanfluid");
+        registerAdvanced(TRASH_CAN_FLUID, new TileTrashcanFluid());
 
 //        CONTROLLER = new AdvancedBlock(new TileController()).setUnlocalizedName(QuantumStorage.MOD_ID + ".controller");
 //        registerAdvanced(CONTROLLER, new TileController());

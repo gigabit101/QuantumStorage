@@ -53,7 +53,7 @@ public class GuiBuilderQuantumStorage extends GuiBuilder
                 list.add(TextFormatting.GRAY + "prolly a bug");
                 list.add(TextFormatting.GRAY + "pls report and tell how tf you did this");
             }
-            net.minecraftforge.fml.client.config.GuiUtils.drawHoveringText(list, mouseX, mouseY, gui.width, gui.height, -1, gui.mc.fontRendererObj);
+            net.minecraftforge.fml.client.config.GuiUtils.drawHoveringText(list, mouseX, mouseY, gui.width, gui.height, -1, gui.mc.fontRenderer);
             GlStateManager.disableLighting();
             GlStateManager.color(1, 1, 1, 1);
         }
@@ -95,7 +95,7 @@ public class GuiBuilderQuantumStorage extends GuiBuilder
             int percentage = percentage(maxProgress, progress);
             List<String> list = new ArrayList<>();
             list.add(getPercentageColour(percentage) + "" + percentage + "%");
-            GuiUtils.drawHoveringText(list, mouseX, mouseY, gui.width, gui.height, -1, gui.mc.fontRendererObj);
+            GuiUtils.drawHoveringText(list, mouseX, mouseY, gui.width, gui.height, -1, gui.mc.fontRenderer);
             GlStateManager.disableLighting();
             GlStateManager.color(1, 1, 1, 1);
         }
@@ -118,7 +118,7 @@ public class GuiBuilderQuantumStorage extends GuiBuilder
             {
                 list.add("empty");
             }
-            net.minecraftforge.fml.client.config.GuiUtils.drawHoveringText(list, mouseX, mouseY, gui.width, gui.height, -1, gui.mc.fontRendererObj);
+            net.minecraftforge.fml.client.config.GuiUtils.drawHoveringText(list, mouseX, mouseY, gui.width, gui.height, -1, gui.mc.fontRenderer);
             GlStateManager.disableLighting();
         }
     }

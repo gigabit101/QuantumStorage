@@ -10,6 +10,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -23,7 +24,7 @@ public class ItemCrate extends ItemBase
     {
         setMaxStackSize(64);
         setUnlocalizedName(QuantumStorage.MOD_ID + ".crate");
-        setRegistryName("crate");
+        setRegistryName(QuantumStorage.MOD_ID, "crate");
     }
 
     @Override

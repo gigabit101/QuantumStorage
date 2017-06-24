@@ -28,8 +28,11 @@ public class AdvancedGui extends GuiContainer
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
     {
+        this.drawDefaultBackground();
+
         super.drawScreen(mouseX, mouseY, partialTicks);
-        this.func_191948_b(mouseX, mouseY);
+
+        this.renderHoveredToolTip(mouseX, mouseY);
     }
 
     @Override
@@ -46,14 +49,14 @@ public class AdvancedGui extends GuiContainer
 
     public void drawCentredString(String string, int y, int colour)
     {
-        drawString(string, (xSize / 2 - mc.fontRendererObj.getStringWidth(string) / 2), y, colour);
+        drawString(string, (xSize / 2 - mc.fontRenderer.getStringWidth(string) / 2), y, colour);
     }
 
     public void drawString(String string, int x, int y, int colour)
     {
         int factorX = 0;
         int factorY = 0;
-        mc.fontRendererObj.drawString(string, x + factorX, y + factorY, colour);
+        mc.fontRenderer.drawString(string, x + factorX, y + factorY, colour);
         GlStateManager.color(1, 1, 1, 1);
     }
 }

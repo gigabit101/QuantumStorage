@@ -31,7 +31,7 @@ public class ModRecipes
 
         if (Loader.isModLoaded("refinedstorage"))
         {
-            QuantumStorageAPI.addAltarRecipe(new ItemStack(Items.NETHER_STAR, 1), new ItemStack(CompatHandler.DISK, 1), ConfigQuantumStorage.defaultDiskTime);
+//            QuantumStorageAPI.addAltarRecipe(new ItemStack(Items.NETHER_STAR, 1), new ItemStack(CompatHandler.DISK, 1), ConfigQuantumStorage.defaultDiskTime);
         }
     }
 }

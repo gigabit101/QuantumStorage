@@ -24,7 +24,7 @@ public class RenderBarrel extends TileEntitySpecialRenderer<TileQuantumBarrel>
     public static Minecraft mc = Minecraft.getMinecraft();
 
     @Override
-    public void func_192841_a(TileQuantumBarrel te, double x, double y, double z, float p_192841_8_, int destroyStage, float partialTicks)
+    public void render(TileQuantumBarrel te, double x, double y, double z, float p_192841_8_, int destroyStage, float partialTicks)
     {
         final ItemStackHandler stackHandler = (ItemStackHandler) te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
         if (!stackHandler.getStackInSlot(0).isEmpty())
@@ -88,7 +88,7 @@ public class RenderBarrel extends TileEntitySpecialRenderer<TileQuantumBarrel>
             }
 
             EntityItem entityitem = new EntityItem(world, 0.0D, 0.0D, 0.0D, stack);
-            entityitem.getEntityItem().setCount(1);
+            entityitem.getItem().setCount(1);
 
             GlStateManager.pushMatrix();
             GlStateManager.disableLighting();
@@ -100,7 +100,7 @@ public class RenderBarrel extends TileEntitySpecialRenderer<TileQuantumBarrel>
             GlStateManager.pushAttrib();
             RenderHelper.enableStandardItemLighting();
 
-            itemRenderer.renderItem(entityitem.getEntityItem(), ItemCameraTransforms.TransformType.FIXED);
+            itemRenderer.renderItem(entityitem.getItem(), ItemCameraTransforms.TransformType.FIXED);
 
             RenderHelper.disableStandardItemLighting();
             GlStateManager.popAttrib();

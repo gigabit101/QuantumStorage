@@ -63,7 +63,7 @@ public class TileQuantumTank extends AdvancedTileEntity implements ITickable
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
     {
-        if (fillBlockWithFluid(worldIn, pos, playerIn, hand, side) == FluidActionResult.FAILURE)
+        if (FluidUtil.interactWithFluidHandler(playerIn, hand, worldIn, pos, side))
             openGui(playerIn, (AdvancedTileEntity) worldIn.getTileEntity(pos));
         return true;
     }
@@ -85,8 +85,8 @@ public class TileQuantumTank extends AdvancedTileEntity implements ITickable
         getBuilder().drawBigBlueBar((AdvancedGui) gui, 30, 50, amount, tank.getCapacity(), mouseX - guiLeft, mouseY - guiTop, "", "Fluid Type: " + name, amount + " mb " + name);
 
 
-        gui.mc.fontRendererObj.drawString("Stored Fluid: " + name, 10, 10, TextFormatting.BLACK.getColorIndex());
-        gui.mc.fontRendererObj.drawString("Stored Amount: " + amount, 10, 20, TextFormatting.BLACK.getColorIndex());
+        gui.mc.fontRenderer.drawString("Stored Fluid: " + name, 10, 10, TextFormatting.BLACK.getColorIndex());
+        gui.mc.fontRenderer.drawString("Stored Amount: " + amount, 10, 20, TextFormatting.BLACK.getColorIndex());
     }
 
     @Override
@@ -161,33 +161,33 @@ public class TileQuantumTank extends AdvancedTileEntity implements ITickable
         return super.getCapability(capability, facing);
     }
 
-    public FluidActionResult fillBlockWithFluid(World worldIn, BlockPos pos, EntityPlayer playerIn, EnumHand hand, EnumFacing side)
-    {
-        try
-        {
-            TileEntity tile = worldIn.getTileEntity(pos);
-            if (tile == null || !tile.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side))
-            {
-                return FluidActionResult.FAILURE;
-            }
-
-            IFluidHandler fluidHandler = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side);
-            FluidActionResult inserted = FluidUtil.interactWithFluidHandler(playerIn.getHeldItem(hand), fluidHandler, playerIn);
-            if (inserted != FluidActionResult.FAILURE)
-            {
-                playerIn.setHeldItem(hand, inserted.getResult());
-            }
-
-            if (!worldIn.isRemote)
-            {
-                sync();
-            }
-            return inserted;
-        } catch (Exception e)
-        {
-        }
-        return FluidActionResult.FAILURE;
-    }
+//    public FluidActionResult fillBlockWithFluid(World worldIn, BlockPos pos, EntityPlayer playerIn, EnumHand hand, EnumFacing side)
+//    {
+//        try
+//        {
+//            TileEntity tile = worldIn.getTileEntity(pos);
+//            if (tile == null || !tile.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side))
+//            {
+//                return FluidActionResult.FAILURE;
+//            }
+//
+//            IFluidHandler fluidHandler = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side);
+//            FluidActionResult inserted = FluidUtil.interactWithFluidHandler(playerIn, hand, worldIn, pos, side);
+//            if (inserted != FluidActionResult.FAILURE)
+//            {
+//                playerIn.setHeldItem(hand, inserted.getResult());
+//            }
+//
+//            if (!worldIn.isRemote)
+//            {
+//                sync();
+//            }
+//            return inserted;
+//        } catch (Exception e)
+//        {
+//        }
+//        return FluidActionResult.FAILURE;
+//    }
 
     @Override
     public void update()

@@ -3,22 +3,23 @@ package QuantumStorage.init;
 import QuantumStorage.items.ItemCrate;
 import QuantumStorage.items.ItemUpgrade;
 import net.minecraft.item.Item;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 /**
  * Created by Gigabit101 on 28/01/2017.
  */
+@Mod.EventBusSubscriber
 public class ModItems
 {
-    public static Item UPGRADE;
-    public static Item CRATE;
+    public static Item UPGRADE = new ItemUpgrade();
+    public static Item CRATE = new ItemCrate();
 
-    public static void init()
+    @SubscribeEvent
+    public static void init(RegistryEvent.Register<Item> event)
     {
-        UPGRADE = new ItemUpgrade();
-        GameRegistry.register(UPGRADE);
-
-        CRATE = new ItemCrate();
-        GameRegistry.register(CRATE);
+        event.getRegistry().register(CRATE);
+        event.getRegistry().register(UPGRADE);
     }
 }

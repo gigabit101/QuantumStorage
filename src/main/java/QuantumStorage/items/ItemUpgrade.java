@@ -70,7 +70,7 @@ public class ItemUpgrade extends ItemBase
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list)
     {
-        if(!func_194125_a(tab))
+        if(!isInCreativeTab(tab))
         {
             return;
         }

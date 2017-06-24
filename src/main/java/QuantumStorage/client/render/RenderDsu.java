@@ -15,7 +15,7 @@ import reborncore.client.RenderUtil;
 public class RenderDsu extends TileEntitySpecialRenderer<TileQuantumStorageUnit>
 {
     @Override
-    public void func_192841_a(TileQuantumStorageUnit te, double x, double y, double z, float p_192841_8_, int p_192841_9_, float p_192841_10_)
+    public void render(TileQuantumStorageUnit te, double x, double y, double z, float p_192841_8_, int p_192841_9_, float p_192841_10_)
     {
         if (te.getFacing() != null)
         {

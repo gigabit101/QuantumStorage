@@ -30,7 +30,7 @@ public class RenderChest extends TileEntitySpecialRenderer
     }
 
     @Override
-    public void func_192841_a(TileEntity tile, double x, double y, double z, float p_192841_8_, int destroyStage, float partialTicks)
+    public void render(TileEntity tile, double x, double y, double z, float p_192841_8_, int destroyStage, float partialTicks)
     {
         if (tile == null || tile.isInvalid())
         {

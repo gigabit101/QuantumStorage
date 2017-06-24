@@ -41,7 +41,6 @@ public class QuantumStorage
         String path = event.getSuggestedConfigurationFile().getAbsolutePath().replace(QuantumStorage.MOD_ID, "QuantumStorage");
         config = ConfigQuantumStorage.init(new File(path));
 
-        ModItems.init();
         ModBlocks.init();
         ModRecipes.init();
 

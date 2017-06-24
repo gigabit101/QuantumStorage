@@ -61,7 +61,7 @@ public class GuiMultiBlockCrate extends GuiContainer
     {
         if (multiBlockCrate.getInv().getSlots() != 0)
         {
-            this.drawCenteredString(Minecraft.getMinecraft().fontRendererObj, "Amount of Slots " + multiBlockCrate.getInv().getSlots(), 125, 130, 4210752);
+            this.drawCenteredString(Minecraft.getMinecraft().fontRenderer, "Amount of Slots " + multiBlockCrate.getInv().getSlots(), 125, 130, 4210752);
         }
     }
 
@@ -80,8 +80,9 @@ public class GuiMultiBlockCrate extends GuiContainer
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
     {
+        this.drawDefaultBackground();
         super.drawScreen(mouseX, mouseY, partialTicks);
-        this.func_191948_b(mouseX, mouseY);
+        this.renderHoveredToolTip(mouseX, mouseY);
     }
 
     @Override
