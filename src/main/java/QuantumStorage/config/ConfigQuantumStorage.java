@@ -20,6 +20,8 @@ public class ConfigQuantumStorage
     public static boolean disableQuantumStorageUnit;
     public static boolean disableCrateingMachine;
     public static boolean disableBarrel;
+    public static boolean disableTrashcan;
+    public static boolean disableTrashcanFluid;
 
     public static int defaultDiskTime;
 
@@ -65,6 +67,8 @@ public class ConfigQuantumStorage
         disableQuantumStorageUnit = config.get(CATEGORY_RECIPE, "disable default recipe for quantum storage unit", false).getBoolean();
         disableCrateingMachine = config.get(CATEGORY_RECIPE, "disable default recipe for crating machine", false).getBoolean();
         disableBarrel = config.get(CATEGORY_RECIPE, "disable default recipe for quantum barrel", false).getBoolean();
+        disableTrashcan = config.get(CATEGORY_RECIPE, "disable default recipe for trash can", false).getBoolean();
+        disableTrashcanFluid = config.get(CATEGORY_RECIPE, "disable default recipe for fluid trash can", false).getBoolean();
 
         defaultDiskTime = config.get(CATEGORY_RECIPE, "how long in ticks it takes to craft a quantum disk", 100000).getInt();
 

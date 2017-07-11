@@ -1,5 +1,6 @@
 package QuantumStorage.tiles;
 
+import QuantumStorage.config.ConfigQuantumStorage;
 import QuantumStorage.init.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -72,13 +73,16 @@ public class TileTrashcanFluid extends AdvancedTileEntity implements ITickable
     @Override
     public void addRecipe()
     {
-        RebornCraftingHelper.addShapedOreRecipe(new ItemStack(getBlock()),
-                "SSS",
-                "CHC",
-                "CCC",
-                'C', new ItemStack(Blocks.COBBLESTONE),
-                'H', new ItemStack(Items.BUCKET),
-                'S', new ItemStack(Blocks.STONE));
+        if(ConfigQuantumStorage.disableTrashcanFluid)
+        {
+            RebornCraftingHelper.addShapedOreRecipe(new ItemStack(getBlock()),
+                    "SSS",
+                    "CHC",
+                    "CCC",
+                    'C', new ItemStack(Blocks.COBBLESTONE),
+                    'H', new ItemStack(Items.BUCKET),
+                    'S', new ItemStack(Blocks.STONE));
+        }
     }
 
     @Override

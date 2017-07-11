@@ -63,7 +63,7 @@ public class TileQuantumTank extends AdvancedTileEntity implements ITickable
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
     {
-        if (FluidUtil.interactWithFluidHandler(playerIn, hand, worldIn, pos, side))
+        if (!FluidUtil.interactWithFluidHandler(playerIn, hand, worldIn, pos, side))
             openGui(playerIn, (AdvancedTileEntity) worldIn.getTileEntity(pos));
         return true;
     }
