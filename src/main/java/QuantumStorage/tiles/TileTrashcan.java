@@ -69,7 +69,7 @@ public class TileTrashcan extends AdvancedTileEntity implements ITickable
     @Override
     public void addRecipe()
     {
-        if(ConfigQuantumStorage.disableTrashcan)
+        if(!ConfigQuantumStorage.disableTrashcan)
         {
             RebornCraftingHelper.addShapedOreRecipe(new ItemStack(getBlock()),
                     "SSS",

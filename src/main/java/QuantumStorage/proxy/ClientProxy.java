@@ -18,9 +18,9 @@ public class ClientProxy extends CommonProxy
     public void registerRenders()
     {
 //        ModelHandler.init();
-        ClientRegistry.bindTileEntitySpecialRenderer(TileChestIron.class, new RenderChest(new ResourceLocation(QuantumStorage.MOD_ID + ":textures/blocks/chest_iron.png")));
-        ClientRegistry.bindTileEntitySpecialRenderer(TileChestGold.class, new RenderChest(new ResourceLocation(QuantumStorage.MOD_ID + ":textures/blocks/chest_gold.png")));
-        ClientRegistry.bindTileEntitySpecialRenderer(TileChestDiamond.class, new RenderChest(new ResourceLocation(QuantumStorage.MOD_ID + ":textures/blocks/chest_diamond.png")));
+        ClientRegistry.bindTileEntitySpecialRenderer(TileChestIron.class, new RenderChest(new ResourceLocation(QuantumStorage.MOD_ID + ":textures/blocks/chests/chest_iron.png")));
+        ClientRegistry.bindTileEntitySpecialRenderer(TileChestGold.class, new RenderChest(new ResourceLocation(QuantumStorage.MOD_ID + ":textures/blocks/chests/chest_gold.png")));
+        ClientRegistry.bindTileEntitySpecialRenderer(TileChestDiamond.class, new RenderChest(new ResourceLocation(QuantumStorage.MOD_ID + ":textures/blocks/chests/chest_diamond.png")));
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileQuantumStorageUnit.class, new RenderDsu());
         ClientRegistry.bindTileEntitySpecialRenderer(TileQuantumBarrel.class, new RenderBarrel());

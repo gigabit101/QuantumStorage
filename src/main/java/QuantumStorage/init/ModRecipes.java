@@ -1,11 +1,7 @@
 package QuantumStorage.init;
 
-import QuantumStorage.api.QuantumStorageAPI;
-import QuantumStorage.compat.CompatHandler;
-import QuantumStorage.config.ConfigQuantumStorage;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.Loader;
 import reborncore.common.util.RebornCraftingHelper;
 
 /**
@@ -28,10 +24,5 @@ public class ModRecipes
                 " W ",
                 'W', new ItemStack(Items.PAPER),
                 'P', new ItemStack(Items.WATER_BUCKET));
-
-        if (Loader.isModLoaded("refinedstorage"))
-        {
-//            QuantumStorageAPI.addAltarRecipe(new ItemStack(Items.NETHER_STAR, 1), new ItemStack(CompatHandler.DISK, 1), ConfigQuantumStorage.defaultDiskTime);
-        }
     }
 }

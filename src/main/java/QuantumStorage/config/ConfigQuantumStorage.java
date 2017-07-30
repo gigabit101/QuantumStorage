@@ -70,7 +70,7 @@ public class ConfigQuantumStorage
         disableTrashcan = config.get(CATEGORY_RECIPE, "disable default recipe for trash can", false).getBoolean();
         disableTrashcanFluid = config.get(CATEGORY_RECIPE, "disable default recipe for fluid trash can", false).getBoolean();
 
-        defaultDiskTime = config.get(CATEGORY_RECIPE, "how long in ticks it takes to craft a quantum disk", 100000).getInt();
+        defaultDiskTime = config.get(CATEGORY_RECIPE, "how long in ticks it takes to craft a quantum disk", 20000).getInt();
 
         if (config.hasChanged())
         {

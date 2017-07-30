@@ -1,11 +1,11 @@
 {
     "parent": "block/block",
     "textures": {
-        "0": "quantumstorage:blocks/fluid_trash_can_side",
-        "1": "quantumstorage:blocks/fluid_trash_can_bottom",
-        "2": "quantumstorage:blocks/fluid_trash_can_top_side",
-        "3": "quantumstorage:blocks/fluid_trash_can_top",
-        "particle": "quantumstorage:blocks/fluid_trash_can_side"
+        "0": "quantumstorage:blocks/fluidtrashcan/fluid_trash_can_side",
+        "1": "quantumstorage:blocks/fluidtrashcan/fluid_trash_can_bottom",
+        "2": "quantumstorage:blocks/fluidtrashcan/fluid_trash_can_top_side",
+        "3": "quantumstorage:blocks/fluidtrashcan/fluid_trash_can_top",
+        "particle": "quantumstorage:blocks/fluidtrashcan/fluid_trash_can_side"
     },
     "elements": [
         {

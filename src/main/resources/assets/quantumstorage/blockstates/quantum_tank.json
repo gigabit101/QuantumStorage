@@ -1,45 +1,45 @@
 {
-   "forge_marker": 1,
-   "defaults": {
-      "transform": "forge:default-block",
-      "model": "orientable",
-      "textures": {
-         "particle": "quantumstorage:blocks/dsuside",
-         "top": "quantumstorage:blocks/dsutop",
-         "down": "quantumstorage:blocks/dsubottom",
-         "side": "quantumstorage:blocks/dsuside",
-         "front": "quantumstorage:blocks/dsuside",
-         "front-on": "quantumstorage:blocks/dsuside"
+   "forge_marker":1,
+   "defaults":{
+      "transform":"forge:default-block",
+      "model":"quantumstorage:quantum_tank",
+      "textures":{
+         "particle":"quantumstorage:blocks/dsutop"
       }
    },
-   "variants": {
+   "variants":{
       "inventory":{
          "transform":"forge:default-block",
-         "textures":{
+         "textures":{}
+      },
+      "facing":{
+         "north":{
+
+         },
+         "east":{
+            "y":90
+         },
+         "south":{
+            "y":180
+         },
+         "west":{
+            "y":270
          }
       },
-      "facing": {
-         "north": {},
-         "east": {
-            "y": 90
-         },
-         "south": {
-            "y": 180
-         },
-         "west": {
-            "y": 270
-         }
-      },
-      "active": {
-         "true": {
-            "textures": {
-               "particle": "#front-on",
-               "front": "#front-on"
+      "active":{
+         "true":{
+            "textures":{
             }
          },
-         "false": {
-            "textures": {}
+         "false":{
+            "textures":{
+
+            }
          }
+      },
+      "inventory": {
+         "model": "quantumstorage:quantum_tank",
+         "textures": {}
       }
    }
 }

@@ -252,6 +252,18 @@ public class AdvancedBlock extends BlockContainer
     }
 
     @Override
+    public boolean isSideSolid(IBlockState base_state, IBlockAccess world, BlockPos pos, EnumFacing side)
+    {
+        return side == EnumFacing.UP || side == EnumFacing.DOWN;
+    }
+
+    @Override
+    public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer)
+    {
+        return layer == BlockRenderLayer.CUTOUT_MIPPED || layer == BlockRenderLayer.TRANSLUCENT;
+    }
+
+    @Override
     public boolean isFullCube(IBlockState state)
     {
         return false;

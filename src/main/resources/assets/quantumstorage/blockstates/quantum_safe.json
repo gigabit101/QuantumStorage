@@ -1,0 +1,39 @@
+{
+   "forge_marker":1,
+   "defaults":{
+      "transform":"forge:default-block",
+      "model":"orientable",
+      "textures":{
+         "particle":"quantumstorage:blocks/multiblockcrate",
+         "top":"quantumstorage:blocks/multiblockcrate",
+         "down":"quantumstorage:blocks/multiblockcrate"
+      }
+   },
+   "variants":{
+      "inventory":{
+         "transform":"forge:default-block",
+         "textures":{
+            "front":"quantumstorage:blocks/multiblockcrate",
+            "side":"quantumstorage:blocks/multiblockcrate"
+         }
+      },
+      "normal":{
+         "transform":"forge:default-block",
+         "textures":{
+               "front":"quantumstorage:blocks/multiblockcrate",
+               "side":"quantumstorage:blocks/multiblockcrate",
+			   "down": "quantumstorage:blocks/multiblockcrate"
+            }
+         },
+      "inventory": {
+         "model": "orientable",
+         "textures": {
+            "particle": "quantumstorage:blocks/multiblockcrate",
+            "top": "quantumstorage:blocks/multiblockcrate",
+            "down": "quantumstorage:blocks/multiblockcrate",
+            "side": "quantumstorage:blocks/multiblockcrate",
+            "front": "quantumstorage:blocks/multiblockcrate"
+         }
+      }
+   }
+}

@@ -61,6 +61,5 @@ public class CrafterRecipeCategory extends BlankRecipeCategory<CrafterRecipeWrap
         group.set(0, iIngredients.getInputs(ItemStack.class).get(0));
 
         group.set(1, iIngredients.getOutputs(ItemStack.class).get(0));
-
     }
 }

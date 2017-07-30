@@ -4,7 +4,7 @@
         "transform":"forge:default-block",
         "model":"quantumstorage:trashcan",
         "textures":{
-            "particle":"quantumstorage:blocks/trashcan"
+            "particle":"quantumstorage:blocks/trashcan/trashcan"
         }
     },
     "variants":{

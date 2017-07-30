@@ -4,12 +4,12 @@
       "transform": "forge:default-block",
       "model": "orientable",
       "textures": {
-         "particle": "quantumstorage:blocks/dsuside",
-         "top": "quantumstorage:blocks/crater_top",
-         "down": "quantumstorage:blocks/dsubottom",
-         "side": "quantumstorage:blocks/crater_front",
-         "front": "quantumstorage:blocks/crater_front",
-         "front-on": "quantumstorage:blocks/dsuside"
+         "particle": "quantumstorage:blocks/crater/side",
+         "top": "quantumstorage:blocks/crater/top",
+         "down": "quantumstorage:blocks/crater/bottom",
+         "side": "quantumstorage:blocks/crater/side",
+         "front": "quantumstorage:blocks/crater/side",
+         "front-on": "quantumstorage:blocks/crater/side"
       }
    },
    "variants": {

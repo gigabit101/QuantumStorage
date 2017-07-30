@@ -66,9 +66,9 @@ dependencies {
     deobfCompile ('RebornCore:RebornCore-1.12:+:universal'){
         transitive = false
     }
-//    deobfCompile ('refinedstorage:refinedstorage:1.4.1+'){
-//        transitive = false
-//    }
+    deobfCompile ('refinedstorage:refinedstorage:1.5.13+'){
+        transitive = false
+    }
     deobfCompile "mezz.jei:jei_1.12:+"
 }
 

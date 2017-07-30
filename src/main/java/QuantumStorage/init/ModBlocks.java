@@ -29,6 +29,7 @@ public class ModBlocks
     public static Block CRATE;
     public static Block TRASH_CAN;
     public static Block TRASH_CAN_FLUID;
+    public static Block SAFE;
 
     public static Block CONTROLLER;
     public static Block CABLE;
@@ -68,6 +69,9 @@ public class ModBlocks
 
         TRASH_CAN_FLUID = new AdvancedBlock(new TileTrashcanFluid()).setUnlocalizedName(QuantumStorage.MOD_ID + ".trashcanfluid");
         registerAdvanced(TRASH_CAN_FLUID, new TileTrashcanFluid());
+
+        SAFE = new AdvancedBlock(new TileSafe()).setUnlocalizedName(QuantumStorage.MOD_ID + ".safe");
+        registerAdvanced(SAFE, new TileSafe());
 
 //        CONTROLLER = new AdvancedBlock(new TileController()).setUnlocalizedName(QuantumStorage.MOD_ID + ".controller");
 //        registerAdvanced(CONTROLLER, new TileController());

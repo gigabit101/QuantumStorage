@@ -4,23 +4,23 @@
       "transform":"forge:default-block",
       "model":"quantumstorage:chest_iron",
       "textures":{
-         "particle": "quantumstorage:blocks/chest_diamond",
-         "texture": "quantumstorage:blocks/chest_diamond"
+         "particle": "quantumstorage:blocks/chests/chest_diamond",
+         "texture": "quantumstorage:blocks/chests/chest_diamond"
       }
    },
    "variants": {
       "inventory": {
          "transform": "forge:default-block",
          "textures": {
-            "particle": "quantumstorage:blocks/chest_diamond",
-            "texture": "quantumstorage:blocks/chest_diamond"
+            "particle": "quantumstorage:blocks/chests/chest_diamond",
+            "texture": "quantumstorage:blocks/chests/chest_diamond"
          }
       },
       "normal": {
          "transform": "forge:default-block",
          "textures": {
-            "particle": "quantumstorage:blocks/chest_diamond",
-            "texture": "quantumstorage:blocks/chest_diamond"
+            "particle": "quantumstorage:blocks/chests/chest_diamond",
+            "texture": "quantumstorage:blocks/chests/chest_diamond"
          }
       }
    }

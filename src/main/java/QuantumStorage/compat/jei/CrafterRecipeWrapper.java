@@ -12,6 +12,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreDictionary;
+import reborncore.client.guibuilder.GuiBuilder;
 
 import java.util.List;
 
@@ -30,6 +31,7 @@ public class CrafterRecipeWrapper extends BlankRecipeWrapper
     {
         ImmutableList.Builder builder = ImmutableList.builder();
         IDrawableStatic progressStatic = guiHelper.getGuiHelper().createDrawable(GuiBuilderQuantumStorage.GUI_SHEET, 100, 151, 16, 10);
+
         int ticksPerCycle = 1000 / 4;
         this.progress = guiHelper.getGuiHelper().createAnimatedDrawable(progressStatic, ticksPerCycle, IDrawableAnimated.StartDirection.LEFT, false);
 

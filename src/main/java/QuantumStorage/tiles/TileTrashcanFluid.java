@@ -73,7 +73,7 @@ public class TileTrashcanFluid extends AdvancedTileEntity implements ITickable
     @Override
     public void addRecipe()
     {
-        if(ConfigQuantumStorage.disableTrashcanFluid)
+        if(!ConfigQuantumStorage.disableTrashcanFluid)
         {
             RebornCraftingHelper.addShapedOreRecipe(new ItemStack(getBlock()),
                     "SSS",

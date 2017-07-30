@@ -4,12 +4,12 @@
       "transform": "forge:default-block",
       "model": "orientable",
       "textures": {
-         "particle": "quantumstorage:blocks/dsuside",
-         "top": "quantumstorage:blocks/dsutop",
-         "down": "quantumstorage:blocks/dsubottom",
-         "side": "quantumstorage:blocks/dsuside",
-         "front": "quantumstorage:blocks/barrel_front",
-         "front-on": "quantumstorage:blocks/dsuside"
+         "particle": "quantumstorage:blocks/barrel/side",
+         "top": "quantumstorage:blocks/barrel/top",
+         "down": "quantumstorage:blocks/barrel/bottom",
+         "side": "quantumstorage:blocks/barrel/side",
+         "front": "quantumstorage:blocks/barrel/front",
+         "front-on": "quantumstorage:blocks/barrel/side"
       }
    },
    "variants": {
