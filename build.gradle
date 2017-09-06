@@ -81,7 +81,6 @@ minecraft {
 }
 
 dependencies {
-    compile "mcp.mobius.waila:Waila:1.7.0-B3_1.9.4"
     	compile files (
 		'Waila.jar'
 	)
