@@ -53,9 +53,7 @@ if (hasProperty('appendBuildNumber')) {
 group = "${config.group_id}" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "${config.mod_name}-${config.minecraft_version}"
 
-dependencies {
-    compile "mcp.mobius.waila:Waila:1.7.0-B3_1.9.4"
-    
+dependencies {    
         def f = new File('dep/')
     if(f.exists()){
         f.delete()
@@ -81,6 +79,7 @@ minecraft {
 }
 
 dependencies {
+	compile 'RebornCore:RebornCore-1.10.2:+:dev'
     	compile files (
 		'Waila.jar'
 	)
