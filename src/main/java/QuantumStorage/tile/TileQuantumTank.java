@@ -15,6 +15,7 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.FluidTankPropertiesWrapper;
@@ -84,7 +85,6 @@ public class TileQuantumTank extends TileQuantumStorage implements IInventory, I
 		{
             emptyContainer();
             fillContainer();
-            tank.compareAndUpdate();
         }
 	}
 
@@ -224,7 +224,7 @@ public class TileQuantumTank extends TileQuantumStorage implements IInventory, I
 		if (isRealTile) {
 			if (tank.getFluid() != null)
 			{
-				info.add(tank.getFluidAmount() + " of " + tank.getFluidType().getName());
+				info.add(tank.getFluidAmount() + " of " + tank.getFluid().getFluid().getName());
 			}
 			else 
 			{
@@ -239,7 +239,7 @@ public class TileQuantumTank extends TileQuantumStorage implements IInventory, I
 	{
 		if (tank.getFluid() != null)
 		{
-			info.add(tank.getFluidAmount() + " of " + tank.getFluidType().getName());
+			info.add(tank.getFluidAmount() + " of " + tank.getFluid().getFluid().getName());
 		}
 		else
 		{

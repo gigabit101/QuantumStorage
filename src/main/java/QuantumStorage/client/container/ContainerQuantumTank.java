@@ -6,6 +6,8 @@ import QuantumStorage.tile.TileQuantumTank;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.Slot;
+import net.minecraftforge.fluids.FluidTank;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import reborncore.client.gui.slots.SlotFluid;
@@ -57,14 +59,16 @@ public class ContainerQuantumTank extends RebornContainer
         super.detectAndSendChanges();
         for (int i = 0; i < this.listeners.size(); i++) {
             IContainerListener IContainerListener = this.listeners.get(i);
-            if(tile.tank != null && tile.tank.getFluidAmount() != 0){
-                if (this.stackamount != getHStackAmount(tile.tank.getFluidAmount())) {
-                    IContainerListener.sendProgressBarUpdate(this, 0, getHStackAmount(tile.tank.getFluidAmount()));
+            FluidTank tank = (FluidTank) tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+
+            if(tank != null && tank.getFluidAmount() != 0){
+                if (this.stackamount != getHStackAmount(tank.getFluidAmount())) {
+                    IContainerListener.sendProgressBarUpdate(this, 0, getHStackAmount(tank.getFluidAmount()));
                 }
-                if (this.stackSizeType != getHStackAmountType(tile.tank.getFluidAmount())) {
-                    IContainerListener.sendProgressBarUpdate(this, 1, getHStackAmountType(tile.tank.getFluidAmount()));
+                if (this.stackSizeType != getHStackAmountType(tank.getFluidAmount())) {
+                    IContainerListener.sendProgressBarUpdate(this, 1, getHStackAmountType(tank.getFluidAmount()));
                 }
-            } else if(tile.tank.getFluidAmount() == 0)  {
+            } else if(tank.getFluidAmount() == 0)  {
                 if (this.stackamount != 0) {
                     IContainerListener.sendProgressBarUpdate(this, 0, 0);
                 }
@@ -78,9 +82,11 @@ public class ContainerQuantumTank extends RebornContainer
     @Override
     public void addListener(IContainerListener crafting) {
         super.addListener(crafting);
-        if(tile.tank != null){
-            crafting.sendProgressBarUpdate(this, 0, getHStackAmount(tile.tank.getFluidAmount()));
-            crafting.sendProgressBarUpdate(this, 1, getHStackAmountType(tile.tank.getFluidAmount()));
+        FluidTank tank = (FluidTank) tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+
+        if(tank != null){
+            crafting.sendProgressBarUpdate(this, 0, getHStackAmount(tank.getFluidAmount()));
+            crafting.sendProgressBarUpdate(this, 1, getHStackAmountType(tank.getFluidAmount()));
         }
     }
 

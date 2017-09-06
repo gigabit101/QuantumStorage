@@ -7,6 +7,11 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.translation.I18n;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidTank;
+import net.minecraftforge.fluids.IFluidTank;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandler;
 import reborncore.client.RenderUtil;
 
 public class GuiQuantumTank extends GuiContainer {
@@ -37,15 +42,19 @@ public class GuiQuantumTank extends GuiContainer {
         int l = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
 
-        RenderUtil.renderGuiTank(tile.tank.getFluid(), 1, 1, k + 95, l + 51, zLevel, 16, 16);
+        FluidTank tank = (FluidTank) tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+
+        RenderUtil.renderGuiTank(tank.getFluid(), 1, 1, k + 95, l + 51, zLevel, 16, 16);
     }
 
     protected void drawGuiContainerForegroundLayer(int p_146979_1_, int p_146979_2_) {
+        FluidTank tank = (FluidTank) tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+
         String name = I18n.translateToLocal("tile.quantumtank.name");
         this.fontRendererObj.drawString(name, this.xSize / 2 - this.fontRendererObj.getStringWidth(name) / 2, 6, 4210752);
         this.fontRendererObj.drawString(I18n.translateToLocalFormatted("container.inventory", new Object[0]), 8, this.ySize - 96 + 2, 4210752);
-        if (tile.tank.getFluid() != null)
-            this.fontRendererObj.drawString(tile.tank.getFluid().getLocalizedName(), 10, 20, 16448255);
+        if (tank.getFluid() != null)
+            this.fontRendererObj.drawString(tank.getFluid().getLocalizedName(), 10, 20, 16448255);
         this.fontRendererObj.drawString(getStringToDraw(containerQuantumTank.stackamount, containerQuantumTank.stackSizeType) + " mb", 10, 30, 16448255);
     }
 
