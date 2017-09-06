@@ -34,7 +34,7 @@ import java.util.List;
 public class TileQuantumTank extends TileQuantumStorage implements IInventory, IListInfoProvider, ITickable, IItemHandler
 {
 	public int storage = ConfigQuantumStorage.tankMaxStorage;
-	public Tank tank = new Tank("TileQuantumTank", storage, this);
+	FluidTank tank = new FluidTank(Integer.MAX_VALUE);
 	public Inventory inventory = new Inventory(3, "TileQuantumTank", 1, this);
 
 	@Override
@@ -123,7 +123,7 @@ public class TileQuantumTank extends TileQuantumStorage implements IInventory, I
 	@Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing facing)
 	{
-		if(capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
+		if(capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY || capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
 		{
 			return true;
 		}
