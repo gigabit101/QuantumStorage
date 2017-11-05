@@ -1,4 +1,4 @@
-package QuantumStorage.inventory;
+package QuantumStorage.inventory.slot;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;

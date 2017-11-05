@@ -13,11 +13,11 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidStack;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -26,14 +26,14 @@ import java.util.List;
 /**
  * Created by Gigabit101 on 07/03/2017.
  */
-public class ItemQuantumStorageDisk extends ItemBase implements IStorageDiskProvider<ItemStack>
+public class ItemQuantumStorageDiskFluid extends ItemBase implements IStorageDiskProvider<FluidStack>
 {
-    public ItemQuantumStorageDisk()
+    public ItemQuantumStorageDiskFluid()
     {
         setMaxStackSize(1);
-        setUnlocalizedName(QuantumStorage.MOD_ID + ".quantumstoragedisk");
-        setRegistryName("quantumstoragedisk");
-        QuantumStorageAPI.addAltarRecipe(new ItemStack(RSItems.STORAGE_DISK, 1, 3), new ItemStack(this, 1), ConfigQuantumStorage.defaultDiskTime);
+        setUnlocalizedName(QuantumStorage.MOD_ID + ".quantumstoragediskfluid");
+        setRegistryName("quantumstoragediskfluid");
+        QuantumStorageAPI.addAltarRecipe(new ItemStack(RSItems.FLUID_STORAGE_DISK, 1, 3), new ItemStack(this, 1), ConfigQuantumStorage.defaultDiskTime);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class ItemQuantumStorageDisk extends ItemBase implements IStorageDiskProv
         super.onUpdate(stack, world, entity, slot, selected);
         if (!stack.hasTagCompound())
         {
-            API.instance().getDefaultStorageDiskBehavior().initDisk(StorageDiskType.ITEMS, stack);
+            API.instance().getDefaultStorageDiskBehavior().initDisk(StorageDiskType.FLUIDS, stack);
         }
     }
 
@@ -67,7 +67,7 @@ public class ItemQuantumStorageDisk extends ItemBase implements IStorageDiskProv
     public void onCreated(ItemStack stack, World world, EntityPlayer player)
     {
         super.onCreated(stack, world, player);
-        API.instance().getDefaultStorageDiskBehavior().initDisk(StorageDiskType.ITEMS, stack);
+        API.instance().getDefaultStorageDiskBehavior().initDisk(StorageDiskType.FLUIDS, stack);
     }
 
     @Override
@@ -79,14 +79,14 @@ public class ItemQuantumStorageDisk extends ItemBase implements IStorageDiskProv
     @Override
     public NBTTagCompound getNBTShareTag(ItemStack stack)
     {
-        return API.instance().getDefaultStorageDiskBehavior().getShareTag(StorageDiskType.ITEMS, stack);
+        return API.instance().getDefaultStorageDiskBehavior().getShareTag(StorageDiskType.FLUIDS, stack);
     }
 
     @Nonnull
     @Override
-    public IStorageDisk<ItemStack> create(ItemStack disk)
+    public IStorageDisk<FluidStack> create(ItemStack disk)
     {
-        return API.instance().getDefaultStorageDiskBehavior().createItemStorage(disk.getTagCompound(), Integer.MAX_VALUE);
+        return API.instance().getDefaultStorageDiskBehavior().createFluidStorage(disk.getTagCompound(), Integer.MAX_VALUE);
     }
 
     @Override

@@ -1,13 +1,12 @@
 package QuantumStorage.tiles;
 
-import QuantumStorage.config.ConfigQuantumStorage;
 import QuantumStorage.init.ModBlocks;
 import QuantumStorage.inventory.BarrelInventoryHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -17,21 +16,26 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import reborncore.common.util.ItemUtils;
-import reborncore.common.util.RebornCraftingHelper;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 /**
  * Created by Gigabit101 on 18/03/2017.
  */
+@Deprecated
 public class TileQuantumBarrel extends AdvancedTileEntity implements ITickable
 {
-    public BarrelInventoryHandler inv = new BarrelInventoryHandler();
+    public TileQuantumBarrel()
+    {
+        this.inv = new BarrelInventoryHandler();
+    }
 
     @Override
     public ItemStackHandler getInv()
@@ -43,12 +47,6 @@ public class TileQuantumBarrel extends AdvancedTileEntity implements ITickable
     public String getName()
     {
         return "quantum_barrel";
-    }
-
-    @Override
-    public int getInvSize()
-    {
-        return 0;
     }
 
     @Override
@@ -85,8 +83,11 @@ public class TileQuantumBarrel extends AdvancedTileEntity implements ITickable
                 } else if (ItemUtils.isItemEqual(stackHandler.getStackInSlot(0), playerIn.getHeldItem(hand), true, true))
                 {
                     int amout = playerIn.getHeldItem(hand).getCount();
-                    stackHandler.getStackInSlot(0).grow(amout);
-                    playerIn.setHeldItem(hand, ItemStack.EMPTY);
+                    if(stackHandler.insertItem(0, playerIn.getHeldItem(hand), true).getCount() == 0)
+                    {
+                        stackHandler.getStackInSlot(0).grow(amout);
+                        playerIn.setHeldItem(hand, ItemStack.EMPTY);
+                    }
                 }
             }
         }
@@ -164,18 +165,13 @@ public class TileQuantumBarrel extends AdvancedTileEntity implements ITickable
     }
 
     @Override
-    public void addRecipe()
+    public void addRecipe() {}
+
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag advanced)
     {
-        if (!ConfigQuantumStorage.disableBarrel)
-        {
-            RebornCraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.BARREL),
-                    "OOO",
-                    "ICI",
-                    "III",
-                    'I', new ItemStack(Items.IRON_INGOT),
-                    'O', "plankWood",
-                    'C', "chest");
-        }
+        tooltip.add(TextFormatting.RED + "Deprecated Barrels will be removed as of 1.13");
+        super.addInformation(stack, world, tooltip, advanced);
     }
 
     @Override

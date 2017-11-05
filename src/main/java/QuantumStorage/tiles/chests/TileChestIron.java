@@ -1,8 +1,8 @@
-package QuantumStorage.tiles;
+package QuantumStorage.tiles.chests;
 
-import QuantumStorage.client.AdvancedGui;
 import QuantumStorage.config.ConfigQuantumStorage;
 import QuantumStorage.init.ModBlocks;
+import QuantumStorage.tiles.AdvancedTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
@@ -24,6 +24,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import reborncore.common.util.RebornCraftingHelper;
 
@@ -32,26 +33,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Gigabit101 on 03/04/2017.
+ * Created by Gigabit101 on 29/03/2017.
  */
-public class TileChestDiamond extends AdvancedTileEntity
+public class TileChestIron extends AdvancedTileEntity
 {
+    public TileChestIron()
+    {
+        this.inv = new ItemStackHandler(36);
+    }
+
     @Override
     public String getName()
     {
-        return "chest_diamond";
-    }
-
-    @Override
-    public int getInvSize()
-    {
-        return 96;
-    }
-
-    @Override
-    public EnumBlockRenderType getRenderType(IBlockState state)
-    {
-        return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
+        return "chest_iron";
     }
 
     protected static final AxisAlignedBB CHEST_AABB = new AxisAlignedBB(0.0625D, 0.0D, 0.0625D, 0.9375D, 0.875D, 0.9375D);
@@ -67,9 +61,9 @@ public class TileChestDiamond extends AdvancedTileEntity
     {
         List<Slot> slots = new ArrayList<>();
         int i = 0;
-        for (int l = 0; l < 7; ++l)
+        for (int l = 0; l < 4; ++l)
         {
-            for (int j1 = 0; j1 < 13; ++j1)
+            for (int j1 = 0; j1 < 9; ++j1)
             {
                 slots.add(new SlotItemHandler(getInv(), i, 8 + j1 * 18, 11 + l * 18));
                 i++;
@@ -78,49 +72,10 @@ public class TileChestDiamond extends AdvancedTileEntity
         return slots;
     }
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY, int guiLeft, int guiTop, int xSize, int ySize, AdvancedGui gui)
-    {
-        getBuilder().drawDefaultBackground(gui, guiLeft, guiTop, xSize, ySize);
-        getBuilder().drawPlayerSlots(gui, guiLeft + xSize / 2, guiTop + 150, true);
-        if (getSlots() != null)
-        {
-            for (Slot s : getSlots())
-            {
-                getBuilder().drawSlot(gui, guiLeft + s.xPos - 1, guiTop + s.yPos - 1);
-            }
-        }
-    }
-
-    @Override
-    public int getXSize()
-    {
-        return 250;
-    }
-
-    @Override
-    public int getYsize()
-    {
-        return 240;
-    }
-
-    @Override
-    public int inventoryOffsetX()
-    {
-        return 45;
-    }
-
-    @Override
-    public int inventoryOffsetY()
-    {
-        return 151;
-    }
-
     @Override
     public TileEntity createNewTileEntity(World world, int meta)
     {
-        return new TileChestDiamond();
+        return new TileChestIron();
     }
 
     @Override
@@ -133,7 +88,22 @@ public class TileChestDiamond extends AdvancedTileEntity
     @Override
     public Block getBlock()
     {
-        return ModBlocks.CHEST_DIAMOND;
+        return ModBlocks.CHEST_IRON;
+    }
+
+    @Override
+    public void addRecipe()
+    {
+        if (!ConfigQuantumStorage.disableChests)
+        {
+            RebornCraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.CHEST_IRON),
+                    "WIW",
+                    "ICI",
+                    "WIW",
+                    'W', "plankWood",
+                    'I', new ItemStack(Items.IRON_INGOT),
+                    'C', "chest");
+        }
     }
 
     @Override
@@ -169,22 +139,6 @@ public class TileChestDiamond extends AdvancedTileEntity
             return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(getInv());
         }
         return super.getCapability(capability, facing);
-    }
-
-    @Override
-    public void addRecipe()
-    {
-        if (!ConfigQuantumStorage.disableChests)
-        {
-            RebornCraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.CHEST_DIAMOND),
-                    "WWW",
-                    "ICI",
-                    "WBW",
-                    'W', "plankWood",
-                    'I', new ItemStack(Items.DIAMOND),
-                    'B', new ItemStack(Blocks.DIAMOND_BLOCK),
-                    'C', new ItemStack(ModBlocks.CHEST_GOLD));
-        }
     }
 
     @SideOnly(Side.CLIENT)

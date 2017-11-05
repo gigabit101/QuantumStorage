@@ -1,6 +1,7 @@
-package QuantumStorage.inventory;
+package QuantumStorage.inventory.slot;
 
-import QuantumStorage.items.ItemUpgrade;
+import QuantumStorage.items.ItemCrate;
+import QuantumStorage.upgrades.ItemUpgrade;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
@@ -10,9 +11,9 @@ import javax.annotation.Nonnull;
 /**
  * Created by Gigabit101 on 30/07/2017.
  */
-public class SlotUpgrade extends SlotItemHandler
+public class SlotCrate extends SlotItemHandler
 {
-    public SlotUpgrade(IItemHandler itemHandler, int index, int xPosition, int yPosition)
+    public SlotCrate(IItemHandler itemHandler, int index, int xPosition, int yPosition)
     {
         super(itemHandler, index, xPosition, yPosition);
     }
@@ -20,7 +21,7 @@ public class SlotUpgrade extends SlotItemHandler
     @Override
     public boolean isItemValid(@Nonnull ItemStack stack)
     {
-        if(stack.getItem() instanceof ItemUpgrade)
+        if(stack.getItem() instanceof ItemCrate)
         {
             return true;
         }

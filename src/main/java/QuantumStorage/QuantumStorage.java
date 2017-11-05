@@ -3,7 +3,6 @@ package QuantumStorage;
 import QuantumStorage.compat.CompatHandler;
 import QuantumStorage.config.ConfigQuantumStorage;
 import QuantumStorage.init.ModBlocks;
-import QuantumStorage.init.ModItems;
 import QuantumStorage.init.ModRecipes;
 import QuantumStorage.proxy.CommonProxy;
 import net.minecraftforge.fml.common.Loader;
@@ -17,13 +16,13 @@ import java.io.File;
 /**
  * Created by Gigabit101 on 27/01/2017.
  */
-@Mod(name = QuantumStorage.MOD_NAME, modid = QuantumStorage.MOD_ID, version = QuantumStorage.MOD_VERSION, dependencies = QuantumStorage.MOD_DEPENDENCUIES)
+@Mod(name = QuantumStorage.MOD_NAME, modid = QuantumStorage.MOD_ID, version = QuantumStorage.MOD_VERSION, dependencies = QuantumStorage.MOD_DEPENDENCIES, acceptedMinecraftVersions = "[1.12,1.12.2]")
 public class QuantumStorage
 {
     public static final String MOD_ID = "quantumstorage";
     public static final String MOD_NAME = "QuantumStorage";
     public static final String MOD_VERSION = "@VERSION@";
-    public static final String MOD_DEPENDENCUIES = "required-after:forge@[14.21.0.2359,);required-after:reborncore";
+    public static final String MOD_DEPENDENCIES = "required-after:forge@[14.21.0.2359,);required-after:reborncore";
 
     public static ConfigQuantumStorage config;
 
@@ -39,9 +38,11 @@ public class QuantumStorage
         INSTANCE = this;
 
         String path = event.getSuggestedConfigurationFile().getAbsolutePath().replace(QuantumStorage.MOD_ID, "QuantumStorage");
+
         config = ConfigQuantumStorage.init(new File(path));
 
         ModBlocks.init();
+
         ModRecipes.init();
 
         if (Loader.isModLoaded("refinedstorage"))
@@ -50,6 +51,7 @@ public class QuantumStorage
         }
 
         proxy.registerRenders();
+
         NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, new GuiHandler());
     }
 }

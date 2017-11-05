@@ -1,26 +1,44 @@
 {
-   "forge_marker":1,
-   "defaults":{
-      "transform":"forge:default-block",
-      "model":"quantumstorage:chest_iron",
-      "textures":{
+   "forge_marker": 1,
+   "defaults": {
+      "transform": "forge:default-block",
+      "model": "orientable",
+      "textures": {
          "particle": "quantumstorage:blocks/chests/chest_gold",
-         "texture": "quantumstorage:blocks/chests/chest_gold"
+         "top": "quantumstorage:blocks/chests/top",
+         "down": "quantumstorage:blocks/chests/top",
+         "side": "quantumstorage:blocks/chests/chest_gold",
+         "front": "quantumstorage:blocks/chests/chest_gold",
+         "front-on": "quantumstorage:blocks/chests/chest_gold"
       }
    },
    "variants": {
-      "inventory": {
-         "transform": "forge:default-block",
-         "textures": {
-            "particle": "quantumstorage:blocks/chests/chest_gold",
-            "texture": "quantumstorage:blocks/chests/chest_gold"
+      "inventory":{
+         "transform":"forge:default-block",
+         "textures":{
          }
       },
-      "normal": {
-         "transform": "forge:default-block",
-         "textures": {
-            "particle": "quantumstorage:blocks/chests/chest_gold",
-            "texture": "quantumstorage:blocks/chests/chest_gold"
+      "facing": {
+         "north": {},
+         "east": {
+            "y": 90
+         },
+         "south": {
+            "y": 180
+         },
+         "west": {
+            "y": 270
+         }
+      },
+      "active": {
+         "true": {
+            "textures": {
+               "particle": "#front-on",
+               "front": "#front-on"
+            }
+         },
+         "false": {
+            "textures": {}
          }
       }
    }

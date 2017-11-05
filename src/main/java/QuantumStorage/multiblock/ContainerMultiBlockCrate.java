@@ -18,9 +18,8 @@ public class ContainerMultiBlockCrate extends RebornContainer
         if (multiBlockCrate != null)
         {
             ItemStackHandler handler = multiBlockCrate.getInv();
-//            if (handler != null) {
+
             drawSlotsForPage(handler);
-//            }
 
             drawPlayersInv(player, 45, 141);
             drawPlayersHotBar(player, 45, 199);

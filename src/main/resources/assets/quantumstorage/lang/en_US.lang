@@ -4,9 +4,9 @@ tile.quantumstorage.quantum_storage_unit.name=Quantum Storage Unit
 tile.quantumstorage.quantum_tank.name=Quantum Tank
 tile.quantumstorage.quantum_barrel.name=Quantum Barrel
 tile.quantumstorage.crater.name=Crating Machine
-tile.quantumstorage.chest_iron.name=Reinforced Iron Chest
-tile.quantumstorage.chest_gold.name=Reinforced Gold Chest
-tile.quantumstorage.chest_diamond.name=Reinforced Diamond Chest
+tile.quantumstorage.chest_iron.name=Iron Storage Crate
+tile.quantumstorage.chest_gold.name=Gold Storage Crate
+tile.quantumstorage.chest_diamond.name=Diamond Storage Crate
 tile.quantumstorage.quantumcrafter.name=Quantum Crafter
 
 tile.quantumstorage.controller.name=Controller
@@ -27,6 +27,9 @@ item.quantumstorage.upgrade.water.name=Infinite Water Upgrade
 tooltipitem.quantumstorage.upgrade.water=Shift Click on QuantumTank to have the tank auto generate water
 
 item.quantumstorage.quantumstoragedisk.name=Quantum Storage Disk
+item.quantumstorage.quantumstoragediskfluid.name=Quantum Fluid Disk
+
+item.quantumstorage.quantum_battery.name=Quantum Battery
 
 gui.quantumstorage.crafter=Quantum Crafter Recipe
 

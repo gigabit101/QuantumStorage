@@ -18,5 +18,4 @@ public class QuantumStorageAPI
         RECIPES.add(recipe);
         return recipe;
     }
-
 }

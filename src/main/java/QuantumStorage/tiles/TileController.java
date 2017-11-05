@@ -91,12 +91,6 @@ public class TileController extends AdvancedTileEntity implements ITickable
     }
 
     @Override
-    public int getInvSize()
-    {
-        return 1;
-    }
-
-    @Override
     public List<Slot> getSlots()
     {
         return null;

@@ -6,6 +6,7 @@ import QuantumStorage.init.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -22,11 +23,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.*;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import reborncore.common.util.RebornCraftingHelper;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 /**
@@ -36,16 +37,12 @@ public class TileQuantumTank extends AdvancedTileEntity implements ITickable
 {
     FluidTank tank = new FluidTank(Integer.MAX_VALUE);
 
+    public TileQuantumTank() {}
+
     @Override
     public String getName()
     {
         return "quantum_tank";
-    }
-
-    @Override
-    public int getInvSize()
-    {
-        return 2;
     }
 
     @Override
@@ -82,11 +79,9 @@ public class TileQuantumTank extends AdvancedTileEntity implements ITickable
             name = tank.getFluid().getFluid().getName();
         }
 
+        getBuilder().drawString(gui,  "Quantum Tank",  56, 8);
+
         getBuilder().drawBigBlueBar((AdvancedGui) gui, 30, 50, amount, tank.getCapacity(), mouseX - guiLeft, mouseY - guiTop, "", "Fluid Type: " + name, amount + " mb " + name);
-
-
-        gui.mc.fontRenderer.drawString("Stored Fluid: " + name, 10, 10, TextFormatting.BLACK.getColorIndex());
-        gui.mc.fontRenderer.drawString("Stored Amount: " + amount, 10, 20, TextFormatting.BLACK.getColorIndex());
     }
 
     @Override
@@ -94,7 +89,6 @@ public class TileQuantumTank extends AdvancedTileEntity implements ITickable
     {
         super.readFromNBT(compound);
         tank.readFromNBT(compound);
-        getInv().deserializeNBT(compound);
     }
 
     @Override
@@ -115,6 +109,8 @@ public class TileQuantumTank extends AdvancedTileEntity implements ITickable
                     'I', new ItemStack(Items.IRON_INGOT),
                     'O', new ItemStack(Blocks.OBSIDIAN),
                     'B', new ItemStack(Items.BUCKET));
+
+            RebornCraftingHelper.addShapelessRecipe(new ItemStack(ModBlocks.TANK), new ItemStack(ModBlocks.TANK));
         }
     }
 
@@ -128,7 +124,6 @@ public class TileQuantumTank extends AdvancedTileEntity implements ITickable
     @Override
     public void readFromNBTWithoutCoords(NBTTagCompound compound)
     {
-        super.readFromNBTWithoutCoords(compound);
         tank.readFromNBT(compound);
     }
 
@@ -137,7 +132,6 @@ public class TileQuantumTank extends AdvancedTileEntity implements ITickable
     {
         compound = super.writeToNBT(compound);
         compound.merge(tank.writeToNBT(compound));
-        compound.merge(getInv().serializeNBT());
         return compound;
     }
 
@@ -148,7 +142,7 @@ public class TileQuantumTank extends AdvancedTileEntity implements ITickable
         {
             return true;
         }
-        return super.hasCapability(capability, facing);
+        return false;
     }
 
     @Override
@@ -158,47 +152,42 @@ public class TileQuantumTank extends AdvancedTileEntity implements ITickable
         {
             return CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY.cast(tank);
         }
-        return super.getCapability(capability, facing);
+        return null;
     }
 
-//    public FluidActionResult fillBlockWithFluid(World worldIn, BlockPos pos, EntityPlayer playerIn, EnumHand hand, EnumFacing side)
-//    {
-//        try
-//        {
-//            TileEntity tile = worldIn.getTileEntity(pos);
-//            if (tile == null || !tile.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side))
-//            {
-//                return FluidActionResult.FAILURE;
-//            }
-//
-//            IFluidHandler fluidHandler = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side);
-//            FluidActionResult inserted = FluidUtil.interactWithFluidHandler(playerIn, hand, worldIn, pos, side);
-//            if (inserted != FluidActionResult.FAILURE)
-//            {
-//                playerIn.setHeldItem(hand, inserted.getResult());
-//            }
-//
-//            if (!worldIn.isRemote)
-//            {
-//                sync();
-//            }
-//            return inserted;
-//        } catch (Exception e)
-//        {
-//        }
-//        return FluidActionResult.FAILURE;
-//    }
 
     @Override
     public void update()
     {
         sync();
+        handleUpgrades();
+    }
+
+    public void handleUpgrades()
+    {
         if(this.getTileData().hasKey("infin_water") && this.tank.getFluid() != null && this.tank.getFluid().getFluid() == FluidRegistry.WATER)
         {
             if(tank.canFill())
             {
                 tank.fill(tank.getFluid(), true);
-//                tank.setFluid(new FluidStack(FluidRegistry.WATER, this.tank.getCapacity()));
+            }
+        }
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag advanced)
+    {
+        if (stack != null && stack.hasTagCompound())
+        {
+            if (stack.getTagCompound().getCompoundTag("tileEntity") != null)
+            {
+                String fluidname = stack.getTagCompound().getCompoundTag("tileEntity").getString("FluidName");
+                int fluidamount = stack.getTagCompound().getCompoundTag("tileEntity").getInteger("Amount");
+
+                if(fluidamount != 0)
+                {
+                    tooltip.add(TextFormatting.GOLD + "Stored Fluid type: " + fluidamount + "mb " + fluidname);
+                }
             }
         }
     }

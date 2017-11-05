@@ -12,8 +12,6 @@ import net.minecraftforge.items.ItemStackHandler;
 public class DsuInventoryHandler extends ItemStackHandler
 {
     int STORAGE = 0;
-    int INPUT_SLOT = 1;
-    int OUTPUT_SLOT = 2;
 
     public DsuInventoryHandler()
     {

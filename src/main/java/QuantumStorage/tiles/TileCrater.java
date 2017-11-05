@@ -3,6 +3,8 @@ package QuantumStorage.tiles;
 import QuantumStorage.config.ConfigQuantumStorage;
 import QuantumStorage.init.ModBlocks;
 import QuantumStorage.init.ModItems;
+import QuantumStorage.inventory.slot.SlotCrate;
+import QuantumStorage.inventory.slot.SlotOutputItemHandler;
 import QuantumStorage.items.ItemCrate;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -22,6 +24,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import reborncore.common.util.RebornCraftingHelper;
 
@@ -33,6 +36,11 @@ import java.util.List;
  */
 public class TileCrater extends AdvancedTileEntity implements ITickable
 {
+    public TileCrater()
+    {
+        this.inv = new ItemStackHandler(3);
+    }
+
     int progress = 0;
 
     @Override
@@ -63,7 +71,7 @@ public class TileCrater extends AdvancedTileEntity implements ITickable
     {
         if (!getInv().getStackInSlot(0).isEmpty() && getInv().getStackInSlot(0).getItem() instanceof ItemCrate && !getInv().getStackInSlot(0).hasTagCompound() && getInv().getStackInSlot(2).isEmpty())
         {
-            if (!getInv().getStackInSlot(1).isEmpty() && getInv().getStackInSlot(1).getCount() == getInv().getStackInSlot(1).getMaxStackSize())
+            if (!getInv().getStackInSlot(1).isEmpty() && getInv().getStackInSlot(1).getCount() == getInv().getStackInSlot(1).getMaxStackSize() && !(getInv().getStackInSlot(1).getItem() instanceof ItemCrate))
             {
                 return true;
             }
@@ -78,18 +86,12 @@ public class TileCrater extends AdvancedTileEntity implements ITickable
     }
 
     @Override
-    public int getInvSize()
-    {
-        return 3;
-    }
-
-    @Override
     public List<Slot> getSlots()
     {
         List<Slot> slots = new ArrayList<>();
-        slots.add(new SlotItemHandler(getInv(), 0, 40, 40));
+        slots.add(new SlotCrate(getInv(), 0, 40, 40));
         slots.add(new SlotItemHandler(getInv(), 1, 60, 40));
-        slots.add(new SlotItemHandler(getInv(), 2, 120, 40));
+        slots.add(new SlotOutputItemHandler(getInv(), 2, 120, 40));
 
         return slots;
     }

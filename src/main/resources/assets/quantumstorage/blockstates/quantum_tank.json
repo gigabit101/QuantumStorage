@@ -4,7 +4,7 @@
       "transform":"forge:default-block",
       "model":"quantumstorage:quantum_tank",
       "textures":{
-         "particle":"quantumstorage:blocks/dsutop"
+         "particle":"quantumstorage:blocks/quantum_tank/dsutop"
       }
    },
    "variants":{

@@ -1,7 +1,8 @@
-package QuantumStorage.tiles;
+package QuantumStorage.tiles.trashcans;
 
 import QuantumStorage.config.ConfigQuantumStorage;
 import QuantumStorage.init.ModBlocks;
+import QuantumStorage.tiles.AdvancedTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,11 +17,9 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.fluids.FluidActionResult;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandler;
 import reborncore.common.util.RebornCraftingHelper;
 
 import java.util.List;
@@ -36,12 +35,6 @@ public class TileTrashcanFluid extends AdvancedTileEntity implements ITickable
     public String getName()
     {
         return "trashcanfluid";
-    }
-
-    @Override
-    public int getInvSize()
-    {
-        return 0;
     }
 
     @Override
@@ -113,32 +106,4 @@ public class TileTrashcanFluid extends AdvancedTileEntity implements ITickable
             tank.setFluid(null);
         }
     }
-
-//    public FluidActionResult fillBlockWithFluid(World worldIn, BlockPos pos, EntityPlayer playerIn, EnumHand hand, EnumFacing side)
-//    {
-//        try
-//        {
-//            TileEntity tile = worldIn.getTileEntity(pos);
-//            if (tile == null || !tile.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side))
-//            {
-//                return FluidActionResult.FAILURE;
-//            }
-//
-//            IFluidHandler fluidHandler = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side);
-//            FluidActionResult inserted = FluidUtil.interactWithFluidHandler(playerIn.getHeldItem(hand), fluidHandler, playerIn);
-//            if (inserted != FluidActionResult.FAILURE)
-//            {
-//                playerIn.setHeldItem(hand, inserted.getResult());
-//            }
-//
-//            if (!worldIn.isRemote)
-//            {
-//                sync();
-//            }
-//            return inserted;
-//        } catch (Exception e)
-//        {
-//        }
-//        return FluidActionResult.FAILURE;
-//    }
 }

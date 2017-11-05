@@ -11,10 +11,14 @@ import reborncore.RebornRegistry;
 public class CompatHandler
 {
     public static Item DISK;
+    public static Item DISK_FLUID;
 
     public static void init()
     {
         DISK = new ItemQuantumStorageDisk();
         RebornRegistry.registerItem(DISK);
+
+        DISK_FLUID = new ItemQuantumStorageDiskFluid();
+        RebornRegistry.registerItem(DISK_FLUID);
     }
 }

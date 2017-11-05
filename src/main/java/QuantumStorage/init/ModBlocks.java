@@ -2,14 +2,13 @@ package QuantumStorage.init;
 
 import QuantumStorage.QuantumStorage;
 import QuantumStorage.blocks.AdvancedBlock;
-import QuantumStorage.multiblock.BlockCrate;
-import QuantumStorage.multiblock.TileCrate;
 import QuantumStorage.tiles.*;
+import QuantumStorage.tiles.chests.TileChestDiamond;
+import QuantumStorage.tiles.chests.TileChestGold;
+import QuantumStorage.tiles.chests.TileChestIron;
+import QuantumStorage.tiles.trashcans.TileTrashcan;
+import QuantumStorage.tiles.trashcans.TileTrashcanFluid;
 import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import reborncore.RebornRegistry;
 
@@ -60,9 +59,9 @@ public class ModBlocks
         QUANTUM_CRAFTER = new AdvancedBlock(new TileQuantumCrafter()).setUnlocalizedName(QuantumStorage.MOD_ID + ".quantumcrafter");
         registerAdvanced(QUANTUM_CRAFTER, new TileQuantumCrafter());
 
-        CRATE = new BlockCrate();
-        RebornRegistry.registerBlock(CRATE, "multiblockcrate");
-        GameRegistry.registerTileEntity(TileCrate.class, QuantumStorage.MOD_ID + "multiblockcrate");
+//        CRATE = new BlockCrate();
+//        RebornRegistry.registerBlock(CRATE, "multiblockcrate");
+//        GameRegistry.registerTileEntity(TileCrate.class, QuantumStorage.MOD_ID + "multiblockcrate");
 
         TRASH_CAN = new AdvancedBlock(new TileTrashcan()).setUnlocalizedName(QuantumStorage.MOD_ID + ".trashcan");
         registerAdvanced(TRASH_CAN, new TileTrashcan());
@@ -70,14 +69,6 @@ public class ModBlocks
         TRASH_CAN_FLUID = new AdvancedBlock(new TileTrashcanFluid()).setUnlocalizedName(QuantumStorage.MOD_ID + ".trashcanfluid");
         registerAdvanced(TRASH_CAN_FLUID, new TileTrashcanFluid());
 
-        SAFE = new AdvancedBlock(new TileSafe()).setUnlocalizedName(QuantumStorage.MOD_ID + ".safe");
-        registerAdvanced(SAFE, new TileSafe());
-
-//        CONTROLLER = new AdvancedBlock(new TileController()).setUnlocalizedName(QuantumStorage.MOD_ID + ".controller");
-//        registerAdvanced(CONTROLLER, new TileController());
-//
-//        CABLE = new BlockCable();
-//        RebornRegistry.registerBlock(CABLE, "cable");
     }
 
     static void registerAdvanced(Block block, AdvancedTileEntity advancedTileEntity)

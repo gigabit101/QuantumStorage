@@ -2,7 +2,6 @@ package QuantumStorage.client.render;
 
 import QuantumStorage.tiles.TileQuantumBarrel;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.RenderItem;
@@ -10,7 +9,6 @@ import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -19,6 +17,7 @@ import net.minecraftforge.items.ItemStackHandler;
 /**
  * Created by Gigabit101 on 18/03/2017.
  */
+@Deprecated
 public class RenderBarrel extends TileEntitySpecialRenderer<TileQuantumBarrel>
 {
     public static Minecraft mc = Minecraft.getMinecraft();

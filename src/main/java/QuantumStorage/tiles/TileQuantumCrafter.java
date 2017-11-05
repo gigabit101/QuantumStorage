@@ -3,7 +3,7 @@ package QuantumStorage.tiles;
 import QuantumStorage.api.RecipeQuantumCrafter;
 import QuantumStorage.config.ConfigQuantumStorage;
 import QuantumStorage.init.ModBlocks;
-import QuantumStorage.inventory.SlotOutputItemHandler;
+import QuantumStorage.inventory.slot.SlotOutputItemHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -36,6 +36,11 @@ import java.util.List;
 public class TileQuantumCrafter extends AdvancedTileEntity implements ITickable
 {
     int progress = 0;
+
+    public TileQuantumCrafter()
+    {
+        this.inv = new ItemStackHandler(2);
+    }
 
     @Override
     public void update()
@@ -73,6 +78,7 @@ public class TileQuantumCrafter extends AdvancedTileEntity implements ITickable
         {
             max = RecipeQuantumCrafter.getTimeFromStack(inv.getStackInSlot(0));
         }
+
         getBuilder().drawProgressBar(gui, progress, max, 80, 40, mouseX - guiLeft, mouseY - guiTop);
 
         getBuilder().drawString(gui, TextFormatting.BLACK + "Progress = " + progress + " / " + max, 8, 8);
@@ -84,12 +90,6 @@ public class TileQuantumCrafter extends AdvancedTileEntity implements ITickable
     public String getName()
     {
         return "quantumcrafter";
-    }
-
-    @Override
-    public int getInvSize()
-    {
-        return 2;
     }
 
     @Override

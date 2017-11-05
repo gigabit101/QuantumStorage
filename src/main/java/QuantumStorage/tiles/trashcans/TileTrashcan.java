@@ -1,7 +1,8 @@
-package QuantumStorage.tiles;
+package QuantumStorage.tiles.trashcans;
 
 import QuantumStorage.config.ConfigQuantumStorage;
 import QuantumStorage.init.ModBlocks;
+import QuantumStorage.tiles.AdvancedTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,6 +17,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import reborncore.common.util.RebornCraftingHelper;
 
@@ -27,16 +29,15 @@ import java.util.List;
  */
 public class TileTrashcan extends AdvancedTileEntity implements ITickable
 {
+    public TileTrashcan()
+    {
+        this.inv = new ItemStackHandler(1);
+    }
+
     @Override
     public String getName()
     {
         return "trashcan";
-    }
-
-    @Override
-    public int getInvSize()
-    {
-        return 1;
     }
 
     @Override

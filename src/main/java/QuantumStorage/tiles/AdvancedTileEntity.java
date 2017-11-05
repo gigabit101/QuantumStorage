@@ -3,7 +3,6 @@ package QuantumStorage.tiles;
 import QuantumStorage.QuantumStorage;
 import QuantumStorage.client.AdvancedGui;
 import QuantumStorage.client.GuiBuilderQuantumStorage;
-import QuantumStorage.reborncore.VanillaPacketDispatcher;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -27,8 +26,8 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import reborncore.common.network.VanillaPacketDispatcher;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -41,6 +40,7 @@ public abstract class AdvancedTileEntity extends TileEntity
     private EnumFacing facing;
     public float prevLidAngle;
     public float lidAngle;
+    public ItemStackHandler inv = null;
 
     protected AdvancedTileEntity()
     {
@@ -66,19 +66,6 @@ public abstract class AdvancedTileEntity extends TileEntity
 
     public abstract String getName();
 
-    public ItemStackHandler inv = new ItemStackHandler(getInvSize());
-
-    public abstract int getInvSize();
-
-    public boolean hasInv()
-    {
-        if (getInvSize() != 0)
-        {
-            return true;
-        }
-        return false;
-    }
-
     public ItemStackHandler getInv()
     {
         return this.inv;
@@ -87,7 +74,7 @@ public abstract class AdvancedTileEntity extends TileEntity
     @Override
     public boolean hasCapability(Capability<?> capability, EnumFacing facing)
     {
-        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+        if (inv != null && capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
         {
             return true;
         }
@@ -97,7 +84,7 @@ public abstract class AdvancedTileEntity extends TileEntity
     @Override
     public <T> T getCapability(Capability<T> capability, EnumFacing facing)
     {
-        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+        if (inv != null && capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
         {
             return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(inv);
         }
@@ -137,9 +124,7 @@ public abstract class AdvancedTileEntity extends TileEntity
     }
 
     @SideOnly(Side.CLIENT)
-    public void drawGuiContainerForegroundLayer(int mouseX, int mouseY, GuiContainer gui, int guiLeft, int guiTop)
-    {
-    }
+    public void drawGuiContainerForegroundLayer(int mouseX, int mouseY, GuiContainer gui, int guiLeft, int guiTop) {}
 
     //Container
     public abstract List<Slot> getSlots();
@@ -179,9 +164,7 @@ public abstract class AdvancedTileEntity extends TileEntity
         return FULL_BLOCK_AABB;
     }
 
-    public void onBlockClicked(World worldIn, BlockPos pos, EntityPlayer playerIn)
-    {
-    }
+    public void onBlockClicked(World worldIn, BlockPos pos, EntityPlayer playerIn) {}
 
     //NBT
     @Override
@@ -249,9 +232,7 @@ public abstract class AdvancedTileEntity extends TileEntity
     public abstract void addRecipe();
 
     @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag advanced)
-    {
-    }
+    public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag advanced) {}
 
     public BlockRenderLayer getBlockLayer()
     {
@@ -267,7 +248,4 @@ public abstract class AdvancedTileEntity extends TileEntity
         }
         return false;
     }
-
-    //Test Chest
-    public boolean isOpen;
 }

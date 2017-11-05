@@ -22,6 +22,7 @@ public class ConfigQuantumStorage
     public static boolean disableBarrel;
     public static boolean disableTrashcan;
     public static boolean disableTrashcanFluid;
+    public static boolean disableQuantumBattery;
 
     public static int defaultDiskTime;
 
@@ -42,7 +43,8 @@ public class ConfigQuantumStorage
         if (INSTANCE == null)
         {
             INSTANCE = new ConfigQuantumStorage(configfile);
-        } else
+        }
+        else
         {
             throw new IllegalStateException("Cannot init QuantumStorage config twice");
         }
@@ -69,6 +71,8 @@ public class ConfigQuantumStorage
         disableBarrel = config.get(CATEGORY_RECIPE, "disable default recipe for quantum barrel", false).getBoolean();
         disableTrashcan = config.get(CATEGORY_RECIPE, "disable default recipe for trash can", false).getBoolean();
         disableTrashcanFluid = config.get(CATEGORY_RECIPE, "disable default recipe for fluid trash can", false).getBoolean();
+
+        disableQuantumBattery = config.get(CATEGORY_RECIPE, "disable default recipe for quantum battery", false).getBoolean();
 
         defaultDiskTime = config.get(CATEGORY_RECIPE, "how long in ticks it takes to craft a quantum disk", 20000).getInt();
 
