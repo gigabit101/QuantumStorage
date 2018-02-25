@@ -209,7 +209,10 @@ public abstract class AdvancedTileEntity extends TileEntity
     public void writeToNBTWithoutCoords(NBTTagCompound tagCompound)
     {
         tagCompound = super.writeToNBT(tagCompound);
-        tagCompound.merge(getInv().serializeNBT());
+        if(getInv() != null)
+        {
+            tagCompound.merge(getInv().serializeNBT());
+        }
     }
 
     public void readFromNBTWithoutCoords(NBTTagCompound compound)

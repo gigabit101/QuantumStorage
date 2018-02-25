@@ -111,4 +111,10 @@ public class TileTrashcan extends AdvancedTileEntity implements ITickable
         }
         return super.getCapability(capability, facing);
     }
+
+    @Override
+    public ItemStack getDropWithNBT()
+    {
+        return new ItemStack(getBlock(), 1);
+    }
 }

@@ -2,6 +2,8 @@ package QuantumStorage.init;
 
 import QuantumStorage.QuantumStorage;
 import QuantumStorage.blocks.AdvancedBlock;
+import QuantumStorage.multiblock.BlockCrate;
+import QuantumStorage.multiblock.TileCrate;
 import QuantumStorage.tiles.*;
 import QuantumStorage.tiles.chests.TileChestDiamond;
 import QuantumStorage.tiles.chests.TileChestGold;

@@ -22,6 +22,11 @@ public class EnergyCapabilityProvider implements ICapabilityProvider, INBTSerial
         this.storage = new EnergyNbt(cap, 1000);
     }
 
+    public EnergyCapabilityProvider(EnergyNbt cap)
+    {
+        this.storage = cap;
+    }
+
     @Override
     public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing)
     {

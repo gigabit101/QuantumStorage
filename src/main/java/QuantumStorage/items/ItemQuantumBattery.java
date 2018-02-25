@@ -3,6 +3,7 @@ package QuantumStorage.items;
 import QuantumStorage.QuantumStorage;
 import QuantumStorage.items.prefab.ItemBase;
 import QuantumStorage.utils.EnergyCapabilityProvider;
+import QuantumStorage.utils.EnergyNbt;
 import QuantumStorage.utils.RfUtils;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
@@ -12,6 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ITickable;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.energy.CapabilityEnergy;
@@ -20,8 +22,10 @@ import net.minecraftforge.energy.IEnergyStorage;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemQuantumBattery extends ItemBase
+public class ItemQuantumBattery extends ItemBase implements ITickable
 {
+    private EnergyNbt container = new EnergyNbt(Integer.MAX_VALUE);
+
     public ItemQuantumBattery()
     {
         setUnlocalizedName(QuantumStorage.MOD_ID + ".quantum_battery");
@@ -90,7 +94,7 @@ public class ItemQuantumBattery extends ItemBase
     @Override
     public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt)
     {
-        return new EnergyCapabilityProvider(Integer.MAX_VALUE);
+        return new EnergyCapabilityProvider(container);
     }
 
     @Override
@@ -122,4 +126,7 @@ public class ItemQuantumBattery extends ItemBase
     {
         return isActive(stack);
     }
+
+    @Override
+    public void update() {}
 }

@@ -91,9 +91,7 @@ public class RfUtils
     {
         IEnergyStorage storage = stack.getCapability(CapabilityEnergy.ENERGY, null);
 
-        String s = storage.getEnergyStored() + " / " + storage.getMaxEnergyStored();
-
-        return s;
+        return storage.getEnergyStored() + " / " + storage.getMaxEnergyStored();
     }
 
     public static boolean isItemFull(ItemStack stack)

@@ -10,6 +10,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -105,5 +106,20 @@ public class TileTrashcanFluid extends AdvancedTileEntity implements ITickable
         {
             tank.setFluid(null);
         }
+    }
+
+    @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound compound)
+    {
+        return compound;
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound compound){}
+
+    @Override
+    public ItemStack getDropWithNBT()
+    {
+        return new ItemStack(getBlock(), 1);
     }
 }
