@@ -23,7 +23,7 @@ public class GuiMultiBlockCrate extends GuiContainer
 
     public GuiMultiBlockCrate(EntityPlayer player, MultiBlockCrate multiBlockCrate, BlockPos pos)
     {
-        super(new ContainerMultiBlockCrate(player, multiBlockCrate));
+        super(new ContainerMultiBlockCrate(player, multiBlockCrate, player.world.getTileEntity(pos)));
         this.xSize = 250;
         this.ySize = 240;
         this.multiBlockCrate = multiBlockCrate;
