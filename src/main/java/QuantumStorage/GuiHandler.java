@@ -23,7 +23,7 @@ public class GuiHandler implements IGuiHandler
     {
         if (getMultiBlock(world, x, y, z) != null)
         {
-            return new ContainerMultiBlockCrate(player, getMultiBlock(world, x, y, z));
+            return new ContainerMultiBlockCrate(player, getMultiBlock(world, x, y, z), world.getTileEntity(new BlockPos(x, y, z)));
         }
         else if (world.getTileEntity(new BlockPos(x, y, z)) != null && world.getTileEntity(new BlockPos(x, y, z)) instanceof AdvancedTileEntity)
         {

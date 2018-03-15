@@ -1,6 +1,8 @@
 package QuantumStorage.multiblock;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import reborncore.common.container.RebornContainer;
@@ -12,8 +14,9 @@ public class ContainerMultiBlockCrate extends RebornContainer
 {
     MultiBlockCrate multiBlockCrate;
 
-    public ContainerMultiBlockCrate(EntityPlayer player, MultiBlockCrate multiBlockCrate)
+    public ContainerMultiBlockCrate(EntityPlayer player, MultiBlockCrate multiBlockCrate, TileEntity tileEntity)
     {
+    	super(tileEntity);
         this.multiBlockCrate = multiBlockCrate;
         if (multiBlockCrate != null)
         {
@@ -40,11 +43,5 @@ public class ContainerMultiBlockCrate extends RebornContainer
                 }
             }
         }
-    }
-
-    @Override
-    public boolean canInteractWith(EntityPlayer playerIn)
-    {
-        return true;
     }
 }
