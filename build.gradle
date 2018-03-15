@@ -63,7 +63,7 @@ minecraft {
 }
 
 dependencies {
-    deobfCompile ('RebornCore:RebornCore-1.12:+:universal'){
+    deobfCompile ('RebornCore:RebornCore-1.12.2:+:universal'){
         transitive = false
     }
     deobfCompile ('refinedstorage:refinedstorage:1.5.13+'){
