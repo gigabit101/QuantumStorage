@@ -16,7 +16,7 @@ public class AdvancedContainer extends RebornContainer
 
     public AdvancedContainer(EntityPlayer player, AdvancedTileEntity machine)
     {
-        super();
+        super(machine);
         this.machine = machine;
         if (machine.getSlots() != null)
         {
@@ -29,9 +29,4 @@ public class AdvancedContainer extends RebornContainer
         drawPlayersHotBar(player, machine.inventoryOffsetX(), machine.inventoryOffsetY() + 58);
     }
 
-    @Override
-    public boolean canInteractWith(EntityPlayer playerIn)
-    {
-        return true;
-    }
 }
