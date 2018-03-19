@@ -18,6 +18,7 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
@@ -28,9 +29,15 @@ import java.util.List;
 /**
  * Created by Gigabit101 on 24/06/2017.
  */
-public class TileTrashcanFluid extends AdvancedTileEntity implements ITickable
+public class TileTrashcanFluid extends AdvancedTileEntity
 {
-    FluidTank tank = new FluidTank(Integer.MAX_VALUE);
+    FluidTank tank = new FluidTank(Integer.MAX_VALUE)
+    {
+        @Override
+        public int fill(FluidStack resource, boolean doFill) {
+            return resource.amount;
+        }
+    };
 
     @Override
     public String getName()
@@ -54,8 +61,14 @@ public class TileTrashcanFluid extends AdvancedTileEntity implements ITickable
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
     {
         if (FluidUtil.interactWithFluidHandler(playerIn, hand, worldIn, pos, side))
+        {
+            return true;
+        }
+        else
+        {
             openGui(playerIn, (AdvancedTileEntity) worldIn.getTileEntity(pos));
-        return true;
+            return true;
+        }
     }
 
     @Override
@@ -97,15 +110,6 @@ public class TileTrashcanFluid extends AdvancedTileEntity implements ITickable
             return CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY.cast(tank);
         }
         return super.getCapability(capability, facing);
-    }
-
-    @Override
-    public void update()
-    {
-        if(tank.getFluid() != null)
-        {
-            tank.setFluid(null);
-        }
     }
 
     @Override
