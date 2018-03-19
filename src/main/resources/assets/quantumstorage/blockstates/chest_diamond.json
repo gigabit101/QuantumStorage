@@ -2,7 +2,7 @@
    "forge_marker": 1,
    "defaults": {
       "transform": "forge:default-block",
-      "model": "orientable",
+      "model": "quantumstorage:chest_diamond",
       "textures": {
          "particle": "quantumstorage:blocks/chests/chest_diamond",
          "top": "quantumstorage:blocks/chests/top",

@@ -2,7 +2,7 @@
    "forge_marker": 1,
    "defaults": {
       "transform": "forge:default-block",
-      "model": "orientable",
+      "model": "quantumstorage:chest_gold",
       "textures": {
          "particle": "quantumstorage:blocks/chests/chest_gold",
          "top": "quantumstorage:blocks/chests/top",
