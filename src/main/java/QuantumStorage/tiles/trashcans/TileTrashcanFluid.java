@@ -64,11 +64,7 @@ public class TileTrashcanFluid extends AdvancedTileEntity
         {
             return true;
         }
-        else
-        {
-            openGui(playerIn, (AdvancedTileEntity) worldIn.getTileEntity(pos));
-            return true;
-        }
+        return true;
     }
 
     @Override
