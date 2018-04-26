@@ -1,45 +1,45 @@
 {
-   "forge_marker": 1,
-   "defaults": {
-      "transform": "forge:default-block",
-      "model": "quantumstorage:chest_iron",
-      "textures": {
-         "particle": "quantumstorage:blocks/chests/planks_spruce_rotated",
-         "top": "quantumstorage:blocks/chests/top",
-         "down": "quantumstorage:blocks/chests/top",
-         "side": "quantumstorage:blocks/chests/chest_iron",
-         "front": "quantumstorage:blocks/chests/chest_iron",
-         "front-on": "quantumstorage:blocks/chests/chest_iron"
+   "forge_marker":1,
+   "defaults":{
+      "transform":"forge:default-block",
+      "model":"quantumstorage:chest_iron",
+      "textures":{
+         "particle":"quantumstorage:blocks/chests/planks_spruce_rotated"
       }
    },
-   "variants": {
+   "variants":{
       "inventory":{
          "transform":"forge:default-block",
-         "textures":{
+         "textures":{}
+      },
+      "facing":{
+         "north":{
+
+         },
+         "east":{
+            "y":90
+         },
+         "south":{
+            "y":180
+         },
+         "west":{
+            "y":270
          }
       },
-      "facing": {
-         "north": {},
-         "east": {
-            "y": 90
-         },
-         "south": {
-            "y": 180
-         },
-         "west": {
-            "y": 270
-         }
-      },
-      "active": {
-         "true": {
-            "textures": {
-               "particle": "#front-on",
-               "front": "#front-on"
+      "active":{
+         "true":{
+            "textures":{
             }
          },
-         "false": {
-            "textures": {}
+         "false":{
+            "textures":{
+
+            }
          }
+      },
+      "inventory": {
+         "model": "quantumstorage:chest_iron",
+         "textures": {}
       }
    }
 }
