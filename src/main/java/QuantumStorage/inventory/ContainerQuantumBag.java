@@ -1,10 +1,12 @@
 package QuantumStorage.inventory;
 
+import invtweaks.api.container.ChestContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.SlotItemHandler;
 import reborncore.common.container.RebornContainer;
 
+@ChestContainer(isLargeChest = true, rowSize = 13)
 public class ContainerQuantumBag extends RebornContainer
 {
     public ContainerQuantumBag(EntityPlayer player, IItemHandlerModifiable invBag)
