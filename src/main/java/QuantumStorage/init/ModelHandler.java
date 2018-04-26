@@ -4,6 +4,7 @@ import QuantumStorage.compat.CompatHandler;
 import QuantumStorage.upgrades.ItemUpgrade;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
@@ -38,8 +39,13 @@ public class ModelHandler
         registerItemModel(ModItems.BATTERY, 0);
         registerItemModel(ModItems.BATTERY, 1);
 
-        //Items
         int i;
+        for (i = 0; i < EnumDyeColor.values().length; ++i)
+        {
+            registerItemModel(ModItems.BAG, i);
+        }
+
+        //Items
         for (i = 0; i < ItemUpgrade.types.length; ++i)
         {
             String[] name = ItemUpgrade.types.clone();

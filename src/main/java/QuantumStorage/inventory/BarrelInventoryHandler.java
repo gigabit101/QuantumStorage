@@ -9,6 +9,7 @@ import net.minecraftforge.items.ItemStackHandler;
 /**
  * Created by Gigabit101 on 18/03/2017.
  */
+@Deprecated
 public class BarrelInventoryHandler extends ItemStackHandler
 {
     public BarrelInventoryHandler()

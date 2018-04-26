@@ -1,6 +1,8 @@
 package QuantumStorage.api;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.CapabilityInject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,4 +20,7 @@ public class QuantumStorageAPI
         RECIPES.add(recipe);
         return recipe;
     }
+
+    @CapabilityInject(IQuantumBagProvider.class)
+    public static final Capability<IQuantumBagProvider> QUANTUM_BAG_PROVIDER_CAPABILITY = null;
 }

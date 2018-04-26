@@ -2,12 +2,15 @@ package QuantumStorage;
 
 import QuantumStorage.compat.CompatHandler;
 import QuantumStorage.config.ConfigQuantumStorage;
+import QuantumStorage.handler.QunatumBagImpl;
 import QuantumStorage.init.ModBlocks;
 import QuantumStorage.init.ModRecipes;
+import QuantumStorage.network.PacketHandler;
 import QuantumStorage.proxy.CommonProxy;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
@@ -52,6 +55,16 @@ public class QuantumStorage
 
         proxy.registerRenders();
 
+        PacketHandler.register();
+
+        QunatumBagImpl.init();
+
         NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, new GuiHandler());
+    }
+
+    @Mod.EventHandler
+    public void init(FMLInitializationEvent event)
+    {
+        proxy.registerColors();
     }
 }

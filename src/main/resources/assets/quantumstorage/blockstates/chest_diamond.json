@@ -4,7 +4,7 @@
       "transform": "forge:default-block",
       "model": "quantumstorage:chest_diamond",
       "textures": {
-         "particle": "quantumstorage:blocks/chests/chest_diamond",
+         "particle": "quantumstorage:blocks/chests/planks_spruce_rotated",
          "top": "quantumstorage:blocks/chests/top",
          "down": "quantumstorage:blocks/chests/top",
          "side": "quantumstorage:blocks/chests/chest_diamond",

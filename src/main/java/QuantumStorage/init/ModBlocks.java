@@ -33,7 +33,6 @@ public class ModBlocks
     public static Block SAFE;
 
     public static Block CONTROLLER;
-    public static Block CABLE;
 
     public static void init()
     {

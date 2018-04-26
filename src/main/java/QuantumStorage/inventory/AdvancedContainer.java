@@ -28,5 +28,4 @@ public class AdvancedContainer extends RebornContainer
         drawPlayersInv(player, machine.inventoryOffsetX(), machine.inventoryOffsetY());
         drawPlayersHotBar(player, machine.inventoryOffsetX(), machine.inventoryOffsetY() + 58);
     }
-
 }

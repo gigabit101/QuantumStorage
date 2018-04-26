@@ -2,8 +2,7 @@ package QuantumStorage.items;
 
 import QuantumStorage.QuantumStorage;
 import QuantumStorage.items.prefab.ItemBase;
-import QuantumStorage.utils.EnergyCapabilityProvider;
-import QuantumStorage.utils.EnergyNbt;
+import QuantumStorage.utils.CustomEnergyStorage;
 import QuantumStorage.utils.RfUtils;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
@@ -12,9 +11,10 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.ITickable;
 import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
@@ -22,15 +22,12 @@ import net.minecraftforge.energy.IEnergyStorage;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemQuantumBattery extends ItemBase implements ITickable
+public class ItemQuantumBattery extends ItemBase
 {
-    private EnergyNbt container = new EnergyNbt(Integer.MAX_VALUE);
-
     public ItemQuantumBattery()
     {
         setUnlocalizedName(QuantumStorage.MOD_ID + ".quantum_battery");
         setRegistryName("quantum_battery");
-        setMaxStackSize(1);
     }
 
     @Override
@@ -61,7 +58,7 @@ public class ItemQuantumBattery extends ItemBase implements ITickable
     @Override
     public void onUpdate(ItemStack stack, World world, Entity entity, int itemSlot, boolean isSelected)
     {
-        if(entity instanceof EntityPlayer && !isSelected && isActive(stack))
+        if(!world.isRemote && entity instanceof EntityPlayer && !isSelected && isActive(stack))
         {
             EntityPlayer player = (EntityPlayer)entity;
             for(int i = 0; i < player.inventory.getSizeInventory(); i++)
@@ -90,11 +87,23 @@ public class ItemQuantumBattery extends ItemBase implements ITickable
         }
     }
 
-    @Nullable
     @Override
-    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt)
+    public EnumRarity getRarity(ItemStack stack)
     {
-        return new EnergyCapabilityProvider(container);
+        return EnumRarity.EPIC;
+    }
+
+    @Override
+    public boolean hasEffect(ItemStack stack)
+    {
+        return isActive(stack);
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
+    {
+        super.addInformation(stack, worldIn, tooltip, flagIn);
+        tooltip.add(RfUtils.addPowerTooltip(stack));
     }
 
     @Override
@@ -110,23 +119,57 @@ public class ItemQuantumBattery extends ItemBase implements ITickable
     }
 
     @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
+    public ICapabilityProvider initCapabilities(ItemStack stack, NBTTagCompound nbt)
     {
-        tooltip.add(RfUtils.addPowerTooltip(stack));
+        return new EnergyCapabilityProvider(stack, this);
     }
 
-    @Override
-    public EnumRarity getRarity(ItemStack stack)
+    private static class EnergyCapabilityProvider implements ICapabilityProvider
     {
-        return EnumRarity.EPIC;
-    }
+        public final CustomEnergyStorage storage;
+        public EnergyCapabilityProvider(final ItemStack stack, ItemQuantumBattery item)
+        {
+            this.storage = new CustomEnergyStorage(Integer.MAX_VALUE, 500000, 500000){
+                @Override
+                public int getEnergyStored(){
+                    if(stack.hasTagCompound())
+                    {
+                        return stack.getTagCompound().getInteger("Energy");
+                    }
+                    else
+                    {
+                        return 0;
+                    }
+                }
 
-    @Override
-    public boolean hasEffect(ItemStack stack)
-    {
-        return isActive(stack);
-    }
+                @Override
+                public void setEnergyStored(int energy)
+                {
+                    if(!stack.hasTagCompound())
+                    {
+                        stack.setTagCompound(new NBTTagCompound());
+                    }
+                    stack.getTagCompound().setInteger("Energy", energy);
+                }
+            };
+        }
 
-    @Override
-    public void update() {}
+        @Override
+        public boolean hasCapability(Capability<?> capability, EnumFacing facing)
+        {
+            return this.getCapability(capability, facing) != null;
+        }
+
+
+        @Nullable
+        @Override
+        public <T> T getCapability(Capability<T> capability, EnumFacing facing)
+        {
+            if(capability == CapabilityEnergy.ENERGY)
+            {
+                return CapabilityEnergy.ENERGY.cast(this.storage);
+            }
+            return null;
+        }
+    }
 }
