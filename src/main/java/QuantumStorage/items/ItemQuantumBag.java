@@ -38,9 +38,12 @@ public class ItemQuantumBag extends ItemBase implements IColorable
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items)
     {
-        for (int meta = 0; meta < COLOURS.length; ++meta)
+        if(this.isInCreativeTab(tab))
         {
-            items.add(new ItemStack(this, 1, meta));
+            for (int meta = 0; meta < COLOURS.length; ++meta)
+            {
+                items.add(new ItemStack(this, 1, meta));
+            }
         }
     }
 
