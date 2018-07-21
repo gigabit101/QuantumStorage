@@ -29,6 +29,7 @@ repositories {
         url = "http://maven.modmuss50.me/"
     }
     maven {
+        name "Raoulvdberge"
         url  "https://repo.raoulvdberge.com/"
     }
     maven {
