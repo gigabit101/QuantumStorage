@@ -44,4 +44,9 @@ public class ContainerMultiBlockCrate extends RebornContainer
             }
         }
     }
+
+    @Override
+    public boolean canInteractWith(EntityPlayer playerIn) {
+        return true;
+    }
 }

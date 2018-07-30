@@ -51,4 +51,9 @@ public class AdvancedContainer extends RebornContainer
         }
         return 0;
     }
+
+    @Override
+    public boolean canInteractWith(EntityPlayer playerIn) {
+        return true;
+    }
 }

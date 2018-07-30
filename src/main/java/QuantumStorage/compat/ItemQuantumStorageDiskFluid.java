@@ -33,7 +33,7 @@ public class ItemQuantumStorageDiskFluid extends ItemBase implements IStorageDis
         setMaxStackSize(1);
         setUnlocalizedName(QuantumStorage.MOD_ID + ".quantumstoragediskfluid");
         setRegistryName("quantumstoragediskfluid");
-        QuantumStorageAPI.addAltarRecipe(new ItemStack(RSItems.FLUID_STORAGE_DISK, 1, 3), new ItemStack(this, 1), ConfigQuantumStorage.defaultDiskTime);
+//        QuantumStorageAPI.addAltarRecipe(new ItemStack(RSItems.FLUID_STORAGE_PART, 1, 3), new ItemStack(CompatHandler.DISK_FLUID, 1), ConfigQuantumStorage.defaultDiskTime);
     }
 
     @Override
