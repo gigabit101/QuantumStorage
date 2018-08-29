@@ -3,8 +3,8 @@ package QuantumStorage.compat;
 import QuantumStorage.QuantumStorage;
 import QuantumStorage.api.QuantumStorageAPI;
 import QuantumStorage.config.ConfigQuantumStorage;
+import QuantumStorage.init.ModBlocks;
 import QuantumStorage.items.prefab.ItemBase;
-import com.raoulvdberge.refinedstorage.RSItems;
 import com.raoulvdberge.refinedstorage.api.storage.StorageType;
 import com.raoulvdberge.refinedstorage.api.storage.disk.IStorageDiskProvider;
 import com.raoulvdberge.refinedstorage.api.storage.disk.IStorageDiskSyncData;
@@ -33,48 +33,52 @@ public class ItemQuantumStorageDiskFluid extends ItemBase implements IStorageDis
         setMaxStackSize(1);
         setUnlocalizedName(QuantumStorage.MOD_ID + ".quantumstoragediskfluid");
         setRegistryName("quantumstoragediskfluid");
-//        QuantumStorageAPI.addAltarRecipe(new ItemStack(RSItems.FLUID_STORAGE_PART, 1, 3), new ItemStack(CompatHandler.DISK_FLUID, 1), ConfigQuantumStorage.defaultDiskTime);
     }
 
     @Override
-    public void onUpdate(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
+    public void onUpdate(ItemStack stack, World world, Entity entity, int slot, boolean selected)
+    {
         super.onUpdate(stack, world, entity, slot, selected);
-
-        if (!world.isRemote) {
-            if (!isValid(stack)) {
+        if (!world.isRemote)
+        {
+            if (!isValid(stack))
+            {
                 API.instance().getOneSixMigrationHelper().migrateDisk(world, stack);
             }
 
-            if (!stack.hasTagCompound()) {
+            if (!stack.hasTagCompound())
+            {
                 UUID id = UUID.randomUUID();
-
-                API.instance().getStorageDiskManager(world).set(id, API.instance().createDefaultItemDisk(world, Integer.MAX_VALUE));
+                API.instance().getStorageDiskManager(world).set(id, API.instance().createDefaultFluidDisk(world, Integer.MAX_VALUE));
                 API.instance().getStorageDiskManager(world).markForSaving();
-
                 setId(stack, id);
             }
         }
     }
 
     @Override
-    public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
+    public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag flag)
+    {
         super.addInformation(stack, world, tooltip, flag);
-
-        if (isValid(stack)) {
+        if (isValid(stack))
+        {
             UUID id = getId(stack);
-
             API.instance().getStorageDiskSync().sendRequest(id);
-
             IStorageDiskSyncData data = API.instance().getStorageDiskSync().getData(id);
-            if (data != null) {
-                if (data.getCapacity() == -1) {
+            if (data != null)
+            {
+                if (data.getCapacity() == -1)
+                {
                     tooltip.add(I18n.format("misc.refinedstorage:storage.stored", API.instance().getQuantityFormatter().format(data.getStored())));
-                } else {
-                    tooltip.add(I18n.format("misc.refinedstorage:storage.stored_capacity", API.instance().getQuantityFormatter().format(data.getStored()), API.instance().getQuantityFormatter().format(data.getCapacity())));
                 }
+                else
+                    {
+                        tooltip.add(I18n.format("misc.refinedstorage:storage.stored_capacity", API.instance().getQuantityFormatter().format(data.getStored()), API.instance().getQuantityFormatter().format(data.getCapacity())));
+                    }
             }
 
-            if (flag.isAdvanced()) {
+            if (flag.isAdvanced())
+            {
                 tooltip.add(id.toString());
             }
         }
@@ -98,13 +102,15 @@ public class ItemQuantumStorageDiskFluid extends ItemBase implements IStorageDis
     }
 
     @Override
-    public void setId(ItemStack disk, UUID id) {
+    public void setId(ItemStack disk, UUID id)
+    {
         disk.setTagCompound(new NBTTagCompound());
         disk.getTagCompound().setUniqueId(NBT_ID, id);
     }
 
     @Override
-    public boolean isValid(ItemStack disk) {
+    public boolean isValid(ItemStack disk)
+    {
         return disk.hasTagCompound() && disk.getTagCompound().hasUniqueId(NBT_ID);
     }
 

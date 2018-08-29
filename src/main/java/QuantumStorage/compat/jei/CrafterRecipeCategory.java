@@ -55,8 +55,8 @@ public class CrafterRecipeCategory extends BlankRecipeCategory<CrafterRecipeWrap
     {
         IGuiItemStackGroup group = iRecipeLayout.getItemStacks();
 
-        group.init(0, true, 0, 20);
-        group.init(1, false, 80, 20);
+        group.init(0, true, 20, 20);
+        group.init(1, false, 60, 20);
 
         group.set(0, iIngredients.getInputs(ItemStack.class).get(0));
 
