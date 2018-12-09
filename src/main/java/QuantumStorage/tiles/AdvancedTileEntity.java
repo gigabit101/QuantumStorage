@@ -91,6 +91,7 @@ public abstract class AdvancedTileEntity extends TileEntity
         return super.getCapability(capability, facing);
     }
 
+    @SideOnly(Side.CLIENT)
     public GuiBuilderQuantumStorage builder = new GuiBuilderQuantumStorage();
 
     @SideOnly(Side.CLIENT)
