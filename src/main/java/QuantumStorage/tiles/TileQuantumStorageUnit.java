@@ -139,12 +139,12 @@ public class TileQuantumStorageUnit extends AdvancedTileEntity implements ITicka
         super.drawGuiContainerForegroundLayer(mouseX, mouseY, gui, guiLeft, guiTop);
         if (this.getInv().getStackInSlot(STORAGE) != ItemStack.EMPTY && this.getInv().getStackInSlot(OUTPUT) != null)
         {
-            this.builder.drawBigBlueBar((AdvancedGui) gui, 31, 43, this.getInv().getStackInSlot(STORAGE).getCount() + this.getInv().getStackInSlot(OUTPUT).getCount(), Integer.MAX_VALUE, mouseX - guiLeft, mouseY - guiTop, "Stored", getInv().getStackInSlot(OUTPUT).getDisplayName(),
+            this.getBuilder().drawBigBlueBar((AdvancedGui) gui, 31, 43, this.getInv().getStackInSlot(STORAGE).getCount() + this.getInv().getStackInSlot(OUTPUT).getCount(), Integer.MAX_VALUE, mouseX - guiLeft, mouseY - guiTop, "Stored", getInv().getStackInSlot(OUTPUT).getDisplayName(),
                     formatQuantity(this.getInv().getStackInSlot(STORAGE).getCount() + this.getInv().getStackInSlot(OUTPUT).getCount()));
         }
         if (this.getInv().getStackInSlot(STORAGE) == ItemStack.EMPTY && this.getInv().getStackInSlot(OUTPUT) != ItemStack.EMPTY)
         {
-            this.builder.drawBigBlueBar((AdvancedGui) gui, 31, 43, this.getInv().getStackInSlot(OUTPUT).getCount(), Integer.MAX_VALUE, mouseX - guiLeft, mouseY - guiTop, "Stored", getInv().getStackInSlot(OUTPUT).getDisplayName(),
+            this.getBuilder().drawBigBlueBar((AdvancedGui) gui, 31, 43, this.getInv().getStackInSlot(OUTPUT).getCount(), Integer.MAX_VALUE, mouseX - guiLeft, mouseY - guiTop, "Stored", getInv().getStackInSlot(OUTPUT).getDisplayName(),
                     formatQuantity(this.getInv().getStackInSlot(STORAGE).getCount() + this.getInv().getStackInSlot(OUTPUT).getCount()));
         }
     }
