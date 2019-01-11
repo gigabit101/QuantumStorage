@@ -11,3 +11,9 @@
 out/
 dep/
 
+/bin/
+/.classpath
+/.project
+/QuantumStorage_Client.launch
+/QuantumStorage_Server.launch
+/.settings/
