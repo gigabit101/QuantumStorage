@@ -2,21 +2,23 @@ package QuantumStorage.client;
 
 import QuantumStorage.inventory.AdvancedContainer;
 import QuantumStorage.tiles.AdvancedTileEntity;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
+import reborncore.client.gui.builder.GuiBase;
+import reborncore.common.container.RebornContainer;
 
 /**
  * Created by Gigabit101 on 17/03/2017.
  */
-public class AdvancedGui extends GuiContainer
+public class AdvancedGui extends GuiBase
 {
     public AdvancedTileEntity machine;
     public EntityPlayer player;
 
     public AdvancedGui(EntityPlayer player, AdvancedTileEntity machine)
     {
-        super(new AdvancedContainer(player, machine));
+    	super(player, (TileEntity) machine, (RebornContainer) new AdvancedContainer(player, machine));
         this.machine = machine;
         this.player = player;
         this.xSize = machine.getXSize();
