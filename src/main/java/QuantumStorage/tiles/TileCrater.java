@@ -1,6 +1,5 @@
 package QuantumStorage.tiles;
 
-import QuantumStorage.client.AdvancedGui;
 import QuantumStorage.config.ConfigQuantumStorage;
 import QuantumStorage.init.ModBlocks;
 import QuantumStorage.init.ModItems;
@@ -9,6 +8,7 @@ import QuantumStorage.inventory.slot.SlotOutputItemHandler;
 import QuantumStorage.items.ItemCrate;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -26,8 +26,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
-import reborncore.client.gui.builder.GuiBase;
-import reborncore.client.guibuilder.GuiBuilder;
 import reborncore.common.util.RebornCraftingHelper;
 
 import java.util.ArrayList;
@@ -135,10 +133,10 @@ public class TileCrater extends AdvancedTileEntity implements ITickable
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void drawGuiContainerForegroundLayer(int mouseX, int mouseY, AdvancedGui gui, int guiLeft, int guiTop)
+    public void drawGuiContainerForegroundLayer(int mouseX, int mouseY, GuiContainer gui, int guiLeft, int guiTop)
     {
         super.drawGuiContainerForegroundLayer(mouseX, mouseY, gui, guiLeft, guiTop);
-        getBuilder().drawProgressBar(gui, progress, 100, 90, 42, mouseX, mouseY, GuiBuilder.ProgressDirection.RIGHT, GuiBase.Layer.FOREGROUND);
+        getBuilder().drawProgressBar(gui, progress, 100, 90, 42, mouseX - guiLeft, mouseY - guiTop);
         getBuilder().drawString(gui, TextFormatting.BLACK + "Crating Machine", 50, 5);
     }
 

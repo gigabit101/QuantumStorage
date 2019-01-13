@@ -1,12 +1,12 @@
 package QuantumStorage.tiles;
 
 import QuantumStorage.api.RecipeQuantumCrafter;
-import QuantumStorage.client.AdvancedGui;
 import QuantumStorage.config.ConfigQuantumStorage;
 import QuantumStorage.init.ModBlocks;
 import QuantumStorage.inventory.slot.SlotOutputItemHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.Slot;
@@ -25,8 +25,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
-import reborncore.client.gui.builder.GuiBase;
-import reborncore.client.guibuilder.GuiBuilder;
 import reborncore.common.util.RebornCraftingHelper;
 
 import java.util.ArrayList;
@@ -72,7 +70,7 @@ public class TileQuantumCrafter extends AdvancedTileEntity implements ITickable
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void drawGuiContainerForegroundLayer(int mouseX, int mouseY, AdvancedGui gui, int guiLeft, int guiTop)
+    public void drawGuiContainerForegroundLayer(int mouseX, int mouseY, GuiContainer gui, int guiLeft, int guiTop)
     {
         int max = 100;
 
@@ -81,7 +79,8 @@ public class TileQuantumCrafter extends AdvancedTileEntity implements ITickable
             max = RecipeQuantumCrafter.getTimeFromStack(inv.getStackInSlot(0));
         }
 
-        getBuilder().drawProgressBar(gui, progress, max, 90, 42, mouseX, mouseY, GuiBuilder.ProgressDirection.RIGHT, GuiBase.Layer.FOREGROUND);
+        getBuilder().drawProgressBar(gui, progress, max, 80, 40, mouseX - guiLeft, mouseY - guiTop);
+
         getBuilder().drawString(gui, TextFormatting.BLACK + "Progress = " + progress + " / " + max, 8, 8);
 
         super.drawGuiContainerForegroundLayer(mouseX, mouseY, gui, guiLeft, guiTop);

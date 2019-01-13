@@ -5,6 +5,7 @@ import QuantumStorage.client.AdvancedGui;
 import QuantumStorage.client.GuiBuilderQuantumStorage;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;
@@ -129,7 +130,7 @@ public abstract class AdvancedTileEntity extends TileEntity
     }
 
     @SideOnly(Side.CLIENT)
-    public void drawGuiContainerForegroundLayer(int mouseX, int mouseY, AdvancedGui gui, int guiLeft, int guiTop) {}
+    public void drawGuiContainerForegroundLayer(int mouseX, int mouseY, GuiContainer gui, int guiLeft, int guiTop) {}
 
     //Container
     public abstract List<Slot> getSlots();

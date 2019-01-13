@@ -5,6 +5,7 @@ import QuantumStorage.config.ConfigQuantumStorage;
 import QuantumStorage.init.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -24,7 +25,6 @@ import net.minecraftforge.fluids.*;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import reborncore.client.gui.builder.GuiBase;
 import reborncore.common.util.RebornCraftingHelper;
 
 import javax.annotation.Nullable;
@@ -67,7 +67,7 @@ public class TileQuantumTank extends AdvancedTileEntity implements ITickable
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void drawGuiContainerForegroundLayer(int mouseX, int mouseY, AdvancedGui gui, int guiLeft, int guiTop)
+    public void drawGuiContainerForegroundLayer(int mouseX, int mouseY, GuiContainer gui, int guiLeft, int guiTop)
     {
         super.drawGuiContainerForegroundLayer(mouseX, mouseY, gui, guiLeft, guiTop);
         int amount = 0;
@@ -81,7 +81,7 @@ public class TileQuantumTank extends AdvancedTileEntity implements ITickable
 
         getBuilder().drawString(gui,  "Quantum Tank",  56, 8);
 
-        getBuilder().drawBigBlueBar(gui, 30, 50, amount, tank.getCapacity(), mouseX, mouseY, "", "Fluid Type: " + name, amount + " mb " + name, GuiBase.Layer.FOREGROUND);
+        getBuilder().drawBigBlueBar((AdvancedGui) gui, 30, 50, amount, tank.getCapacity(), mouseX - guiLeft, mouseY - guiTop, "", "Fluid Type: " + name, amount + " mb " + name);
     }
 
     @Override

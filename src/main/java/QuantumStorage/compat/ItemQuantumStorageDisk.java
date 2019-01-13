@@ -5,7 +5,7 @@ import QuantumStorage.api.QuantumStorageAPI;
 import QuantumStorage.config.ConfigQuantumStorage;
 import QuantumStorage.init.ModBlocks;
 import QuantumStorage.items.prefab.ItemBase;
-import com.raoulvdberge.refinedstorage.RSItems;
+import com.raoulvdberge.refinedstorage.RSItems;;
 import com.raoulvdberge.refinedstorage.api.storage.StorageType;
 import com.raoulvdberge.refinedstorage.api.storage.disk.IStorageDisk;
 import com.raoulvdberge.refinedstorage.api.storage.disk.IStorageDiskProvider;
