@@ -59,7 +59,7 @@ public class TileQuantumCrafter extends AdvancedTileEntity implements ITickable
                     if (progress >= RecipeQuantumCrafter.getTimeFromStack(input))
                     {
                         inventory.setStackInSlot(1, RecipeQuantumCrafter.getOutputFrom(input));
-                        inventory.setStackInSlot(0, ItemStack.EMPTY);
+                        inventory.getStackInSlot(0).shrink(1);
                         progress = 0;
                     }
                 }

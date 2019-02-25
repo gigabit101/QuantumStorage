@@ -106,16 +106,19 @@ public class AdvancedBlock extends BlockContainer
     {
         if (te instanceof AdvancedTileEntity)
         {
+            AdvancedTileEntity tileEntity = (AdvancedTileEntity) te;
+            
             float xOffset = world.rand.nextFloat() * 0.8F + 0.1F;
             float yOffset = world.rand.nextFloat() * 0.8F + 0.1F;
             float zOffset = world.rand.nextFloat() * 0.8F + 0.1F;
 
-            ItemStack stacknbt = ((AdvancedTileEntity) te).getDropWithNBT();
+            ItemStack stacknbt = (tileEntity).getDropWithNBT();
             int amountToDrop = Math.min(world.rand.nextInt(21) + 10, stacknbt.getCount());
 
             EntityItem entityitem = new EntityItem(world, pos.getX() + xOffset, pos.getY() + yOffset, pos.getZ() + zOffset, stacknbt.splitStack(amountToDrop));
             world.spawnEntity(entityitem);
-        } else
+        }
+        else
         {
             super.harvestBlock(world, player, pos, state, te, stack);
         }
@@ -125,17 +128,27 @@ public class AdvancedBlock extends BlockContainer
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
     {
         super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
-        AdvancedTileEntity adva = (AdvancedTileEntity) worldIn.getTileEntity(pos);
-
-        if (stack.hasTagCompound())
+        try
         {
-            adva.readFromNBTWithoutCoords(stack.getTagCompound().getCompoundTag("tileEntity"));
+            AdvancedTileEntity adva = (AdvancedTileEntity) worldIn.getTileEntity(pos);
+            if (adva != null)
+            {
+    
+                if (stack.hasTagCompound())
+                {
+                    adva.readFromNBTWithoutCoords(stack.getTagCompound().getCompoundTag("tileEntity"));
+                }
+    
+                setFacing(placer.getHorizontalFacing().getOpposite(), worldIn, pos);
+                adva.setFacing(placer.getHorizontalFacing().getOpposite());
+    
+                worldIn.notifyBlockUpdate(pos, state, state, 3);
+            }
         }
-
-        setFacing(placer.getHorizontalFacing().getOpposite(), worldIn, pos);
-        adva.setFacing(placer.getHorizontalFacing().getOpposite());
-
-        worldIn.notifyBlockUpdate(pos, state, state, 3);
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public void setFacing(EnumFacing facing, World world, BlockPos pos)

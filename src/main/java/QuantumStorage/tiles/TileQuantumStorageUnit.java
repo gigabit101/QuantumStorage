@@ -96,6 +96,7 @@ public class TileQuantumStorageUnit extends AdvancedTileEntity implements ITicka
                 {
                     inv.getStackInSlot(OUTPUT).grow(1);
                     inv.getStackInSlot(STORAGE).shrink(1);
+                    sync();
                 }
             }
             handleUpgrades();
@@ -103,7 +104,6 @@ public class TileQuantumStorageUnit extends AdvancedTileEntity implements ITicka
         {
             e.printStackTrace();
         }
-        sync();
     }
 
     @Override

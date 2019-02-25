@@ -123,7 +123,7 @@ public class ItemQuantumBattery extends ItemBase
     {
         return new EnergyCapabilityProvider(stack, this);
     }
-
+    
     private static class EnergyCapabilityProvider implements ICapabilityProvider
     {
         public final CustomEnergyStorage storage;

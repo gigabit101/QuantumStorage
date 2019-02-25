@@ -51,4 +51,10 @@ public class AdvancedContainer extends RebornContainer
         }
         return 0;
     }
+    
+    @Override
+    public boolean canInteractWith(EntityPlayer player)
+    {
+        return machine != null;
+    }
 }

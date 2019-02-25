@@ -29,7 +29,8 @@ repositories {
         url = "http://maven.modmuss50.me/"
     }
     maven {
-        url  "https://dl.bintray.com/raoulvdberge/dev/"
+        name "Raoulvdberge"
+        url  "https://repo.raoulvdberge.com/"
     }
     maven {
         name "jei"
