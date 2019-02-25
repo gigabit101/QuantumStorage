@@ -14,9 +14,9 @@ public class QuantumStorageAPI
 {
     public static List<RecipeQuantumCrafter> RECIPES = new ArrayList<>();
 
-    public static RecipeQuantumCrafter addAltarRecipe(Object input, ItemStack output, int mana)
+    public static RecipeQuantumCrafter addAltarRecipe(Object input, ItemStack output, int time)
     {
-        RecipeQuantumCrafter recipe = new RecipeQuantumCrafter(input, output, mana);
+        RecipeQuantumCrafter recipe = new RecipeQuantumCrafter(input, output, time);
         RECIPES.add(recipe);
         return recipe;
     }

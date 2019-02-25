@@ -65,12 +65,10 @@ public class TileQuantumStorageUnit extends AdvancedTileEntity implements ITicka
                 {
                     inv.setStackInSlot(STORAGE, inv.getStackInSlot(INPUT).copy());
                     inv.setStackInSlot(INPUT, ItemStack.EMPTY);
-                    sync();
                 } else if (!inv.getStackInSlot(STORAGE).isEmpty() && ItemUtils.isItemEqual(inv.getStackInSlot(INPUT), inv.getStackInSlot(STORAGE), true, true))
                 {
                     inv.getStackInSlot(STORAGE).grow(inv.getStackInSlot(INPUT).getCount());
                     inv.setStackInSlot(INPUT, ItemStack.EMPTY);
-                    sync();
                 }
             }
 
@@ -84,12 +82,10 @@ public class TileQuantumStorageUnit extends AdvancedTileEntity implements ITicka
                         inv.setStackInSlot(OUTPUT, inv.getStackInSlot(STORAGE).copy());
                         inv.getStackInSlot(OUTPUT).setCount(size);
                         inv.getStackInSlot(STORAGE).shrink(size);
-                        sync();
                     } else
                     {
                         inv.setStackInSlot(OUTPUT, inv.getStackInSlot(STORAGE));
                         inv.setStackInSlot(STORAGE, ItemStack.EMPTY);
-                        sync();
                     }
                 }
                 if (inv.getStackInSlot(STORAGE).getCount() != 0 && ItemUtils.isItemEqual(inv.getStackInSlot(STORAGE), inv.getStackInSlot(OUTPUT), true, true) && inv.getStackInSlot(OUTPUT).getCount() <= size - 1)
@@ -100,6 +96,7 @@ public class TileQuantumStorageUnit extends AdvancedTileEntity implements ITicka
                 }
             }
             handleUpgrades();
+            sync();
         } catch (Exception e)
         {
             e.printStackTrace();
@@ -142,12 +139,12 @@ public class TileQuantumStorageUnit extends AdvancedTileEntity implements ITicka
         super.drawGuiContainerForegroundLayer(mouseX, mouseY, gui, guiLeft, guiTop);
         if (this.getInv().getStackInSlot(STORAGE) != ItemStack.EMPTY && this.getInv().getStackInSlot(OUTPUT) != null)
         {
-            this.builder.drawBigBlueBar((AdvancedGui) gui, 31, 43, this.getInv().getStackInSlot(STORAGE).getCount() + this.getInv().getStackInSlot(OUTPUT).getCount(), Integer.MAX_VALUE, mouseX - guiLeft, mouseY - guiTop, "Stored", getInv().getStackInSlot(OUTPUT).getDisplayName(),
+            this.getBuilder().drawBigBlueBar((AdvancedGui) gui, 31, 43, this.getInv().getStackInSlot(STORAGE).getCount() + this.getInv().getStackInSlot(OUTPUT).getCount(), Integer.MAX_VALUE, mouseX - guiLeft, mouseY - guiTop, "Stored", getInv().getStackInSlot(OUTPUT).getDisplayName(),
                     formatQuantity(this.getInv().getStackInSlot(STORAGE).getCount() + this.getInv().getStackInSlot(OUTPUT).getCount()));
         }
         if (this.getInv().getStackInSlot(STORAGE) == ItemStack.EMPTY && this.getInv().getStackInSlot(OUTPUT) != ItemStack.EMPTY)
         {
-            this.builder.drawBigBlueBar((AdvancedGui) gui, 31, 43, this.getInv().getStackInSlot(OUTPUT).getCount(), Integer.MAX_VALUE, mouseX - guiLeft, mouseY - guiTop, "Stored", getInv().getStackInSlot(OUTPUT).getDisplayName(),
+            this.getBuilder().drawBigBlueBar((AdvancedGui) gui, 31, 43, this.getInv().getStackInSlot(OUTPUT).getCount(), Integer.MAX_VALUE, mouseX - guiLeft, mouseY - guiTop, "Stored", getInv().getStackInSlot(OUTPUT).getDisplayName(),
                     formatQuantity(this.getInv().getStackInSlot(STORAGE).getCount() + this.getInv().getStackInSlot(OUTPUT).getCount()));
         }
     }
@@ -232,15 +229,12 @@ public class TileQuantumStorageUnit extends AdvancedTileEntity implements ITicka
         return super.getCapability(capability, facing);
     }
 
-    public void handleUpgrades()
-    {
-
-    }
+    public void handleUpgrades() {}
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag advanced)
     {
-        if (stack != null && stack.hasTagCompound())
+        if (!stack.isEmpty() && stack.hasTagCompound())
         {
             if (stack.getTagCompound().getCompoundTag("tileEntity") != null)
             {
