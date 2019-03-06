@@ -28,6 +28,7 @@ public class ItemQuantumBattery extends ItemBase
     {
         setUnlocalizedName(QuantumStorage.MOD_ID + ".quantum_battery");
         setRegistryName("quantum_battery");
+        setMaxStackSize(1);
     }
 
     @Override
