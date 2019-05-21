@@ -172,10 +172,11 @@ public class TileChestGold extends AdvancedTileEntity
         if (!ConfigQuantumStorage.disableChests)
         {
             RebornCraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.CHEST_GOLD),
-                    "WIW",
+                    "WXW",
                     "ICI",
-                    "WIW",
+                    "WXW",
                     'W', "plankWood",
+                    'X', "chest",
                     'I', new ItemStack(Items.GOLD_INGOT),
                     'C', new ItemStack(ModBlocks.CHEST_IRON));
         }

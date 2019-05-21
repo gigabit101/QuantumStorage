@@ -84,7 +84,7 @@ public class TileTrashcanFluid extends AdvancedTileEntity
                     "CCC",
                     'C', new ItemStack(Blocks.COBBLESTONE),
                     'H', new ItemStack(Items.BUCKET),
-                    'S', new ItemStack(Blocks.STONE));
+                    'S', new ItemStack(Blocks.STONE_SLAB));
         }
     }
 

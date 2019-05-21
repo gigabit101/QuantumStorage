@@ -40,7 +40,7 @@ public class TileChestDiamond extends AdvancedTileEntity
 {
     public TileChestDiamond()
     {
-        this.inv = new ItemStackHandler(96);
+        this.inv = new ItemStackHandler(91);
     }
 
     @Override
@@ -172,10 +172,11 @@ public class TileChestDiamond extends AdvancedTileEntity
         if (!ConfigQuantumStorage.disableChests)
         {
             RebornCraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.CHEST_DIAMOND),
-                    "WIW",
+                    "WXW",
                     "ICI",
-                    "WIW",
+                    "WXW",
                     'W', "plankWood",
+                    'X', "chest",
                     'I', new ItemStack(Items.DIAMOND),
                     'C', new ItemStack(ModBlocks.CHEST_GOLD));
         }

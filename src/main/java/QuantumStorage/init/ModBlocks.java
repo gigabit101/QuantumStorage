@@ -2,12 +2,11 @@ package QuantumStorage.init;
 
 import QuantumStorage.QuantumStorage;
 import QuantumStorage.blocks.AdvancedBlock;
-import QuantumStorage.multiblock.BlockCrate;
-import QuantumStorage.multiblock.TileCrate;
 import QuantumStorage.tiles.*;
 import QuantumStorage.tiles.chests.TileChestDiamond;
 import QuantumStorage.tiles.chests.TileChestGold;
 import QuantumStorage.tiles.chests.TileChestIron;
+import QuantumStorage.tiles.chests.TileChestQuantum;
 import QuantumStorage.tiles.trashcans.TileTrashcan;
 import QuantumStorage.tiles.trashcans.TileTrashcanFluid;
 import net.minecraft.block.Block;
@@ -26,6 +25,7 @@ public class ModBlocks
     public static Block CHEST_IRON;
     public static Block CHEST_GOLD;
     public static Block CHEST_DIAMOND;
+    public static Block CHEST_QUANIUM;
     public static Block QUANTUM_CRAFTER;
     public static Block CRATE;
     public static Block TRASH_CAN;
@@ -69,6 +69,9 @@ public class ModBlocks
 
         TRASH_CAN_FLUID = new AdvancedBlock(new TileTrashcanFluid()).setUnlocalizedName(QuantumStorage.MOD_ID + ".trashcanfluid");
         registerAdvanced(TRASH_CAN_FLUID, new TileTrashcanFluid());
+    
+        CHEST_QUANIUM = new AdvancedBlock(new TileChestQuantum()).setUnlocalizedName(QuantumStorage.MOD_ID + ".chest_quantum");
+        registerAdvanced(CHEST_QUANIUM, new TileChestQuantum());
 
     }
 

@@ -78,7 +78,7 @@ public class TileTrashcan extends AdvancedTileEntity implements ITickable
                     "CCC",
                     'C', new ItemStack(Blocks.COBBLESTONE),
                     'H', new ItemStack(Blocks.CHEST),
-                    'S', new ItemStack(Blocks.STONE));
+                    'S', new ItemStack(Blocks.STONE_SLAB));
         }
 
     }

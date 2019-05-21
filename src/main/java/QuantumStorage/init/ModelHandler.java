@@ -31,6 +31,7 @@ public class ModelHandler
         registerItemModel(ModBlocks.CHEST_IRON, 0);
         registerItemModel(ModBlocks.CHEST_GOLD, 0);
         registerItemModel(ModBlocks.CHEST_DIAMOND, 0);
+        registerItemModel(ModBlocks.CHEST_QUANIUM, 0);
         registerItemModel(ModBlocks.QUANTUM_CRAFTER, 0);
         registerItemModel(ModBlocks.CRATE, 0);
         registerItemModel(ModBlocks.TRASH_CAN, 0);

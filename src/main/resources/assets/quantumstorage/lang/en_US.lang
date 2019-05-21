@@ -7,6 +7,7 @@ tile.quantumstorage.crater.name=Crating Machine
 tile.quantumstorage.chest_iron.name=Iron Storage Crate
 tile.quantumstorage.chest_gold.name=Gold Storage Crate
 tile.quantumstorage.chest_diamond.name=Diamond Storage Crate
+tile.quantumstorage.chest_quantum.name=Quantum Storage Crate
 tile.quantumstorage.quantumcrafter.name=Quantum Crafter
 
 tile.quantumstorage.controller.name=Controller
