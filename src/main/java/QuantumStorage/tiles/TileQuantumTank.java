@@ -3,7 +3,6 @@ package QuantumStorage.tiles;
 import QuantumStorage.client.AdvancedGui;
 import QuantumStorage.config.ConfigQuantumStorage;
 import QuantumStorage.init.ModBlocks;
-import QuantumStorage.utils.FluidConnection;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -43,7 +42,6 @@ import java.util.List;
 public class TileQuantumTank extends AdvancedTileEntity implements ITickable
 {
     FluidTank tank = new FluidTank(Integer.MAX_VALUE);
-    public FluidConnection fluidConnection = FluidConnection.BOTH;
     
     public TileQuantumTank()
     {
