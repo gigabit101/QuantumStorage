@@ -4,8 +4,11 @@ import QuantumStorage.QuantumStorage;
 import QuantumStorage.items.prefab.ItemBase;
 import QuantumStorage.utils.CustomEnergyStorage;
 import QuantumStorage.utils.RfUtils;
+import baubles.api.BaubleType;
+import baubles.api.IBauble;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
@@ -18,11 +21,13 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
+import net.minecraftforge.fml.common.Optional;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemQuantumBattery extends ItemBase
+@Optional.Interface(iface = "baubles.api.IBauble", modid = "baubles")
+public class ItemQuantumBattery extends ItemBase implements IBauble
 {
     public ItemQuantumBattery()
     {
@@ -122,6 +127,18 @@ public class ItemQuantumBattery extends ItemBase
     public ICapabilityProvider initCapabilities(ItemStack stack, NBTTagCompound nbt)
     {
         return new EnergyCapabilityProvider(stack, this);
+    }
+    
+    @Override
+    public BaubleType getBaubleType(ItemStack itemStack)
+    {
+        return BaubleType.TRINKET;
+    }
+    
+    @Override
+    public void onWornTick(ItemStack itemstack, EntityLivingBase player)
+    {
+        onUpdate(itemstack, player.world, player, 0, false);
     }
     
     private static class EnergyCapabilityProvider implements ICapabilityProvider
