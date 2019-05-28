@@ -36,19 +36,15 @@ public class ClientProxy extends CommonProxy
     @Override
     public void registerColors()
     {
-        Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new IItemColor()
+        Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) ->
         {
-            @Override
-            public int colorMultiplier(ItemStack stack, int tintIndex)
+            Item item = stack.getItem();
+            if (item instanceof IColorable)
             {
-                Item item = stack.getItem();
-                if (item instanceof IColorable)
-                {
-                    return ((IColorable) item).getColorFromItemStack(stack, tintIndex);
-                } else
-                {
-                    return 0xFFFFFF;
-                }
+                return ((IColorable) item).getColorFromItemStack(stack, tintIndex);
+            } else
+            {
+                return 0xFFFFFF;
             }
         }, ModItems.BAG);
     }

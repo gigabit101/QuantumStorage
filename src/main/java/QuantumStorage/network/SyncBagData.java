@@ -39,14 +39,7 @@ public class SyncBagData implements IMessage
         @Override
         public IMessage onMessage(final SyncBagData message, MessageContext ctx)
         {
-            Minecraft.getMinecraft().addScheduledTask(new Runnable()
-            {
-                @Override
-                public void run()
-                {
-                    QuantumStorage.proxy.getClientBagProps().deserializeNBT(message.nbt);
-                }
-            });
+            Minecraft.getMinecraft().addScheduledTask(() -> QuantumStorage.proxy.getClientBagProps().deserializeNBT(message.nbt));
 
             return null;
         }
