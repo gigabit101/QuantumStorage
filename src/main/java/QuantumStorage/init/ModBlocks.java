@@ -2,6 +2,10 @@ package QuantumStorage.init;
 
 import QuantumStorage.QuantumStorage;
 import QuantumStorage.blocks.AdvancedBlock;
+import QuantumStorage.multiblock.BlockMultiStorage;
+import QuantumStorage.multiblock.ItemMultiBlockStorage;
+import QuantumStorage.multiblock.TileIoPort;
+import QuantumStorage.multiblock.TileMultiStorage;
 import QuantumStorage.tiles.*;
 import QuantumStorage.tiles.chests.TileChestDiamond;
 import QuantumStorage.tiles.chests.TileChestGold;
@@ -20,7 +24,6 @@ public class ModBlocks
 {
     public static Block DSU;
     public static Block TANK;
-    public static Block BARREL;
     public static Block CRATER;
     public static Block CHEST_IRON;
     public static Block CHEST_GOLD;
@@ -31,6 +34,8 @@ public class ModBlocks
     public static Block TRASH_CAN;
     public static Block TRASH_CAN_FLUID;
     public static Block SAFE;
+    
+    public static Block MULTIBLOCK_STORAGE;
 
     public static Block CONTROLLER;
 
@@ -38,9 +43,6 @@ public class ModBlocks
     {
         TANK = new AdvancedBlock(new TileQuantumTank()).setUnlocalizedName(QuantumStorage.MOD_ID + ".quantum_tank");
         registerAdvanced(TANK, new TileQuantumTank());
-
-        BARREL = new AdvancedBlock(new TileQuantumBarrel()).setUnlocalizedName(QuantumStorage.MOD_ID + ".quantum_barrel");
-        registerAdvanced(BARREL, new TileQuantumBarrel());
 
         CRATER = new AdvancedBlock(new TileCrater()).setUnlocalizedName(QuantumStorage.MOD_ID + ".crater");
         registerAdvanced(CRATER, new TileCrater());
@@ -60,10 +62,6 @@ public class ModBlocks
         QUANTUM_CRAFTER = new AdvancedBlock(new TileQuantumCrafter()).setUnlocalizedName(QuantumStorage.MOD_ID + ".quantumcrafter");
         registerAdvanced(QUANTUM_CRAFTER, new TileQuantumCrafter());
 
-//        CRATE = new BlockCrate();
-//        RebornRegistry.registerBlock(CRATE, "multiblockcrate");
-//        GameRegistry.registerTileEntity(TileCrate.class, QuantumStorage.MOD_ID + "multiblockcrate");
-
         TRASH_CAN = new AdvancedBlock(new TileTrashcan()).setUnlocalizedName(QuantumStorage.MOD_ID + ".trashcan");
         registerAdvanced(TRASH_CAN, new TileTrashcan());
 
@@ -72,7 +70,16 @@ public class ModBlocks
     
         CHEST_QUANIUM = new AdvancedBlock(new TileChestQuantum()).setUnlocalizedName(QuantumStorage.MOD_ID + ".chest_quantum");
         registerAdvanced(CHEST_QUANIUM, new TileChestQuantum());
-
+        
+        registerMultiBlocks();
+    }
+    
+    public static void registerMultiBlocks()
+    {
+        MULTIBLOCK_STORAGE = new BlockMultiStorage();
+        RebornRegistry.registerBlock(MULTIBLOCK_STORAGE, ItemMultiBlockStorage.class, "multistorage");
+        GameRegistry.registerTileEntity(TileMultiStorage.class, QuantumStorage.MOD_ID + "tilemultistorage");
+        GameRegistry.registerTileEntity(TileIoPort.class, QuantumStorage.MOD_ID + "tileioport");
     }
 
     static void registerAdvanced(Block block, AdvancedTileEntity advancedTileEntity)

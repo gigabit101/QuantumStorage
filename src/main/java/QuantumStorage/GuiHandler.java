@@ -6,10 +6,10 @@ import QuantumStorage.inventory.ContainerQuantumBag;
 import QuantumStorage.client.GuiQuantumBag;
 import QuantumStorage.inventory.AdvancedContainer;
 import QuantumStorage.items.ItemQuantumBag;
-import QuantumStorage.multiblock.ContainerMultiBlockCrate;
-import QuantumStorage.multiblock.GuiMultiBlockCrate;
-import QuantumStorage.multiblock.MultiBlockCrate;
-import QuantumStorage.multiblock.TileCrate;
+import QuantumStorage.multiblock.ContainerMultiBlockStorage;
+import QuantumStorage.multiblock.GuiMultiStorage;
+import QuantumStorage.multiblock.MultiBlockStorage;
+import QuantumStorage.multiblock.TileMultiStorage;
 import QuantumStorage.tiles.AdvancedTileEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumDyeColor;
@@ -25,14 +25,18 @@ import net.minecraftforge.items.IItemHandlerModifiable;
  */
 public class GuiHandler implements IGuiHandler
 {
-    public static int BAG_ID = 0;
+    public static final int BAG_ID = 0;
+    public static final int MULTI_BASEPAGE = 1;
 
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
     {
-        if (getMultiBlock(world, x, y, z) != null)
+        if (ID >= MULTI_BASEPAGE)
         {
-            return new ContainerMultiBlockCrate(player, getMultiBlock(world, x, y, z), world.getTileEntity(new BlockPos(x, y, z)));
+            if (getMultiBlock(world, x, y, z) != null)
+            {
+                return new ContainerMultiBlockStorage(player, getMultiBlock(world, x, y, z), ID - MULTI_BASEPAGE + 1);
+            }
         }
         else if (world.getTileEntity(new BlockPos(x, y, z)) != null && world.getTileEntity(new BlockPos(x, y, z)) instanceof AdvancedTileEntity)
         {
@@ -51,9 +55,10 @@ public class GuiHandler implements IGuiHandler
     @Override
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
     {
-        if (getMultiBlock(world, x, y, z) != null)
-        {
-            return new GuiMultiBlockCrate(player, getMultiBlock(world, x, y, z), new BlockPos(x, y, z));
+        if (ID >= MULTI_BASEPAGE) {
+            if (getMultiBlock(world, x, y, z) != null) {
+                return new GuiMultiStorage(player, getMultiBlock(world, x, y, z), ID - MULTI_BASEPAGE + 1, new BlockPos(x, y, z));
+            }
         }
         else if (world.getTileEntity(new BlockPos(x, y, z)) != null && world.getTileEntity(new BlockPos(x, y, z)) instanceof AdvancedTileEntity)
         {
@@ -82,12 +87,12 @@ public class GuiHandler implements IGuiHandler
         return EnumDyeColor.WHITE;
     }
 
-    public MultiBlockCrate getMultiBlock(World world, int x, int y, int z)
+    public MultiBlockStorage getMultiBlock(World world, int x, int y, int z)
     {
         TileEntity tileEntity = world.getTileEntity(new BlockPos(x, y, z));
-        if (tileEntity instanceof TileCrate)
+        if (tileEntity instanceof TileMultiStorage)
         {
-            return (MultiBlockCrate) ((TileCrate) tileEntity).getMultiblockController();
+            return (MultiBlockStorage) ((TileMultiStorage) tileEntity).getMultiblockController();
         }
         return null;
     }

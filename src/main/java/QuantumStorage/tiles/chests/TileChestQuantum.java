@@ -127,7 +127,7 @@ public class TileChestQuantum extends AdvancedTileEntity
     @Override
     public Block getBlock()
     {
-        return ModBlocks.CHEST_DIAMOND;
+        return ModBlocks.CHEST_QUANIUM;
     }
 
     @Override

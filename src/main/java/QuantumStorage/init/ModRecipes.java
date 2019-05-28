@@ -40,6 +40,36 @@ public class ModRecipes
 
         //TODO config
         RebornCraftingHelper.addShapedRecipe(new ItemStack(ModItems.BAG), "WSW", "WCW", "WWW", 'S', Items.STRING, 'C', new ItemStack(ModBlocks.CHEST_DIAMOND), 'W', new ItemStack(Blocks.WOOL, 1, OreDictionary.WILDCARD_VALUE));
+    
+        RebornCraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.MULTIBLOCK_STORAGE, 4, 0),
+                "III",
+                "ISI",
+                "III",
+                'S', "stone",
+                'I', new ItemStack(Items.IRON_INGOT));
+    
+        RebornCraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.MULTIBLOCK_STORAGE, 4, 1),
+                "IBI",
+                "BBB",
+                "IBI",
+                'B', new ItemStack(Blocks.IRON_BARS),
+                'I', new ItemStack(Items.IRON_INGOT));
+    
+        RebornCraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.MULTIBLOCK_STORAGE, 1, 2),
+                "III",
+                "ICI",
+                "III",
+                'C', new ItemStack(ModBlocks.CHEST_DIAMOND),
+                'I', new ItemStack(Items.IRON_INGOT));
+    
+        RebornCraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.MULTIBLOCK_STORAGE, 4, 3),
+                "III",
+                "ISI",
+                "III",
+                'S', new ItemStack(Blocks.HOPPER),
+                'I', new ItemStack(Items.IRON_INGOT));
+        
+        
         addColourRecipes();
     }
 

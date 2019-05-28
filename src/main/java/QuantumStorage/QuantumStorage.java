@@ -5,6 +5,7 @@ import QuantumStorage.config.ConfigQuantumStorage;
 import QuantumStorage.handler.QunatumBagImpl;
 import QuantumStorage.init.ModBlocks;
 import QuantumStorage.init.ModRecipes;
+import QuantumStorage.multiblock.MultiBlockPackets;
 import QuantumStorage.network.PacketHandler;
 import QuantumStorage.proxy.CommonProxy;
 import net.minecraftforge.common.MinecraftForge;
@@ -61,8 +62,8 @@ public class QuantumStorage
         QunatumBagImpl.init();
 
         NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, new GuiHandler());
-
-        MinecraftForge.EVENT_BUS.register(new PacketMonitor());
+        
+        MinecraftForge.EVENT_BUS.register(MultiBlockPackets.class);
     }
 
     @Mod.EventHandler

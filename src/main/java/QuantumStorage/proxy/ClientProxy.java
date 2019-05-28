@@ -3,7 +3,6 @@ package QuantumStorage.proxy;
 import QuantumStorage.api.IColorable;
 import QuantumStorage.api.IQuantumBagProvider;
 import QuantumStorage.api.QuantumStorageAPI;
-import QuantumStorage.client.render.RenderBarrel;
 import QuantumStorage.client.render.RenderDsu;
 import QuantumStorage.client.render.TankRender;
 import QuantumStorage.init.ModItems;
@@ -24,7 +23,6 @@ public class ClientProxy extends CommonProxy
     public void registerRenders()
     {
         ClientRegistry.bindTileEntitySpecialRenderer(TileQuantumStorageUnit.class, new RenderDsu());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileQuantumBarrel.class, new RenderBarrel());
         ClientRegistry.bindTileEntitySpecialRenderer(TileQuantumTank.class, new TankRender());
     }
 

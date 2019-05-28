@@ -3,10 +3,12 @@ package QuantumStorage.tiles;
 import QuantumStorage.client.AdvancedGui;
 import QuantumStorage.config.ConfigQuantumStorage;
 import QuantumStorage.init.ModBlocks;
+import QuantumStorage.utils.FluidConnection;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -23,8 +25,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.*;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import reborncore.common.util.ItemUtils;
 import reborncore.common.util.RebornCraftingHelper;
 
 import javax.annotation.Nullable;
@@ -36,7 +40,8 @@ import java.util.List;
 public class TileQuantumTank extends AdvancedTileEntity implements ITickable
 {
     FluidTank tank = new FluidTank(Integer.MAX_VALUE);
-
+    public FluidConnection fluidConnection = FluidConnection.BOTH;
+    
     public TileQuantumTank() {}
 
     @Override
@@ -60,9 +65,25 @@ public class TileQuantumTank extends AdvancedTileEntity implements ITickable
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
     {
-        if (!FluidUtil.interactWithFluidHandler(playerIn, hand, worldIn, pos, side))
+        if (FluidUtil.interactWithFluidHandler(playerIn, hand, worldIn, pos, side))
+        {
+            return true;
+        }
+        else if (!playerIn.getHeldItem(hand).isEmpty() && ItemUtils.isItemEqual(playerIn.getHeldItem(hand), new ItemStack(Blocks.CONCRETE_POWDER), false, false))
+        {
+            ItemStack stackinhand = playerIn.getHeldItem(hand);
+            ItemStack out = new ItemStack(Blocks.CONCRETE, 1, stackinhand.getItemDamage());
+            
+            playerIn.getHeldItem(hand).shrink(1);
+            if(!worldIn.isRemote)
+                worldIn.spawnEntity(new EntityItem(worldIn, playerIn.posX, playerIn.posY, playerIn.posZ, out));
+            return true;
+        }
+        else
+        {
             openGui(playerIn, (AdvancedTileEntity) worldIn.getTileEntity(pos));
-        return true;
+            return true;
+        }
     }
 
     @SideOnly(Side.CLIENT)
@@ -161,6 +182,30 @@ public class TileQuantumTank extends AdvancedTileEntity implements ITickable
     {
         sync();
         handleUpgrades();
+        pushFluid(world, getPos(), tank, EnumFacing.UP, EnumFacing.DOWN);
+    }
+    
+    
+    public static FluidStack pushFluid(World world, BlockPos pos, IFluidHandler fluid, EnumFacing... sides){
+        try
+        {
+            if (!world.isRemote)
+            {
+                for (EnumFacing side : sides)
+                {
+                    TileEntity tile = world.getTileEntity(pos.offset(side));
+                    if (tile != null && tile.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side.getOpposite()))
+                    {
+                        IFluidHandler other = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side.getOpposite());
+                        if (other != null && !(tile instanceof TileQuantumTank))
+                        {
+                            return fluid.drain(other.fill(fluid.drain(1000, false), true), true);
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {}
+        return null;
     }
 
     public void handleUpgrades()

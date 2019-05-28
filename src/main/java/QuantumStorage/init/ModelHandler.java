@@ -1,6 +1,7 @@
 package QuantumStorage.init;
 
 import QuantumStorage.compat.CompatHandler;
+import QuantumStorage.multiblock.BlockMultiStorage;
 import QuantumStorage.upgrades.ItemUpgrade;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -14,6 +15,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
+import java.util.Arrays;
+
 /**
  * Created by Gigabit101 on 07/03/2017.
  */
@@ -26,7 +29,6 @@ public class ModelHandler
         //Blocks
         registerItemModel(ModBlocks.DSU, 0);
         registerItemModel(ModBlocks.TANK, 0);
-        registerItemModel(ModBlocks.BARREL, 0);
         registerItemModel(ModBlocks.CRATER, 0);
         registerItemModel(ModBlocks.CHEST_IRON, 0);
         registerItemModel(ModBlocks.CHEST_GOLD, 0);
@@ -60,7 +62,13 @@ public class ModelHandler
             registerItemModel(CompatHandler.DISK, 0);
             registerItemModel(CompatHandler.DISK_FLUID, 0);
         }
+        for (i = 0; i < BlockMultiStorage.types.length; ++i)
+        {
+            String[] name = BlockMultiStorage.types.clone();
+            registerItemModel(ModBlocks.MULTIBLOCK_STORAGE, i, name[i]);
+        }
     }
+    
 
     static void registerItemModel(Item i, int meta)
     {
@@ -77,5 +85,9 @@ public class ModelHandler
     {
         ResourceLocation loc = i.getRegistryName();
         ModelLoader.setCustomModelResourceLocation(i, meta, new ModelResourceLocation(loc, "type=" + variant));
+    }
+    
+    static void registerItemModel(Block b, int meta, String variant) {
+        registerItemModel(Item.getItemFromBlock(b), meta, variant);
     }
 }

@@ -14,6 +14,11 @@ tile.quantumstorage.controller.name=Controller
 tile.quantumstorage.trashcan.name=Trash Can
 tile.quantumstorage.trashcanfluid.name=Fluid Trash Can
 
+tile.quantumstorage.multistorage.frame.name=Storage Frame
+tile.quantumstorage.multistorage.heat.name=Heat Conductor
+tile.quantumstorage.multistorage.storage.name=Storage Unit
+tile.quantumstorage.multistorage.io.name=Storage IO
+
 item.quantumstorage.upgrade.render.name=Render Upgrade
 item.quantumstorage.crate.name=Crate
 tooltipitem.quantumstorage.upgrade.render=Shift Click on DSU to allow Special Render
