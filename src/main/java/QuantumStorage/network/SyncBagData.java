@@ -13,7 +13,9 @@ public class SyncBagData implements IMessage
 {
     private NBTTagCompound nbt;
 
-    public SyncBagData() {}
+    public SyncBagData()
+    {
+    }
 
     public SyncBagData(NBTTagCompound nbt)
     {
@@ -37,9 +39,11 @@ public class SyncBagData implements IMessage
         @Override
         public IMessage onMessage(final SyncBagData message, MessageContext ctx)
         {
-            Minecraft.getMinecraft().addScheduledTask(new Runnable() {
+            Minecraft.getMinecraft().addScheduledTask(new Runnable()
+            {
                 @Override
-                public void run() {
+                public void run()
+                {
                     QuantumStorage.proxy.getClientBagProps().deserializeNBT(message.nbt);
                 }
             });

@@ -8,7 +8,8 @@ import reborncore.common.network.RegisterPacketEvent;
 public class MultiBlockPackets
 {
     @SubscribeEvent
-    public static void loadPackets(RegisterPacketEvent event) {
+    public static void loadPackets(RegisterPacketEvent event)
+    {
         event.registerPacket(PacketGui.class, Side.SERVER);
     }
 }

@@ -25,18 +25,18 @@ import java.util.List;
 public class TileController extends AdvancedTileEntity implements ITickable
 {
     List<IItemHandler> l = new ArrayList<>();
-
+    
     public void addInv(IItemHandler handler)
     {
         if (!l.contains(handler))
             l.add(handler);
     }
-
+    
     public List<IItemHandler> getItemHandlers()
     {
         return l;
     }
-
+    
     @Override
     public void update()
     {
@@ -69,60 +69,60 @@ public class TileController extends AdvancedTileEntity implements ITickable
 //            }
         }
     }
-
+    
     public static <T> List<T> getConnectedCapabilities(Capability<T> capability, World world, BlockPos pos)
     {
         final List<T> capabilities = new ArrayList<T>();
-
+        
         for (final EnumFacing side : EnumFacing.values())
         {
             final TileEntity tile = world.getTileEntity(pos.offset(side));
-
+            
             if (tile != null && !tile.isInvalid() && tile.hasCapability(capability, side.getOpposite()))
                 capabilities.add(tile.getCapability(capability, side.getOpposite()));
         }
         return capabilities;
     }
-
+    
     @Override
     public String getName()
     {
         return "controller";
     }
-
+    
     @Override
     public List<Slot> getSlots()
     {
         return null;
     }
-
+    
     @Override
     public TileEntity createNewTileEntity(World world, int meta)
     {
         return new TileController();
     }
-
+    
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
     {
         if (getItemHandlers() != null)
         {
             TileController te = (TileController) worldIn.getTileEntity(pos);
-
+            
             playerIn.sendMessage(new TextComponentString(te.getItemHandlers().toString()));
         }
         return true;
     }
-
+    
     @Override
     public Block getBlock()
     {
         return ModBlocks.CONTROLLER;
     }
-
+    
     @Override
     public void addRecipe()
     {
-
+    
     }
 }

@@ -12,6 +12,6 @@ public interface IQuantumBagProvider extends INBTSerializable<NBTTagCompound>
 {
     @Nonnull
     IItemHandler getBag(@Nonnull EnumDyeColor color);
-
+    
     void sync(EnumDyeColor color, @Nonnull EntityPlayerMP player);
 }

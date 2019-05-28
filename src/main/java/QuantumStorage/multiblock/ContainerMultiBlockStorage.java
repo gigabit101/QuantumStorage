@@ -10,12 +10,15 @@ public class ContainerMultiBlockStorage extends RebornContainer
     int page = 0;
     MultiBlockStorage storage;
     
-    public ContainerMultiBlockStorage(EntityPlayer player, MultiBlockStorage storage, int page) {
+    public ContainerMultiBlockStorage(EntityPlayer player, MultiBlockStorage storage, int page)
+    {
         this.page = page;
         this.storage = storage;
-        if (storage != null) {
+        if (storage != null)
+        {
             Inventory handler = storage.getInvForPage(page);
-            if (handler != null) {
+            if (handler != null)
+            {
                 drawSlotsForPage(page, handler);
             }
             
@@ -38,7 +41,8 @@ public class ContainerMultiBlockStorage extends RebornContainer
     }
     
     @Override
-    public boolean canInteractWith(EntityPlayer playerIn) {
+    public boolean canInteractWith(EntityPlayer playerIn)
+    {
         return true;
     }
 }

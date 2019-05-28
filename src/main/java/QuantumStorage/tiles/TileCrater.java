@@ -40,9 +40,9 @@ public class TileCrater extends AdvancedTileEntity implements ITickable
     {
         this.inv = new ItemStackHandler(3);
     }
-
+    
     int progress = 0;
-
+    
     @Override
     public void update()
     {
@@ -53,11 +53,11 @@ public class TileCrater extends AdvancedTileEntity implements ITickable
             {
                 ItemStack copy = getInv().getStackInSlot(1).copy();
                 ItemStack blankCrate = new ItemStack(ModItems.CRATE, 1);
-
+                
                 NBTTagCompound compound = new NBTTagCompound();
                 copy.writeToNBT(compound);
                 blankCrate.setTagCompound(compound);
-
+                
                 getInv().getStackInSlot(0).shrink(1);
                 getInv().setStackInSlot(1, ItemStack.EMPTY);
                 getInv().setStackInSlot(2, blankCrate);
@@ -66,7 +66,7 @@ public class TileCrater extends AdvancedTileEntity implements ITickable
             sync();
         }
     }
-
+    
     public boolean canWork()
     {
         if (!getInv().getStackInSlot(0).isEmpty() && getInv().getStackInSlot(0).getItem() instanceof ItemCrate && !getInv().getStackInSlot(0).hasTagCompound() && getInv().getStackInSlot(2).isEmpty())
@@ -78,13 +78,13 @@ public class TileCrater extends AdvancedTileEntity implements ITickable
         }
         return false;
     }
-
+    
     @Override
     public String getName()
     {
         return "crater";
     }
-
+    
     @Override
     public List<Slot> getSlots()
     {
@@ -92,29 +92,29 @@ public class TileCrater extends AdvancedTileEntity implements ITickable
         slots.add(new SlotCrate(getInv(), 0, 40, 40));
         slots.add(new SlotItemHandler(getInv(), 1, 60, 40));
         slots.add(new SlotOutputItemHandler(getInv(), 2, 120, 40));
-
+        
         return slots;
     }
-
+    
     @Override
     public TileEntity createNewTileEntity(World world, int meta)
     {
         return new TileCrater();
     }
-
+    
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
     {
         openGui(playerIn, (AdvancedTileEntity) worldIn.getTileEntity(pos));
         return true;
     }
-
+    
     @Override
     public Block getBlock()
     {
         return ModBlocks.CRATER;
     }
-
+    
     @Override
     public void addRecipe()
     {
@@ -130,7 +130,7 @@ public class TileCrater extends AdvancedTileEntity implements ITickable
                     'C', "chest");
         }
     }
-
+    
     @SideOnly(Side.CLIENT)
     @Override
     public void drawGuiContainerForegroundLayer(int mouseX, int mouseY, GuiContainer gui, int guiLeft, int guiTop)
@@ -139,7 +139,7 @@ public class TileCrater extends AdvancedTileEntity implements ITickable
         getBuilder().drawProgressBar(gui, progress, 100, 90, 42, mouseX - guiLeft, mouseY - guiTop);
         getBuilder().drawString(gui, TextFormatting.BLACK + "Crating Machine", 50, 5);
     }
-
+    
     @Override
     public void readFromNBT(NBTTagCompound compound)
     {
@@ -147,7 +147,7 @@ public class TileCrater extends AdvancedTileEntity implements ITickable
         getInv().deserializeNBT(compound);
         progress = compound.getInteger("progress");
     }
-
+    
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {

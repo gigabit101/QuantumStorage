@@ -17,10 +17,10 @@ public class ModItems
 {
     public static Item UPGRADE = new ItemUpgrade();
     public static Item CRATE = new ItemCrate();
-
+    
     public static Item BATTERY = new ItemQuantumBattery();
     public static Item BAG = new ItemQuantumBag();
-
+    
     @SubscribeEvent
     public static void init(RegistryEvent.Register<Item> event)
     {

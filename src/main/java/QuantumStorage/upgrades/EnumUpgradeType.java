@@ -7,9 +7,9 @@ package QuantumStorage.upgrades;
 public enum EnumUpgradeType
 {
     RENDER("render"),
-    VOID ("void"),
-    CREATIVE ("creative"),
-    WATER ("water");
+    VOID("void"),
+    CREATIVE("creative"),
+    WATER("water");
 
     private final String name;
 

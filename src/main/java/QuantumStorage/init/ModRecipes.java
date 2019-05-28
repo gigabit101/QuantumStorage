@@ -20,15 +20,15 @@ public class ModRecipes
                 " W ",
                 'W', "plankWood",
                 'P', new ItemStack(Items.PAPER));
-
+        
         RebornCraftingHelper.addShapedOreRecipe(new ItemStack(ModItems.UPGRADE, 1, 3),
                 " W ",
                 "WPW",
                 " W ",
                 'W', new ItemStack(Items.PAPER),
                 'P', new ItemStack(Items.WATER_BUCKET));
-
-        if(!ConfigQuantumStorage.disableQuantumBattery)
+        
+        if (!ConfigQuantumStorage.disableQuantumBattery)
         {
             RebornCraftingHelper.addShapedOreRecipe(new ItemStack(ModItems.BATTERY, 1),
                     " I ",
@@ -37,31 +37,31 @@ public class ModRecipes
                     'I', new ItemStack(Items.IRON_INGOT),
                     'R', new ItemStack(Blocks.REDSTONE_BLOCK));
         }
-
+        
         //TODO config
         RebornCraftingHelper.addShapedRecipe(new ItemStack(ModItems.BAG), "WSW", "WCW", "WWW", 'S', Items.STRING, 'C', new ItemStack(ModBlocks.CHEST_DIAMOND), 'W', new ItemStack(Blocks.WOOL, 1, OreDictionary.WILDCARD_VALUE));
-    
+        
         RebornCraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.MULTIBLOCK_STORAGE, 4, 0),
                 "III",
                 "ISI",
                 "III",
                 'S', "stone",
                 'I', new ItemStack(Items.IRON_INGOT));
-    
+        
         RebornCraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.MULTIBLOCK_STORAGE, 4, 1),
                 "IBI",
                 "BBB",
                 "IBI",
                 'B', new ItemStack(Blocks.IRON_BARS),
                 'I', new ItemStack(Items.IRON_INGOT));
-    
+        
         RebornCraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.MULTIBLOCK_STORAGE, 1, 2),
                 "III",
                 "ICI",
                 "III",
                 'C', new ItemStack(ModBlocks.CHEST_DIAMOND),
                 'I', new ItemStack(Items.IRON_INGOT));
-    
+        
         RebornCraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.MULTIBLOCK_STORAGE, 4, 3),
                 "III",
                 "ISI",
@@ -72,11 +72,11 @@ public class ModRecipes
         
         addColourRecipes();
     }
-
+    
     public static void addColourRecipes()
     {
         ItemStack bags = new ItemStack(ModItems.BAG, 1, OreDictionary.WILDCARD_VALUE);
-
+        
         RebornCraftingHelper.addShapelessOreRecipe(new ItemStack(ModItems.BAG, 1, 0), bags, "dyeWhite");
         RebornCraftingHelper.addShapelessOreRecipe(new ItemStack(ModItems.BAG, 1, 1), bags, "dyeOrange");
         RebornCraftingHelper.addShapelessOreRecipe(new ItemStack(ModItems.BAG, 1, 2), bags, "dyeMagenta");

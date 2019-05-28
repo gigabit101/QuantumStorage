@@ -48,12 +48,12 @@ public class TileQuantumStorageUnit extends AdvancedTileEntity implements ITicka
     int STORAGE = 0;
     int INPUT = 1;
     int OUTPUT = 2;
-
+    
     public TileQuantumStorageUnit()
     {
         this.inv = new DsuInventoryHandler();
     }
-
+    
     @Override
     public void update()
     {
@@ -71,7 +71,7 @@ public class TileQuantumStorageUnit extends AdvancedTileEntity implements ITicka
                     inv.setStackInSlot(INPUT, ItemStack.EMPTY);
                 }
             }
-
+            
             if (!inv.getStackInSlot(STORAGE).isEmpty())
             {
                 int size = inv.getStackInSlot(STORAGE).getMaxStackSize();
@@ -102,36 +102,36 @@ public class TileQuantumStorageUnit extends AdvancedTileEntity implements ITicka
             e.printStackTrace();
         }
     }
-
+    
     @Override
     public String getName()
     {
         return "quantum_storage_unit";
     }
-
+    
     @Override
     public List<Slot> getSlots()
     {
         List<Slot> slots = new ArrayList<>();
         slots.add(new SlotItemHandler(inv, 1, 80, 20));
         slots.add(new SlotOutputItemHandler(inv, 2, 80, 70));
-
+        
         return slots;
     }
-
+    
     @Override
     public TileEntity createNewTileEntity(World world, int meta)
     {
         return new TileQuantumStorageUnit();
     }
-
+    
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
     {
         openGui(playerIn, (AdvancedTileEntity) worldIn.getTileEntity(pos));
         return true;
     }
-
+    
     @SideOnly(Side.CLIENT)
     @Override
     public void drawGuiContainerForegroundLayer(int mouseX, int mouseY, GuiContainer gui, int guiLeft, int guiTop)
@@ -148,10 +148,10 @@ public class TileQuantumStorageUnit extends AdvancedTileEntity implements ITicka
                     formatQuantity(this.getInv().getStackInSlot(STORAGE).getCount() + this.getInv().getStackInSlot(OUTPUT).getCount()));
         }
     }
-
+    
     //TODO move to RC
     public static final DecimalFormat QUANTITY_FORMATTER = new DecimalFormat("####0.#", DecimalFormatSymbols.getInstance(Locale.US));
-
+    
     //TODO move to RC
     public static String formatQuantity(int qty)
     {
@@ -164,20 +164,20 @@ public class TileQuantumStorageUnit extends AdvancedTileEntity implements ITicka
         }
         return String.valueOf(qty);
     }
-
+    
     @Override
     public void readFromNBT(NBTTagCompound compound)
     {
         super.readFromNBT(compound);
         inv.deserializeNBT(compound);
     }
-
+    
     @Override
     public Block getBlock()
     {
         return ModBlocks.DSU;
     }
-
+    
     @Override
     public void addRecipe()
     {
@@ -190,11 +190,11 @@ public class TileQuantumStorageUnit extends AdvancedTileEntity implements ITicka
                     'I', new ItemStack(Items.IRON_INGOT),
                     'O', new ItemStack(Blocks.OBSIDIAN),
                     'C', new ItemStack(ModBlocks.CHEST_DIAMOND));
-
+            
             RebornCraftingHelper.addShapelessRecipe(new ItemStack(ModBlocks.DSU), new ItemStack(ModBlocks.DSU));
         }
     }
-
+    
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {
@@ -202,13 +202,13 @@ public class TileQuantumStorageUnit extends AdvancedTileEntity implements ITicka
         compound.merge(inv.serializeNBT());
         return compound;
     }
-
+    
     @Override
     public BlockRenderLayer getBlockLayer()
     {
         return BlockRenderLayer.CUTOUT;
     }
-
+    
     @Override
     public boolean hasCapability(Capability<?> capability, EnumFacing facing)
     {
@@ -218,7 +218,7 @@ public class TileQuantumStorageUnit extends AdvancedTileEntity implements ITicka
         }
         return super.hasCapability(capability, facing);
     }
-
+    
     @Override
     public <T> T getCapability(Capability<T> capability, EnumFacing facing)
     {
@@ -228,9 +228,11 @@ public class TileQuantumStorageUnit extends AdvancedTileEntity implements ITicka
         }
         return super.getCapability(capability, facing);
     }
-
-    public void handleUpgrades() {}
-
+    
+    public void handleUpgrades()
+    {
+    }
+    
     @Override
     public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag advanced)
     {
@@ -240,16 +242,16 @@ public class TileQuantumStorageUnit extends AdvancedTileEntity implements ITicka
             {
                 NBTTagList tagList = stack.getTagCompound().getCompoundTag("tileEntity").getTagList("Items", Constants.NBT.TAG_COMPOUND);
                 ItemStack stack1 = ItemStack.EMPTY;
-
+                
                 NBTTagCompound itemTags = tagList.getCompoundTagAt(0);
                 NBTTagCompound itemTags2 = tagList.getCompoundTagAt(2);
-
+                
                 int count = itemTags.getInteger("SizeSpecial") + itemTags2.getInteger("SizeSpecial");
-
+                
                 stack1 = new ItemStack(itemTags);
                 stack1.setCount(count);
-
-                if(!stack1.isEmpty())
+                
+                if (!stack1.isEmpty())
                 {
                     tooltip.add(TextFormatting.GOLD + "Stored Item Type: " + stack1.getCount() + " " + stack1.getDisplayName());
                 }

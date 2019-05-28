@@ -7,9 +7,16 @@ import QuantumStorage.api.IQuantumBagProvider;
  */
 public class CommonProxy
 {
-    public void registerRenders() {}
-
-    public void registerColors() {}
-
-    public IQuantumBagProvider getClientBagProps() { return null; }
+    public void registerRenders()
+    {
+    }
+    
+    public void registerColors()
+    {
+    }
+    
+    public IQuantumBagProvider getClientBagProps()
+    {
+        return null;
+    }
 }

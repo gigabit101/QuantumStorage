@@ -20,7 +20,7 @@ public class SlotUpgrade extends SlotItemHandler
     @Override
     public boolean isItemValid(@Nonnull ItemStack stack)
     {
-        if(stack.getItem() instanceof ItemUpgrade)
+        if (stack.getItem() instanceof ItemUpgrade)
         {
             return true;
         }

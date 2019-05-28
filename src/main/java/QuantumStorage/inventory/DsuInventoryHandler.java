@@ -12,12 +12,12 @@ import net.minecraftforge.items.ItemStackHandler;
 public class DsuInventoryHandler extends ItemStackHandler
 {
     int STORAGE = 0;
-
+    
     public DsuInventoryHandler()
     {
         super(3);
     }
-
+    
     @Override
     protected int getStackLimit(int slot, ItemStack stack)
     {
@@ -27,7 +27,7 @@ public class DsuInventoryHandler extends ItemStackHandler
         }
         return 64;
     }
-
+    
     @Override
     public NBTTagCompound serializeNBT()
     {
@@ -48,7 +48,7 @@ public class DsuInventoryHandler extends ItemStackHandler
         nbt.setInteger("Size", stacks.size());
         return nbt;
     }
-
+    
     @Override
     public void deserializeNBT(NBTTagCompound nbt)
     {
@@ -58,7 +58,7 @@ public class DsuInventoryHandler extends ItemStackHandler
         {
             NBTTagCompound itemTags = tagList.getCompoundTagAt(i);
             int slot = itemTags.getInteger("Slot");
-
+            
             if (slot >= 0 && slot < stacks.size())
             {
                 stacks.set(slot, new ItemStack(itemTags));

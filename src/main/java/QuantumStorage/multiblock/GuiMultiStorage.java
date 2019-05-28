@@ -44,7 +44,8 @@ public class GuiMultiStorage extends GuiContainer
     {
         builder.drawDefaultBackground(this, guiLeft, guiTop, xSize, ySize);
         builder.drawPlayerSlots(this, guiLeft + xSize / 2, guiTop + 140, true);
-        if(storage.invs.size() != 0){
+        if (storage.invs.size() != 0)
+        {
             drawSlots(13, 6, maxSlotsPerPage);
         }
     }
@@ -57,7 +58,7 @@ public class GuiMultiStorage extends GuiContainer
             for (int x = 0; x < col; x++)
             {
                 i++;
-                if(i <= max)
+                if (i <= max)
                     builder.drawSlot(this, guiLeft + 8 + x * 18, guiTop + 20 + y * 18);
             }
         }
@@ -66,34 +67,42 @@ public class GuiMultiStorage extends GuiContainer
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
     {
-        if(storage.invs.size() == 0){
-            drawCenteredString(Minecraft.getMinecraft().fontRenderer, "Multiblock must contain at least 1 storage block",  xSize /2 , 75, Color.RED.getRGB());
-        } else {
+        if (storage.invs.size() == 0)
+        {
+            drawCenteredString(Minecraft.getMinecraft().fontRenderer, "Multiblock must contain at least 1 storage block", xSize / 2, 75, Color.RED.getRGB());
+        } else
+        {
             this.drawCenteredString(Minecraft.getMinecraft().fontRenderer, "Page " + page + " of " + storage.invs.size(), 125, 130, 4210752);
         }
     }
     
     @Override
-    public void drawCenteredString(FontRenderer fontRendererIn, String text, int x, int y, int color) {
-        fontRendererIn.drawString(text, (float)(x - fontRendererIn.getStringWidth(text) / 2), (float)y, color, false);
+    public void drawCenteredString(FontRenderer fontRendererIn, String text, int x, int y, int color)
+    {
+        fontRendererIn.drawString(text, (float) (x - fontRendererIn.getStringWidth(text) / 2), (float) y, color, false);
     }
     
     @Override
-    public void initGui() {
+    public void initGui()
+    {
         super.initGui();
         this.buttonList.clear();
-        if(storage.invs.size() != 0){
-            if(page > 1){
-                this.buttonList.add(new GuiButton(this.page-2, this.guiLeft+13, this.guiTop+172, 20, 20, "<"));
+        if (storage.invs.size() != 0)
+        {
+            if (page > 1)
+            {
+                this.buttonList.add(new GuiButton(this.page - 2, this.guiLeft + 13, this.guiTop + 172, 20, 20, "<"));
             }
-            if(storage.invs.size() > page){
-                this.buttonList.add(new GuiButton(this.page, this.guiLeft+209, this.guiTop+172, 20, 20, ">"));
+            if (storage.invs.size() > page)
+            {
+                this.buttonList.add(new GuiButton(this.page, this.guiLeft + 209, this.guiTop + 172, 20, 20, ">"));
             }
         }
     }
     
     @Override
-    protected void actionPerformed(GuiButton button) throws IOException {
+    protected void actionPerformed(GuiButton button) throws IOException
+    {
         super.actionPerformed(button);
         NetworkManager.sendToServer(new PacketGui(button.id, pos));
     }

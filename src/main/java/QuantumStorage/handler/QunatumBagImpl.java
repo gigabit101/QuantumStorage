@@ -34,19 +34,20 @@ public final class QunatumBagImpl
             {
                 return instance.serializeNBT();
             }
-
+            
             @Override
-            public void readNBT(Capability<IQuantumBagProvider> capability, IQuantumBagProvider instance, EnumFacing side, NBTBase nbt) {
+            public void readNBT(Capability<IQuantumBagProvider> capability, IQuantumBagProvider instance, EnumFacing side, NBTBase nbt)
+            {
                 if (nbt instanceof NBTTagCompound)
                     instance.deserializeNBT(((NBTTagCompound) nbt));
             }
         }, DefaultImpl.class);
     }
-
+    
     private static class DefaultImpl implements IQuantumBagProvider
     {
         private final Map<EnumDyeColor, IItemHandler> inventories = new EnumMap<>(EnumDyeColor.class);
-
+        
         @Nonnull
         @Override
         public IItemHandler getBag(@Nonnull EnumDyeColor color)
@@ -55,20 +56,20 @@ public final class QunatumBagImpl
             {
                 inventories.put(color, new ItemStackHandler(104));
             }
-
+            
             return inventories.get(color);
         }
-
+        
         @Override
         public void sync(@Nullable EnumDyeColor color, @Nonnull EntityPlayerMP player)
         {
             PacketHandler.sendTo(new SyncBagData(writeNBT(color)), player);
         }
-
+        
         private NBTTagCompound writeNBT(EnumDyeColor color)
         {
             NBTTagCompound ret = new NBTTagCompound();
-            EnumDyeColor[] colors = color == null ? EnumDyeColor.values() : new EnumDyeColor[] { color };
+            EnumDyeColor[] colors = color == null ? EnumDyeColor.values() : new EnumDyeColor[]{color};
             for (EnumDyeColor c : colors)
             {
                 if (inventories.containsKey(c))
@@ -79,13 +80,13 @@ public final class QunatumBagImpl
             }
             return ret;
         }
-
+        
         @Override
         public NBTTagCompound serializeNBT()
         {
             return writeNBT(null);
         }
-
+        
         @Override
         public void deserializeNBT(NBTTagCompound nbt)
         {
@@ -100,20 +101,20 @@ public final class QunatumBagImpl
             }
         }
     }
-
+    
     public static class Provider implements ICapabilitySerializable<NBTTagCompound>
     {
-
+        
         public static final ResourceLocation NAME = new ResourceLocation(QuantumStorage.MOD_NAME, "quantum_bags");
-
+        
         private final IQuantumBagProvider cap = new DefaultImpl();
-
+        
         @Override
         public boolean hasCapability(@Nonnull Capability<?> capability, EnumFacing facing)
         {
             return capability == QuantumStorageAPI.QUANTUM_BAG_PROVIDER_CAPABILITY;
         }
-
+        
         @Override
         public <T> T getCapability(@Nonnull Capability<T> capability, EnumFacing facing)
         {
@@ -121,22 +122,24 @@ public final class QunatumBagImpl
             {
                 return QuantumStorageAPI.QUANTUM_BAG_PROVIDER_CAPABILITY.cast(cap);
             }
-
+            
             return null;
         }
-
+        
         @Override
         public NBTTagCompound serializeNBT()
         {
             return cap.serializeNBT();
         }
-
+        
         @Override
         public void deserializeNBT(NBTTagCompound nbt)
         {
             cap.deserializeNBT(nbt);
         }
     }
-
-    private QunatumBagImpl() {}
+    
+    private QunatumBagImpl()
+    {
+    }
 }

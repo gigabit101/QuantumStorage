@@ -12,12 +12,12 @@ import net.minecraft.item.ItemStack;
 public class CreativeTabQuantumStorage extends CreativeTabs
 {
     public static CreativeTabQuantumStorage INSTANCE = new CreativeTabQuantumStorage();
-
+    
     public CreativeTabQuantumStorage()
     {
         super(QuantumStorage.MOD_ID);
     }
-
+    
     @Override
     public ItemStack getTabIconItem()
     {

@@ -13,14 +13,14 @@ public class RecipeQuantumCrafter
     Object input;
     ItemStack output;
     int time;
-
+    
     public RecipeQuantumCrafter(Object input, ItemStack output, int time)
     {
         this.input = input;
         this.output = output;
         this.time = time;
     }
-
+    
     public static ItemStack getOutputFrom(ItemStack input)
     {
         if (input != null)
@@ -36,7 +36,7 @@ public class RecipeQuantumCrafter
         }
         return null;
     }
-
+    
     public static int getTimeFromStack(ItemStack input)
     {
         if (input != null)
@@ -51,7 +51,7 @@ public class RecipeQuantumCrafter
         }
         return 0;
     }
-
+    
     public boolean matches(ItemStack stack)
     {
         if (input instanceof ItemStack)
@@ -63,11 +63,11 @@ public class RecipeQuantumCrafter
             }
             return stack.isItemEqual(inputCopy);
         }
-
+        
         if (input instanceof String)
         {
             List<ItemStack> validStacks = OreDictionary.getOres((String) input);
-
+            
             for (ItemStack ostack : validStacks)
             {
                 ItemStack cstack = ostack.copy();
@@ -83,17 +83,17 @@ public class RecipeQuantumCrafter
         }
         return false;
     }
-
+    
     public Object getInput()
     {
         return input;
     }
-
+    
     public ItemStack getOutput()
     {
         return output;
     }
-
+    
     public int getTime()
     {
         return time;

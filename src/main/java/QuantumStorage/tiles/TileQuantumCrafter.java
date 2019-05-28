@@ -36,23 +36,23 @@ import java.util.List;
 public class TileQuantumCrafter extends AdvancedTileEntity implements ITickable
 {
     int progress = 0;
-
+    
     public TileQuantumCrafter()
     {
         this.inv = new ItemStackHandler(2);
     }
-
+    
     @Override
     public void update()
     {
         final ItemStackHandler inventory = (ItemStackHandler) world.getTileEntity(pos).getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-
+        
         if (!world.isRemote)
         {
             if (!inventory.getStackInSlot(0).isEmpty() && inventory.getStackInSlot(1).isEmpty())
             {
                 ItemStack input = inventory.getStackInSlot(0);
-
+                
                 if (RecipeQuantumCrafter.getOutputFrom(input) != null)
                 {
                     progress++;
@@ -67,31 +67,31 @@ public class TileQuantumCrafter extends AdvancedTileEntity implements ITickable
             }
         }
     }
-
+    
     @SideOnly(Side.CLIENT)
     @Override
     public void drawGuiContainerForegroundLayer(int mouseX, int mouseY, GuiContainer gui, int guiLeft, int guiTop)
     {
         int max = 100;
-
+        
         if (RecipeQuantumCrafter.getTimeFromStack(inv.getStackInSlot(0)) != 0)
         {
             max = RecipeQuantumCrafter.getTimeFromStack(inv.getStackInSlot(0));
         }
-
+        
         getBuilder().drawProgressBar(gui, progress, max, 80, 40, mouseX - guiLeft, mouseY - guiTop);
-
+        
         getBuilder().drawString(gui, TextFormatting.BLACK + "Progress = " + progress + " / " + max, 8, 8);
-
+        
         super.drawGuiContainerForegroundLayer(mouseX, mouseY, gui, guiLeft, guiTop);
     }
-
+    
     @Override
     public String getName()
     {
         return "quantumcrafter";
     }
-
+    
     @Override
     public List<Slot> getSlots()
     {
@@ -100,26 +100,26 @@ public class TileQuantumCrafter extends AdvancedTileEntity implements ITickable
         slots.add(new SlotOutputItemHandler(getInv(), 1, 120, 40));
         return slots;
     }
-
+    
     @Override
     public TileEntity createNewTileEntity(World world, int meta)
     {
         return new TileQuantumCrafter();
     }
-
+    
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
     {
         openGui(playerIn, (AdvancedTileEntity) worldIn.getTileEntity(pos));
         return true;
     }
-
+    
     @Override
     public Block getBlock()
     {
         return ModBlocks.QUANTUM_CRAFTER;
     }
-
+    
     @Override
     public void addRecipe()
     {
@@ -134,7 +134,7 @@ public class TileQuantumCrafter extends AdvancedTileEntity implements ITickable
                     'C', "chest");
         }
     }
-
+    
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {
@@ -143,7 +143,7 @@ public class TileQuantumCrafter extends AdvancedTileEntity implements ITickable
         compound.setInteger("progress", progress);
         return compound;
     }
-
+    
     @Override
     public void readFromNBT(NBTTagCompound compound)
     {
@@ -151,7 +151,7 @@ public class TileQuantumCrafter extends AdvancedTileEntity implements ITickable
         inv.deserializeNBT(compound);
         progress = compound.getInteger("progress");
     }
-
+    
     @Override
     public boolean hasCapability(Capability<?> capability, EnumFacing facing)
     {
@@ -161,7 +161,7 @@ public class TileQuantumCrafter extends AdvancedTileEntity implements ITickable
         }
         return super.hasCapability(capability, facing);
     }
-
+    
     @Override
     public <T> T getCapability(Capability<T> capability, EnumFacing facing)
     {

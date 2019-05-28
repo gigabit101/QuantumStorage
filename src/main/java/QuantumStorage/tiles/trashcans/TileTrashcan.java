@@ -33,13 +33,13 @@ public class TileTrashcan extends AdvancedTileEntity implements ITickable
     {
         this.inv = new ItemStackHandler(1);
     }
-
+    
     @Override
     public String getName()
     {
         return "trashcan";
     }
-
+    
     @Override
     public List<Slot> getSlots()
     {
@@ -47,30 +47,30 @@ public class TileTrashcan extends AdvancedTileEntity implements ITickable
         slots.add(new SlotItemHandler(inv, 0, 80, 50));
         return slots;
     }
-
+    
     @Override
     public TileEntity createNewTileEntity(World world, int meta)
     {
         return new TileTrashcan();
     }
-
+    
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
     {
         openGui(playerIn, (AdvancedTileEntity) worldIn.getTileEntity(pos));
         return true;
     }
-
+    
     @Override
     public Block getBlock()
     {
         return ModBlocks.TRASH_CAN;
     }
-
+    
     @Override
     public void addRecipe()
     {
-        if(!ConfigQuantumStorage.disableTrashcan)
+        if (!ConfigQuantumStorage.disableTrashcan)
         {
             RebornCraftingHelper.addShapedOreRecipe(new ItemStack(getBlock()),
                     "SSS",
@@ -80,18 +80,18 @@ public class TileTrashcan extends AdvancedTileEntity implements ITickable
                     'H', new ItemStack(Blocks.CHEST),
                     'S', new ItemStack(Blocks.STONE_SLAB));
         }
-
+        
     }
-
+    
     @Override
     public void update()
     {
-        if(!inv.getStackInSlot(0).isEmpty())
+        if (!inv.getStackInSlot(0).isEmpty())
         {
             inv.setStackInSlot(0, ItemStack.EMPTY);
         }
     }
-
+    
     @Override
     public boolean hasCapability(Capability<?> capability, EnumFacing facing)
     {
@@ -101,7 +101,7 @@ public class TileTrashcan extends AdvancedTileEntity implements ITickable
         }
         return super.hasCapability(capability, facing);
     }
-
+    
     @Override
     public <T> T getCapability(Capability<T> capability, EnumFacing facing)
     {
@@ -111,7 +111,7 @@ public class TileTrashcan extends AdvancedTileEntity implements ITickable
         }
         return super.getCapability(capability, facing);
     }
-
+    
     @Override
     public ItemStack getDropWithNBT()
     {

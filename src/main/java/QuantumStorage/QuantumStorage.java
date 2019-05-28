@@ -28,44 +28,44 @@ public class QuantumStorage
     public static final String MOD_NAME = "QuantumStorage";
     public static final String MOD_VERSION = "@VERSION@";
     public static final String MOD_DEPENDENCIES = "required-after:forge@[14.21.0.2359,);required-after:reborncore";
-
+    
     public static ConfigQuantumStorage config;
-
+    
     @Mod.Instance
     public static QuantumStorage INSTANCE;
-
+    
     @SidedProxy(clientSide = "QuantumStorage.proxy.ClientProxy", serverSide = "QuantumStorage.proxy.CommonProxy")
     public static CommonProxy proxy;
-
+    
     @Mod.EventHandler
     public void preinit(FMLPreInitializationEvent event)
     {
         INSTANCE = this;
-
+        
         String path = event.getSuggestedConfigurationFile().getAbsolutePath().replace(QuantumStorage.MOD_ID, "QuantumStorage");
-
+        
         config = ConfigQuantumStorage.init(new File(path));
-
+        
         ModBlocks.init();
-
+        
         ModRecipes.init();
-
+        
         if (Loader.isModLoaded("refinedstorage"))
         {
             CompatHandler.init();
         }
-
+        
         proxy.registerRenders();
-
+        
         PacketHandler.register();
-
+        
         QunatumBagImpl.init();
-
+        
         NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, new GuiHandler());
         
         MinecraftForge.EVENT_BUS.register(MultiBlockPackets.class);
     }
-
+    
     @Mod.EventHandler
     public void init(FMLInitializationEvent event)
     {

@@ -40,21 +40,21 @@ public class TileChestQuantum extends AdvancedTileEntity
     {
         this.inv = new ItemStackHandler(192);
     }
-
+    
     @Override
     public String getName()
     {
         return "chest_quantum";
     }
-
+    
     protected static final AxisAlignedBB CHEST_AABB = new AxisAlignedBB(0.0625D, 0.0D, 0.0625D, 0.9375D, 0.875D, 0.9375D);
-
+    
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
         return CHEST_AABB;
     }
-
+    
     @Override
     public List<Slot> getSlots()
     {
@@ -70,7 +70,7 @@ public class TileChestQuantum extends AdvancedTileEntity
         }
         return slots;
     }
-
+    
     @SideOnly(Side.CLIENT)
     @Override
     public void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY, int guiLeft, int guiTop, int xSize, int ySize, AdvancedGui gui)
@@ -86,50 +86,50 @@ public class TileChestQuantum extends AdvancedTileEntity
             }
         }
     }
-
+    
     @Override
     public int getXSize()
     {
         return 250;
     }
-
+    
     @Override
     public int getYsize()
     {
         return 240;
     }
-
+    
     @Override
     public int inventoryOffsetX()
     {
         return 45;
     }
-
+    
     @Override
     public int inventoryOffsetY()
     {
         return 151;
     }
-
+    
     @Override
     public TileEntity createNewTileEntity(World world, int meta)
     {
         return new TileChestQuantum();
     }
-
+    
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
     {
         openGui(playerIn, (AdvancedTileEntity) worldIn.getTileEntity(pos));
         return true;
     }
-
+    
     @Override
     public Block getBlock()
     {
         return ModBlocks.CHEST_QUANIUM;
     }
-
+    
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {
@@ -137,14 +137,14 @@ public class TileChestQuantum extends AdvancedTileEntity
         compound.merge(inv.serializeNBT());
         return compound;
     }
-
+    
     @Override
     public void readFromNBT(NBTTagCompound compound)
     {
         super.readFromNBT(compound);
         inv.deserializeNBT(compound);
     }
-
+    
     @Override
     public boolean hasCapability(Capability<?> capability, EnumFacing facing)
     {
@@ -154,7 +154,7 @@ public class TileChestQuantum extends AdvancedTileEntity
         }
         return super.hasCapability(capability, facing);
     }
-
+    
     @Override
     public <T> T getCapability(Capability<T> capability, EnumFacing facing)
     {
@@ -164,7 +164,7 @@ public class TileChestQuantum extends AdvancedTileEntity
         }
         return super.getCapability(capability, facing);
     }
-
+    
     @Override
     public void addRecipe()
     {
@@ -180,7 +180,7 @@ public class TileChestQuantum extends AdvancedTileEntity
                     'C', new ItemStack(ModBlocks.CHEST_DIAMOND));
         }
     }
-
+    
     @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag advanced)
