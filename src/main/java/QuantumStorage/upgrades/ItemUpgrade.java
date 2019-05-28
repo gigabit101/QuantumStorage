@@ -41,15 +41,11 @@ public class ItemUpgrade extends ItemBase
         {
             TileQuantumStorageUnit dsu = (TileQuantumStorageUnit) worldIn.getTileEntity(pos);
             int meta = player.getHeldItem(hand).getItemDamage();
-            if (meta == 0)
-            {
-                dsu.getTileData().setInteger("facing", facing.getIndex());
-            }
             if (meta == 2)//Creative
             {
                 if (dsu.inv.getStackInSlot(0) != ItemStack.EMPTY)
-                {//TODO change max int to config value
-                    dsu.inv.getStackInSlot(0).setCount(Integer.MAX_VALUE / 2 - 64);
+                {
+                    dsu.inv.getStackInSlot(0).setCount(Integer.MAX_VALUE - 128);
                 }
             }
         }
