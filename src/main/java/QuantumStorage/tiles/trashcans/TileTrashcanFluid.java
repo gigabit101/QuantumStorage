@@ -14,7 +14,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
@@ -34,29 +33,30 @@ public class TileTrashcanFluid extends AdvancedTileEntity
     FluidTank tank = new FluidTank(Integer.MAX_VALUE)
     {
         @Override
-        public int fill(FluidStack resource, boolean doFill) {
+        public int fill(FluidStack resource, boolean doFill)
+        {
             return resource.amount;
         }
     };
-
+    
     @Override
     public String getName()
     {
         return "trashcanfluid";
     }
-
+    
     @Override
     public List<Slot> getSlots()
     {
         return null;
     }
-
+    
     @Override
     public TileEntity createNewTileEntity(World world, int meta)
     {
         return new TileTrashcanFluid();
     }
-
+    
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
     {
@@ -66,17 +66,17 @@ public class TileTrashcanFluid extends AdvancedTileEntity
         }
         return true;
     }
-
+    
     @Override
     public Block getBlock()
     {
         return ModBlocks.TRASH_CAN_FLUID;
     }
-
+    
     @Override
     public void addRecipe()
     {
-        if(!ConfigQuantumStorage.disableTrashcanFluid)
+        if (!ConfigQuantumStorage.disableTrashcanFluid)
         {
             RebornCraftingHelper.addShapedOreRecipe(new ItemStack(getBlock()),
                     "SSS",
@@ -87,7 +87,7 @@ public class TileTrashcanFluid extends AdvancedTileEntity
                     'S', new ItemStack(Blocks.STONE_SLAB));
         }
     }
-
+    
     @Override
     public boolean hasCapability(Capability<?> capability, EnumFacing facing)
     {
@@ -97,7 +97,7 @@ public class TileTrashcanFluid extends AdvancedTileEntity
         }
         return super.hasCapability(capability, facing);
     }
-
+    
     @Override
     public <T> T getCapability(Capability<T> capability, EnumFacing facing)
     {
@@ -107,16 +107,18 @@ public class TileTrashcanFluid extends AdvancedTileEntity
         }
         return super.getCapability(capability, facing);
     }
-
+    
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {
         return compound;
     }
-
+    
     @Override
-    public void readFromNBT(NBTTagCompound compound){}
-
+    public void readFromNBT(NBTTagCompound compound)
+    {
+    }
+    
     @Override
     public ItemStack getDropWithNBT()
     {

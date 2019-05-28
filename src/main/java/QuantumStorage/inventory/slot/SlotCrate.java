@@ -1,7 +1,6 @@
 package QuantumStorage.inventory.slot;
 
 import QuantumStorage.items.ItemCrate;
-import QuantumStorage.upgrades.ItemUpgrade;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
@@ -17,11 +16,11 @@ public class SlotCrate extends SlotItemHandler
     {
         super(itemHandler, index, xPosition, yPosition);
     }
-
+    
     @Override
     public boolean isItemValid(@Nonnull ItemStack stack)
     {
-        if(stack.getItem() instanceof ItemCrate)
+        if (stack.getItem() instanceof ItemCrate)
         {
             return true;
         }

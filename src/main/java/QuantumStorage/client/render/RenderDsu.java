@@ -2,7 +2,6 @@ package QuantumStorage.client.render;
 
 import QuantumStorage.tiles.TileQuantumStorageUnit;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.ItemBlock;

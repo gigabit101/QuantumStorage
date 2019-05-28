@@ -8,7 +8,6 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
@@ -59,7 +58,7 @@ public class ItemUpgrade extends ItemBase
         {
             TileQuantumTank tank = (TileQuantumTank) worldIn.getTileEntity(pos);
 
-            if(meta == 3)//water
+            if (meta == 3)//water
             {
                 tank.getTileData().setBoolean("infin_water", true);
             }
@@ -70,7 +69,7 @@ public class ItemUpgrade extends ItemBase
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list)
     {
-        if(!isInCreativeTab(tab))
+        if (!isInCreativeTab(tab))
         {
             return;
         }

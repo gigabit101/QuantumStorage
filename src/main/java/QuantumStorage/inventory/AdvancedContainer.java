@@ -7,8 +7,6 @@ import QuantumStorage.tiles.chests.TileChestIron;
 import invtweaks.api.container.ChestContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.SlotItemHandler;
 import reborncore.common.container.RebornContainer;
 
 /**
@@ -37,15 +35,15 @@ public class AdvancedContainer extends RebornContainer
     @ChestContainer.RowSizeCallback
     public int getNumColumns()
     {
-        if(machine instanceof TileChestIron)
+        if (machine instanceof TileChestIron)
         {
             return 9;
         }
-        if(machine instanceof TileChestGold)
+        if (machine instanceof TileChestGold)
         {
             return 9;
         }
-        if(machine instanceof TileChestDiamond)
+        if (machine instanceof TileChestDiamond)
         {
             return 13;
         }

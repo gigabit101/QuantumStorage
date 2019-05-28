@@ -12,7 +12,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreDictionary;
-import reborncore.client.guibuilder.GuiBuilder;
 
 import java.util.List;
 
@@ -61,6 +60,6 @@ public class CrafterRecipeWrapper extends BlankRecipeWrapper
     {
         super.drawInfo(minecraft, i, i1, i2, i3);
         progress.draw(minecraft, 40, 24);
-        minecraft.fontRenderer.drawString( time / 20 + " Seconds", 10, 45, TextFormatting.BLACK.getColorIndex());
+        minecraft.fontRenderer.drawString(time / 20 + " Seconds", 10, 45, TextFormatting.BLACK.getColorIndex());
     }
 }

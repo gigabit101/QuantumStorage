@@ -2,22 +2,11 @@ package QuantumStorage.client.render;
 
 import QuantumStorage.tiles.TileQuantumTank;
 import QuantumStorage.utils.RenderUtils;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
-import net.minecraftforge.fml.client.FMLClientHandler;
 import org.lwjgl.opengl.GL11;
 
 public class TankRender extends TileEntitySpecialRenderer<TileQuantumTank>
@@ -58,8 +47,7 @@ public class TankRender extends TileEntitySpecialRenderer<TileQuantumTank>
             if (renderOffset > 1.2f || renderOffset < -1.2f)
             {
                 renderOffset -= (renderOffset / 12f + 0.1f) * partialTicks;
-            }
-            else
+            } else
             {
                 renderOffset = 0;
             }

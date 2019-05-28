@@ -6,7 +6,8 @@ import QuantumStorage.api.QuantumStorageAPI;
 import QuantumStorage.client.render.RenderDsu;
 import QuantumStorage.client.render.TankRender;
 import QuantumStorage.init.ModItems;
-import QuantumStorage.tiles.*;
+import QuantumStorage.tiles.TileQuantumStorageUnit;
+import QuantumStorage.tiles.TileQuantumTank;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.Item;
@@ -33,14 +34,19 @@ public class ClientProxy extends CommonProxy
     }
 
     @Override
-    public void registerColors() {
-        Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new IItemColor() {
+    public void registerColors()
+    {
+        Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new IItemColor()
+        {
             @Override
-            public int colorMultiplier(ItemStack stack, int tintIndex) {
+            public int colorMultiplier(ItemStack stack, int tintIndex)
+            {
                 Item item = stack.getItem();
-                if (item instanceof IColorable) {
+                if (item instanceof IColorable)
+                {
                     return ((IColorable) item).getColorFromItemStack(stack, tintIndex);
-                } else {
+                } else
+                {
                     return 0xFFFFFF;
                 }
             }

@@ -1,7 +1,7 @@
 package QuantumStorage.multiblock;
 
-import QuantumStorage.QuantumStorage;
 import QuantumStorage.GuiHandler;
+import QuantumStorage.QuantumStorage;
 import QuantumStorage.client.CreativeTabQuantumStorage;
 import QuantumStorage.network.PacketGui;
 import com.google.common.collect.Lists;
@@ -33,12 +33,13 @@ import java.util.List;
 
 public class BlockMultiStorage extends BlockMultiblockBase
 {
-    public static final String[] types = new String[] { "frame", "heat", "storage", "io" };
+    public static final String[] types = new String[]{"frame", "heat", "storage", "io"};
     private static final List<String> typesList = Lists.newArrayList(ArrayUtils.arrayToLowercase(types));
     
     public static final PropertyString VARIANTS = new PropertyString("type", types);
     
-    public BlockMultiStorage() {
+    public BlockMultiStorage()
+    {
         super(Material.IRON);
         setCreativeTab(CreativeTabQuantumStorage.INSTANCE);
         setUnlocalizedName(QuantumStorage.MOD_ID + ".multistorage");
@@ -51,10 +52,10 @@ public class BlockMultiStorage extends BlockMultiblockBase
     {
         IBlockState state = this.getStateFromMeta(meta);
         
-        if(state.getBlock() instanceof BlockMultiStorage && state.getValue(BlockMultiStorage.VARIANTS).equals("io")) {
+        if (state.getBlock() instanceof BlockMultiStorage && state.getValue(BlockMultiStorage.VARIANTS).equals("io"))
+        {
             return new TileIoPort();
-        }
-        else if(state.getBlock() instanceof BlockMultiStorage && !state.getValue(BlockMultiStorage.VARIANTS).equals("io"))
+        } else if (state.getBlock() instanceof BlockMultiStorage && !state.getValue(BlockMultiStorage.VARIANTS).equals("io"))
         {
             return new TileMultiStorage(getStateFromMeta(meta).getValue(VARIANTS));
         }
@@ -62,17 +63,23 @@ public class BlockMultiStorage extends BlockMultiblockBase
     }
     
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
+    {
         TileMultiStorage tile = (TileMultiStorage) worldIn.getTileEntity(pos);
-        if (tile.getMultiblockController() != null) {
-            if (!tile.getMultiblockController().isAssembled()) {
-                if (tile.getMultiblockController().getLastValidationException() != null) {
-                    if (worldIn.isRemote && playerIn.getHeldItem(EnumHand.MAIN_HAND).isEmpty()) {
+        if (tile.getMultiblockController() != null)
+        {
+            if (!tile.getMultiblockController().isAssembled())
+            {
+                if (tile.getMultiblockController().getLastValidationException() != null)
+                {
+                    if (worldIn.isRemote && playerIn.getHeldItem(EnumHand.MAIN_HAND).isEmpty())
+                    {
                         ChatUtils.sendNoSpamMessages(42, new TextComponentString(tile.getMultiblockController().getLastValidationException().getMessage()));
                     }
                     return false;
                 }
-            } else if (worldIn.isRemote) {
+            } else if (worldIn.isRemote)
+            {
                 playerIn.openGui(QuantumStorage.INSTANCE, GuiHandler.MULTI_BASEPAGE, worldIn, pos.getX(), pos.getY(), pos.getZ());
                 NetworkManager.sendToServer(new PacketGui(0, pos));
                 return true;
@@ -83,50 +90,61 @@ public class BlockMultiStorage extends BlockMultiblockBase
     }
     
     @Override
-    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
+    {
         super.onBlockPlacedBy(world, pos, state, placer, stack);
     }
     
     @Override
-    public IBlockState getStateFromMeta(int meta) {
+    public IBlockState getStateFromMeta(int meta)
+    {
         return getBlockState().getBaseState().withProperty(VARIANTS, typesList.get(meta));
     }
     
     @Override
-    public int getMetaFromState(IBlockState state) {
+    public int getMetaFromState(IBlockState state)
+    {
         return typesList.indexOf(state.getValue(VARIANTS));
     }
     
     @Override
-    protected BlockStateContainer createBlockState() {
+    protected BlockStateContainer createBlockState()
+    {
         return new BlockStateContainer(this, VARIANTS);
     }
     
     @Override
     @SideOnly(Side.CLIENT)
-    public void getSubBlocks(CreativeTabs creativeTabs, NonNullList<ItemStack> list) {
-        for (int meta = 0; meta < types.length; meta++) {
+    public void getSubBlocks(CreativeTabs creativeTabs, NonNullList<ItemStack> list)
+    {
+        for (int meta = 0; meta < types.length; meta++)
+        {
             list.add(new ItemStack(this, 1, meta));
         }
     }
     
     @Override
-    public int damageDropped(IBlockState state) {
+    public int damageDropped(IBlockState state)
+    {
         return getMetaFromState(state);
     }
     
     @Override
-    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
+    {
         return new ItemStack(this, 1, getMetaFromState(state));
     }
     
     @Override
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+    public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
+    {
         TileEntity tileentity = worldIn.getTileEntity(pos);
         
-        if (tileentity instanceof TileMultiStorage) {
+        if (tileentity instanceof TileMultiStorage)
+        {
             TileMultiStorage tile = (TileMultiStorage) tileentity;
-            if(tile.inv == null){
+            if (tile.inv == null)
+            {
                 super.breakBlock(worldIn, pos, state);
                 return;
             }

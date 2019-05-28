@@ -1,7 +1,7 @@
 package QuantumStorage.items;
 
-import QuantumStorage.QuantumStorage;
 import QuantumStorage.GuiHandler;
+import QuantumStorage.QuantumStorage;
 import QuantumStorage.api.IColorable;
 import QuantumStorage.items.prefab.ItemBase;
 import net.minecraft.creativetab.CreativeTabs;
@@ -38,7 +38,7 @@ public class ItemQuantumBag extends ItemBase implements IColorable
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items)
     {
-        if(this.isInCreativeTab(tab))
+        if (this.isInCreativeTab(tab))
         {
             for (int meta = 0; meta < COLOURS.length; ++meta)
             {
@@ -50,7 +50,7 @@ public class ItemQuantumBag extends ItemBase implements IColorable
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
     {
-        if(!worldIn.isRemote)
+        if (!worldIn.isRemote)
         {
             playerIn.openGui(QuantumStorage.INSTANCE, GuiHandler.BAG_ID, worldIn, 0, 0, 0);
         }
@@ -61,7 +61,7 @@ public class ItemQuantumBag extends ItemBase implements IColorable
     @Override
     public int getColorFromItemStack(ItemStack par1ItemStack, int par2)
     {
-        if(par1ItemStack.getItemDamage() >= EnumDyeColor.values().length)
+        if (par1ItemStack.getItemDamage() >= EnumDyeColor.values().length)
         {
             return 0xFFFFFF;
         }

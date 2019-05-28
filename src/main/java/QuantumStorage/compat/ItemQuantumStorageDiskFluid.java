@@ -1,9 +1,6 @@
 package QuantumStorage.compat;
 
 import QuantumStorage.QuantumStorage;
-import QuantumStorage.api.QuantumStorageAPI;
-import QuantumStorage.config.ConfigQuantumStorage;
-import QuantumStorage.init.ModBlocks;
 import QuantumStorage.items.prefab.ItemBase;
 import com.raoulvdberge.refinedstorage.api.storage.StorageType;
 import com.raoulvdberge.refinedstorage.api.storage.disk.IStorageDiskProvider;
@@ -70,11 +67,10 @@ public class ItemQuantumStorageDiskFluid extends ItemBase implements IStorageDis
                 if (data.getCapacity() == -1)
                 {
                     tooltip.add(I18n.format("misc.refinedstorage:storage.stored", API.instance().getQuantityFormatter().format(data.getStored())));
+                } else
+                {
+                    tooltip.add(I18n.format("misc.refinedstorage:storage.stored_capacity", API.instance().getQuantityFormatter().format(data.getStored()), API.instance().getQuantityFormatter().format(data.getCapacity())));
                 }
-                else
-                    {
-                        tooltip.add(I18n.format("misc.refinedstorage:storage.stored_capacity", API.instance().getQuantityFormatter().format(data.getStored()), API.instance().getQuantityFormatter().format(data.getCapacity())));
-                    }
             }
 
             if (flag.isAdvanced())
@@ -97,7 +93,8 @@ public class ItemQuantumStorageDiskFluid extends ItemBase implements IStorageDis
     }
 
     @Override
-    public UUID getId(ItemStack disk) {
+    public UUID getId(ItemStack disk)
+    {
         return disk.getTagCompound().getUniqueId(NBT_ID);
     }
 
@@ -115,12 +112,14 @@ public class ItemQuantumStorageDiskFluid extends ItemBase implements IStorageDis
     }
 
     @Override
-    public int getCapacity(ItemStack disk) {
+    public int getCapacity(ItemStack disk)
+    {
         return Integer.MAX_VALUE;
     }
 
     @Override
-    public StorageType getType() {
+    public StorageType getType()
+    {
         return StorageType.FLUID;
     }
 }

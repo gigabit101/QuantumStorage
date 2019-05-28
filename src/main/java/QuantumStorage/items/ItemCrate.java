@@ -10,7 +10,6 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -26,7 +25,7 @@ public class ItemCrate extends ItemBase
         setUnlocalizedName(QuantumStorage.MOD_ID + ".crate");
         setRegistryName(QuantumStorage.MOD_ID, "crate");
     }
-
+    
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
     {
@@ -45,7 +44,7 @@ public class ItemCrate extends ItemBase
         }
         return super.onItemRightClick(worldIn, playerIn, handIn);
     }
-
+    
     @Override
     public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag advanced)
     {

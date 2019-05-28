@@ -15,8 +15,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
-import java.util.Arrays;
-
 /**
  * Created by Gigabit101 on 07/03/2017.
  */
@@ -41,22 +39,22 @@ public class ModelHandler
         registerItemModel(ModBlocks.SAFE, 0);
         registerItemModel(ModItems.BATTERY, 0);
         registerItemModel(ModItems.BATTERY, 1);
-
+        
         int i;
         for (i = 0; i < EnumDyeColor.values().length; ++i)
         {
             registerItemModel(ModItems.BAG, i);
         }
-
+        
         //Items
         for (i = 0; i < ItemUpgrade.types.length; ++i)
         {
             String[] name = ItemUpgrade.types.clone();
             registerItemModel(ModItems.UPGRADE, i, name[i]);
         }
-
+        
         registerItemModel(ModItems.CRATE, 0);
-
+        
         if (Loader.isModLoaded("refinedstorage"))
         {
             registerItemModel(CompatHandler.DISK, 0);
@@ -69,25 +67,26 @@ public class ModelHandler
         }
     }
     
-
+    
     static void registerItemModel(Item i, int meta)
     {
         ResourceLocation loc = i.getRegistryName();
         ModelLoader.setCustomModelResourceLocation(i, meta, new ModelResourceLocation(loc, "inventory"));
     }
-
+    
     static void registerItemModel(Block b, int meta)
     {
         registerItemModel(Item.getItemFromBlock(b), meta);
     }
-
+    
     static void registerItemModel(Item i, int meta, String variant)
     {
         ResourceLocation loc = i.getRegistryName();
         ModelLoader.setCustomModelResourceLocation(i, meta, new ModelResourceLocation(loc, "type=" + variant));
     }
     
-    static void registerItemModel(Block b, int meta, String variant) {
+    static void registerItemModel(Block b, int meta, String variant)
+    {
         registerItemModel(Item.getItemFromBlock(b), meta, variant);
     }
 }
