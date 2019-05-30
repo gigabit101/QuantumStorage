@@ -7,6 +7,7 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
+import org.lwjgl.input.Keyboard;
 import reborncore.client.guibuilder.GuiBuilder;
 import reborncore.common.network.NetworkManager;
 
@@ -104,6 +105,20 @@ public class GuiMultiStorage extends GuiContainer
     protected void actionPerformed(GuiButton button) throws IOException
     {
         super.actionPerformed(button);
-        NetworkManager.sendToServer(new PacketGui(button.id, pos));
+        if(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT))
+        {
+            if(page > 1)
+            {
+                NetworkManager.sendToServer(new PacketGui(button.id - 10, pos));
+            }
+            else if(storage.invs.size() > page)
+            {
+                NetworkManager.sendToServer(new PacketGui(button.id + 10, pos));
+            }
+        }
+        else
+        {
+            NetworkManager.sendToServer(new PacketGui(button.id, pos));
+        }
     }
 }

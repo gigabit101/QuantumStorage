@@ -43,7 +43,7 @@ public class ItemUpgrade extends ItemBase
             int meta = player.getHeldItem(hand).getItemDamage();
             if (meta == 2)//Creative
             {
-                if (dsu.inv.getStackInSlot(0) != ItemStack.EMPTY)
+                if (!dsu.inv.getStackInSlot(2).isEmpty())
                 {
                     dsu.inv.getStackInSlot(0).setCount(Integer.MAX_VALUE - 128);
                 }
