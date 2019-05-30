@@ -5,12 +5,16 @@ import QuantumStorage.QuantumStorage;
 import QuantumStorage.client.CreativeTabQuantumStorage;
 import QuantumStorage.network.PacketGui;
 import com.google.common.collect.Lists;
+import net.minecraft.block.BlockDynamicLiquid;
+import net.minecraft.block.BlockStaticLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -20,8 +24,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import reborncore.api.tile.IUpgradeable;
 import reborncore.common.blocks.PropertyString;
 import reborncore.common.multiblock.BlockMultiblockBase;
 import reborncore.common.network.NetworkManager;
@@ -148,8 +154,37 @@ public class BlockMultiStorage extends BlockMultiblockBase
                 super.breakBlock(worldIn, pos, state);
                 return;
             }
-            InventoryHelper.dropInventoryItems(worldIn, pos);
+            dropInventoryItems(worldIn, pos, tile.inv);
         }
         super.breakBlock(worldIn, pos, state);
+    }
+    
+    public static void dropInventoryItems(World world, BlockPos pos, IInventory inventory)
+    {
+        TileEntity tileEntity = world.getTileEntity(pos);
+        if (tileEntity == null)
+        {
+            return;
+        }
+        for (int i = 0; i < inventory.getSizeInventory(); i++)
+        {
+            ItemStack itemStack = inventory.getStackInSlot(i);
+            
+            if (itemStack.isEmpty())
+            {
+                continue;
+            }
+            if (itemStack.getCount() > 0)
+            {
+                if (itemStack.getItem() instanceof ItemBlock)
+                {
+                    if (((ItemBlock) itemStack.getItem()).getBlock() instanceof BlockFluidBase || ((ItemBlock) itemStack.getItem()).getBlock() instanceof BlockStaticLiquid || ((ItemBlock) itemStack.getItem()).getBlock() instanceof BlockDynamicLiquid)
+                    {
+                        continue;
+                    }
+                }
+            }
+            net.minecraft.inventory.InventoryHelper.spawnItemStack(world, (double) pos.getX(), (double) pos.getY(), (double) pos.getZ(), itemStack);
+        }
     }
 }
