@@ -7,7 +7,6 @@ import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import reborncore.common.multiblock.MultiblockControllerBase;
 import reborncore.common.multiblock.MultiblockValidationException;
 import reborncore.common.multiblock.rectangular.RectangularMultiblockTileEntityBase;
-import reborncore.common.util.Inventory;
 
 import javax.annotation.Nullable;
 import java.util.Optional;

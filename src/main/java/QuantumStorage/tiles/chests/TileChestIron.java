@@ -39,21 +39,21 @@ public class TileChestIron extends AdvancedTileEntity
     {
         this.inv = new ItemStackHandler(36);
     }
-
+    
     @Override
     public String getName()
     {
         return "chest_iron";
     }
-
+    
     protected static final AxisAlignedBB CHEST_AABB = new AxisAlignedBB(0.0625D, 0.0D, 0.0625D, 0.9375D, 0.875D, 0.9375D);
-
+    
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
         return CHEST_AABB;
     }
-
+    
     @Override
     public List<Slot> getSlots()
     {
@@ -69,26 +69,26 @@ public class TileChestIron extends AdvancedTileEntity
         }
         return slots;
     }
-
+    
     @Override
     public TileEntity createNewTileEntity(World world, int meta)
     {
         return new TileChestIron();
     }
-
+    
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
     {
         openGui(playerIn, (AdvancedTileEntity) worldIn.getTileEntity(pos));
         return true;
     }
-
+    
     @Override
     public Block getBlock()
     {
         return ModBlocks.CHEST_IRON;
     }
-
+    
     @Override
     public void addRecipe()
     {
@@ -103,7 +103,7 @@ public class TileChestIron extends AdvancedTileEntity
                     'C', "chest");
         }
     }
-
+    
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {
@@ -111,14 +111,14 @@ public class TileChestIron extends AdvancedTileEntity
         compound.merge(inv.serializeNBT());
         return compound;
     }
-
+    
     @Override
     public void readFromNBT(NBTTagCompound compound)
     {
         super.readFromNBT(compound);
         inv.deserializeNBT(compound);
     }
-
+    
     @Override
     public boolean hasCapability(Capability<?> capability, EnumFacing facing)
     {
@@ -128,7 +128,7 @@ public class TileChestIron extends AdvancedTileEntity
         }
         return super.hasCapability(capability, facing);
     }
-
+    
     @Override
     public <T> T getCapability(Capability<T> capability, EnumFacing facing)
     {
@@ -138,7 +138,7 @@ public class TileChestIron extends AdvancedTileEntity
         }
         return super.getCapability(capability, facing);
     }
-
+    
     @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag advanced)

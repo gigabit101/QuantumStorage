@@ -27,13 +27,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import reborncore.api.tile.IUpgradeable;
 import reborncore.common.blocks.PropertyString;
 import reborncore.common.multiblock.BlockMultiblockBase;
 import reborncore.common.network.NetworkManager;
 import reborncore.common.util.ArrayUtils;
 import reborncore.common.util.ChatUtils;
-import reborncore.common.util.InventoryHelper;
 
 import java.util.List;
 
@@ -61,12 +59,10 @@ public class BlockMultiStorage extends BlockMultiblockBase
         if (state.getBlock() instanceof BlockMultiStorage && state.getValue(BlockMultiStorage.VARIANTS).equals("io"))
         {
             return new TileIoPort();
-        }
-        else if (state.getBlock() instanceof BlockMultiStorage && state.getValue(BlockMultiStorage.VARIANTS).equals("interface"))
+        } else if (state.getBlock() instanceof BlockMultiStorage && state.getValue(BlockMultiStorage.VARIANTS).equals("interface"))
         {
             return new TileInterface();
-        }
-        else if (state.getBlock() instanceof BlockMultiStorage && !state.getValue(BlockMultiStorage.VARIANTS).equals("io"))
+        } else if (state.getBlock() instanceof BlockMultiStorage && !state.getValue(BlockMultiStorage.VARIANTS).equals("io"))
         {
             return new TileMultiStorage(getStateFromMeta(meta).getValue(VARIANTS));
         }

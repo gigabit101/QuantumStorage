@@ -16,7 +16,7 @@ public class SlotUpgrade extends SlotItemHandler
     {
         super(itemHandler, index, xPosition, yPosition);
     }
-
+    
     @Override
     public boolean isItemValid(@Nonnull ItemStack stack)
     {

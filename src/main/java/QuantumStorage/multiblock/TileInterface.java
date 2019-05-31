@@ -46,8 +46,7 @@ public class TileInterface extends TileMultiStorage implements IItemHandler
         try
         {
             return MAX * getMultiBlock().pages;
-        }
-        catch (Exception e)
+        } catch (Exception e)
         {
             e.printStackTrace();
             world.removeTileEntity(pos);
@@ -56,7 +55,7 @@ public class TileInterface extends TileMultiStorage implements IItemHandler
         }
         return 0;
     }
-
+    
     @Override
     public ItemStack getStackInSlot(int slot)
     {
@@ -65,16 +64,13 @@ public class TileInterface extends TileMultiStorage implements IItemHandler
         CachingItemHandler handler = getMultiBlock().getInvForPage(page);
         return handler.getStackInSlot(slot);
     }
-
+    
     @Override
     public ItemStack insertItem(int slot, ItemStack stack, boolean simulate)
     {
-//        int page = slot / MAX + 1;
-//        slot %= MAX;
-//        CachingItemHandler handler = getMultiBlock().getInvForPage(page);
         return stack;
     }
-
+    
     @Override
     public ItemStack extractItem(int slot, int amount, boolean simulate)
     {

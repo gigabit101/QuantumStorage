@@ -16,14 +16,14 @@ import net.minecraft.world.World;
 public class ItemQuantumBag extends ItemBase implements IColorable
 {
     public static final String[] COLOURS = new String[]{"white", "orange", "magenta", "lightBlue", "yellow", "lime", "pink", "gray", "silver", "cyan", "purple", "blue", "brown", "green", "red", "black"};
-
+    
     public ItemQuantumBag()
     {
         setUnlocalizedName(QuantumStorage.MOD_ID + ".quantum_bag");
         setRegistryName("quantum_bag");
         setMaxStackSize(1);
     }
-
+    
     @Override
     public String getUnlocalizedName(ItemStack itemStack)
     {
@@ -34,7 +34,7 @@ public class ItemQuantumBag extends ItemBase implements IColorable
         }
         return super.getUnlocalizedName() + "." + COLOURS[meta];
     }
-
+    
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items)
     {
@@ -46,7 +46,7 @@ public class ItemQuantumBag extends ItemBase implements IColorable
             }
         }
     }
-
+    
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
     {
@@ -54,10 +54,10 @@ public class ItemQuantumBag extends ItemBase implements IColorable
         {
             playerIn.openGui(QuantumStorage.INSTANCE, GuiHandler.BAG_ID, worldIn, 0, 0, 0);
         }
-
+        
         return super.onItemRightClick(worldIn, playerIn, handIn);
     }
-
+    
     @Override
     public int getColorFromItemStack(ItemStack par1ItemStack, int par2)
     {

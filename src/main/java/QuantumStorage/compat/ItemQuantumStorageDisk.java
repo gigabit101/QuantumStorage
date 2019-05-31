@@ -26,14 +26,14 @@ import java.util.UUID;
 public class ItemQuantumStorageDisk extends ItemBase implements IStorageDiskProvider
 {
     private static final String NBT_ID = "Id";
-
+    
     public ItemQuantumStorageDisk()
     {
         setMaxStackSize(1);
         setUnlocalizedName(QuantumStorage.MOD_ID + ".quantumstoragedisk");
         setRegistryName("quantumstoragedisk");
     }
-
+    
     @Override
     public void onUpdate(ItemStack stack, World world, Entity entity, int slot, boolean selected)
     {
@@ -47,15 +47,15 @@ public class ItemQuantumStorageDisk extends ItemBase implements IStorageDiskProv
             if (!stack.hasTagCompound())
             {
                 UUID id = UUID.randomUUID();
-
+                
                 API.instance().getStorageDiskManager(world).set(id, API.instance().createDefaultItemDisk(world, Integer.MAX_VALUE));
                 API.instance().getStorageDiskManager(world).markForSaving();
-
+                
                 setId(stack, id);
             }
         }
     }
-
+    
     @Override
     public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag flag)
     {
@@ -63,9 +63,9 @@ public class ItemQuantumStorageDisk extends ItemBase implements IStorageDiskProv
         if (isValid(stack))
         {
             UUID id = getId(stack);
-
+            
             API.instance().getStorageDiskSync().sendRequest(id);
-
+            
             IStorageDiskSyncData data = API.instance().getStorageDiskSync().getData(id);
             if (data != null)
             {
@@ -77,52 +77,52 @@ public class ItemQuantumStorageDisk extends ItemBase implements IStorageDiskProv
                     tooltip.add(I18n.format("misc.refinedstorage:storage.stored_capacity", API.instance().getQuantityFormatter().format(data.getStored()), API.instance().getQuantityFormatter().format(data.getCapacity())));
                 }
             }
-
+            
             if (flag.isAdvanced())
             {
                 tooltip.add(id.toString());
             }
         }
     }
-
+    
     @Override
     public int getEntityLifespan(ItemStack stack, World world)
     {
         return Integer.MAX_VALUE;
     }
-
-
+    
+    
     @Override
     public EnumRarity getRarity(ItemStack stack)
     {
         return EnumRarity.EPIC;
     }
-
+    
     @Override
     public UUID getId(ItemStack disk)
     {
         return disk.getTagCompound().getUniqueId(NBT_ID);
     }
-
+    
     @Override
     public void setId(ItemStack disk, UUID id)
     {
         disk.setTagCompound(new NBTTagCompound());
         disk.getTagCompound().setUniqueId(NBT_ID, id);
     }
-
+    
     @Override
     public boolean isValid(ItemStack disk)
     {
         return disk.hasTagCompound() && disk.getTagCompound().hasUniqueId(NBT_ID);
     }
-
+    
     @Override
     public int getCapacity(ItemStack disk)
     {
         return Integer.MAX_VALUE;
     }
-
+    
     @Override
     public StorageType getType()
     {

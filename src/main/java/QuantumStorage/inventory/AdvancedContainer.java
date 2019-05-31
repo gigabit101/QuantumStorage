@@ -16,7 +16,7 @@ import reborncore.common.container.RebornContainer;
 public class AdvancedContainer extends RebornContainer
 {
     public AdvancedTileEntity machine;
-
+    
     public AdvancedContainer(EntityPlayer player, AdvancedTileEntity machine)
     {
         super(machine);
@@ -31,7 +31,7 @@ public class AdvancedContainer extends RebornContainer
         drawPlayersInv(player, machine.inventoryOffsetX(), machine.inventoryOffsetY());
         drawPlayersHotBar(player, machine.inventoryOffsetX(), machine.inventoryOffsetY() + 58);
     }
-
+    
     @ChestContainer.RowSizeCallback
     public int getNumColumns()
     {

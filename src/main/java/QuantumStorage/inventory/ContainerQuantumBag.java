@@ -23,7 +23,7 @@ public class ContainerQuantumBag extends RebornContainer
         drawPlayersInv(player, 45, 151);
         drawPlayersHotBar(player, 45, 151 + 58);
     }
-
+    
     @Override
     public boolean canInteractWith(EntityPlayer playerIn)
     {

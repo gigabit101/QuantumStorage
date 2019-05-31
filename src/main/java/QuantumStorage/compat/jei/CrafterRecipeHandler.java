@@ -11,30 +11,30 @@ import mezz.jei.api.recipe.IRecipeWrapper;
 public class CrafterRecipeHandler implements IRecipeHandler<RecipeQuantumCrafter>
 {
     private final IJeiHelpers jeiHelpers;
-
+    
     public CrafterRecipeHandler(IJeiHelpers helpers)
     {
         this.jeiHelpers = helpers;
     }
-
+    
     @Override
     public Class<RecipeQuantumCrafter> getRecipeClass()
     {
         return RecipeQuantumCrafter.class;
     }
-
+    
     @Override
     public String getRecipeCategoryUid(RecipeQuantumCrafter crafter)
     {
         return CrafterRecipeCategory.ID;
     }
-
+    
     @Override
     public IRecipeWrapper getRecipeWrapper(RecipeQuantumCrafter crafter)
     {
         return new CrafterRecipeWrapper(jeiHelpers, crafter);
     }
-
+    
     @Override
     public boolean isRecipeValid(RecipeQuantumCrafter crafter)
     {

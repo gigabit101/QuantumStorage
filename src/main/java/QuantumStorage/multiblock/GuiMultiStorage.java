@@ -105,18 +105,16 @@ public class GuiMultiStorage extends GuiContainer
     protected void actionPerformed(GuiButton button) throws IOException
     {
         super.actionPerformed(button);
-        if(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT))
+        if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT))
         {
-            if(page > 1)
+            if (page > 1)
             {
                 NetworkManager.sendToServer(new PacketGui(button.id - 10, pos));
-            }
-            else if(storage.invs.size() > page)
+            } else if (storage.invs.size() > page)
             {
                 NetworkManager.sendToServer(new PacketGui(button.id + 10, pos));
             }
-        }
-        else
+        } else
         {
             NetworkManager.sendToServer(new PacketGui(button.id, pos));
         }

@@ -26,14 +26,14 @@ import java.util.List;
 public class ItemUpgrade extends ItemBase
 {
     public static final String[] types = new String[]{"render", "void", "creative", "water"};
-
+    
     public ItemUpgrade()
     {
         setUnlocalizedName(QuantumStorage.MOD_ID + ".upgrade");
         setRegistryName("upgrade");
         setHasSubtypes(true);
     }
-
+    
     @Override
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
@@ -53,7 +53,7 @@ public class ItemUpgrade extends ItemBase
         if (worldIn.getTileEntity(pos) != null && worldIn.getTileEntity(pos) instanceof TileQuantumTank)
         {
             TileQuantumTank tank = (TileQuantumTank) worldIn.getTileEntity(pos);
-
+            
             if (meta == 3)//water
             {
                 tank.getTileData().setBoolean("infin_water", true);
@@ -61,7 +61,7 @@ public class ItemUpgrade extends ItemBase
         }
         return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
     }
-
+    
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list)
     {
@@ -69,13 +69,13 @@ public class ItemUpgrade extends ItemBase
         {
             return;
         }
-
+        
         for (int meta = 0; meta < types.length; meta++)
         {
             list.add(new ItemStack(this, 1, meta));
         }
     }
-
+    
     @Override
     public String getUnlocalizedName(ItemStack itemStack)
     {
@@ -86,7 +86,7 @@ public class ItemUpgrade extends ItemBase
         }
         return super.getUnlocalizedName() + "." + types[meta];
     }
-
+    
     @Override
     public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag advanced)
     {

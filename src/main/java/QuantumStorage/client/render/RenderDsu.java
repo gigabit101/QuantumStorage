@@ -21,12 +21,12 @@ public class RenderDsu extends TileEntitySpecialRenderer<TileQuantumStorageUnit>
             if (!te.inv.getStackInSlot(2).isEmpty())
             {
                 GlStateManager.pushMatrix();
-
+                
                 ItemStack stack = te.inv.getStackInSlot(2);
                 if (stack != null)
                 {
                     double spin = Minecraft.getSystemTime() / 1000D;
-
+                    
                     if (stack.getItem() instanceof ItemBlock)
                     {
                         GlStateManager.translate(x + .5, y + 0.65, z + .5);
@@ -35,7 +35,7 @@ public class RenderDsu extends TileEntitySpecialRenderer<TileQuantumStorageUnit>
                         GlStateManager.translate(x + .5, y + 0.65, z + .5);
                     }
                     GlStateManager.rotate((float) (((spin * 40D) % 360)), 0, 1, 0);
-
+                    
                     RenderUtil.renderItemInWorld(stack);
                 }
                 GlStateManager.popMatrix();

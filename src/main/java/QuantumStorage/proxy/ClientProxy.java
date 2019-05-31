@@ -9,9 +9,7 @@ import QuantumStorage.init.ModItems;
 import QuantumStorage.tiles.TileQuantumStorageUnit;
 import QuantumStorage.tiles.TileQuantumTank;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 
@@ -26,13 +24,13 @@ public class ClientProxy extends CommonProxy
         ClientRegistry.bindTileEntitySpecialRenderer(TileQuantumStorageUnit.class, new RenderDsu());
         ClientRegistry.bindTileEntitySpecialRenderer(TileQuantumTank.class, new TankRender());
     }
-
+    
     @Override
     public IQuantumBagProvider getClientBagProps()
     {
         return FMLClientHandler.instance().getClientPlayerEntity().getCapability(QuantumStorageAPI.QUANTUM_BAG_PROVIDER_CAPABILITY, null);
     }
-
+    
     @Override
     public void registerColors()
     {

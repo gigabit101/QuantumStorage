@@ -2,10 +2,8 @@ package QuantumStorage.multiblock;
 
 import QuantumStorage.inventory.CachingItemHandler;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Slot;
 import net.minecraftforge.items.SlotItemHandler;
 import reborncore.common.container.RebornContainer;
-import reborncore.common.util.Inventory;
 
 public class ContainerMultiBlockStorage extends RebornContainer
 {

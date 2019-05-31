@@ -20,19 +20,19 @@ public class EventHandlerPlayer
         NBTTagCompound bags = evt.getOriginal().getCapability(QuantumStorageAPI.QUANTUM_BAG_PROVIDER_CAPABILITY, null).serializeNBT();
         evt.getEntityPlayer().getCapability(QuantumStorageAPI.QUANTUM_BAG_PROVIDER_CAPABILITY, null).deserializeNBT(bags);
     }
-
+    
     @SubscribeEvent
     public static void respawnEvent(net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent evt)
     {
         evt.player.getCapability(QuantumStorageAPI.QUANTUM_BAG_PROVIDER_CAPABILITY, null).sync(null, (EntityPlayerMP) evt.player);
     }
-
+    
     @SubscribeEvent
     public static void playerChangeDimension(net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent event)
     {
         event.player.getCapability(QuantumStorageAPI.QUANTUM_BAG_PROVIDER_CAPABILITY, null).sync(null, (EntityPlayerMP) event.player);
     }
-
+    
     @SubscribeEvent
     public static void attachCaps(AttachCapabilitiesEvent<Entity> evt)
     {

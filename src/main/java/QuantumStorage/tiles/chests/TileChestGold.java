@@ -40,21 +40,21 @@ public class TileChestGold extends AdvancedTileEntity
     {
         this.inv = new ItemStackHandler(54);
     }
-
+    
     @Override
     public String getName()
     {
         return "chest_gold";
     }
-
+    
     protected static final AxisAlignedBB CHEST_AABB = new AxisAlignedBB(0.0625D, 0.0D, 0.0625D, 0.9375D, 0.875D, 0.9375D);
-
+    
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
         return CHEST_AABB;
     }
-
+    
     @Override
     public List<Slot> getSlots()
     {
@@ -70,50 +70,50 @@ public class TileChestGold extends AdvancedTileEntity
         }
         return slots;
     }
-
+    
     @Override
     public TileEntity createNewTileEntity(World world, int meta)
     {
         return new TileChestGold();
     }
-
+    
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
     {
         openGui(playerIn, (AdvancedTileEntity) worldIn.getTileEntity(pos));
         return true;
     }
-
+    
     @Override
     public Block getBlock()
     {
         return ModBlocks.CHEST_GOLD;
     }
-
+    
     @Override
     public int getXSize()
     {
         return 190;
     }
-
+    
     @Override
     public int getYsize()
     {
         return 220;
     }
-
+    
     @Override
     public int inventoryOffsetX()
     {
         return 15;
     }
-
+    
     @Override
     public int inventoryOffsetY()
     {
         return 131;
     }
-
+    
     @SideOnly(Side.CLIENT)
     @Override
     public void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY, int guiLeft, int guiTop, int xSize, int ySize, AdvancedGui gui)
@@ -128,7 +128,7 @@ public class TileChestGold extends AdvancedTileEntity
             }
         }
     }
-
+    
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {
@@ -136,14 +136,14 @@ public class TileChestGold extends AdvancedTileEntity
         compound.merge(inv.serializeNBT());
         return compound;
     }
-
+    
     @Override
     public void readFromNBT(NBTTagCompound compound)
     {
         super.readFromNBT(compound);
         inv.deserializeNBT(compound);
     }
-
+    
     @Override
     public boolean hasCapability(Capability<?> capability, EnumFacing facing)
     {
@@ -153,7 +153,7 @@ public class TileChestGold extends AdvancedTileEntity
         }
         return super.hasCapability(capability, facing);
     }
-
+    
     @Override
     public <T> T getCapability(Capability<T> capability, EnumFacing facing)
     {
@@ -163,7 +163,7 @@ public class TileChestGold extends AdvancedTileEntity
         }
         return super.getCapability(capability, facing);
     }
-
+    
     @Override
     public void addRecipe()
     {
@@ -179,7 +179,7 @@ public class TileChestGold extends AdvancedTileEntity
                     'C', new ItemStack(ModBlocks.CHEST_IRON));
         }
     }
-
+    
     @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag advanced)

@@ -6,7 +6,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.wrapper.InvWrapper;
 
 import javax.annotation.Nullable;
 
@@ -39,50 +38,63 @@ public class TileIoPort extends TileMultiStorage implements IItemHandler
         return 64;
     }
     
-    private class Slot {
+    private class Slot
+    {
         private IItemHandler inv;
         private int slot;
         
-        Slot(IItemHandler inv, int slot) {
+        Slot(IItemHandler inv, int slot)
+        {
             this.inv = inv;
             this.slot = slot;
         }
         
-        public ItemStack extractItem(int amount, boolean simulate) {
+        public ItemStack extractItem(int amount, boolean simulate)
+        {
             return inv.extractItem(slot, amount, simulate);
         }
         
-        public ItemStack getStack() {
+        public ItemStack getStack()
+        {
             return inv.getStackInSlot(slot);
         }
         
-        public ItemStack insertItem(ItemStack stack, boolean simulate) {
+        public ItemStack insertItem(ItemStack stack, boolean simulate)
+        {
             return inv.insertItem(slot, stack, simulate);
         }
     }
     
-    private Slot getFirstAvailable() {
+    private Slot getFirstAvailable()
+    {
         MultiBlockStorage multiBlock = getMultiBlock();
-        if (multiBlock == null || !multiBlock.isAssembled()) {
+        if (multiBlock == null || !multiBlock.isAssembled())
+        {
             return null;
         }
-        for (int i = 1; i <= multiBlock.pages; ++i) {
+        for (int i = 1; i <= multiBlock.pages; ++i)
+        {
             CachingItemHandler inv = multiBlock.getInvForPage(i);
-            if (!inv.isFull()) {
+            if (!inv.isFull())
+            {
                 return new Slot(inv, inv.getFirstAvailable());
             }
         }
         return null;
     }
     
-    private Slot getLastUsed() {
+    private Slot getLastUsed()
+    {
         MultiBlockStorage multiBlock = getMultiBlock();
-        if (multiBlock == null || !multiBlock.isAssembled()) {
+        if (multiBlock == null || !multiBlock.isAssembled())
+        {
             return null;
         }
-        for (int i = multiBlock.pages; i >= 1; --i) {
+        for (int i = multiBlock.pages; i >= 1; --i)
+        {
             CachingItemHandler inv = multiBlock.getInvForPage(i);
-            if (!inv.isEmpty()) {
+            if (!inv.isEmpty())
+            {
                 return new Slot(inv, inv.getLastUsed());
             }
         }
@@ -90,31 +102,28 @@ public class TileIoPort extends TileMultiStorage implements IItemHandler
     }
     
     @Override
-    public ItemStack extractItem(int slot, int amount, boolean simulate) {
-//        if (slot != 1) {
-//            return ItemStack.EMPTY;
-//        }
-//        Slot lastUsed = getLastUsed();
-        return ItemStack.EMPTY; //lastUsed == null ? ItemStack.EMPTY : lastUsed.extractItem(amount, simulate);
+    public ItemStack extractItem(int slot, int amount, boolean simulate)
+    {
+        return ItemStack.EMPTY;
     }
     
     @Override
-    public int getSlots() {
+    public int getSlots()
+    {
         return 2;
     }
     
     @Override
-    public ItemStack getStackInSlot(int slot) {
-//        if (slot != 1) {
-//            return ItemStack.EMPTY;
-//        }
-//        Slot lastUsed = getLastUsed();
-        return ItemStack.EMPTY;//lastUsed == null ? ItemStack.EMPTY : lastUsed.getStack();
+    public ItemStack getStackInSlot(int slot)
+    {
+        return ItemStack.EMPTY;
     }
     
     @Override
-    public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
-        if (slot != 0) {
+    public ItemStack insertItem(int slot, ItemStack stack, boolean simulate)
+    {
+        if (slot != 0)
+        {
             return stack;
         }
         Slot firstAvailable = getFirstAvailable();

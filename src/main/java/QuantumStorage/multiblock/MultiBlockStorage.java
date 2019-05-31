@@ -6,7 +6,6 @@ import net.minecraft.world.World;
 import reborncore.common.multiblock.IMultiblockPart;
 import reborncore.common.multiblock.MultiblockControllerBase;
 import reborncore.common.multiblock.rectangular.RectangularMultiblockControllerBase;
-import reborncore.common.util.Inventory;
 
 import java.util.Map;
 import java.util.Optional;
