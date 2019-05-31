@@ -1,5 +1,6 @@
 package QuantumStorage.multiblock;
 
+import QuantumStorage.inventory.CachingItemHandler;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import reborncore.common.multiblock.IMultiblockPart;
@@ -13,7 +14,7 @@ import java.util.TreeMap;
 
 public class MultiBlockStorage extends RectangularMultiblockControllerBase
 {
-    public Map<Integer, Inventory> invs = new TreeMap<>();
+    public Map<Integer, CachingItemHandler> invs = new TreeMap<>();
     public int pages = 0;
     
     public MultiBlockStorage(World world)
@@ -45,6 +46,7 @@ public class MultiBlockStorage extends RectangularMultiblockControllerBase
     @Override
     protected void onMachineRestored()
     {
+        updateInfo();
     }
     
     @Override
@@ -85,7 +87,7 @@ public class MultiBlockStorage extends RectangularMultiblockControllerBase
         }
     }
     
-    public Inventory getInvForPage(int page)
+    public CachingItemHandler getInvForPage(int page)
     {
         return invs.get(page);
     }

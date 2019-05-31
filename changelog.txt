@@ -4,6 +4,7 @@ Added Baubles Support for Quantum Battery.
 Added AutoEject to QuantumTanks.
 Added Concrete Powder to Concrete recipe by clicking on a QuantumTank with water inside
 Added Quantum Crate (Larger than diamond)
+Added shift clicking next page button to increase by 10
 
 Fixed Overflow with Quantum Disks.
 Fixed Trashcan missing textures.

@@ -62,14 +62,16 @@ public class ModRecipes
                 'C', new ItemStack(ModBlocks.CHEST_DIAMOND),
                 'I', new ItemStack(Items.IRON_INGOT));
         
-        RebornCraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.MULTIBLOCK_STORAGE, 4, 3),
+        RebornCraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.MULTIBLOCK_STORAGE, 2, 3),
                 "III",
                 "ISI",
                 "III",
                 'S', new ItemStack(Blocks.HOPPER),
                 'I', new ItemStack(Items.IRON_INGOT));
-        
-        
+    
+        RebornCraftingHelper.addShapelessOreRecipe(new ItemStack(ModBlocks.MULTIBLOCK_STORAGE, 1, 4),  new ItemStack(ModBlocks.MULTIBLOCK_STORAGE, 1, 3));
+        RebornCraftingHelper.addShapelessOreRecipe(new ItemStack(ModBlocks.MULTIBLOCK_STORAGE, 1, 3),  new ItemStack(ModBlocks.MULTIBLOCK_STORAGE, 1, 4));
+    
         addColourRecipes();
     }
     

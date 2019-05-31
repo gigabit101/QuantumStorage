@@ -39,7 +39,7 @@ import java.util.List;
 
 public class BlockMultiStorage extends BlockMultiblockBase
 {
-    public static final String[] types = new String[]{"frame", "heat", "storage", "io"};
+    public static final String[] types = new String[]{"frame", "heat", "storage", "io", "interface"};
     private static final List<String> typesList = Lists.newArrayList(ArrayUtils.arrayToLowercase(types));
     
     public static final PropertyString VARIANTS = new PropertyString("type", types);
@@ -61,7 +61,12 @@ public class BlockMultiStorage extends BlockMultiblockBase
         if (state.getBlock() instanceof BlockMultiStorage && state.getValue(BlockMultiStorage.VARIANTS).equals("io"))
         {
             return new TileIoPort();
-        } else if (state.getBlock() instanceof BlockMultiStorage && !state.getValue(BlockMultiStorage.VARIANTS).equals("io"))
+        }
+        else if (state.getBlock() instanceof BlockMultiStorage && state.getValue(BlockMultiStorage.VARIANTS).equals("interface"))
+        {
+            return new TileInterface();
+        }
+        else if (state.getBlock() instanceof BlockMultiStorage && !state.getValue(BlockMultiStorage.VARIANTS).equals("io"))
         {
             return new TileMultiStorage(getStateFromMeta(meta).getValue(VARIANTS));
         }
@@ -154,7 +159,8 @@ public class BlockMultiStorage extends BlockMultiblockBase
                 super.breakBlock(worldIn, pos, state);
                 return;
             }
-            dropInventoryItems(worldIn, pos, tile.inv);
+            //TODO
+//            dropInventoryItems(worldIn, pos, tile.inv);
         }
         super.breakBlock(worldIn, pos, state);
     }

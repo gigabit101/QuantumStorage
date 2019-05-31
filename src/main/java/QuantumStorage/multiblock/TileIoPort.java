@@ -1,5 +1,6 @@
 package QuantumStorage.multiblock;
 
+import QuantumStorage.inventory.CachingItemHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
@@ -11,8 +12,6 @@ import javax.annotation.Nullable;
 
 public class TileIoPort extends TileMultiStorage implements IItemHandler
 {
-    public static int MAX = 78;
-    
     @Override
     public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing)
     {
@@ -35,40 +34,90 @@ public class TileIoPort extends TileMultiStorage implements IItemHandler
     }
     
     @Override
-    public ItemStack extractItem(int slot, int amount, boolean simulate)
-    {
-        int page = slot / MAX + 1;
-        slot %= MAX;
-        IItemHandler handler = new InvWrapper(getMultiBlock().getInvForPage(page));
-        return handler.extractItem(slot, amount, simulate);
-    }
-    
-    @Override
     public int getSlotLimit(int slot)
     {
         return 64;
     }
     
-    @Override
-    public int getSlots()
-    {
-        return MAX * getMultiBlock().pages;
+    private class Slot {
+        private IItemHandler inv;
+        private int slot;
+        
+        Slot(IItemHandler inv, int slot) {
+            this.inv = inv;
+            this.slot = slot;
+        }
+        
+        public ItemStack extractItem(int amount, boolean simulate) {
+            return inv.extractItem(slot, amount, simulate);
+        }
+        
+        public ItemStack getStack() {
+            return inv.getStackInSlot(slot);
+        }
+        
+        public ItemStack insertItem(ItemStack stack, boolean simulate) {
+            return inv.insertItem(slot, stack, simulate);
+        }
+    }
+    
+    private Slot getFirstAvailable() {
+        MultiBlockStorage multiBlock = getMultiBlock();
+        if (multiBlock == null || !multiBlock.isAssembled()) {
+            return null;
+        }
+        for (int i = 1; i <= multiBlock.pages; ++i) {
+            CachingItemHandler inv = multiBlock.getInvForPage(i);
+            if (!inv.isFull()) {
+                return new Slot(inv, inv.getFirstAvailable());
+            }
+        }
+        return null;
+    }
+    
+    private Slot getLastUsed() {
+        MultiBlockStorage multiBlock = getMultiBlock();
+        if (multiBlock == null || !multiBlock.isAssembled()) {
+            return null;
+        }
+        for (int i = multiBlock.pages; i >= 1; --i) {
+            CachingItemHandler inv = multiBlock.getInvForPage(i);
+            if (!inv.isEmpty()) {
+                return new Slot(inv, inv.getLastUsed());
+            }
+        }
+        return null;
     }
     
     @Override
-    public ItemStack getStackInSlot(int slot)
-    {
-        int page = slot / MAX + 1;
-        slot %= MAX;
-        return getMultiBlock().getInvForPage(page).getStackInSlot(slot);
+    public ItemStack extractItem(int slot, int amount, boolean simulate) {
+//        if (slot != 1) {
+//            return ItemStack.EMPTY;
+//        }
+//        Slot lastUsed = getLastUsed();
+        return ItemStack.EMPTY; //lastUsed == null ? ItemStack.EMPTY : lastUsed.extractItem(amount, simulate);
     }
     
     @Override
-    public ItemStack insertItem(int slot, ItemStack stack, boolean simulate)
-    {
-        int page = slot / MAX + 1;
-        slot %= MAX;
-        IItemHandler handler = new InvWrapper(getMultiBlock().getInvForPage(page));
-        return handler.insertItem(slot, stack, simulate);
+    public int getSlots() {
+        return 2;
+    }
+    
+    @Override
+    public ItemStack getStackInSlot(int slot) {
+//        if (slot != 1) {
+//            return ItemStack.EMPTY;
+//        }
+//        Slot lastUsed = getLastUsed();
+        return ItemStack.EMPTY;//lastUsed == null ? ItemStack.EMPTY : lastUsed.getStack();
+    }
+    
+    @Override
+    public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
+        if (slot != 0) {
+            return stack;
+        }
+        Slot firstAvailable = getFirstAvailable();
+        return firstAvailable == null ? stack : firstAvailable.insertItem(stack, simulate);
     }
 }

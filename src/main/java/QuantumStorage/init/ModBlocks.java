@@ -2,10 +2,7 @@ package QuantumStorage.init;
 
 import QuantumStorage.QuantumStorage;
 import QuantumStorage.blocks.AdvancedBlock;
-import QuantumStorage.multiblock.BlockMultiStorage;
-import QuantumStorage.multiblock.ItemMultiBlockStorage;
-import QuantumStorage.multiblock.TileIoPort;
-import QuantumStorage.multiblock.TileMultiStorage;
+import QuantumStorage.multiblock.*;
 import QuantumStorage.tiles.*;
 import QuantumStorage.tiles.chests.TileChestDiamond;
 import QuantumStorage.tiles.chests.TileChestGold;
@@ -80,6 +77,7 @@ public class ModBlocks
         RebornRegistry.registerBlock(MULTIBLOCK_STORAGE, ItemMultiBlockStorage.class, "multistorage");
         GameRegistry.registerTileEntity(TileMultiStorage.class, QuantumStorage.MOD_ID + "tilemultistorage");
         GameRegistry.registerTileEntity(TileIoPort.class, QuantumStorage.MOD_ID + "tileioport");
+        GameRegistry.registerTileEntity(TileInterface.class, QuantumStorage.MOD_ID + "tileinterface");
     }
     
     static void registerAdvanced(Block block, AdvancedTileEntity advancedTileEntity)

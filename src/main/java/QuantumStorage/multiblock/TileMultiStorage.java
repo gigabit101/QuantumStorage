@@ -1,5 +1,6 @@
 package QuantumStorage.multiblock;
 
+import QuantumStorage.inventory.CachingItemHandler;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
@@ -25,7 +26,7 @@ public class TileMultiStorage extends RectangularMultiblockTileEntityBase
     @Override
     public void isGoodForSides() throws MultiblockValidationException
     {
-        if (!getVarient().equals("heat") && !getVarient().equals("io"))
+        if (!getVarient().equals("heat") && !getVarient().equals("io") && !getVarient().equals("interface"))
         {
             throw new MultiblockValidationException(getVarient() + " is not valid for the sides of the block");
         }
@@ -34,7 +35,7 @@ public class TileMultiStorage extends RectangularMultiblockTileEntityBase
     @Override
     public void isGoodForTop() throws MultiblockValidationException
     {
-        if (!getVarient().equals("heat") && !getVarient().equals("io"))
+        if (!getVarient().equals("heat") && !getVarient().equals("io") && !getVarient().equals("interface"))
         {
             throw new MultiblockValidationException(getVarient() + " is not valid for the sides of the block");
         }
@@ -95,14 +96,14 @@ public class TileMultiStorage extends RectangularMultiblockTileEntityBase
     }
     
     
-    public Inventory inv;
+    public CachingItemHandler inv;
     public Optional<Integer> page = Optional.empty();
     
     public TileMultiStorage(String varient)
     {
         if (varient.equals("storage"))
         {
-            inv = new Inventory(78, "storageBlock", 64, this);
+            inv = new CachingItemHandler(78);
         }
     }
     
@@ -117,11 +118,11 @@ public class TileMultiStorage extends RectangularMultiblockTileEntityBase
         super.readFromNBT(data);
         if (inv == null && data.hasKey("hasInv"))
         {
-            inv = new Inventory(78, "storageBlock", 64, this);
+            inv = new CachingItemHandler(78);
         }
         if (inv != null)
         {
-            inv.readFromNBT(data);
+            inv.deserializeNBT(data);
         }
         if (data.hasKey("page"))
         {
@@ -134,7 +135,8 @@ public class TileMultiStorage extends RectangularMultiblockTileEntityBase
     {
         if (inv != null)
         {
-            inv.writeToNBT(data);
+            data = super.writeToNBT(data);
+            data.merge(inv.serializeNBT());
             data.setBoolean("hasInv", true);
         }
         if (page.isPresent())

@@ -17,7 +17,8 @@ tile.quantumstorage.trashcanfluid.name=Fluid Trash Can
 tile.quantumstorage.multistorage.frame.name=Storage Frame
 tile.quantumstorage.multistorage.heat.name=Heat Conductor
 tile.quantumstorage.multistorage.storage.name=Storage Unit
-tile.quantumstorage.multistorage.io.name=Storage IO
+tile.quantumstorage.multistorage.io.name=Storage Input
+tile.quantumstorage.multistorage.interface.name=Storage Output
 
 item.quantumstorage.upgrade.render.name=Render Upgrade
 item.quantumstorage.crate.name=Crate
