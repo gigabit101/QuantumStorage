@@ -107,14 +107,16 @@ public class GuiMultiStorage extends GuiContainer
         super.actionPerformed(button);
         if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT))
         {
-            if (page > 1)
+            if (button.displayString.equalsIgnoreCase("<"))
             {
                 NetworkManager.sendToServer(new PacketGui(button.id - 10, pos));
-            } else if (storage.invs.size() > page)
+            }
+            else if (button.displayString.equalsIgnoreCase(">"))
             {
                 NetworkManager.sendToServer(new PacketGui(button.id + 10, pos));
             }
-        } else
+        }
+        else
         {
             NetworkManager.sendToServer(new PacketGui(button.id, pos));
         }

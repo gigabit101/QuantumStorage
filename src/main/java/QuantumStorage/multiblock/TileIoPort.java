@@ -6,6 +6,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import reborncore.common.util.ItemUtils;
 
 import javax.annotation.Nullable;
 
@@ -83,24 +84,6 @@ public class TileIoPort extends TileMultiStorage implements IItemHandler
         return null;
     }
     
-    private Slot getLastUsed()
-    {
-        MultiBlockStorage multiBlock = getMultiBlock();
-        if (multiBlock == null || !multiBlock.isAssembled())
-        {
-            return null;
-        }
-        for (int i = multiBlock.pages; i >= 1; --i)
-        {
-            CachingItemHandler inv = multiBlock.getInvForPage(i);
-            if (!inv.isEmpty())
-            {
-                return new Slot(inv, inv.getLastUsed());
-            }
-        }
-        return null;
-    }
-    
     @Override
     public ItemStack extractItem(int slot, int amount, boolean simulate)
     {
@@ -126,7 +109,14 @@ public class TileIoPort extends TileMultiStorage implements IItemHandler
         {
             return stack;
         }
-        Slot firstAvailable = getFirstAvailable();
-        return firstAvailable == null ? stack : firstAvailable.insertItem(stack, simulate);
+        if(ItemUtils.isItemEqual(getStackInSlot(slot), stack, true, true))
+        {
+            return inv.insertItem(slot, stack, simulate);
+        }
+        else
+        {
+            Slot firstAvailable = getFirstAvailable();
+            return firstAvailable == null ? stack : firstAvailable.insertItem(stack, simulate);
+        }
     }
 }

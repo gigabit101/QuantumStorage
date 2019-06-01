@@ -48,7 +48,7 @@ public class ContainerMultiBlockStorage extends RebornContainer
     @ChestContainer.RowSizeCallback
     public int getNumColumns()
     {
-        return 78;
+        return 78 * storage.pages;
     }
     
     @Override
