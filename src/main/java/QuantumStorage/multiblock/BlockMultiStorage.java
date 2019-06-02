@@ -59,10 +59,8 @@ public class BlockMultiStorage extends BlockMultiblockBase
         if (state.getBlock() instanceof BlockMultiStorage && state.getValue(BlockMultiStorage.VARIANTS).equals("io"))
         {
             return new TileIoPort();
-        } else if (state.getBlock() instanceof BlockMultiStorage && state.getValue(BlockMultiStorage.VARIANTS).equals("interface"))
-        {
-            return new TileInterface();
-        } else if (state.getBlock() instanceof BlockMultiStorage && !state.getValue(BlockMultiStorage.VARIANTS).equals("io"))
+        }
+        else if (state.getBlock() instanceof BlockMultiStorage && !state.getValue(BlockMultiStorage.VARIANTS).equals("io"))
         {
             return new TileMultiStorage(getStateFromMeta(meta).getValue(VARIANTS));
         }

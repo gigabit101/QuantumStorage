@@ -24,7 +24,6 @@ public class AdvancedGui extends GuiContainer
         buttonList.clear();
     }
     
-    
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
     {

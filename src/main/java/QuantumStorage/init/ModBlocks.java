@@ -68,6 +68,9 @@ public class ModBlocks
         CHEST_QUANIUM = new AdvancedBlock(new TileChestQuantum()).setUnlocalizedName(QuantumStorage.MOD_ID + ".chest_quantum");
         registerAdvanced(CHEST_QUANIUM, new TileChestQuantum());
         
+        CONTROLLER = new AdvancedBlock(new TileController()).setUnlocalizedName(QuantumStorage.MOD_ID + "controller");
+        registerAdvanced(CONTROLLER, new TileController());
+        
         registerMultiBlocks();
     }
     
@@ -77,7 +80,6 @@ public class ModBlocks
         RebornRegistry.registerBlock(MULTIBLOCK_STORAGE, ItemMultiBlockStorage.class, "multistorage");
         GameRegistry.registerTileEntity(TileMultiStorage.class, QuantumStorage.MOD_ID + "tilemultistorage");
         GameRegistry.registerTileEntity(TileIoPort.class, QuantumStorage.MOD_ID + "tileioport");
-        GameRegistry.registerTileEntity(TileInterface.class, QuantumStorage.MOD_ID + "tileinterface");
     }
     
     static void registerAdvanced(Block block, AdvancedTileEntity advancedTileEntity)

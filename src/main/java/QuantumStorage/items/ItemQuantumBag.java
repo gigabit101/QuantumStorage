@@ -54,7 +54,6 @@ public class ItemQuantumBag extends ItemBase implements IColorable
         {
             playerIn.openGui(QuantumStorage.INSTANCE, GuiHandler.BAG_ID, worldIn, 0, 0, 0);
         }
-        
         return super.onItemRightClick(worldIn, playerIn, handIn);
     }
     

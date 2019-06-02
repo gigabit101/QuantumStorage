@@ -21,9 +21,7 @@ public class PacketGui implements INetworkPacket<PacketGui>
         this.blockPos = blockPos;
     }
     
-    public PacketGui()
-    {
-    }
+    public PacketGui() {}
     
     @Override
     public void writeData(ExtendedPacketBuffer extendedPacketBuffer) throws IOException

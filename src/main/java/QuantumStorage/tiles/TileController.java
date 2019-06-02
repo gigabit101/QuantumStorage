@@ -15,6 +15,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.items.SlotItemHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,17 +26,17 @@ import java.util.List;
  */
 public class TileController extends AdvancedTileEntity implements ITickable
 {
-    List<IItemHandler> l = new ArrayList<>();
-    
-    public void addInv(IItemHandler handler)
+    public TileController()
     {
-        if (!l.contains(handler))
-            l.add(handler);
+        this.inv = new ItemStackHandler(1);
     }
     
-    public List<IItemHandler> getItemHandlers()
+    @Override
+    public List<Slot> getSlots()
     {
-        return l;
+        List<Slot> slots = new ArrayList<>();
+        slots.add(new SlotItemHandler(inv, 0, 80, 50));
+        return slots;
     }
     
     @Override
@@ -42,58 +44,36 @@ public class TileController extends AdvancedTileEntity implements ITickable
     {
         if (!world.isRemote)
         {
-            TileController controller = (TileController) world.getTileEntity(pos);
-            if (controller != null)
-            {
-                for (final IItemHandler invs : getConnectedCapabilities(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, world, pos))
-                {
-                    addInv(invs);
-                }
-            }
-
-//            if(getInv().getStackInSlot(0) != ItemStack.EMPTY)
+//            TileController controller = (TileController) world.getTileEntity(pos);
+//            if (controller != null)
 //            {
-//                for(final IItemHandler i : getItemHandlers())
+//                for (final IItemHandler invs : getConnectedCapabilities(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, world, pos))
 //                {
-//                    if(i.getStackInSlot(1) == ItemStack.EMPTY)
-//                    {
-//                        i.insertItem(1, getInv().getStackInSlot(0), false);
-//                        getInv().setStackInSlot(0, ItemStack.EMPTY);
-//                    }
-//                    else if(ItemUtils.isItemEqual(getInv().getStackInSlot(0), i.getStackInSlot(1), true, true, true))
-//                    {
-//                        i.insertItem(1, getInv().getStackInSlot(0), false);
-//                        getInv().setStackInSlot(0, ItemStack.EMPTY);
-//                    }
+//                    addInv(invs);
 //                }
 //            }
         }
     }
     
-    public static <T> List<T> getConnectedCapabilities(Capability<T> capability, World world, BlockPos pos)
+    public static List<TileQuantumStorageUnit> getAttached(World world, BlockPos pos)
     {
-        final List<T> capabilities = new ArrayList<T>();
-        
-        for (final EnumFacing side : EnumFacing.values())
+        List<TileQuantumStorageUnit> units = new ArrayList<>();
+    
+        for (EnumFacing side : EnumFacing.values())
         {
-            final TileEntity tile = world.getTileEntity(pos.offset(side));
-            
-            if (tile != null && !tile.isInvalid() && tile.hasCapability(capability, side.getOpposite()))
-                capabilities.add(tile.getCapability(capability, side.getOpposite()));
+            if(!world.isRemote && world.getTileEntity(pos.offset(side)) != null && world.getTileEntity(pos.offset(side)) instanceof TileQuantumStorageUnit)
+            {
+                TileQuantumStorageUnit i = (TileQuantumStorageUnit) world.getTileEntity(pos.offset(side));
+                units.add(i);
+            }
         }
-        return capabilities;
+        return units;
     }
     
     @Override
     public String getName()
     {
         return "controller";
-    }
-    
-    @Override
-    public List<Slot> getSlots()
-    {
-        return null;
     }
     
     @Override
@@ -105,13 +85,20 @@ public class TileController extends AdvancedTileEntity implements ITickable
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
     {
-        if (getItemHandlers() != null)
+        if(!playerIn.isSneaking())
         {
-            TileController te = (TileController) worldIn.getTileEntity(pos);
-            
-            playerIn.sendMessage(new TextComponentString(te.getItemHandlers().toString()));
+            openGui(playerIn, (AdvancedTileEntity) worldIn.getTileEntity(pos));
+            return true;
         }
-        return true;
+        else
+        {
+            for (EnumFacing s : EnumFacing.values())
+            {
+                
+            }
+            playerIn.sendMessage(new TextComponentString(getAttached(world, pos).toString()));
+            return true;
+        }
     }
     
     @Override
@@ -124,5 +111,25 @@ public class TileController extends AdvancedTileEntity implements ITickable
     public void addRecipe()
     {
     
+    }
+    
+    @Override
+    public boolean hasCapability(Capability<?> capability, EnumFacing facing)
+    {
+        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+        {
+            return true;
+        }
+        return super.hasCapability(capability, facing);
+    }
+    
+    @Override
+    public <T> T getCapability(Capability<T> capability, EnumFacing facing)
+    {
+        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+        {
+            return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(inv);
+        }
+        return super.getCapability(capability, facing);
     }
 }

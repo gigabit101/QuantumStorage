@@ -19,17 +19,16 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTank;
-import net.minecraftforge.fluids.FluidUtil;
+import net.minecraftforge.fluids.*;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import reborncore.common.util.FluidUtils;
 import reborncore.common.util.ItemUtils;
 import reborncore.common.util.RebornCraftingHelper;
 
@@ -68,23 +67,33 @@ public class TileQuantumTank extends AdvancedTileEntity implements ITickable
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
     {
+        sync();
         if (FluidUtil.interactWithFluidHandler(playerIn, hand, worldIn, pos, side))
         {
             return true;
-        } else if (!playerIn.getHeldItem(hand).isEmpty() && ItemUtils.isItemEqual(playerIn.getHeldItem(hand), new ItemStack(Blocks.CONCRETE_POWDER), false, false))
-        {
-            ItemStack stackinhand = playerIn.getHeldItem(hand);
-            ItemStack out = new ItemStack(Blocks.CONCRETE, 1, stackinhand.getItemDamage());
-            
-            playerIn.getHeldItem(hand).shrink(1);
-            if (!worldIn.isRemote)
-                worldIn.spawnEntity(new EntityItem(worldIn, playerIn.posX, playerIn.posY, playerIn.posZ, out));
-            return true;
-        } else
-        {
-            openGui(playerIn, (AdvancedTileEntity) worldIn.getTileEntity(pos));
-            return true;
         }
+        else if (worldIn.getTileEntity(pos).hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side))
+        {
+            IFluidTank handler = (IFluidTank) worldIn.getTileEntity(pos).getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side);
+            if(!playerIn.getHeldItem(hand).isEmpty() && ItemUtils.isItemEqual(playerIn.getHeldItem(hand), new ItemStack(Blocks.CONCRETE_POWDER), false, false) && handler.getFluid() != null && handler.getFluid().getFluid() == FluidRegistry.WATER)
+            {
+                ItemStack stackinhand = playerIn.getHeldItem(hand);
+                ItemStack out = new ItemStack(Blocks.CONCRETE, 1, stackinhand.getItemDamage());
+    
+                playerIn.getHeldItem(hand).shrink(1);
+                if (!worldIn.isRemote)
+                {
+                    worldIn.spawnEntity(new EntityItem(worldIn, playerIn.posX, playerIn.posY, playerIn.posZ, out));
+                }
+                return true;
+            }
+            else
+            {
+                openGui(playerIn, (AdvancedTileEntity) worldIn.getTileEntity(pos));
+                return true;
+            }
+        }
+        return false;
     }
     
     @SideOnly(Side.CLIENT)

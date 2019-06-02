@@ -69,9 +69,6 @@ public class ModRecipes
                 'S', new ItemStack(Blocks.HOPPER),
                 'I', new ItemStack(Items.IRON_INGOT));
         
-        RebornCraftingHelper.addShapelessOreRecipe(new ItemStack(ModBlocks.MULTIBLOCK_STORAGE, 1, 4), new ItemStack(ModBlocks.MULTIBLOCK_STORAGE, 1, 3));
-        RebornCraftingHelper.addShapelessOreRecipe(new ItemStack(ModBlocks.MULTIBLOCK_STORAGE, 1, 3), new ItemStack(ModBlocks.MULTIBLOCK_STORAGE, 1, 4));
-        
         addColourRecipes();
     }
     

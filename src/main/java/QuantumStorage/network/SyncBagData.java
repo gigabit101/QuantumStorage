@@ -13,9 +13,7 @@ public class SyncBagData implements IMessage
 {
     private NBTTagCompound nbt;
     
-    public SyncBagData()
-    {
-    }
+    public SyncBagData() {}
     
     public SyncBagData(NBTTagCompound nbt)
     {

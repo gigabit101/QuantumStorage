@@ -1,6 +1,7 @@
 package QuantumStorage.multiblock;
 
 import QuantumStorage.network.PacketGui;
+import QuantumStorage.network.PacketGuiBag;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import reborncore.common.network.RegisterPacketEvent;
@@ -11,5 +12,6 @@ public class MultiBlockPackets
     public static void loadPackets(RegisterPacketEvent event)
     {
         event.registerPacket(PacketGui.class, Side.SERVER);
+        event.registerPacket(PacketGuiBag.class, Side.SERVER);
     }
 }

@@ -1,6 +1,7 @@
 package QuantumStorage.multiblock;
 
 import QuantumStorage.inventory.CachingItemHandler;
+import QuantumStorage.utils.SortingHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
@@ -12,6 +13,8 @@ import javax.annotation.Nullable;
 
 public class TileIoPort extends TileMultiStorage implements IItemHandler
 {
+    public static int MAX = 78;
+    
     @Override
     public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing)
     {
@@ -66,6 +69,8 @@ public class TileIoPort extends TileMultiStorage implements IItemHandler
         }
     }
     
+    public int page = -1;
+    
     private Slot getFirstAvailable()
     {
         MultiBlockStorage multiBlock = getMultiBlock();
@@ -78,6 +83,7 @@ public class TileIoPort extends TileMultiStorage implements IItemHandler
             CachingItemHandler inv = multiBlock.getInvForPage(i);
             if (!inv.isFull())
             {
+                page = i;
                 return new Slot(inv, inv.getFirstAvailable());
             }
         }
@@ -87,19 +93,34 @@ public class TileIoPort extends TileMultiStorage implements IItemHandler
     @Override
     public ItemStack extractItem(int slot, int amount, boolean simulate)
     {
-        return ItemStack.EMPTY;
+        int page = slot / MAX + 1;
+        slot %= MAX;
+        CachingItemHandler handler = getMultiBlock().getInvForPage(page);
+        return handler.extractItem(slot, amount, simulate);
     }
     
     @Override
     public int getSlots()
     {
-        return 2;
+        try
+        {
+            return MAX * getMultiBlock().pages;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            world.removeTileEntity(pos);
+        }
+        return 0;
     }
     
     @Override
     public ItemStack getStackInSlot(int slot)
     {
-        return ItemStack.EMPTY;
+        int page = slot / MAX + 1;
+        slot %= MAX;
+        CachingItemHandler handler = getMultiBlock().getInvForPage(page);
+        return handler.getStackInSlot(slot);
     }
     
     @Override
@@ -109,13 +130,16 @@ public class TileIoPort extends TileMultiStorage implements IItemHandler
         {
             return stack;
         }
-        if(ItemUtils.isItemEqual(getStackInSlot(slot), stack, true, true))
-        {
-            return inv.insertItem(slot, stack, simulate);
-        }
         else
         {
             Slot firstAvailable = getFirstAvailable();
+            if(page != -1)
+            {
+                if(firstAvailable != null)
+                {
+                    SortingHandler.sortInventory(getMultiBlock().getInvForPage(page), 0, firstAvailable.slot);
+                }
+            }
             return firstAvailable == null ? stack : firstAvailable.insertItem(stack, simulate);
         }
     }

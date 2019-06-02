@@ -109,11 +109,11 @@ public class GuiMultiStorage extends GuiContainer
         {
             if (button.displayString.equalsIgnoreCase("<"))
             {
-                NetworkManager.sendToServer(new PacketGui(button.id - 10, pos));
+                NetworkManager.sendToServer(new PacketGui(button.id - 9, pos));
             }
-            else if (button.displayString.equalsIgnoreCase(">"))
+            else if (button.displayString.equalsIgnoreCase(">")  && (page + 9) <= storage.invs.size())
             {
-                NetworkManager.sendToServer(new PacketGui(button.id + 10, pos));
+                NetworkManager.sendToServer(new PacketGui(button.id + 9, pos));
             }
         }
         else
