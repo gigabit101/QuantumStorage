@@ -27,6 +27,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.IItemHandler;
 import reborncore.common.blocks.PropertyString;
 import reborncore.common.multiblock.BlockMultiblockBase;
 import reborncore.common.network.NetworkManager;
@@ -37,7 +38,7 @@ import java.util.List;
 
 public class BlockMultiStorage extends BlockMultiblockBase
 {
-    public static final String[] types = new String[]{"frame", "heat", "storage", "io", "interface"};
+    public static final String[] types = new String[]{"frame", "heat", "storage", "io"};
     private static final List<String> typesList = Lists.newArrayList(ArrayUtils.arrayToLowercase(types));
     
     public static final PropertyString VARIANTS = new PropertyString("type", types);
@@ -83,7 +84,8 @@ public class BlockMultiStorage extends BlockMultiblockBase
                     }
                     return false;
                 }
-            } else if (worldIn.isRemote)
+            }
+            else if (worldIn.isRemote)
             {
                 playerIn.openGui(QuantumStorage.INSTANCE, GuiHandler.MULTI_BASEPAGE, worldIn, pos.getX(), pos.getY(), pos.getZ());
                 NetworkManager.sendToServer(new PacketGui(0, pos));
@@ -153,20 +155,19 @@ public class BlockMultiStorage extends BlockMultiblockBase
                 super.breakBlock(worldIn, pos, state);
                 return;
             }
-            //TODO
-//            dropInventoryItems(worldIn, pos, tile.inv);
+            dropInventoryItems(worldIn, pos, tile.inv);
         }
         super.breakBlock(worldIn, pos, state);
     }
     
-    public static void dropInventoryItems(World world, BlockPos pos, IInventory inventory)
+    public static void dropInventoryItems(World world, BlockPos pos, IItemHandler inventory)
     {
         TileEntity tileEntity = world.getTileEntity(pos);
         if (tileEntity == null)
         {
             return;
         }
-        for (int i = 0; i < inventory.getSizeInventory(); i++)
+        for (int i = 0; i < inventory.getSlots(); i++)
         {
             ItemStack itemStack = inventory.getStackInSlot(i);
             

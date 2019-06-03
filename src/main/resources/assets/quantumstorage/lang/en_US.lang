@@ -36,6 +36,7 @@ item.quantumstorage.quantumstoragedisk.name=Quantum Storage Disk
 item.quantumstorage.quantumstoragediskfluid.name=Quantum Fluid Disk
 
 item.quantumstorage.quantum_battery.name=Quantum Battery
+item.quantumstorage.remote.name=Inventory Remote
 
 gui.quantumstorage.crafter=Quantum Crafter Recipe
 

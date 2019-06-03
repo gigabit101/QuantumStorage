@@ -5,7 +5,7 @@ import net.minecraftforge.items.ItemStackHandler;
 
 public class CachingItemHandler extends ItemStackHandler
 {
-    private int firstAvailable = 0;
+    public int firstAvailable = 0;
     private int lastUsed = -1;
     
     public CachingItemHandler(int size)

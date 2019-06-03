@@ -1,6 +1,7 @@
 package QuantumStorage.multiblock;
 
 import QuantumStorage.inventory.CachingItemHandler;
+import QuantumStorage.utils.SortingHandler;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
@@ -172,5 +173,17 @@ public class TileMultiStorage extends RectangularMultiblockTileEntityBase
     @Override
     public void update()
     {
+    }
+    
+    public void actionPerformed(int iD)
+    {
+        if(iD == -1)
+        {
+            for (int i = 0; i < getMultiBlock().pages; i++)
+            {
+                if(!world.isRemote && i != 0)
+                    SortingHandler.sortInventory(getMultiBlock().getInvForPage(i));
+            }
+        }
     }
 }

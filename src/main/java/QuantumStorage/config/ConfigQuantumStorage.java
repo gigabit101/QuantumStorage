@@ -12,6 +12,7 @@ public class ConfigQuantumStorage
     private static ConfigQuantumStorage INSTANCE = null;
     public static String CATEGORY_GENERAL = "general";
     public static String CATEGORY_RECIPE = "recipe";
+    public static String CATEGORY_MULTIBLOCK = "recipe";
     
     public static boolean disableChests;
     public static boolean disableQuantumTank;
@@ -23,6 +24,14 @@ public class ConfigQuantumStorage
     public static boolean disableTrashcan;
     public static boolean disableTrashcanFluid;
     public static boolean disableQuantumBattery;
+    public static boolean disableInventoryRemote;
+    
+    public static boolean disableMutliblockStorage;
+    
+    public static int multiblockMaxX;
+    public static int multiblockMaxY;
+    public static int multiblockMaxZ;
+    
     
     public static int defaultDiskTime;
     
@@ -71,9 +80,14 @@ public class ConfigQuantumStorage
         disableTrashcan = config.get(CATEGORY_RECIPE, "disable default recipe for trash can", false).getBoolean();
         disableTrashcanFluid = config.get(CATEGORY_RECIPE, "disable default recipe for fluid trash can", false).getBoolean();
         
+        disableInventoryRemote = config.get(CATEGORY_RECIPE, "disable default recipe for the Inventory remote", false).getBoolean();
+        disableMutliblockStorage = config.get(CATEGORY_RECIPE, "disable default recipes for multiblock blocks", false).getBoolean();
         disableQuantumBattery = config.get(CATEGORY_RECIPE, "disable default recipe for quantum battery", false).getBoolean();
-        
         defaultDiskTime = config.get(CATEGORY_RECIPE, "how long in ticks it takes to craft a quantum disk", 20000).getInt();
+    
+        multiblockMaxX = config.get(CATEGORY_MULTIBLOCK, "Max X size for the multiblock", 16).getInt();
+        multiblockMaxY = config.get(CATEGORY_MULTIBLOCK, "Max Y size for the multiblock", 16).getInt();
+        multiblockMaxZ = config.get(CATEGORY_MULTIBLOCK, "Max Z size for the multiblock", 16).getInt();
         
         if (config.hasChanged())
         {

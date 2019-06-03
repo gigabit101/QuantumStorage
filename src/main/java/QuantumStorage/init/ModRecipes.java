@@ -68,6 +68,18 @@ public class ModRecipes
                 "III",
                 'S', new ItemStack(Blocks.HOPPER),
                 'I', new ItemStack(Items.IRON_INGOT));
+    
+        if (!ConfigQuantumStorage.disableInventoryRemote)
+        {
+            RebornCraftingHelper.addShapedOreRecipe(new ItemStack(ModItems.REMOTE, 1, 0),
+                    "IGI",
+                    "IBI",
+                    "IRI",
+                    'G', "paneGlass",
+                    'B', Blocks.STONE_BUTTON,
+                    'R', Items.REDSTONE,
+                    'I', new ItemStack(Items.IRON_INGOT));
+        }
         
         addColourRecipes();
     }

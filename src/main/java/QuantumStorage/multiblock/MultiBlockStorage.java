@@ -1,5 +1,6 @@
 package QuantumStorage.multiblock;
 
+import QuantumStorage.config.ConfigQuantumStorage;
 import QuantumStorage.inventory.CachingItemHandler;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
@@ -22,19 +23,13 @@ public class MultiBlockStorage extends RectangularMultiblockControllerBase
     }
     
     @Override
-    public void onAttachedPartWithMultiblockData(IMultiblockPart iMultiblockPart, NBTTagCompound nbtTagCompound)
-    {
-    }
+    public void onAttachedPartWithMultiblockData(IMultiblockPart iMultiblockPart, NBTTagCompound nbtTagCompound) {}
     
     @Override
-    protected void onBlockAdded(IMultiblockPart iMultiblockPart)
-    {
-    }
+    protected void onBlockAdded(IMultiblockPart iMultiblockPart) {}
     
     @Override
-    protected void onBlockRemoved(IMultiblockPart iMultiblockPart)
-    {
-    }
+    protected void onBlockRemoved(IMultiblockPart iMultiblockPart) {}
     
     @Override
     protected void onMachineAssembled()
@@ -49,9 +44,7 @@ public class MultiBlockStorage extends RectangularMultiblockControllerBase
     }
     
     @Override
-    protected void onMachinePaused()
-    {
-    }
+    protected void onMachinePaused() {}
     
     public void updateInfo()
     {
@@ -84,12 +77,33 @@ public class MultiBlockStorage extends RectangularMultiblockControllerBase
             tile.page = Optional.of(newid);
             invs.put(newid, tile.inv);
         }
+        lie();
     }
     
     public CachingItemHandler getInvForPage(int page)
     {
         return invs.get(page);
     }
+    
+    int lie = 0;
+    
+    public void lie()
+    {
+        for (int i = 0; i < pages; i++)
+        {
+            if(i != 0 && !getInvForPage(i).isFull())
+            {
+                this.lie = i;
+                break;
+            }
+        }
+    }
+    
+    public int getLie()
+    {
+        return lie;
+    }
+    
     
     @Override
     protected void onMachineDisassembled()
@@ -105,19 +119,19 @@ public class MultiBlockStorage extends RectangularMultiblockControllerBase
     @Override
     protected int getMaximumXSize()
     {
-        return 16;
+        return ConfigQuantumStorage.multiblockMaxX;
     }
     
     @Override
     protected int getMaximumZSize()
     {
-        return 16;
+        return ConfigQuantumStorage.multiblockMaxZ;
     }
     
     @Override
     protected int getMaximumYSize()
     {
-        return 16;
+        return ConfigQuantumStorage.multiblockMaxY;
     }
     
     @Override
@@ -139,14 +153,10 @@ public class MultiBlockStorage extends RectangularMultiblockControllerBase
     }
     
     @Override
-    protected void onAssimilate(MultiblockControllerBase multiblockControllerBase)
-    {
-    }
+    protected void onAssimilate(MultiblockControllerBase multiblockControllerBase) {}
     
     @Override
-    protected void onAssimilated(MultiblockControllerBase multiblockControllerBase)
-    {
-    }
+    protected void onAssimilated(MultiblockControllerBase multiblockControllerBase) {}
     
     @Override
     protected boolean updateServer()
@@ -155,19 +165,13 @@ public class MultiBlockStorage extends RectangularMultiblockControllerBase
     }
     
     @Override
-    protected void updateClient()
-    {
-    }
+    protected void updateClient() {}
     
     @Override
-    public void writeToNBT(NBTTagCompound nbtTagCompound)
-    {
-    }
+    public void writeToNBT(NBTTagCompound nbtTagCompound) {}
     
     @Override
-    public void readFromNBT(NBTTagCompound nbtTagCompound)
-    {
-    }
+    public void readFromNBT(NBTTagCompound nbtTagCompound) {}
     
     @Override
     public void formatDescriptionPacket(NBTTagCompound nbtTagCompound)

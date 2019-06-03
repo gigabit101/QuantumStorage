@@ -7,13 +7,14 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemHandlerHelper;
 import reborncore.common.util.ItemUtils;
 
 import javax.annotation.Nullable;
 
 public class TileIoPort extends TileMultiStorage implements IItemHandler
 {
-    public static int MAX = 78;
+    public static int slotsPerPage = 78;
     
     @Override
     public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing)
@@ -42,69 +43,25 @@ public class TileIoPort extends TileMultiStorage implements IItemHandler
         return 64;
     }
     
-    private class Slot
-    {
-        private IItemHandler inv;
-        private int slot;
-        
-        Slot(IItemHandler inv, int slot)
-        {
-            this.inv = inv;
-            this.slot = slot;
-        }
-        
-        public ItemStack extractItem(int amount, boolean simulate)
-        {
-            return inv.extractItem(slot, amount, simulate);
-        }
-        
-        public ItemStack getStack()
-        {
-            return inv.getStackInSlot(slot);
-        }
-        
-        public ItemStack insertItem(ItemStack stack, boolean simulate)
-        {
-            return inv.insertItem(slot, stack, simulate);
-        }
-    }
-    
-    public int page = -1;
-    
-    private Slot getFirstAvailable()
-    {
-        MultiBlockStorage multiBlock = getMultiBlock();
-        if (multiBlock == null || !multiBlock.isAssembled())
-        {
-            return null;
-        }
-        for (int i = 1; i <= multiBlock.pages; ++i)
-        {
-            CachingItemHandler inv = multiBlock.getInvForPage(i);
-            if (!inv.isFull())
-            {
-                page = i;
-                return new Slot(inv, inv.getFirstAvailable());
-            }
-        }
-        return null;
-    }
-    
     @Override
     public ItemStack extractItem(int slot, int amount, boolean simulate)
     {
-        int page = slot / MAX + 1;
-        slot %= MAX;
+        int page = slot / slotsPerPage + 1;
+        slot %= slotsPerPage;
         CachingItemHandler handler = getMultiBlock().getInvForPage(page);
         return handler.extractItem(slot, amount, simulate);
     }
     
+
     @Override
     public int getSlots()
     {
+        if(this.getMultiBlock().getLie() == 0)
+            getMultiBlock().lie();
+        
         try
         {
-            return MAX * getMultiBlock().pages;
+            return slotsPerPage * getMultiBlock().getLie();
         }
         catch (Exception e)
         {
@@ -117,8 +74,8 @@ public class TileIoPort extends TileMultiStorage implements IItemHandler
     @Override
     public ItemStack getStackInSlot(int slot)
     {
-        int page = slot / MAX + 1;
-        slot %= MAX;
+        int page = slot / slotsPerPage + 1;
+        slot %= slotsPerPage;
         CachingItemHandler handler = getMultiBlock().getInvForPage(page);
         return handler.getStackInSlot(slot);
     }
@@ -126,21 +83,12 @@ public class TileIoPort extends TileMultiStorage implements IItemHandler
     @Override
     public ItemStack insertItem(int slot, ItemStack stack, boolean simulate)
     {
-        if (slot != 0)
+        int page = slot / slotsPerPage + 1;
+        slot %= slotsPerPage;
+        if(!getMultiBlock().getInvForPage(getMultiBlock().getLie()).getStackInSlot(slotsPerPage -1).isEmpty())
         {
-            return stack;
+            getMultiBlock().lie();
         }
-        else
-        {
-            Slot firstAvailable = getFirstAvailable();
-            if(page != -1)
-            {
-                if(firstAvailable != null)
-                {
-                    SortingHandler.sortInventory(getMultiBlock().getInvForPage(page), 0, firstAvailable.slot);
-                }
-            }
-            return firstAvailable == null ? stack : firstAvailable.insertItem(stack, simulate);
-        }
+        return getMultiBlock().getInvForPage(page).insertItem(slot, stack, simulate);
     }
 }

@@ -1,5 +1,6 @@
 package QuantumStorage.multiblock;
 
+import QuantumStorage.network.PacketButton;
 import QuantumStorage.network.PacketGui;
 import QuantumStorage.network.PacketGuiBag;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -13,5 +14,6 @@ public class MultiBlockPackets
     {
         event.registerPacket(PacketGui.class, Side.SERVER);
         event.registerPacket(PacketGuiBag.class, Side.SERVER);
+        event.registerPacket(PacketButton.class, Side.SERVER);
     }
 }

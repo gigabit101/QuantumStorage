@@ -39,7 +39,8 @@ public class ModelHandler
         registerItemModel(ModBlocks.SAFE, 0);
         registerItemModel(ModItems.BATTERY, 0);
         registerItemModel(ModItems.BATTERY, 1);
-        
+        registerItemModel(ModItems.REMOTE, 0);
+    
         int i;
         for (i = 0; i < EnumDyeColor.values().length; ++i)
         {
