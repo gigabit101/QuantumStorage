@@ -2,7 +2,6 @@ package QuantumStorage.multiblock;
 
 import QuantumStorage.network.PacketButton;
 import QuantumStorage.network.PacketGui;
-import QuantumStorage.utils.SortingHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
@@ -119,7 +118,7 @@ public class GuiMultiStorage extends GuiContainer
             {
                 NetworkManager.sendToServer(new PacketGui(button.id - 9, pos));
             }
-            else if (button.displayString.equalsIgnoreCase(">")  && (page + 9) <= storage.invs.size())
+            else if (button.displayString.equalsIgnoreCase(">")  && (page + 10) <= storage.invs.size())
             {
                 NetworkManager.sendToServer(new PacketGui(button.id + 9, pos));
             }

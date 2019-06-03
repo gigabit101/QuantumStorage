@@ -1,6 +1,5 @@
 package QuantumStorage.inventory;
 
-import QuantumStorage.utils.SortingHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 public class CachingItemHandler extends ItemStackHandler

@@ -1,14 +1,11 @@
 package QuantumStorage.multiblock;
 
 import QuantumStorage.inventory.CachingItemHandler;
-import QuantumStorage.utils.SortingHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemHandlerHelper;
-import reborncore.common.util.ItemUtils;
 
 import javax.annotation.Nullable;
 

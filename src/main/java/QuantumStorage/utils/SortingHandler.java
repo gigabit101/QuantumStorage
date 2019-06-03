@@ -1,10 +1,11 @@
 package QuantumStorage.utils;
 
-import net.minecraft.item.*;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraftforge.items.IItemHandler;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SortingHandler
 {

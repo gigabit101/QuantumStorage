@@ -1,7 +1,7 @@
 package QuantumStorage.client.keybinding;
 
-import QuantumStorage.QuantumStorage;
 import QuantumStorage.GuiHandler;
+import QuantumStorage.QuantumStorage;
 import QuantumStorage.init.ModItems;
 import QuantumStorage.network.PacketGuiBag;
 import net.minecraft.client.Minecraft;

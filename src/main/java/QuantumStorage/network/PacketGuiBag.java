@@ -3,8 +3,6 @@ package QuantumStorage.network;
 import QuantumStorage.GuiHandler;
 import QuantumStorage.QuantumStorage;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import reborncore.common.network.ExtendedPacketBuffer;
 import reborncore.common.network.INetworkPacket;
