@@ -171,9 +171,7 @@ public class TileMultiStorage extends RectangularMultiblockTileEntityBase
     }
     
     @Override
-    public void update()
-    {
-    }
+    public void update() {}
     
     public void actionPerformed(int iD)
     {

@@ -5,6 +5,7 @@ import QuantumStorage.items.prefab.ItemBase;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.ITileEntityProvider;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -17,6 +18,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
+import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.relauncher.Side;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -47,6 +52,7 @@ public class ItemRemote extends ItemBase
                     compound.setString("linkedname", worldIn.getBlockState(pos).getBlock().getLocalizedName());
                     
                     compound.setString("facing", facing.getName());
+                    compound.setInteger("world", worldIn.provider.getDimension());
     
                     compound.setInteger("posX", pos.getX());
                     compound.setInteger("posY", pos.getY());
@@ -80,11 +86,11 @@ public class ItemRemote extends ItemBase
             try
             {
                 BlockPos pos = getPosFromNBT(stack);
+    
                 Block block = worldIn.getBlockState(pos).getBlock();
                 
-                block.onBlockActivated(worldIn, pos, worldIn.getBlockState(pos), playerIn, handIn, EnumFacing.byName(stack.getTagCompound().getString("facing")).getOpposite(),
+                block.onBlockActivated(worldIn, pos, worldIn.getBlockState(pos), playerIn, handIn, EnumFacing.byName(stack.getTagCompound().getString("facing")),
                         stack.getTagCompound().getInteger("hitX"), stack.getTagCompound().getInteger("hitY"), stack.getTagCompound().getInteger("hitZ"));
-                
             }
             catch (Exception e)
             {
@@ -115,7 +121,6 @@ public class ItemRemote extends ItemBase
             BlockPos pos = getPosFromNBT(stack);
             tooltip.add(TextFormatting.GOLD + stack.getTagCompound().getString("linkedname"));
             tooltip.add("X " + pos.getX() + ", Y " + pos.getY() + ", Z " + pos.getZ());
-            tooltip.add(TextFormatting.GOLD + stack.getTagCompound().getString("facing"));
         }
         else
         {

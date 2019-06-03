@@ -92,14 +92,22 @@ public class TileQuantumStorageUnit extends AdvancedTileEntity implements ITicka
                 {
                     inv.getStackInSlot(OUTPUT).grow(1);
                     inv.getStackInSlot(STORAGE).shrink(1);
-                    sync();
                 }
             }
             handleUpgrades();
-            sync();
+            checksync();
         } catch (Exception e)
         {
             e.printStackTrace();
+        }
+    }
+    
+    public void checksync()
+    {
+        DsuInventoryHandler handler = (DsuInventoryHandler) inv;
+        if(handler.requestUpdate)
+        {
+            sync();
         }
     }
     
@@ -229,9 +237,7 @@ public class TileQuantumStorageUnit extends AdvancedTileEntity implements ITicka
         return super.getCapability(capability, facing);
     }
     
-    public void handleUpgrades()
-    {
-    }
+    public void handleUpgrades() {}
     
     @Override
     public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag advanced)

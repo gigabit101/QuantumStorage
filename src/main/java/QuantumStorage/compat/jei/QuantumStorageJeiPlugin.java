@@ -24,7 +24,7 @@ public class QuantumStorageJeiPlugin extends BlankModPlugin
         
         registry.addRecipeCategoryCraftingItem(new ItemStack(ModBlocks.QUANTUM_CRAFTER), CrafterRecipeCategory.ID);
         
-        registry.addRecipes(QuantumStorageAPI.RECIPES);
+        registry.addRecipes(QuantumStorageAPI.CRAFTER_RECIPES);
     }
     
     @Override

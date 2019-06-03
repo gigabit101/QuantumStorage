@@ -6,11 +6,14 @@ Added Concrete Powder to Concrete recipe by clicking on a QuantumTank with water
 Added Quantum Crate (Larger than diamond)
 Added shift clicking next page button to increase by 10
 Added Keybinding to open bag default numberpad 1
+Added Inventory Remote (Link to an Inventory to open remotely)
 
 Fixed Overflow with Quantum Disks.
 Fixed Trashcan missing textures.
 Fixed Quantum Tanks gui always opening.
 Fixed Creative Upgrade.
+Fixed QuantumStorage utils accepting other items
 
 Changed Recipes for Crates.
 Changed Recipes for Trashcans
+Changed Quantum Bags to not allow bags to go inside them

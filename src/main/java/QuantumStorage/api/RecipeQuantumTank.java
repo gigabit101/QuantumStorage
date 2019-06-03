@@ -1,31 +1,29 @@
 package QuantumStorage.api;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.List;
 
-/**
- * Created by Gigabit101 on 10/05/2017.
- */
-public class RecipeQuantumCrafter
+public class RecipeQuantumTank
 {
     Object input;
     ItemStack output;
-    int time;
+    FluidStack fluidStack;
     
-    public RecipeQuantumCrafter(Object input, ItemStack output, int time)
+    public RecipeQuantumTank(Object input, ItemStack output, FluidStack fluidStack)
     {
         this.input = input;
         this.output = output;
-        this.time = time;
+        this.fluidStack = fluidStack;
     }
     
     public static ItemStack getOutputFrom(ItemStack input)
     {
         if (input != null)
         {
-            for (RecipeQuantumCrafter recipe : QuantumStorageAPI.CRAFTER_RECIPES)
+            for (RecipeQuantumTank recipe : QuantumStorageAPI.TANK_RECIPES)
             {
                 if (recipe.matches(input))
                 {
@@ -37,19 +35,19 @@ public class RecipeQuantumCrafter
         return null;
     }
     
-    public static int getTimeFromStack(ItemStack input)
+    public static FluidStack getFluidFromStack(ItemStack input)
     {
         if (input != null)
         {
-            for (RecipeQuantumCrafter recipe : QuantumStorageAPI.CRAFTER_RECIPES)
+            for (RecipeQuantumTank recipe : QuantumStorageAPI.TANK_RECIPES)
             {
                 if (recipe.matches(input))
                 {
-                    return recipe.getTime();
+                    return recipe.getFluidStack();
                 }
             }
         }
-        return 0;
+        return null;
     }
     
     public boolean matches(ItemStack stack)
@@ -94,8 +92,8 @@ public class RecipeQuantumCrafter
         return output;
     }
     
-    public int getTime()
+    public FluidStack getFluidStack()
     {
-        return time;
+        return fluidStack;
     }
 }

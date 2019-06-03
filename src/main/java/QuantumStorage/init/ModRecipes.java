@@ -80,7 +80,9 @@ public class ModRecipes
                     'R', Items.REDSTONE,
                     'I', new ItemStack(Items.IRON_INGOT));
         }
-        
+    
+        RebornCraftingHelper.addShapelessOreRecipe(new ItemStack(ModItems.REMOTE, 1, 0), new ItemStack(ModItems.REMOTE));
+    
         addColourRecipes();
     }
     

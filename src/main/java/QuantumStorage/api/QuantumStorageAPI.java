@@ -3,6 +3,7 @@ package QuantumStorage.api;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
+import net.minecraftforge.fluids.FluidStack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,12 +13,21 @@ import java.util.List;
  */
 public class QuantumStorageAPI
 {
-    public static List<RecipeQuantumCrafter> RECIPES = new ArrayList<>();
+    public static List<RecipeQuantumCrafter> CRAFTER_RECIPES = new ArrayList<>();
+    public static List<RecipeQuantumTank> TANK_RECIPES = new ArrayList<>();
     
-    public static RecipeQuantumCrafter addAltarRecipe(Object input, ItemStack output, int time)
+    
+    public static RecipeQuantumCrafter addCrafterRecipe(Object input, ItemStack output, int time)
     {
         RecipeQuantumCrafter recipe = new RecipeQuantumCrafter(input, output, time);
-        RECIPES.add(recipe);
+        CRAFTER_RECIPES.add(recipe);
+        return recipe;
+    }
+    
+    public static RecipeQuantumTank addTankRecipe(Object input, ItemStack output, FluidStack fluidStack)
+    {
+        RecipeQuantumTank recipe = new RecipeQuantumTank(input, output, fluidStack);
+        TANK_RECIPES.add(recipe);
         return recipe;
     }
     

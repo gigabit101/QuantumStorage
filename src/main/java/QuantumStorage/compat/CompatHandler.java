@@ -21,11 +21,11 @@ public class CompatHandler
         DISK = new ItemQuantumStorageDisk();
         RebornRegistry.registerItem(DISK);
         
-        QuantumStorageAPI.addAltarRecipe(new ItemStack(ModBlocks.DSU, 1, 0), new ItemStack(DISK, 1), ConfigQuantumStorage.defaultDiskTime);
+        QuantumStorageAPI.addCrafterRecipe(new ItemStack(ModBlocks.DSU, 1, 0), new ItemStack(DISK, 1), ConfigQuantumStorage.defaultDiskTime);
         
         DISK_FLUID = new ItemQuantumStorageDiskFluid();
         RebornRegistry.registerItem(DISK_FLUID);
         
-        QuantumStorageAPI.addAltarRecipe(new ItemStack(ModBlocks.TANK, 1, 0), new ItemStack(DISK_FLUID, 1), ConfigQuantumStorage.defaultDiskTime);
+        QuantumStorageAPI.addCrafterRecipe(new ItemStack(ModBlocks.TANK, 1, 0), new ItemStack(DISK_FLUID, 1), ConfigQuantumStorage.defaultDiskTime);
     }
 }

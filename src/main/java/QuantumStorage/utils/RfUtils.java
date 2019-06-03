@@ -10,8 +10,11 @@ import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
 
 import javax.annotation.Nullable;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by Gigabit101 on 01/07/2017.
@@ -87,11 +90,27 @@ public class RfUtils
         return diff / max;
     }
     
+    //TODO move to RC
+    public static final DecimalFormat QUANTITY_FORMATTER = new DecimalFormat("####0.#", DecimalFormatSymbols.getInstance(Locale.US));
+    
+    //TODO move to RC
+    public static String formatQuantity(int qty)
+    {
+        if (qty >= 1000000)
+        {
+            return QUANTITY_FORMATTER.format((float) qty / 1000000F) + "M";
+        } else if (qty >= 1000)
+        {
+            return QUANTITY_FORMATTER.format((float) qty / 1000F) + "K";
+        }
+        return String.valueOf(qty);
+    }
+    
     public static String addPowerTooltip(ItemStack stack)
     {
         IEnergyStorage storage = stack.getCapability(CapabilityEnergy.ENERGY, null);
         
-        return storage.getEnergyStored() + " / " + storage.getMaxEnergyStored();
+        return formatQuantity(storage.getEnergyStored()) + " / " + formatQuantity(storage.getMaxEnergyStored());
     }
     
     public static boolean isItemFull(ItemStack stack)

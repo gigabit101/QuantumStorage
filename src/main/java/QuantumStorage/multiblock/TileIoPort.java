@@ -52,7 +52,6 @@ public class TileIoPort extends TileMultiStorage implements IItemHandler
         return handler.extractItem(slot, amount, simulate);
     }
     
-
     @Override
     public int getSlots()
     {
@@ -61,7 +60,7 @@ public class TileIoPort extends TileMultiStorage implements IItemHandler
         
         try
         {
-            return slotsPerPage * getMultiBlock().getLie();
+            return (slotsPerPage * getMultiBlock().getLie());
         }
         catch (Exception e)
         {

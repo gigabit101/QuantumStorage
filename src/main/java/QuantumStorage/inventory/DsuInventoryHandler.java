@@ -5,6 +5,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.items.ItemStackHandler;
+import reborncore.common.util.ItemUtils;
+
+import javax.annotation.Nonnull;
 
 /**
  * Created by Gigabit101 on 06/03/2017.
@@ -66,5 +69,25 @@ public class DsuInventoryHandler extends ItemStackHandler
             }
         }
         onLoad();
+    }
+    
+    @Nonnull
+    @Override
+    public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate)
+    {
+        if(getStackInSlot(2).isEmpty() || !getStackInSlot(2).isEmpty() && ItemUtils.isItemEqual(getStackInSlot(2), stack, true, true))
+        {
+            return super.insertItem(slot, stack, simulate);
+        }
+        return stack;
+    }
+    
+    public boolean requestUpdate = false;
+    
+    @Override
+    public void onContentsChanged(int slot)
+    {
+        super.onContentsChanged(slot);
+        requestUpdate = true;
     }
 }

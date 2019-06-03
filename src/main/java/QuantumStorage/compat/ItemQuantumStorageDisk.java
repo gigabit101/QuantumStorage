@@ -18,8 +18,6 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
 
-;
-
 /**
  * Created by Gigabit101 on 07/03/2017.
  */
