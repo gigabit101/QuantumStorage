@@ -115,9 +115,7 @@ public class TileTrashcanFluid extends AdvancedTileEntity
     }
     
     @Override
-    public void readFromNBT(NBTTagCompound compound)
-    {
-    }
+    public void readFromNBT(NBTTagCompound compound) {}
     
     @Override
     public ItemStack getDropWithNBT()

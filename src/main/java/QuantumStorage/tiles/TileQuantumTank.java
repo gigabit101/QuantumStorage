@@ -42,9 +42,7 @@ public class TileQuantumTank extends AdvancedTileEntity implements ITickable
 {
     FluidTank tank = new FluidTank(Integer.MAX_VALUE);
     
-    public TileQuantumTank()
-    {
-    }
+    public TileQuantumTank() {}
     
     @Override
     public String getName()
@@ -89,7 +87,8 @@ public class TileQuantumTank extends AdvancedTileEntity implements ITickable
             }
             else
             {
-                openGui(playerIn, (AdvancedTileEntity) worldIn.getTileEntity(pos));
+                if(!playerIn.isSneaking())
+                    openGui(playerIn, (AdvancedTileEntity) worldIn.getTileEntity(pos));
                 return true;
             }
         }
@@ -215,9 +214,7 @@ public class TileQuantumTank extends AdvancedTileEntity implements ITickable
                     }
                 }
             }
-        } catch (Exception e)
-        {
-        }
+        } catch (Exception e) {}
         return null;
     }
     

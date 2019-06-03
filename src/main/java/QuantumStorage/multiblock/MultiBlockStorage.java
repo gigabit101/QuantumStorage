@@ -106,9 +106,7 @@ public class MultiBlockStorage extends RectangularMultiblockControllerBase
     
     
     @Override
-    protected void onMachineDisassembled()
-    {
-    }
+    protected void onMachineDisassembled() {}
     
     @Override
     protected int getMinimumNumberOfBlocksForAssembledMachine()

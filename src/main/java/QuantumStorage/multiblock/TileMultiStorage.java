@@ -69,9 +69,7 @@ public class TileMultiStorage extends RectangularMultiblockTileEntityBase
     }
     
     @Override
-    public void onMachineDeactivated()
-    {
-    }
+    public void onMachineDeactivated() {}
     
     String getVarient()
     {
@@ -95,7 +93,6 @@ public class TileMultiStorage extends RectangularMultiblockTileEntityBase
         return (MultiBlockStorage) getMultiblockController();
     }
     
-    
     public CachingItemHandler inv;
     public Optional<Integer> page = Optional.empty();
     
@@ -108,9 +105,7 @@ public class TileMultiStorage extends RectangularMultiblockTileEntityBase
     }
     
     @Override
-    public void onLoad()
-    {
-    }
+    public void onLoad() {}
     
     @Override
     public void readFromNBT(NBTTagCompound data)
@@ -179,7 +174,7 @@ public class TileMultiStorage extends RectangularMultiblockTileEntityBase
         {
             for (int i = 0; i < getMultiBlock().pages; i++)
             {
-                if(!world.isRemote && i != 0)
+                if(i != 0)
                     SortingHandler.sortInventory(getMultiBlock().getInvForPage(i));
             }
         }

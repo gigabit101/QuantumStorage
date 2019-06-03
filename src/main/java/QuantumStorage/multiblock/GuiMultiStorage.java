@@ -90,6 +90,7 @@ public class GuiMultiStorage extends GuiContainer
     {
         super.initGui();
         this.buttonList.clear();
+        //Sort Button
         this.buttonList.add(new GuiButton(-1, this.guiLeft + 13, this.guiTop + 148, 20, 20, "S"));
         if (storage.invs.size() != 0)
         {

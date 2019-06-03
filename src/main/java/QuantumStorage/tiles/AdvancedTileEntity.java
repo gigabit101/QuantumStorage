@@ -38,8 +38,6 @@ import java.util.List;
 public abstract class AdvancedTileEntity extends TileEntity
 {
     private EnumFacing facing;
-    public float prevLidAngle;
-    public float lidAngle;
     public ItemStackHandler inv = null;
     
     protected AdvancedTileEntity()
