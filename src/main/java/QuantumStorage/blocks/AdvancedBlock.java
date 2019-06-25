@@ -22,6 +22,7 @@ import java.util.List;
 /**
  * Created by Gigabit101 on 17/03/2017.
  */
+@Deprecated
 public class AdvancedBlock extends ContainerBlock
 {
     public AdvancedTileEntity advancedTileEntity;

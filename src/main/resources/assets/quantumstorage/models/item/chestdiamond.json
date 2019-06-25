@@ -1,0 +1,6 @@
+{
+  "parent": "quantumstorage:block/chestdiamond",
+  "textures": {
+    "layer0": "quantumstorage:block/chestdiamond"
+  }
+}

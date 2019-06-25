@@ -1,18 +1,20 @@
 package QuantumStorage.blocks;
 
 import QuantumStorage.QuantumStorage;
-import net.minecraft.block.BlockRenderType;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ContainerBlock;
-import net.minecraft.block.HorizontalBlock;
+import net.minecraft.block.*;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.DirectionProperty;
+import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Rotation;
+import net.minecraft.util.*;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nonnull;
@@ -27,7 +29,7 @@ public class BlockChestDiamond extends ContainerBlock
         super(properties);
         setRegistryName(new ResourceLocation(QuantumStorage.MOD_ID, "chestdiamond"));
 //        ForgeRegistries.BLOCKS.register(this);
-//        this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH));
+        this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH));
     }
 
     public BlockState getStateForPlacement(BlockItemUseContext context)
@@ -58,5 +60,19 @@ public class BlockChestDiamond extends ContainerBlock
     public TileEntity createNewTileEntity(IBlockReader worldIn)
     {
         return QuantumStorage.tileChestDiamond.create();
+    }
+
+    public boolean onBlockActivated(BlockState blockState, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult traceResult)
+    {
+        if (!world.isRemote)
+        {
+//            NetworkHooks.openGui((ServerPlayerEntity) player, (INamedContainerProvider) world.getTileEntity(pos), pos);
+        }
+        return true;
+    }
+
+    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
+    {
+        builder.add(FACING);
     }
 }

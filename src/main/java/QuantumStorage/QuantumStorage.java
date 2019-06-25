@@ -37,10 +37,10 @@ public class QuantumStorage
     
     public static QuantumStorage INSTANCE;
 
-//    @ObjectHolder(MOD_ID + ":" + "tilechestdiamond")
+    @ObjectHolder(MOD_ID + ":" + "tilechestdiamond")
     public static TileEntityType<?> tileChestDiamond;
 
-//    @ObjectHolder(MOD_ID + ":chestdiamond")
+    @ObjectHolder(MOD_ID + ":chestdiamond")
     public static Block blockChestDiamond ;
     
     private static CommonProxy proxy = DistExecutor.runForDist(() -> ClientProxy::new, () -> CommonProxy::new);
@@ -51,7 +51,7 @@ public class QuantumStorage
         FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(ContainerType.class, QuantumStorage::registerContainers);
         FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(Block.class, QuantumStorage::registerBlocks);
         FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(TileEntityType.class, QuantumStorage::registerTileEntity);
-//        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(Item.class, QuantumStorage::registerItems);
+        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(Item.class, QuantumStorage::registerItems);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::config);
         MinecraftForge.EVENT_BUS.register(this);
