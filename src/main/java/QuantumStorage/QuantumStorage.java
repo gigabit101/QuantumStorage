@@ -1,6 +1,7 @@
 package QuantumStorage;
 
 import QuantumStorage.blocks.BlockChestDiamond;
+import QuantumStorage.client.CreativeTabQuantumStorage;
 import QuantumStorage.containers.ContainerChestDiamond;
 import QuantumStorage.containers.GuiChestDiamond;
 import QuantumStorage.proxy.ClientProxy;
@@ -78,7 +79,7 @@ public class QuantumStorage
 
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
-        event.getRegistry().registerAll(new BlockItem(blockChestDiamond, new Item.Properties().group(ItemGroup.MISC)).setRegistryName(Objects.requireNonNull(blockChestDiamond.getRegistryName())));
+        event.getRegistry().registerAll(new BlockItem(blockChestDiamond, new Item.Properties().group(CreativeTabQuantumStorage.INSTANCE)).setRegistryName(Objects.requireNonNull(blockChestDiamond.getRegistryName())));
     }
 
     @SubscribeEvent
