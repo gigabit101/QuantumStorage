@@ -1,101 +1,58 @@
-
-// For those who want the bleeding edge
 buildscript {
     repositories {
         jcenter()
+        mavenCentral()
         maven {
-            name = "forge"
-            url = "http://files.minecraftforge.net/maven"
+            name = 'forge'
+            url = 'http://files.minecraftforge.net/maven'
         }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
     }
 }
-apply plugin: 'net.minecraftforge.gradle.forge'
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-
-/*
-// for people who want stable - not yet functional for MC 1.8.8 - we require the forgegradle 2.1 snapshot
 plugins {
-    id "net.minecraftforge.gradle.forge" version "2.0.2"
-}
-*/
-
-repositories {
-    maven {
-        name = "Modmuss50"
-        url = "http://maven.modmuss50.me/"
-    }
-    maven {
-        name "Raoulvdberge"
-        url  "https://repo.raoulvdberge.com/"
-    }
-    maven {
-        name "jei"
-        url "http://dvs1.progwml6.com/files/maven"
-    }
 }
 
-// define the properties file
-ext.configFile = file "project.properties"
+apply plugin: 'net.minecraftforge.gradle'
 
-configFile.withReader {
-    // read config.  it shall from now on be referenced as simply config or as project.config
-    def prop = new Properties()
-    prop.load(it)
-    project.ext.config = new ConfigSlurper().parse prop
-}
-
-version = "${config.mod_version}"
-if (hasProperty('appendBuildNumber')) {
-    version = version + "-" + appendBuildNumber.toString()
-}
-
-group = "${config.group_id}" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "${config.mod_name}-${config.minecraft_version}"
+group= 'gigabit101.mods'
+archivesBaseName = 'QuantumStorage'
 
 minecraft {
-    version = "${config.forge_version}"
-    runDir = "run"
-    mappings = "snapshot_20171003"
-    replace '@VERSION@', project.version
-}
+    mappings channel: 'snapshot', version: '20190621-1.14.2'
+    runs {
+        client {
+            workingDirectory project.file('run')
 
-dependencies {
-    deobfCompile ('RebornCore:RebornCore-1.12.2:+:universal'){
-        transitive = false
-    }
-    deobfCompile ('refinedstorage:refinedstorage:1.6-+'){
-        transitive = false
-    }
-    deobfCompile "mezz.jei:jei_1.12:+"
-}
+            // Recommended logging data for a userdev environment
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
 
-processResources
-        {
-            // this will ensure that this task is redone when the versions change.
-            inputs.property "version", project.version
-            inputs.property "mcversion", project.minecraft.version
-
-            // replace stuff in mcmod.info, nothing else
-            from(sourceSets.main.resources.srcDirs) {
-                include 'mcmod.info'
-
-                // replace version and mcversion
-                expand 'version':project.version, 'mcversion':project.minecraft.version
-            }
-
-            // copy everything else, thats not the mcmod.info
-            from(sourceSets.main.resources.srcDirs) {
-                exclude 'mcmod.info'
-            }
+            // Recommended logging level for the console
+            property 'forge.logging.console.level', 'info'
+            property 'forge.logging.noansi', 'false'
         }
 
-task deobfJar(type: Jar) {
-    from sourceSets.main.output
-    classifier = 'dev'
+        server {
+            workingDirectory project.file('run')
+
+            // Recommended logging data for a userdev environment
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+
+            // Recommended logging level for the console
+            property 'forge.logging.console.level', 'info'
+            property 'forge.logging.noansi', 'false'
+        }
+    }
 }
 
-build.dependsOn deobfJar
+
+dependencies {
+    minecraft "net.minecraftforge:forge:${MC_VERSION}-${FORGE_VERSION}"
+}
+
+def reobfFile = file("$buildDir/reobfJar/output.jar")
+def reobfArtifact = artifacts.add('default', reobfFile) {
+    type 'jar'
+    builtBy 'reobfJar'
+}

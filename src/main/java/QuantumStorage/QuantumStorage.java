@@ -1,29 +1,14 @@
 package QuantumStorage;
 
-import QuantumStorage.command.CommandBuildMultiBlock;
-import QuantumStorage.compat.CompatHandler;
 import QuantumStorage.config.ConfigQuantumStorage;
-import QuantumStorage.handler.QunatumBagImpl;
-import QuantumStorage.init.ModBlocks;
-import QuantumStorage.init.ModRecipes;
-import QuantumStorage.multiblock.MultiBlockPackets;
-import QuantumStorage.network.PacketHandler;
 import QuantumStorage.proxy.CommonProxy;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
-
-import java.io.File;
-
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 /**
  * Created by Gigabit101 on 27/01/2017.
  */
-@Mod(name = QuantumStorage.MOD_NAME, modid = QuantumStorage.MOD_ID, version = QuantumStorage.MOD_VERSION, dependencies = QuantumStorage.MOD_DEPENDENCIES, acceptedMinecraftVersions = "[1.12,1.12.2]")
+@Mod(QuantumStorage.MOD_ID)
 public class QuantumStorage
 {
     public static final String MOD_ID = "quantumstorage";
@@ -32,53 +17,57 @@ public class QuantumStorage
     public static final String MOD_DEPENDENCIES = "required-after:forge@[14.21.0.2359,);required-after:reborncore";
     
     public static ConfigQuantumStorage config;
-    
-    @Mod.Instance
     public static QuantumStorage INSTANCE;
     
-    @SidedProxy(clientSide = "QuantumStorage.proxy.ClientProxy", serverSide = "QuantumStorage.proxy.CommonProxy")
+//    @SidedProxy(clientSide = "QuantumStorage.proxy.ClientProxy", serverSide = "QuantumStorage.proxy.CommonProxy")
     public static CommonProxy proxy;
-    
-    @Mod.EventHandler
-    public void preinit(FMLPreInitializationEvent event)
+
+    public QuantumStorage()
     {
         INSTANCE = this;
-        
-        String path = event.getSuggestedConfigurationFile().getAbsolutePath().replace(QuantumStorage.MOD_ID, "QuantumStorage");
-        
-        config = ConfigQuantumStorage.init(new File(path));
-        
-        ModBlocks.init();
-        
-        ModRecipes.init();
-        
-        if (Loader.isModLoaded("refinedstorage"))
-        {
-            CompatHandler.init();
-        }
-        
-        proxy.registerRenders();
-        
-        proxy.registerKeybindings();
-        
-        PacketHandler.register();
-        
-        QunatumBagImpl.init();
-        
-        NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, new GuiHandler());
-        
-        MinecraftForge.EVENT_BUS.register(MultiBlockPackets.class);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::preinit);
+
     }
     
-    @Mod.EventHandler
-    public void init(FMLInitializationEvent event)
+    void preinit(FMLCommonSetupEvent event)
     {
-        proxy.registerColors();
+        INSTANCE = this;
+
+//        String path = event.getSuggestedConfigurationFile().getAbsolutePath().replace(QuantumStorage.MOD_ID, "QuantumStorage");
+
+//        config = ConfigQuantumStorage.init(new File(path));
+//
+//        ModBlocks.init();
+//
+//        ModRecipes.init();
+
+//        if (Loader.isModLoaded("refinedstorage"))
+//        {
+//            CompatHandler.init();
+//        }
+//
+//        proxy.registerRenders();
+//
+//        proxy.registerKeybindings();
+//
+//        PacketHandler.register();
+//
+//        QunatumBagImpl.init();
+//
+//        NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, new GuiHandler());
+//
+//        MinecraftForge.EVENT_BUS.register(MultiBlockPackets.class);
     }
-    
-    @Mod.EventHandler
-    public void serverStarted(FMLServerStartingEvent event)
-    {
-        event.registerServerCommand(new CommandBuildMultiBlock());
-    }
+//
+//    @Mod.EventHandler
+//    public void init(FMLInitializationEvent event)
+//    {
+//        proxy.registerColors();
+//    }
+//
+//    @Mod.EventHandler
+//    public void serverStarted(FMLServerStartingEvent event)
+//    {
+//        event.registerServerCommand(new CommandBuildMultiBlock());
+//    }
 }

@@ -3,19 +3,16 @@ package QuantumStorage.network;
 import QuantumStorage.QuantumStorage;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
-import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class SyncBagData implements IMessage
 {
-    private NBTTagCompound nbt;
+    private CompoundNBT nbt;
     
     public SyncBagData() {}
     
-    public SyncBagData(NBTTagCompound nbt)
+    public SyncBagData(CompoundNBT nbt)
     {
         this.nbt = nbt;
     }

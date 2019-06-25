@@ -3,12 +3,11 @@ package QuantumStorage.init;
 import QuantumStorage.items.ItemCrate;
 import QuantumStorage.items.ItemQuantumBag;
 import QuantumStorage.items.ItemQuantumBattery;
-import QuantumStorage.items.ItemRemote;
 import QuantumStorage.upgrades.ItemUpgrade;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 /**
  * Created by Gigabit101 on 28/01/2017.

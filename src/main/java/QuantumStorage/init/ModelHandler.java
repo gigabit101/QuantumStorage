@@ -1,24 +1,18 @@
 package QuantumStorage.init;
 
-import QuantumStorage.compat.CompatHandler;
-import QuantumStorage.multiblock.BlockMultiStorage;
 import QuantumStorage.upgrades.ItemUpgrade;
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.item.EnumDyeColor;
+import net.minecraft.item.DyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.relauncher.Side;
 
 /**
  * Created by Gigabit101 on 07/03/2017.
  */
-@Mod.EventBusSubscriber(Side.CLIENT)
+@Mod.EventBusSubscriber()
 public class ModelHandler
 {
     @SubscribeEvent
@@ -42,7 +36,7 @@ public class ModelHandler
         registerItemModel(ModItems.REMOTE, 0);
     
         int i;
-        for (i = 0; i < EnumDyeColor.values().length; ++i)
+        for (i = 0; i < DyeColor.values().length; ++i)
         {
             registerItemModel(ModItems.BAG, i);
         }
@@ -56,23 +50,23 @@ public class ModelHandler
         
         registerItemModel(ModItems.CRATE, 0);
         
-        if (Loader.isModLoaded("refinedstorage"))
-        {
-            registerItemModel(CompatHandler.DISK, 0);
-            registerItemModel(CompatHandler.DISK_FLUID, 0);
-        }
-        for (i = 0; i < BlockMultiStorage.types.length; ++i)
-        {
-            String[] name = BlockMultiStorage.types.clone();
-            registerItemModel(ModBlocks.MULTIBLOCK_STORAGE, i, name[i]);
-        }
+//        if (Loader.isModLoaded("refinedstorage"))
+//        {
+//            registerItemModel(CompatHandler.DISK, 0);
+//            registerItemModel(CompatHandler.DISK_FLUID, 0);
+//        }
+//        for (i = 0; i < BlockMultiStorage.types.length; ++i)
+//        {
+//            String[] name = BlockMultiStorage.types.clone();
+//            registerItemModel(ModBlocks.MULTIBLOCK_STORAGE, i, name[i]);
+//        }
     }
     
     
     static void registerItemModel(Item i, int meta)
     {
         ResourceLocation loc = i.getRegistryName();
-        ModelLoader.setCustomModelResourceLocation(i, meta, new ModelResourceLocation(loc, "inventory"));
+//        ModelLoader.setCustomModelResourceLocation(i, meta, new ModelResourceLocation(loc, "inventory"));
     }
     
     static void registerItemModel(Block b, int meta)
@@ -83,7 +77,7 @@ public class ModelHandler
     static void registerItemModel(Item i, int meta, String variant)
     {
         ResourceLocation loc = i.getRegistryName();
-        ModelLoader.setCustomModelResourceLocation(i, meta, new ModelResourceLocation(loc, "type=" + variant));
+//        ModelLoader.setCustomModelResourceLocation(i, meta, new ModelResourceLocation(loc, "type=" + variant));
     }
     
     static void registerItemModel(Block b, int meta, String variant)

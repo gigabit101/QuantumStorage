@@ -1,12 +1,7 @@
 package QuantumStorage.network;
 
 import QuantumStorage.QuantumStorage;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.common.util.FakePlayer;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
-import net.minecraftforge.fml.relauncher.Side;
 
 public final class PacketHandler
 {

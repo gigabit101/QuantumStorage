@@ -2,6 +2,7 @@ package QuantumStorage.utils;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Direction;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -35,10 +36,10 @@ public class RfUtils
     {
         final List<T> capabilities = new ArrayList<>();
         
-        for (final EnumFacing side : EnumFacing.values())
+        for (final Direction side : Direction.values())
         {
             final TileEntity tile = world.getTileEntity(pos.offset(side));
-            if (tile != null && !tile.isInvalid() && tile.hasCapability(capability, side.getOpposite()))
+            if (tile != null && tile.hasCapability(capability, side.getOpposite()))
             {
                 capabilities.add(tile.getCapability(capability, side.getOpposite()));
             }
@@ -50,10 +51,10 @@ public class RfUtils
     {
         int consumedPower = 0;
         
-        for (EnumFacing dir : EnumFacing.values())
+        for (Direction dir : Direction.values())
         {
             TileEntity tile = world.getTileEntity(pos.offset(dir));
-            if (tile != null && !tile.isInvalid() && tile.hasCapability(CapabilityEnergy.ENERGY, dir.getOpposite()))
+            if (tile != null && tile.hasCapability(CapabilityEnergy.ENERGY, dir.getOpposite()))
             {
                 consumedPower += transferPower(source, tile.getCapability(CapabilityEnergy.ENERGY, dir.getOpposite()), amountPerFace, simulated);
             }
@@ -65,10 +66,10 @@ public class RfUtils
     {
         int receivedPower = 0;
         
-        for (EnumFacing dir : EnumFacing.values())
+        for (Direction dir : Direction.values())
         {
             TileEntity tile = world.getTileEntity(pos.offset(dir));
-            if (tile != null && !tile.isInvalid() && tile.hasCapability(CapabilityEnergy.ENERGY, dir.getOpposite()))
+            if (tile != null && tile.hasCapability(CapabilityEnergy.ENERGY, dir.getOpposite()))
             {
                 receivedPower += transferPower(tile.getCapability(CapabilityEnergy.ENERGY, dir.getOpposite()), source, amountPerFace, simulated);
             }
@@ -84,7 +85,7 @@ public class RfUtils
     
     public static double getDurabilityForDisplay(ItemStack stack)
     {
-        IEnergyStorage storage = stack.getCapability(CapabilityEnergy.ENERGY, null);
+        IEnergyStorage storage = (IEnergyStorage) stack.getCapability(CapabilityEnergy.ENERGY, null);
         double max = storage.getMaxEnergyStored();
         double diff = max - storage.getEnergyStored();
         return diff / max;
@@ -108,7 +109,7 @@ public class RfUtils
     
     public static String addPowerTooltip(ItemStack stack)
     {
-        IEnergyStorage storage = stack.getCapability(CapabilityEnergy.ENERGY, null);
+        IEnergyStorage storage = (IEnergyStorage) stack.getCapability(CapabilityEnergy.ENERGY, null);
         
         return formatQuantity(storage.getEnergyStored()) + " / " + formatQuantity(storage.getMaxEnergyStored());
     }
@@ -117,7 +118,7 @@ public class RfUtils
     {
         if (isPoweredItem(stack))
         {
-            IEnergyStorage storage = stack.getCapability(CapabilityEnergy.ENERGY, null);
+            IEnergyStorage storage = (IEnergyStorage) stack.getCapability(CapabilityEnergy.ENERGY, null);
             if (storage.getEnergyStored() != storage.getMaxEnergyStored())
             {
                 return false;
@@ -131,7 +132,7 @@ public class RfUtils
     {
         if (isPoweredItem(stack) && !isItemFull(stack))
         {
-            IEnergyStorage storageItem = stack.getCapability(CapabilityEnergy.ENERGY, null);
+            IEnergyStorage storageItem = (IEnergyStorage) stack.getCapability(CapabilityEnergy.ENERGY, null);
             
             int amount2send = storageItem.receiveEnergy(1000, true);
             if (storage.getEnergyStored() >= amount2send)
@@ -146,7 +147,7 @@ public class RfUtils
     {
         if (isPoweredItem(stack))
         {
-            final IEnergyStorage storage = stack.getCapability(CapabilityEnergy.ENERGY, null);
+            final IEnergyStorage storage = (IEnergyStorage) stack.getCapability(CapabilityEnergy.ENERGY, null);
             return storage.extractEnergy(amount, sim);
         }
         return 0;

@@ -1,11 +1,11 @@
 package QuantumStorage.client.keybinding;
 
+import net.java.games.input.Keyboard;
 import net.minecraft.client.settings.KeyBinding;
-import org.lwjgl.input.Keyboard;
 
 public class KeyBindings
 {
-    public static KeyBinding openBag = new KeyBinding(KeyBindings.Keys.BAG, Keyboard.KEY_NUMPAD1, KeyBindings.Keys.CATEGORY);
+    public static KeyBinding openBag = new KeyBinding(KeyBindings.Keys.BAG, 42, KeyBindings.Keys.CATEGORY);
     
     public static final class Keys
     {

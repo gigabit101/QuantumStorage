@@ -2,36 +2,44 @@ package QuantumStorage.client;
 
 import QuantumStorage.inventory.AdvancedContainer;
 import QuantumStorage.tiles.AdvancedTileEntity;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.entity.player.EntityPlayer;
+import com.mojang.blaze3d.platform.GlStateManager;
+import net.minecraft.client.gui.screen.inventory.ContainerScreen;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponent;
 
 /**
  * Created by Gigabit101 on 17/03/2017.
  */
-public class AdvancedGui extends GuiContainer
+public class AdvancedGui extends ContainerScreen
 {
     public AdvancedTileEntity machine;
-    public EntityPlayer player;
+    public PlayerEntity player;
     
-    public AdvancedGui(EntityPlayer player, AdvancedTileEntity machine)
+    public AdvancedGui(PlayerEntity player, AdvancedTileEntity machine)
     {
-        super(new AdvancedContainer(player, machine));
+        super(new AdvancedContainer(player, machine), player.inventory, new TextComponent() {
+            @Override
+            public String getUnformattedComponentText() {
+                return null;
+            }
+
+            @Override
+            public ITextComponent shallowCopy() {
+                return null;
+            }
+        });
         this.machine = machine;
         this.player = player;
         this.xSize = machine.getXSize();
         this.ySize = machine.getYsize();
-        buttonList.clear();
+//        buttonList.clear();
     }
-    
+
     @Override
-    public void drawScreen(int mouseX, int mouseY, float partialTicks)
+    protected void init()
     {
-        this.drawDefaultBackground();
-        
-        super.drawScreen(mouseX, mouseY, partialTicks);
-        
-        this.renderHoveredToolTip(mouseX, mouseY);
+        super.init();
     }
     
     @Override
@@ -48,14 +56,14 @@ public class AdvancedGui extends GuiContainer
     
     public void drawCentredString(String string, int y, int colour)
     {
-        drawString(string, (xSize / 2 - mc.fontRenderer.getStringWidth(string) / 2), y, colour);
+        drawString(string, (xSize / 2 - font.getStringWidth(string) / 2), y, colour);
     }
     
     public void drawString(String string, int x, int y, int colour)
     {
         int factorX = 0;
         int factorY = 0;
-        mc.fontRenderer.drawString(string, x + factorX, y + factorY, colour);
-        GlStateManager.color(1, 1, 1, 1);
+        font.drawString(string, x + factorX, y + factorY, colour);
+        GlStateManager.color4f(1, 1, 1, 1);
     }
 }

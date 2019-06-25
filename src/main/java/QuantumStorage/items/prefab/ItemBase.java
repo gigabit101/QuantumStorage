@@ -8,8 +8,9 @@ import net.minecraft.item.Item;
  */
 public class ItemBase extends Item
 {
-    public ItemBase()
+    public ItemBase(Item.Properties properties)
     {
-        setCreativeTab(CreativeTabQuantumStorage.INSTANCE);
+        super(properties);
+//        setCreativeTab(CreativeTabQuantumStorage.INSTANCE);
     }
 }

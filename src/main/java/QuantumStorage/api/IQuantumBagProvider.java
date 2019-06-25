@@ -1,17 +1,17 @@
 package QuantumStorage.api;
 
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.EnumDyeColor;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.DyeColor;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nonnull;
 
-public interface IQuantumBagProvider extends INBTSerializable<NBTTagCompound>
+public interface IQuantumBagProvider extends INBTSerializable<CompoundNBT>
 {
     @Nonnull
-    IItemHandler getBag(@Nonnull EnumDyeColor color);
+    IItemHandler getBag(@Nonnull DyeColor color);
     
-    void sync(EnumDyeColor color, @Nonnull EntityPlayerMP player);
+    void sync(DyeColor color, @Nonnull PlayerEntity player);
 }

@@ -3,7 +3,6 @@ package QuantumStorage.inventory.slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
-import reborncore.common.util.ItemUtils;
 
 import javax.annotation.Nonnull;
 
@@ -23,7 +22,7 @@ public class SlotBlacklist extends SlotItemHandler
     @Override
     public boolean isItemValid(@Nonnull ItemStack stack)
     {
-        if (ItemUtils.isItemEqual(stack, blacklist, false, false))
+        if (stack.isItemEqual(blacklist))
         {
             return false;
         }

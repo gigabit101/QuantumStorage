@@ -6,9 +6,8 @@ import QuantumStorage.init.ModItems;
 import QuantumStorage.network.PacketGuiBag;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.InputEvent;
-import reborncore.common.network.NetworkManager;
+import net.minecraftforge.client.event.InputEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class KeyInputEventHandler
 {
@@ -30,17 +29,17 @@ public class KeyInputEventHandler
     
     private void onKeyPressed()
     {
-        Minecraft mc = Minecraft.getMinecraft();
+        Minecraft mc = Minecraft.getInstance();
         if (mc.currentScreen != null)
             return;
         
         if(mc.player.inventory.hasItemStack(new ItemStack(ModItems.BAG)))
         {
             int slot = mc.player.inventory.getSlotFor(new ItemStack(ModItems.BAG));
-            int colour = mc.player.inventory.getStackInSlot(slot).getItemDamage();
+//            int colour = mc.player.inventory.getStackInSlot(slot).getItemDamage();
             
-            mc.player.openGui(QuantumStorage.INSTANCE, GuiHandler.BAG_ID_PACKET, mc.world, 0, 0, colour);
-            NetworkManager.sendToServer(new PacketGuiBag(colour));
+//            mc.player.openGui(QuantumStorage.INSTANCE, GuiHandler.BAG_ID_PACKET, mc.world, 0, 0, colour);
+//            NetworkManager.sendToServer(new PacketGuiBag(colour));
         }
     }
 }
