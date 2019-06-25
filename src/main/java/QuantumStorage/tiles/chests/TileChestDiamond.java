@@ -1,32 +1,32 @@
 package QuantumStorage.tiles.chests;
 
-import QuantumStorage.client.AdvancedGui;
-import QuantumStorage.config.ConfigQuantumStorage;
-import QuantumStorage.init.ModBlocks;
+import QuantumStorage.QuantumStorage;
 import QuantumStorage.tiles.AdvancedTileEntity;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.inventory.Slot;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.INamedContainerProvider;
+import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
-import reborncore.common.util.RebornCraftingHelper;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,10 +34,11 @@ import java.util.List;
 /**
  * Created by Gigabit101 on 03/04/2017.
  */
-public class TileChestDiamond extends AdvancedTileEntity
+public class TileChestDiamond extends AdvancedTileEntity implements INamedContainerProvider
 {
     public TileChestDiamond()
     {
+        super(QuantumStorage.tileChestDiamond);
         this.inv = new ItemStackHandler(91);
     }
     
@@ -48,9 +49,9 @@ public class TileChestDiamond extends AdvancedTileEntity
     }
     
     protected static final AxisAlignedBB CHEST_AABB = new AxisAlignedBB(0.0625D, 0.0D, 0.0625D, 0.9375D, 0.875D, 0.9375D);
-    
+
     @Override
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+    public AxisAlignedBB getRenderBoundingBox()
     {
         return CHEST_AABB;
     }
@@ -71,20 +72,20 @@ public class TileChestDiamond extends AdvancedTileEntity
         return slots;
     }
     
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY, int guiLeft, int guiTop, int xSize, int ySize, AdvancedGui gui)
-    {
-        getBuilder().drawDefaultBackground(gui, guiLeft, guiTop, xSize, ySize);
-        getBuilder().drawPlayerSlots(gui, guiLeft + xSize / 2, guiTop + 150, true);
-        if (getSlots() != null)
-        {
-            for (Slot s : getSlots())
-            {
-                getBuilder().drawSlot(gui, guiLeft + s.xPos - 1, guiTop + s.yPos - 1);
-            }
-        }
-    }
+//    @SideOnly(Side.CLIENT)
+//    @Override
+//    public void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY, int guiLeft, int guiTop, int xSize, int ySize, AdvancedGui gui)
+//    {
+//        getBuilder().drawDefaultBackground(gui, guiLeft, guiTop, xSize, ySize);
+//        getBuilder().drawPlayerSlots(gui, guiLeft + xSize / 2, guiTop + 150, true);
+//        if (getSlots() != null)
+//        {
+//            for (Slot s : getSlots())
+//            {
+//                getBuilder().drawSlot(gui, guiLeft + s.xPos - 1, guiTop + s.yPos - 1);
+//            }
+//        }
+//    }
     
     @Override
     public int getXSize()
@@ -109,82 +110,84 @@ public class TileChestDiamond extends AdvancedTileEntity
     {
         return 151;
     }
-    
+
     @Override
-    public TileEntity createNewTileEntity(World world, int meta)
+    public TileEntity createNewTileEntity(IBlockReader world)
     {
         return new TileChestDiamond();
     }
-    
+
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
+    public boolean onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult rayTraceResult)
     {
-        openGui(playerIn, (AdvancedTileEntity) worldIn.getTileEntity(pos));
+        openGui(player, (AdvancedTileEntity) world.getTileEntity(pos));
         return true;
     }
     
     @Override
     public Block getBlock()
     {
-        return ModBlocks.CHEST_DIAMOND;
+        return null;
     }
     
     @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound compound)
+    public CompoundNBT write(CompoundNBT compound)
     {
-        compound = super.writeToNBT(compound);
+        compound = super.write(compound);
         compound.merge(inv.serializeNBT());
         return compound;
     }
     
     @Override
-    public void readFromNBT(NBTTagCompound compound)
+    public void read(CompoundNBT compound)
     {
-        super.readFromNBT(compound);
+        super.read(compound);
         inv.deserializeNBT(compound);
     }
-    
+
+
+    @Nonnull
     @Override
-    public boolean hasCapability(Capability<?> capability, EnumFacing facing)
+    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> capability)
     {
         if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
         {
-            return true;
+            return LazyOptional.of(() -> getInv()).cast();
         }
-        return super.hasCapability(capability, facing);
+        return super.getCapability(capability);
     }
-    
-    @Override
-    public <T> T getCapability(Capability<T> capability, EnumFacing facing)
-    {
-        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
-        {
-            return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(getInv());
-        }
-        return super.getCapability(capability, facing);
-    }
+
     
     @Override
     public void addRecipe()
     {
-        if (!ConfigQuantumStorage.disableChests)
-        {
-            RebornCraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.CHEST_DIAMOND),
-                    "WXW",
-                    "ICI",
-                    "WXW",
-                    'W', "plankWood",
-                    'X', "chest",
-                    'I', new ItemStack(Items.DIAMOND),
-                    'C', new ItemStack(ModBlocks.CHEST_GOLD));
-        }
+//        if (!ConfigQuantumStorage.disableChests)
+//        {
+//            RebornCraftingHelper.addShapedOreRecipe(new ItemStack(ModBlocks.CHEST_DIAMOND),
+//                    "WXW",
+//                    "ICI",
+//                    "WXW",
+//                    'W', "plankWood",
+//                    'X', "chest",
+//                    'I', new ItemStack(Items.DIAMOND),
+//                    'C', new ItemStack(ModBlocks.CHEST_GOLD));
+//        }
     }
-    
-    @SideOnly(Side.CLIENT)
+
     @Override
-    public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag advanced)
-    {
-        tooltip.add("Keeps Inventory when broken");
+    public void addInformation(ItemStack stack, @Nullable IBlockReader world, List<ITextComponent> tooltip, ITooltipFlag advanced) {
+//        tooltip.add("Keeps Inventory when broken");
         super.addInformation(stack, world, tooltip, advanced);
+    }
+
+    @Override
+    public ITextComponent getDisplayName() {
+        return null;
+    }
+
+    @Nullable
+    @Override
+    public Container createMenu(int i, PlayerInventory playerInventory, PlayerEntity playerEntity) {
+        return null;
     }
 }

@@ -1,7 +1,5 @@
 package QuantumStorage.tiles;
 
-import QuantumStorage.client.AdvancedGui;
-import QuantumStorage.client.GuiBuilderQuantumStorage;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
@@ -13,6 +11,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
@@ -39,9 +38,9 @@ public abstract class AdvancedTileEntity extends TileEntity
     private Direction facing;
     public ItemStackHandler inv = null;
     
-    protected AdvancedTileEntity()
+    public AdvancedTileEntity(TileEntityType<?> tileEntityTypeIn)
     {
-        super(new AdvancedTileEntity());
+        super(tileEntityTypeIn);
         this.facing = Direction.NORTH;
     }
     
@@ -80,17 +79,17 @@ public abstract class AdvancedTileEntity extends TileEntity
     }
     
 //    @SideOnly(Side.CLIENT)
-    private GuiBuilderQuantumStorage builder;
+//    private GuiBuilderQuantumStorage builder;
     
 //    @SideOnly(Side.CLIENT)
-    public GuiBuilderQuantumStorage getBuilder()
-    {
-        if (builder == null)
-        {
-            builder = new GuiBuilderQuantumStorage();
-        }
-        return builder;
-    }
+//    public GuiBuilderQuantumStorage getBuilder()
+//    {
+//        if (builder == null)
+//        {
+//            builder = new GuiBuilderQuantumStorage();
+//        }
+//        return builder;
+//    }
     
     public int getXSize()
     {
@@ -103,8 +102,8 @@ public abstract class AdvancedTileEntity extends TileEntity
     }
     
 //    @SideOnly(Side.CLIENT)
-    public void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY, int guiLeft, int guiTop, int xSize, int ySize, AdvancedGui gui)
-    {
+//    public void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY, int guiLeft, int guiTop, int xSize, int ySize, AdvancedGui gui)
+//    {
 //        getBuilder().drawDefaultBackground(gui, guiLeft, guiTop, xSize, ySize);
 //        getBuilder().drawPlayerSlots(gui, guiLeft + xSize / 2, guiTop + 93, true);
 //        if (getSlots() != null)
@@ -114,7 +113,7 @@ public abstract class AdvancedTileEntity extends TileEntity
 //                getBuilder().drawSlot(gui, guiLeft + s.xPos - 1, guiTop + s.yPos - 1);
 //            }
 //        }
-    }
+//    }
     
 //    @SideOnly(Side.CLIENT)
     public void drawGuiContainerForegroundLayer(int mouseX, int mouseY, ContainerScreen gui, int guiLeft, int guiTop)

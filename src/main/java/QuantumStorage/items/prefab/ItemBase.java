@@ -1,6 +1,5 @@
 package QuantumStorage.items.prefab;
 
-import QuantumStorage.client.CreativeTabQuantumStorage;
 import net.minecraft.item.Item;
 
 /**

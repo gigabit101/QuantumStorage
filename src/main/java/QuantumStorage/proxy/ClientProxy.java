@@ -1,15 +1,6 @@
 package QuantumStorage.proxy;
 
-import QuantumStorage.api.IColorable;
-import QuantumStorage.api.IQuantumBagProvider;
-import QuantumStorage.api.QuantumStorageAPI;
 import QuantumStorage.client.keybinding.KeyBindings;
-import QuantumStorage.client.keybinding.KeyInputEventHandler;
-import QuantumStorage.init.ModItems;
-import QuantumStorage.tiles.TileQuantumStorageUnit;
-import QuantumStorage.tiles.TileQuantumTank;
-import net.minecraft.client.Minecraft;
-import net.minecraft.item.Item;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 
 /**

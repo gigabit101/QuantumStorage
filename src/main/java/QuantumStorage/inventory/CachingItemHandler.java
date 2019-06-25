@@ -6,12 +6,12 @@ public class CachingItemHandler extends ItemStackHandler
 {
     public int firstAvailable = 0;
     private int lastUsed = -1;
-    
+
     public CachingItemHandler(int size)
     {
         super(size);
     }
-    
+
     @Override
     protected void onLoad()
     {
@@ -29,7 +29,7 @@ public class CachingItemHandler extends ItemStackHandler
             }
         }
     }
-    
+
     @Override
     protected void onContentsChanged(int slot)
     {
@@ -51,22 +51,22 @@ public class CachingItemHandler extends ItemStackHandler
             lastUsed = i - 1;
         }
     }
-    
+
     public int getFirstAvailable()
     {
         return firstAvailable;
     }
-    
+
     public int getLastUsed()
     {
         return lastUsed;
     }
-    
+
     public boolean isEmpty()
     {
         return lastUsed == -1;
     }
-    
+
     public boolean isFull()
     {
         return firstAvailable == getSlots();

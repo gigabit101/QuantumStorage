@@ -1,7 +1,6 @@
 package QuantumStorage.items;
 
 import QuantumStorage.items.prefab.ItemBase;
-import QuantumStorage.utils.RfUtils;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -81,11 +80,11 @@ public class ItemQuantumBattery extends ItemBase// implements IBauble
         return true;
     }
     
-    @Override
-    public double getDurabilityForDisplay(ItemStack stack)
-    {
-        return RfUtils.getDurabilityForDisplay(stack);
-    }
+//    @Override
+//    public double getDurabilityForDisplay(ItemStack stack)
+//    {
+//        return RfUtils.getDurabilityForDisplay(stack);
+//    }
     
 //    @Override
 //    public ICapabilityProvider initCapabilities(ItemStack stack, CompoundNBT nbt)

@@ -1,6 +1,5 @@
 package QuantumStorage.client.keybinding;
 
-import net.java.games.input.Keyboard;
 import net.minecraft.client.settings.KeyBinding;
 
 public class KeyBindings
