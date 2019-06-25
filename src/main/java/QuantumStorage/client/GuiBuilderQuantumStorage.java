@@ -1,32 +1,55 @@
-//package QuantumStorage.client;
-//
-//import QuantumStorage.QuantumStorage;
-//import net.minecraft.client.gui.GuiScreen;
-//import net.minecraft.client.gui.inventory.GuiContainer;
-//import net.minecraft.client.renderer.GlStateManager;
-//import net.minecraft.util.ResourceLocation;
-//import net.minecraft.util.text.TextFormatting;
-//import net.minecraftforge.fluids.FluidTank;
-//import net.minecraftforge.fml.client.config.GuiUtils;
-//import reborncore.client.RenderUtil;
-//import reborncore.client.guibuilder.GuiBuilder;
-//
-//import java.util.ArrayList;
-//import java.util.List;
-//
-///**
-// * Created by Gigabit101 on 28/03/2017.
-// */
-//public class GuiBuilderQuantumStorage extends GuiBuilder
-//{
-//    public static final ResourceLocation GUI_SHEET = new ResourceLocation(QuantumStorage.MOD_ID.toLowerCase() + ":" + "textures/gui/gui_sheet.png");
-//
-//    public GuiBuilderQuantumStorage()
-//    {
-//        super(GUI_SHEET);
-//    }
-//
-//    public void drawBigBlueBar(AdvancedGui gui, int x, int y, int value, int max, int mouseX, int mouseY, String suffix, String line2, String format)
+package QuantumStorage.client;
+
+import QuantumStorage.QuantumStorage;
+import com.mojang.blaze3d.platform.GlStateManager;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screen.inventory.ContainerScreen;
+import net.minecraft.util.ResourceLocation;
+
+/**
+ * Created by Gigabit101 on 28/03/2017.
+ */
+public class GuiBuilderQuantumStorage
+{
+    public static final ResourceLocation GUI_SHEET = new ResourceLocation(QuantumStorage.MOD_ID.toLowerCase() + ":" + "textures/gui/gui_sheet.png");
+
+    public void drawDefaultBackground(ContainerScreen gui, int x, int y, int width, int height) {
+        GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+        Minecraft.getInstance().getTextureManager().bindTexture(GUI_SHEET);
+
+        gui.blit(x, y, 0, 0, width / 2, height / 2);
+        gui.blit(x + width / 2, y, 150 - width / 2, 0, width / 2, height / 2);
+        gui.blit(x, y + height / 2, 0, 150 - height / 2, width / 2, height / 2);
+        gui.blit(x + width / 2, y + height / 2, 150 - width / 2, 150 - height / 2, width / 2, height / 2);
+    }
+
+    public void drawPlayerSlots(ContainerScreen gui, int posX, int posY, boolean center)
+    {
+        Minecraft.getInstance().getTextureManager().bindTexture(GUI_SHEET);
+        if (center)
+        {
+            posX -= 81;
+        }
+        for (int y = 0; y < 3; y++)
+        {
+            for (int x = 0; x < 9; x++)
+            {
+                gui.blit(posX + x * 18, posY + y * 18, 150, 0, 18, 18);
+            }
+        }
+        for (int x = 0; x < 9; x++)
+        {
+            gui.blit(posX + x * 18, posY + 58, 150, 0, 18, 18);
+        }
+    }
+
+    public void drawSlot(ContainerScreen gui, int posX, int posY)
+    {
+        Minecraft.getInstance().getTextureManager().bindTexture(GUI_SHEET);
+        gui.blit(posX, posY, 150, 0, 18, 18);
+    }
+
+//    public void drawBigBlueBar(ContainerScreen gui, int x, int y, int value, int max, int mouseX, int mouseY, String suffix, String line2, String format)
 //    {
 //        gui.mc.getTextureManager().bindTexture(GUI_SHEET);
 //        if (!suffix.equals(""))
@@ -122,9 +145,9 @@
 //            GlStateManager.disableLighting();
 //        }
 //    }
-//
-//    public boolean isInRect(int x, int y, int xSize, int ySize, int mouseX, int mouseY)
-//    {
-//        return ((mouseX >= x && mouseX <= x + xSize) && (mouseY >= y && mouseY <= y + ySize));
-//    }
-//}
+
+    public boolean isInRect(int x, int y, int xSize, int ySize, int mouseX, int mouseY)
+    {
+        return ((mouseX >= x && mouseX <= x + xSize) && (mouseY >= y && mouseY <= y + ySize));
+    }
+}

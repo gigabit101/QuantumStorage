@@ -28,7 +28,6 @@ public class BlockChestDiamond extends ContainerBlock
     {
         super(properties);
         setRegistryName(new ResourceLocation(QuantumStorage.MOD_ID, "chestdiamond"));
-//        ForgeRegistries.BLOCKS.register(this);
         this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH));
     }
 
@@ -45,7 +44,7 @@ public class BlockChestDiamond extends ContainerBlock
 
     @Nonnull
     public BlockState rotate(BlockState state, Rotation rot)
-        {
+    {
         return state.with(FACING, rot.rotate(state.get(FACING)));
     }
 
@@ -66,7 +65,7 @@ public class BlockChestDiamond extends ContainerBlock
     {
         if (!world.isRemote)
         {
-//            NetworkHooks.openGui((ServerPlayerEntity) player, (INamedContainerProvider) world.getTileEntity(pos), pos);
+            NetworkHooks.openGui((ServerPlayerEntity) player, (INamedContainerProvider) world.getTileEntity(pos), pos);
         }
         return true;
     }

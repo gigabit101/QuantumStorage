@@ -1,12 +1,15 @@
 package QuantumStorage;
 
 import QuantumStorage.blocks.BlockChestDiamond;
+import QuantumStorage.containers.ContainerChestDiamond;
+import QuantumStorage.containers.GuiChestDiamond;
 import QuantumStorage.proxy.ClientProxy;
 import QuantumStorage.proxy.CommonProxy;
 import QuantumStorage.tiles.chests.TileChestDiamond;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
+import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -14,6 +17,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
@@ -40,8 +44,11 @@ public class QuantumStorage
     @ObjectHolder(MOD_ID + ":" + "tilechestdiamond")
     public static TileEntityType<?> tileChestDiamond;
 
-    @ObjectHolder(MOD_ID + ":chestdiamond")
-    public static Block blockChestDiamond ;
+    @ObjectHolder(MOD_ID + ":" + "chestdiamond")
+    public static Block blockChestDiamond;
+
+    @ObjectHolder(MOD_ID + ":" + "chestdiamond")
+    public static ContainerType<ContainerChestDiamond> containerChestDiamondContainerType = null;
     
     private static CommonProxy proxy = DistExecutor.runForDist(() -> ClientProxy::new, () -> CommonProxy::new);
 
@@ -76,10 +83,12 @@ public class QuantumStorage
 
     @SubscribeEvent
     public static void registerContainers(RegistryEvent.Register<ContainerType<?>> event) {
-//        event.getRegistry().register(IForgeContainerType.create(ContainerStorageCabinet::new).setRegistryName(MOD_ID, MOD_ID));
+        event.getRegistry().register(IForgeContainerType.create(ContainerChestDiamond::new).setRegistryName(MOD_ID, "chestdiamond"));
     }
 
-    void doClientStuff(final FMLClientSetupEvent event) {
+    void doClientStuff(final FMLClientSetupEvent event)
+    {
+        ScreenManager.registerFactory(QuantumStorage.containerChestDiamondContainerType, GuiChestDiamond::new);
 //        proxy.registerRenders();
 //        proxy.registerColors();
 //        proxy.registerKeybindings();
