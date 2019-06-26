@@ -3,6 +3,7 @@ package QuantumStorage.api;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
+@Deprecated
 public class RecipeQuantumTank
 {
     Object input;

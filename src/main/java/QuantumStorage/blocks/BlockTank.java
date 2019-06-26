@@ -2,6 +2,7 @@ package QuantumStorage.blocks;
 
 import QuantumStorage.QuantumStorage;
 import QuantumStorage.tiles.TileQsu;
+import QuantumStorage.tiles.TileTank;
 import net.minecraft.block.*;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
@@ -18,19 +19,20 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class BlockQSU extends ContainerBlock
+public class BlockTank extends ContainerBlock
 {
     private static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
 
-    public BlockQSU(Properties properties)
+    public BlockTank(Properties properties)
     {
         super(properties);
-        setRegistryName(new ResourceLocation(QuantumStorage.MOD_ID, "qsu"));
+        setRegistryName(new ResourceLocation(QuantumStorage.MOD_ID, "tank"));
         this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH));
     }
 
@@ -85,11 +87,15 @@ public class BlockQSU extends ContainerBlock
     @Override
     public TileEntity createNewTileEntity(IBlockReader worldIn)
     {
-        return QuantumStorage.tileQsu.create();
+        return QuantumStorage.tileTank.create();
     }
 
     public boolean onBlockActivated(BlockState blockState, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult traceResult)
     {
+         if(FluidUtil.interactWithFluidHandler(player, hand, world, pos, traceResult.getFace()))
+         {
+             return true;
+         }
         if (!world.isRemote)
         {
             NetworkHooks.openGui((ServerPlayerEntity) player, (INamedContainerProvider) world.getTileEntity(pos), pos);
@@ -105,25 +111,25 @@ public class BlockQSU extends ContainerBlock
     @Override
     public void harvestBlock(World world, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity tile, ItemStack stack)
     {
-        TileQsu tileEntity = (TileQsu) tile;
-    
+        TileTank tileEntity = (TileTank) tile;
+
         float xOffset = world.rand.nextFloat() * 0.8F + 0.1F;
         float yOffset = world.rand.nextFloat() * 0.8F + 0.1F;
         float zOffset = world.rand.nextFloat() * 0.8F + 0.1F;
-    
+
         ItemStack stacknbt = (tileEntity).getDropWithNBT();
         int amountToDrop = Math.min(world.rand.nextInt(21) + 10, stacknbt.getCount());
-    
+
         ItemEntity entityitem = new ItemEntity(world, pos.getX() + xOffset, pos.getY() + yOffset, pos.getZ() + zOffset, stacknbt.split(amountToDrop));
         world.addEntity(entityitem);
     }
-    
+
     @Override
     public void onBlockPlacedBy(World world, BlockPos pos, BlockState state, @Nullable LivingEntity entity, ItemStack stack)
     {
         super.onBlockPlacedBy(world, pos, state, entity, stack);
-        TileQsu qsu = (TileQsu) world.getTileEntity(pos);
-        
+        TileTank qsu = (TileTank) world.getTileEntity(pos);
+
         if (stack.hasTag())
         {
             qsu.readFromNBTWithoutCoords(stack.getTag().getCompound("tileEntity"));

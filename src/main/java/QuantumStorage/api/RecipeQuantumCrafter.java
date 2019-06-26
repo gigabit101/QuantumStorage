@@ -5,6 +5,7 @@ import net.minecraft.item.ItemStack;
 /**
  * Created by Gigabit101 on 10/05/2017.
  */
+@Deprecated
 public class RecipeQuantumCrafter
 {
     Object input;

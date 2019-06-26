@@ -1,4 +1,4 @@
-package QuantumStorage.utils;
+package QuantumStorage.items;
 
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.energy.EnergyStorage;

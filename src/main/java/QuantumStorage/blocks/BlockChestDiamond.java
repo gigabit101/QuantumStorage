@@ -1,11 +1,16 @@
 package QuantumStorage.blocks;
 
 import QuantumStorage.QuantumStorage;
+import QuantumStorage.tiles.chests.TileChestDiamond;
+import QuantumStorage.tiles.chests.TileChestGold;
 import net.minecraft.block.*;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
@@ -72,5 +77,34 @@ public class BlockChestDiamond extends ContainerBlock
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
     {
         builder.add(FACING);
+    }
+    
+    @Override
+    public void harvestBlock(World world, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity tile, ItemStack stack)
+    {
+        TileChestDiamond tileEntity = (TileChestDiamond) tile;
+        
+        float xOffset = world.rand.nextFloat() * 0.8F + 0.1F;
+        float yOffset = world.rand.nextFloat() * 0.8F + 0.1F;
+        float zOffset = world.rand.nextFloat() * 0.8F + 0.1F;
+        
+        ItemStack stacknbt = (tileEntity).getDropWithNBT();
+        int amountToDrop = Math.min(world.rand.nextInt(21) + 10, stacknbt.getCount());
+        
+        ItemEntity entityitem = new ItemEntity(world, pos.getX() + xOffset, pos.getY() + yOffset, pos.getZ() + zOffset, stacknbt.split(amountToDrop));
+        world.addEntity(entityitem);
+    }
+    
+    @Override
+    public void onBlockPlacedBy(World world, BlockPos pos, BlockState state, @Nullable LivingEntity entity, ItemStack stack)
+    {
+        super.onBlockPlacedBy(world, pos, state, entity, stack);
+        TileChestDiamond qsu = (TileChestDiamond) world.getTileEntity(pos);
+        
+        if (stack.hasTag())
+        {
+            qsu.readFromNBTWithoutCoords(stack.getTag().getCompound("tileEntity"));
+        }
+        world.notifyBlockUpdate(pos, state, state, 3);
     }
 }

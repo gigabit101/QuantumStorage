@@ -4,5 +4,6 @@
   "block.quantumstorage.trashcan": "Trash can",
   "block.quantumstorage.chestgold": "Storage crate Gold",
   "block.quantumstorage.chestdiamond": "Storage crate Diamond",
+  "block.quantumstorage.qsu": "QuantumStorage Unit",
   "config.quantumstorge.onlynonstackables": "Enable Blacklist/Whitelist"
 }

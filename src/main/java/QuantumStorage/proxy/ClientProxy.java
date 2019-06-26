@@ -1,8 +1,11 @@
 package QuantumStorage.proxy;
 
 import QuantumStorage.QuantumStorage;
+import QuantumStorage.client.render.RenderDsu;
 import QuantumStorage.guis.*;
+import QuantumStorage.tiles.TileQsu;
 import net.minecraft.client.gui.ScreenManager;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 
 /**
  * Created by Gigabit101 on 07/03/2017.
@@ -12,7 +15,7 @@ public class ClientProxy extends CommonProxy
     @Override
     public void registerRenders()
     {
-//        ClientRegistry.bindTileEntitySpecialRenderer(TileQuantumStorageUnit.class, new RenderDsu());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileQsu.class, new RenderDsu());
 //        ClientRegistry.bindTileEntitySpecialRenderer(TileQuantumTank.class, new TankRender());
     }
     
@@ -54,5 +57,6 @@ public class ClientProxy extends CommonProxy
 
         ScreenManager.registerFactory(QuantumStorage.containerTrashcanContainerType, GuiTrashcan::new);
         ScreenManager.registerFactory(QuantumStorage.containerQsuContainerType, GuiQSU::new);
+        ScreenManager.registerFactory(QuantumStorage.containerTankContainerType, GuiTank::new);
     }
 }

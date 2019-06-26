@@ -2,26 +2,23 @@ package QuantumStorage.guis;
 
 import QuantumStorage.client.GuiBuilderQuantumStorage;
 import QuantumStorage.containers.ContainerQSU;
-import QuantumStorage.containers.ContainerTrashcan;
+import QuantumStorage.containers.ContainerTank;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraftforge.fluids.FluidTank;
+import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Locale;
 
-public class GuiQSU extends ContainerScreen<ContainerQSU>
+public class GuiTank extends ContainerScreen<ContainerTank>
 {
     GuiBuilderQuantumStorage builder = new GuiBuilderQuantumStorage();
-
-    int STORAGE = 1;
-    int OUTPUT = 2;
-
-    public GuiQSU(ContainerQSU container, PlayerInventory playerinv, ITextComponent title)
+    
+    public GuiTank(ContainerTank container, PlayerInventory playerinv, ITextComponent title)
     {
         super(container, playerinv, title);
         this.xSize = 190;
@@ -33,19 +30,23 @@ public class GuiQSU extends ContainerScreen<ContainerQSU>
     {
         builder.drawDefaultBackground(this, guiLeft, guiTop, xSize, ySize);
         builder.drawPlayerSlots(this, guiLeft + xSize / 2, guiTop + 131, true);
-
-        builder.drawSlot(this, guiLeft + xSize / 2 - 9, guiTop + 30);
-
-        builder.drawSlot(this, guiLeft + xSize / 2 - 9, guiTop + 80);
     }
 
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
     {
         super.drawGuiContainerForegroundLayer(mouseX, mouseY);
-        
-        builder.drawBigBlueBar( this, 36, 56, this.getInv().getStackInSlot(STORAGE).getCount() + this.getInv().getStackInSlot(OUTPUT).getCount(), Integer.MAX_VALUE, mouseX - guiLeft, mouseY - guiTop, "Stored", getInv().getStackInSlot(OUTPUT).getDisplayName().getString(),
-                formatQuantity(this.getInv().getStackInSlot(STORAGE).getCount() + this.getInv().getStackInSlot(OUTPUT).getCount()));
+    
+        int amount = 0;
+        String name = "Empty";
+
+        if (getTank().getFluid() != null)
+        {
+            amount = getTank().getFluidAmount();
+            name = getTank().getFluid().getFluid().getName();
+        }
+    
+        builder.drawBigBlueBar(this, 36, 56, amount, getTank().getCapacity(), mouseX - guiLeft, mouseY - guiTop, "", "Fluid Type: " + name, amount + " mb " + name);
     }
 
     public static final DecimalFormat QUANTITY_FORMATTER = new DecimalFormat("####0.#", DecimalFormatSymbols.getInstance(Locale.US));
@@ -62,9 +63,9 @@ public class GuiQSU extends ContainerScreen<ContainerQSU>
         }
         return String.valueOf(qty);
     }
-
-    public IItemHandler getInv()
+    
+    public IFluidTank getTank()
     {
-        return container.getInv();
+        return container.getTank();
     }
 }

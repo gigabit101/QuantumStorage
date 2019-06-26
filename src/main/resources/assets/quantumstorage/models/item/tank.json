@@ -1,5 +1,5 @@
 {
-  "parent": "quantumstorage:block/chestdiamond",
+  "parent": "quantumstorage:block/tank",
   "textures": {
   },
   "display": {

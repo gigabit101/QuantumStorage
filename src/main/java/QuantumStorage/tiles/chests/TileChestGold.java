@@ -7,6 +7,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
@@ -72,5 +73,29 @@ public class TileChestGold extends TileEntity implements INamedContainerProvider
     public Container createMenu(int id, PlayerInventory playerInventory, PlayerEntity playerEntity)
     {
         return new ContainerChestGold(id, playerEntity.inventory, this);
+    }
+    
+    public void writeToNBTWithoutCoords(CompoundNBT tagCompound)
+    {
+        tagCompound = super.write(tagCompound);
+        if (inventory != null)
+        {
+            tagCompound.merge(inventory.serializeNBT());
+        }
+    }
+    
+    public void readFromNBTWithoutCoords(CompoundNBT compound)
+    {
+        inventory.deserializeNBT(compound);
+    }
+    
+    public ItemStack getDropWithNBT()
+    {
+        CompoundNBT tileEntity = new CompoundNBT();
+        ItemStack dropStack = new ItemStack(QuantumStorage.blockChestGold, 1);
+        writeToNBTWithoutCoords(tileEntity);
+        dropStack.setTag(new CompoundNBT());
+        dropStack.getTag().put("tileEntity", tileEntity);
+        return dropStack;
     }
 }
