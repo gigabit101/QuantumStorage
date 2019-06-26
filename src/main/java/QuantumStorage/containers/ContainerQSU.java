@@ -2,6 +2,7 @@ package QuantumStorage.containers;
 
 import QuantumStorage.QuantumStorage;
 import QuantumStorage.containers.prefab.ContainerQS;
+import QuantumStorage.inventory.slot.SlotOutputItemHandler;
 import QuantumStorage.tiles.TileQsu;
 import QuantumStorage.tiles.TileTrashcan;
 import net.minecraft.client.Minecraft;
@@ -29,7 +30,7 @@ public class ContainerQSU extends ContainerQS
         this.inv = te.inventory;
 
         addSlot(new SlotItemHandler(te.inventory,0, 87, 31));
-        addSlot(new SlotItemHandler(te.inventory,2, 87, 81));
+        addSlot(new SlotOutputItemHandler(te.inventory,2, 87, 81));
     
         drawPlayersInv(playerInv, 15, 132);
         drawPlayersHotBar(playerInv, 15, 132 + 58);
