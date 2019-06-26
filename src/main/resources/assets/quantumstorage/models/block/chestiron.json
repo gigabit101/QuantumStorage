@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench, a free, modern block model editor by JannisX11",
 	"textures": {
-		"0": "blocks/planks_spruce",
-		"3": "blocks/gold_block",
+		"0": "block/spruce_planks",
+		"3": "block/iron_block",
 		"4": "quantumstorage:blocks/chests/planks_spruce_rotated"
 	},
 	"elements": [

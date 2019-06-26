@@ -1,0 +1,19 @@
+{
+   "variants": {
+      "facing=north": {
+         "model": "quantumstorage:block/chestiron"
+      },
+      "facing=south": {
+         "model": "quantumstorage:block/chestiron",
+         "y": 180
+      },
+      "facing=west": {
+         "model": "quantumstorage:block/chestiron",
+         "y": 270
+      },
+      "facing=east": {
+         "model": "quantumstorage:block/chestiron",
+         "y": 90
+      }
+   }
+}

@@ -19,14 +19,14 @@ import net.minecraftforge.fml.network.NetworkHooks;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class BlockChestDiamond extends ContainerBlock
+public class BlockChestIron extends ContainerBlock
 {
     private static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
 
-    public BlockChestDiamond(Properties properties)
+    public BlockChestIron(Properties properties)
     {
         super(properties);
-        setRegistryName(new ResourceLocation(QuantumStorage.MOD_ID, "chestdiamond"));
+        setRegistryName(new ResourceLocation(QuantumStorage.MOD_ID, "chestiron"));
         this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH));
     }
 
@@ -57,7 +57,7 @@ public class BlockChestDiamond extends ContainerBlock
     @Override
     public TileEntity createNewTileEntity(IBlockReader worldIn)
     {
-        return QuantumStorage.tileChestDiamond.create();
+        return QuantumStorage.tileChestIron.create();
     }
 
     public boolean onBlockActivated(BlockState blockState, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult traceResult)

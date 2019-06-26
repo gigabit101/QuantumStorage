@@ -1,0 +1,7 @@
+{
+  "itemGroup.quantumstorage": "Quantum Storage",
+  "block.quantumstorage.chestiron": "Storage Crate Iron",
+  "block.quantumstorage.chestgold": "Storage Crate Gold",
+  "block.quantumstorage.chestdiamond": "Storage Crate Diamond",
+  "config.quantumstorge.onlynonstackables": "Enable Blacklist/Whitelist"
+}
