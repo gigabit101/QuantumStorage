@@ -3,11 +3,14 @@ package QuantumStorage.tiles;
 import QuantumStorage.QuantumStorage;
 import QuantumStorage.containers.ContainerChestIron;
 import QuantumStorage.containers.ContainerTrashcan;
+import QuantumStorage.inventory.InventoryTrashcan;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.text.ITextComponent;
@@ -23,13 +26,22 @@ import javax.annotation.Nullable;
 /**
  * Created by Gigabit101 on 03/04/2017.
  */
-public class TileTrashcan extends TileEntity implements INamedContainerProvider
+public class TileTrashcan extends TileEntity implements INamedContainerProvider, ITickableTileEntity
 {
-    public ItemStackHandler inventory = new ItemStackHandler(1);
+    public InventoryTrashcan inventory = new InventoryTrashcan();
 
     public TileTrashcan()
     {
         super(QuantumStorage.tileTrashcan);
+    }
+
+    @Override
+    public void tick()
+    {
+        if(!inventory.getStackInSlot(0).isEmpty())
+        {
+            inventory.setStackInSlot(0, ItemStack.EMPTY);
+        }
     }
 
     @Nonnull
@@ -41,24 +53,6 @@ public class TileTrashcan extends TileEntity implements INamedContainerProvider
             return LazyOptional.of(() -> inventory).cast();
         }
         return super.getCapability(cap, side);
-    }
-
-    @Override
-    public void read(CompoundNBT compound)
-    {
-        super.read(compound);
-        if (compound.contains("inv"))
-        {
-            inventory.deserializeNBT(compound.getCompound("inv"));
-        }
-    }
-
-    @Override
-    @Nonnull
-    public CompoundNBT write(CompoundNBT compound)
-    {
-        compound.put("inv", inventory.serializeNBT());
-        return super.write(compound);
     }
 
     @Override

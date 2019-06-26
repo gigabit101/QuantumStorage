@@ -27,7 +27,7 @@ public class ContainerTrashcan extends ContainerQS
     {
         super(QuantumStorage.containerTrashcanContainerType, id);
 
-        addSlot(new SlotItemHandler(te.inventory,0, 50, 50));
+        addSlot(new SlotItemHandler(te.inventory,0, 87, 61));
 
         drawPlayersInv(playerInv, 15, 132);
         drawPlayersHotBar(playerInv, 15, 132 + 58);

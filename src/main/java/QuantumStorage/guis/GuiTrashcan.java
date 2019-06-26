@@ -24,6 +24,6 @@ public class GuiTrashcan extends ContainerScreen<ContainerTrashcan>
         builder.drawDefaultBackground(this, guiLeft, guiTop, xSize, ySize);
         builder.drawPlayerSlots(this, guiLeft + xSize / 2, guiTop + 131, true);
 
-        builder.drawSlot(this, guiLeft + xSize / 2 - 8, guiTop + 80);
+        builder.drawSlot(this, guiLeft + xSize / 2 - 9, guiTop + 60);
     }
 }
