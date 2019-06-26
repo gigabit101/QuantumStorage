@@ -3,7 +3,10 @@ package QuantumStorage.items;
 import QuantumStorage.api.IColorable;
 import QuantumStorage.items.prefab.ItemBase;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+
+import java.util.Collection;
 
 public class ItemQuantumBag extends ItemBase implements IColorable
 {
@@ -16,7 +19,8 @@ public class ItemQuantumBag extends ItemBase implements IColorable
     }
 
     @Override
-    public int getColorFromItemStack(ItemStack stack, int tintIndex) {
+    public int getColorFromItemStack(ItemStack stack, int tintIndex)
+    {
         return 0;
     }
 
@@ -30,7 +34,9 @@ public class ItemQuantumBag extends ItemBase implements IColorable
 //        }
 //        return super.getUnlocalizedName() + "." + COLOURS[meta];
 //    }
-//
+
+
+    //
 //    @Override
 //    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items)
 //    {

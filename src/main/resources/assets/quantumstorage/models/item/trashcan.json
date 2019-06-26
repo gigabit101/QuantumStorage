@@ -1,0 +1,6 @@
+{
+  "parent": "quantumstorage:block/trashcan",
+  "textures": {
+    "layer0": "quantumstorage:block/trashcan"
+  }
+}

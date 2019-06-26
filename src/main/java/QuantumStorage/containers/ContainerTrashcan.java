@@ -2,6 +2,7 @@ package QuantumStorage.containers;
 
 import QuantumStorage.QuantumStorage;
 import QuantumStorage.containers.prefab.ContainerQS;
+import QuantumStorage.tiles.TileTrashcan;
 import QuantumStorage.tiles.chests.TileChestIron;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
@@ -13,28 +14,20 @@ import net.minecraftforge.items.SlotItemHandler;
 
 import java.util.Objects;
 
-public class ContainerChestIron extends ContainerQS
+public class ContainerTrashcan extends ContainerQS
 {
     private IItemHandler inv;
 
-    public ContainerChestIron(int id, PlayerInventory playerInv, PacketBuffer extraData)
+    public ContainerTrashcan(int id, PlayerInventory playerInv, PacketBuffer extraData)
     {
-        this(id, playerInv, (TileChestIron) Objects.requireNonNull(Minecraft.getInstance().world.getTileEntity(extraData.readBlockPos())));
+        this(id, playerInv, (TileTrashcan) Objects.requireNonNull(Minecraft.getInstance().world.getTileEntity(extraData.readBlockPos())));
     }
 
-    public ContainerChestIron(int id, PlayerInventory playerInv, TileChestIron te)
+    public ContainerTrashcan(int id, PlayerInventory playerInv, TileTrashcan te)
     {
-        super(QuantumStorage.containerChestIronContainerType, id);
+        super(QuantumStorage.containerTrashcanContainerType, id);
 
-        int i = 0;
-        for (int l = 0; l < 4; ++l)
-        {
-            for (int j1 = 0; j1 < 9; ++j1)
-            {
-                addSlot(new SlotItemHandler(te.inventory, i, 14 + j1 * 18, 8 + l * 18));
-                i++;
-            }
-        }
+        addSlot(new SlotItemHandler(te.inventory,0, 50, 50));
 
         drawPlayersInv(playerInv, 15, 132);
         drawPlayersHotBar(playerInv, 15, 132 + 58);

@@ -17,4 +17,6 @@ public class CommonProxy
     }
     
     public void registerKeybindings() {}
+
+    public void registerGuis() {}
 }

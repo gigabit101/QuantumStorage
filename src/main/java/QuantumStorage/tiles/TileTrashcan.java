@@ -1,7 +1,8 @@
-package QuantumStorage.tiles.chests;
+package QuantumStorage.tiles;
 
 import QuantumStorage.QuantumStorage;
-import QuantumStorage.containers.ContainerChestDiamond;
+import QuantumStorage.containers.ContainerChestIron;
+import QuantumStorage.containers.ContainerTrashcan;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
@@ -22,13 +23,13 @@ import javax.annotation.Nullable;
 /**
  * Created by Gigabit101 on 03/04/2017.
  */
-public class TileChestDiamond extends TileEntity implements INamedContainerProvider
+public class TileTrashcan extends TileEntity implements INamedContainerProvider
 {
-    public ItemStackHandler inventory = new ItemStackHandler(109);
+    public ItemStackHandler inventory = new ItemStackHandler(1);
 
-    public TileChestDiamond()
+    public TileTrashcan()
     {
-        super(QuantumStorage.tileChestDiamond);
+        super(QuantumStorage.tileTrashcan);
     }
 
     @Nonnull
@@ -63,13 +64,13 @@ public class TileChestDiamond extends TileEntity implements INamedContainerProvi
     @Override
     public ITextComponent getDisplayName()
     {
-        return new TranslationTextComponent("tile.chestdiamond.name");
+        return new TranslationTextComponent("tile.trashcan.name");
     }
 
     @Nullable
     @Override
     public Container createMenu(int id, PlayerInventory playerInventory, PlayerEntity playerEntity)
     {
-        return new ContainerChestDiamond(id, playerEntity.inventory, this);
+        return new ContainerTrashcan(id, playerEntity.inventory, this);
     }
 }

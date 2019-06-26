@@ -1,12 +1,11 @@
 package QuantumStorage.containers;
 
 import QuantumStorage.QuantumStorage;
-import QuantumStorage.tiles.chests.TileChestDiamond;
+import QuantumStorage.containers.prefab.ContainerQS;
 import QuantumStorage.tiles.chests.TileChestGold;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.items.IItemHandler;
@@ -14,7 +13,7 @@ import net.minecraftforge.items.SlotItemHandler;
 
 import java.util.Objects;
 
-public class ContainerChestGold extends Container
+public class ContainerChestGold extends ContainerQS
 {
     private IItemHandler inv;
 

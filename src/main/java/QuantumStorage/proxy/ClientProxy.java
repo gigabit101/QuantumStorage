@@ -1,7 +1,11 @@
 package QuantumStorage.proxy;
 
-import QuantumStorage.client.keybinding.KeyBindings;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
+import QuantumStorage.QuantumStorage;
+import QuantumStorage.guis.GuiChestDiamond;
+import QuantumStorage.guis.GuiChestGold;
+import QuantumStorage.guis.GuiChestIron;
+import QuantumStorage.guis.GuiTrashcan;
+import net.minecraft.client.gui.ScreenManager;
 
 /**
  * Created by Gigabit101 on 07/03/2017.
@@ -40,7 +44,17 @@ public class ClientProxy extends CommonProxy
     @Override
     public void registerKeybindings()
     {
-        ClientRegistry.registerKeyBinding(KeyBindings.openBag);
+//        ClientRegistry.registerKeyBinding(KeyBindings.openBag);
 //        FMLCommonHandler.instance().bus().register(new KeyInputEventHandler());
+    }
+
+    @Override
+    public void registerGuis()
+    {
+        ScreenManager.registerFactory(QuantumStorage.containerChestDiamondContainerType, GuiChestDiamond::new);
+        ScreenManager.registerFactory(QuantumStorage.containerChestGoldContainerType, GuiChestGold::new);
+        ScreenManager.registerFactory(QuantumStorage.containerChestIronContainerType, GuiChestIron::new);
+
+        ScreenManager.registerFactory(QuantumStorage.containerTrashcanContainerType, GuiTrashcan::new);
     }
 }

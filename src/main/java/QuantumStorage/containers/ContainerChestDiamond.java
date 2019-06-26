@@ -1,11 +1,11 @@
 package QuantumStorage.containers;
 
 import QuantumStorage.QuantumStorage;
+import QuantumStorage.containers.prefab.ContainerQS;
 import QuantumStorage.tiles.chests.TileChestDiamond;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.items.IItemHandler;
@@ -13,7 +13,7 @@ import net.minecraftforge.items.SlotItemHandler;
 
 import java.util.Objects;
 
-public class ContainerChestDiamond extends Container
+public class ContainerChestDiamond extends ContainerQS
 {
     private IItemHandler inv;
 
@@ -29,15 +29,15 @@ public class ContainerChestDiamond extends Container
         int i = 0;
         for (int l = 0; l < 6; ++l)
         {
-            for (int j1 = 0; j1 < 9; ++j1)
+            for (int j1 = 0; j1 < 12; ++j1)
             {
                 addSlot(new SlotItemHandler(te.inventory, i, 14 + j1 * 18, 8 + l * 18));
                 i++;
             }
         }
 
-        drawPlayersInv(playerInv, 15, 132);
-        drawPlayersHotBar(playerInv, 15, 132 + 58);
+        drawPlayersInv(playerInv, 40, 132);
+        drawPlayersHotBar(playerInv, 40, 132 + 58);
     }
 
     @Override

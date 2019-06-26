@@ -1,4 +1,4 @@
-package QuantumStorage.upgrades;
+package QuantumStorage.items;
 
 import QuantumStorage.items.prefab.ItemBase;
 import net.minecraft.item.Item;

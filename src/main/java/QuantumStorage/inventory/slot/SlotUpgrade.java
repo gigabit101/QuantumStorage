@@ -1,6 +1,6 @@
 package QuantumStorage.inventory.slot;
 
-import QuantumStorage.upgrades.ItemUpgrade;
+import QuantumStorage.items.ItemUpgrade;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;

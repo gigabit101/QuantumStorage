@@ -1,16 +1,16 @@
-package QuantumStorage.containers;
+package QuantumStorage.guis;
 
 import QuantumStorage.client.GuiBuilderQuantumStorage;
+import QuantumStorage.containers.ContainerChestGold;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraftforge.items.SlotItemHandler;
 
-public class GuiChestDiamond extends ContainerScreen<ContainerChestDiamond>
+public class GuiChestGold extends ContainerScreen<ContainerChestGold>
 {
     GuiBuilderQuantumStorage builder = new GuiBuilderQuantumStorage();
 
-    public GuiChestDiamond(ContainerChestDiamond container, PlayerInventory playerinv, ITextComponent title)
+    public GuiChestGold(ContainerChestGold container, PlayerInventory playerinv, ITextComponent title)
     {
         super(container, playerinv, title);
         this.xSize = 190;

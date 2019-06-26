@@ -1,45 +1,19 @@
 {
-    "forge_marker":1,
-    "defaults":{
-        "transform":"forge:default-block",
-        "model":"quantumstorage:trashcan",
-        "textures":{
-            "particle":"quantumstorage:blocks/trashcan/trashcan-bottom"
-        }
-    },
-    "variants":{
-        "inventory":{
-            "transform":"forge:default-block",
-            "textures":{}
+    "variants": {
+        "facing=north": {
+            "model": "quantumstorage:block/trashcan"
         },
-        "facing":{
-            "north":{
-
-            },
-            "east":{
-                "y":90
-            },
-            "south":{
-                "y":180
-            },
-            "west":{
-                "y":270
-            }
+        "facing=south": {
+            "model": "quantumstorage:block/trashcan",
+            "y": 180
         },
-        "active":{
-            "true":{
-                "textures":{
-                }
-            },
-            "false":{
-                "textures":{
-
-                }
-            }
+        "facing=west": {
+            "model": "quantumstorage:block/trashcan",
+            "y": 270
         },
-        "inventory": {
-            "model": "quantumstorage:trashcan",
-            "textures": {}
+        "facing=east": {
+            "model": "quantumstorage:block/trashcan",
+            "y": 90
         }
     }
 }

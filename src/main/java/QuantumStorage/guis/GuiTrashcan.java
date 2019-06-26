@@ -1,15 +1,17 @@
-package QuantumStorage.containers;
+package QuantumStorage.guis;
 
 import QuantumStorage.client.GuiBuilderQuantumStorage;
+import QuantumStorage.containers.ContainerChestIron;
+import QuantumStorage.containers.ContainerTrashcan;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.text.ITextComponent;
 
-public class GuiChestGold extends ContainerScreen<ContainerChestGold>
+public class GuiTrashcan extends ContainerScreen<ContainerTrashcan>
 {
     GuiBuilderQuantumStorage builder = new GuiBuilderQuantumStorage();
 
-    public GuiChestGold(ContainerChestGold container, PlayerInventory playerinv, ITextComponent title)
+    public GuiTrashcan(ContainerTrashcan container, PlayerInventory playerinv, ITextComponent title)
     {
         super(container, playerinv, title);
         this.xSize = 190;
@@ -21,13 +23,7 @@ public class GuiChestGold extends ContainerScreen<ContainerChestGold>
     {
         builder.drawDefaultBackground(this, guiLeft, guiTop, xSize, ySize);
         builder.drawPlayerSlots(this, guiLeft + xSize / 2, guiTop + 131, true);
-    
-        for (int l = 0; l < 6; ++l)
-        {
-            for (int j1 = 0; j1 < 9; ++j1)
-            {
-                builder.drawSlot(this, guiLeft + 14 + j1 * 18 - 1, guiTop + 8 + l * 18 - 1);
-            }
-        }
+
+        builder.drawSlot(this, guiLeft + xSize / 2 - 8, guiTop + 80);
     }
 }
