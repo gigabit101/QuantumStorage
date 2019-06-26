@@ -46,26 +46,4 @@ public class ContainerQSU extends ContainerQS
     {
         return this.inv;
     }
-
-    public void drawPlayersInv(PlayerInventory player, int x, int y)
-    {
-        int i;
-        for (i = 0; i < 3; ++i)
-        {
-            for (int j = 0; j < 9; ++j)
-            {
-                this.addSlot(new Slot(player, j + i * 9 + 9, x + j * 18, y + i * 18));
-            }
-        }
-
-    }
-
-    public void drawPlayersHotBar(PlayerInventory player, int x, int y)
-    {
-        int i;
-        for (i = 0; i < 9; ++i)
-        {
-            this.addSlot(new Slot(player, i, x + i * 18, y));
-        }
-    }
 }
