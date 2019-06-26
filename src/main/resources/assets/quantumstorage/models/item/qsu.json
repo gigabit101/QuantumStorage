@@ -1,0 +1,6 @@
+{
+  "parent": "quantumstorage:block/qsu",
+  "textures": {
+    "layer0": "quantumstorage:block/qsu"
+  }
+}

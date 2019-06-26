@@ -1,10 +1,7 @@
 package QuantumStorage.proxy;
 
 import QuantumStorage.QuantumStorage;
-import QuantumStorage.guis.GuiChestDiamond;
-import QuantumStorage.guis.GuiChestGold;
-import QuantumStorage.guis.GuiChestIron;
-import QuantumStorage.guis.GuiTrashcan;
+import QuantumStorage.guis.*;
 import net.minecraft.client.gui.ScreenManager;
 
 /**
@@ -56,5 +53,6 @@ public class ClientProxy extends CommonProxy
         ScreenManager.registerFactory(QuantumStorage.containerChestIronContainerType, GuiChestIron::new);
 
         ScreenManager.registerFactory(QuantumStorage.containerTrashcanContainerType, GuiTrashcan::new);
+        ScreenManager.registerFactory(QuantumStorage.containerQsuContainerType, GuiQSU::new);
     }
 }

@@ -1,13 +1,11 @@
 package QuantumStorage;
 
-import QuantumStorage.blocks.BlockChestDiamond;
-import QuantumStorage.blocks.BlockChestGold;
-import QuantumStorage.blocks.BlockChestIron;
-import QuantumStorage.blocks.BlockTrashcan;
+import QuantumStorage.blocks.*;
 import QuantumStorage.client.CreativeTabQuantumStorage;
 import QuantumStorage.containers.*;
 import QuantumStorage.proxy.ClientProxy;
 import QuantumStorage.proxy.CommonProxy;
+import QuantumStorage.tiles.TileQsu;
 import QuantumStorage.tiles.TileTrashcan;
 import QuantumStorage.tiles.chests.TileChestDiamond;
 import QuantumStorage.tiles.chests.TileChestGold;
@@ -53,6 +51,8 @@ public class QuantumStorage
     public static TileEntityType<?> tileChestIron;
     @ObjectHolder(MOD_ID + ":" + "tiletrashcan")
     public static TileEntityType<?> tileTrashcan;
+    @ObjectHolder(MOD_ID + ":" + "tileqsu")
+    public static TileEntityType<?> tileQsu;
 
     //BLOCKS
     @ObjectHolder(MOD_ID + ":" + "chestdiamond")
@@ -63,6 +63,8 @@ public class QuantumStorage
     public static Block blockChestIron;
     @ObjectHolder(MOD_ID + ":" + "trashcan")
     public static Block blockTashcan;
+    @ObjectHolder(MOD_ID + ":" + "qsu")
+    public static Block blockQsu;
 
 
     //CONTAINERS
@@ -74,6 +76,8 @@ public class QuantumStorage
     public static ContainerType<ContainerChestIron> containerChestIronContainerType = null;
     @ObjectHolder(MOD_ID + ":" + "trashcan")
     public static ContainerType<ContainerTrashcan> containerTrashcanContainerType = null;
+    @ObjectHolder(MOD_ID + ":" + "qsu")
+    public static ContainerType<ContainerQSU> containerQsuContainerType = null;
     
     private static CommonProxy proxy = DistExecutor.runForDist(() -> ClientProxy::new, () -> CommonProxy::new);
 
@@ -97,6 +101,7 @@ public class QuantumStorage
         event.getRegistry().register(TileEntityType.Builder.create(TileChestIron::new, blockChestIron).build(null).setRegistryName(new ResourceLocation(QuantumStorage.MOD_ID, "tilechestiron")));
 
         event.getRegistry().register(TileEntityType.Builder.create(TileTrashcan::new, blockTashcan).build(null).setRegistryName(new ResourceLocation(QuantumStorage.MOD_ID, "tiletrashcan")));
+        event.getRegistry().register(TileEntityType.Builder.create(TileQsu::new, blockQsu).build(null).setRegistryName(new ResourceLocation(QuantumStorage.MOD_ID, "tileqsu")));
     }
 
     @SubscribeEvent
@@ -110,6 +115,7 @@ public class QuantumStorage
         event.getRegistry().register(new BlockChestIron(properties));
 
         event.getRegistry().register(new BlockTrashcan(properties));
+        event.getRegistry().register(new BlockQSU(properties));
     }
 
     @SubscribeEvent
@@ -120,6 +126,7 @@ public class QuantumStorage
         event.getRegistry().register(new BlockItem(blockChestIron, new Item.Properties().group(CreativeTabQuantumStorage.INSTANCE)).setRegistryName(Objects.requireNonNull(blockChestIron.getRegistryName())));
 
         event.getRegistry().register(new BlockItem(blockTashcan, new Item.Properties().group(CreativeTabQuantumStorage.INSTANCE)).setRegistryName(Objects.requireNonNull(blockTashcan.getRegistryName())));
+        event.getRegistry().register(new BlockItem(blockQsu, new Item.Properties().group(CreativeTabQuantumStorage.INSTANCE)).setRegistryName(Objects.requireNonNull(blockQsu.getRegistryName())));
     }
 
     @SubscribeEvent
@@ -130,6 +137,7 @@ public class QuantumStorage
         event.getRegistry().register(IForgeContainerType.create(ContainerChestIron::new).setRegistryName(MOD_ID, "chestiron"));
 
         event.getRegistry().register(IForgeContainerType.create(ContainerTrashcan::new).setRegistryName(MOD_ID, "trashcan"));
+        event.getRegistry().register(IForgeContainerType.create(ContainerQSU::new).setRegistryName(MOD_ID, "qsu"));
     }
 
     void doClientStuff(final FMLClientSetupEvent event)
