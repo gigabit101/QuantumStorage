@@ -1,54 +1,47 @@
 package QuantumStorage.items;
 
 import QuantumStorage.api.IColorable;
+import QuantumStorage.client.CreativeTabQuantumStorage;
 import QuantumStorage.items.prefab.ItemBase;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-
-import java.util.Collection;
+import com.google.common.collect.Maps;
+import net.minecraft.item.*;
+import java.util.Map;
 
 public class ItemQuantumBag extends ItemBase implements IColorable
 {
-    public static final String[] COLOURS = new String[]{"white", "orange", "magenta", "lightBlue", "yellow", "lime", "pink", "gray", "silver", "cyan", "purple", "blue", "brown", "green", "red", "black"};
-    
-    public ItemQuantumBag(Item.Properties properties)
+    private static final Map<DyeColor, ItemQuantumBag> COLOR_DYE_ITEM_MAP = Maps.newEnumMap(DyeColor.class);
+    private final DyeColor dyeColor;
+    protected final int colour;
+
+    public ItemQuantumBag(DyeColor dyeColor)
     {
-        super(properties);
-        setRegistryName("quantum_bag");
+        super(new Item.Properties().group(CreativeTabQuantumStorage.INSTANCE).maxStackSize(1));
+        setRegistryName("quantum_bag_" + dyeColor.getName());
+        this.dyeColor = dyeColor;
+        float[] vals = dyeColor.getColorComponentValues();
+        int[] rgb = new int[3];
+        for (int i = 0; i < 3; i++)
+            rgb[i] = (int) (255 * vals[i]);
+        int value = ((255 & 0xFF) << 24) | ((rgb[0] & 0xFF) << 16) | ((rgb[1] & 0xFF) << 8) | ((rgb[2] & 0xFF) << 0);
+        colour = value;
+    }
+
+    public DyeColor getDyeColor()
+    {
+        return this.dyeColor;
+    }
+
+    public static ItemQuantumBag getItem(DyeColor color)
+    {
+        return (ItemQuantumBag) COLOR_DYE_ITEM_MAP.get(color);
     }
 
     @Override
-    public int getColorFromItemStack(ItemStack stack, int tintIndex)
+    public int getColor(ItemStack stack, int tint)
     {
-        return 0;
+        return colour;
     }
 
-//    @Override
-//    public String getUnlocalizedName(ItemStack itemStack)
-//    {
-//        int meta = itemStack.getItemDamage();
-//        if (meta < 0 || meta >= COLOURS.length)
-//        {
-//            meta = 0;
-//        }
-//        return super.getUnlocalizedName() + "." + COLOURS[meta];
-//    }
-
-
-    //
-//    @Override
-//    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items)
-//    {
-//        if (this.isInCreativeTab(tab))
-//        {
-//            for (int meta = 0; meta < COLOURS.length; ++meta)
-//            {
-//                items.add(new ItemStack(this, 1, meta));
-//            }
-//        }
-//    }
-//
 //    @Override
 //    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
 //    {
@@ -57,15 +50,5 @@ public class ItemQuantumBag extends ItemBase implements IColorable
 //            playerIn.openGui(QuantumStorage.INSTANCE, GuiHandler.BAG_ID, worldIn, 0, 0, 0);
 //        }
 //        return super.onItemRightClick(worldIn, playerIn, handIn);
-//    }
-//
-//    @Override
-//    public int getColorFromItemStack(ItemStack par1ItemStack, int par2)
-//    {
-//        if (par1ItemStack.getItemDamage() >= EnumDyeColor.values().length)
-//        {
-//            return 0xFFFFFF;
-//        }
-//        return EnumDyeColor.byMetadata(par1ItemStack.getItemDamage()).getColorValue();
 //    }
 }

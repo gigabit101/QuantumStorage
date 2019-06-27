@@ -5,5 +5,7 @@
   "block.quantumstorage.chestgold": "Storage crate Gold",
   "block.quantumstorage.chestdiamond": "Storage crate Diamond",
   "block.quantumstorage.qsu": "QuantumStorage Unit",
-  "config.quantumstorge.onlynonstackables": "Enable Blacklist/Whitelist"
+  "block.quantumstorage.tank": "Quantum Tank",
+  "item.quantumstorage.quantum_battery": "Quantum Battery",
+  "config.quantumstorge.specialrender": "Enable Special Render"
 }

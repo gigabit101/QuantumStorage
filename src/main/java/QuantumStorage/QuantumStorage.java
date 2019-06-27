@@ -4,6 +4,7 @@ import QuantumStorage.blocks.*;
 import QuantumStorage.client.CreativeTabQuantumStorage;
 import QuantumStorage.config.ConfigQuantumStorage;
 import QuantumStorage.containers.*;
+import QuantumStorage.items.ItemQuantumBag;
 import QuantumStorage.items.ItemQuantumBattery;
 import QuantumStorage.proxy.ClientProxy;
 import QuantumStorage.proxy.CommonProxy;
@@ -18,6 +19,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.BlockItem;
+import net.minecraft.item.DyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
@@ -33,6 +35,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ObjectHolder;
 
+import java.util.EnumMap;
 import java.util.Objects;
 
 /**
@@ -45,6 +48,7 @@ public class QuantumStorage
     public static final String MOD_NAME = "QuantumStorage";
     
     public static QuantumStorage INSTANCE;
+    ConfigQuantumStorage config = ConfigQuantumStorage.INSTANCE;
 
     //TILES
     @ObjectHolder(MOD_ID + ":" + "tilechestdiamond")
@@ -92,7 +96,10 @@ public class QuantumStorage
     //ITEMS
     @ObjectHolder(MOD_ID + ":" + "qsu")
     public static Item battery;
-    
+
+    public static final EnumMap<DyeColor, ItemQuantumBag> BAGS = new EnumMap<>(DyeColor.class);
+
+
     private static CommonProxy proxy = DistExecutor.runForDist(() -> ClientProxy::new, () -> CommonProxy::new);
 
     public QuantumStorage()
@@ -148,6 +155,13 @@ public class QuantumStorage
         event.getRegistry().register(new BlockItem(blockTank, new Item.Properties().group(CreativeTabQuantumStorage.INSTANCE)).setRegistryName(Objects.requireNonNull(blockTank.getRegistryName())));
         
         event.getRegistry().register(new ItemQuantumBattery());
+
+        for (DyeColor color : DyeColor.values())
+        {
+            ItemQuantumBag s = new ItemQuantumBag(color);
+            BAGS.put(color, s);
+            event.getRegistry().register(s);
+        }
     }
 
     @SubscribeEvent
