@@ -11,9 +11,9 @@ public class ConfigQuantumStorage
     public static final ForgeConfigSpec spec = BUILDER.build();
     public static final ConfigQuantumStorage INSTANCE = new ConfigQuantumStorage(BUILDER);
     
-    public ForgeConfigSpec.ConfigValue<Boolean> specialRender;
+    private ForgeConfigSpec.ConfigValue<Boolean> specialRender;
     
-    ConfigQuantumStorage(ForgeConfigSpec.Builder builder)
+    private ConfigQuantumStorage(ForgeConfigSpec.Builder builder)
     {
         builder.push("General");
         specialRender = builder.comment("Set to false to disable the QuantumStorage units special render").translation("config.quantumstorage.specialrender").define("specialRender", true);
