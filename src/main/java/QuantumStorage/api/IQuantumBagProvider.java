@@ -7,7 +7,7 @@ import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nonnull;
-@Deprecated
+
 public interface IQuantumBagProvider extends INBTSerializable<CompoundNBT>
 {
     @Nonnull
