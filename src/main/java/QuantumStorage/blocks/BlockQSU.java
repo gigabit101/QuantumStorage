@@ -3,6 +3,7 @@ package QuantumStorage.blocks;
 import QuantumStorage.QuantumStorage;
 import QuantumStorage.tiles.TileQsu;
 import net.minecraft.block.*;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -10,18 +11,25 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.ListNBT;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class BlockQSU extends ContainerBlock
 {
@@ -129,5 +137,32 @@ public class BlockQSU extends ContainerBlock
             qsu.readFromNBTWithoutCoords(stack.getTag().getCompound("tileEntity"));
         }
         world.notifyBlockUpdate(pos, state, state, 3);
+    }
+    
+    @Override
+    public void addInformation(ItemStack stack, @Nullable IBlockReader p_190948_2_, List<ITextComponent> tooltip, ITooltipFlag p_190948_4_)
+    {
+        if (!stack.isEmpty() && stack.hasTag())
+        {
+            ListNBT tagList = stack.getTag().getCompound("tileEntity").getList("Items", Constants.NBT.TAG_COMPOUND);
+            ItemStack stack1;
+        
+            CompoundNBT itemTags = tagList.getCompound(0);
+            CompoundNBT itemTags2 = tagList.getCompound(2);
+        
+            int count = itemTags.getInt("SizeSpecial") + itemTags2.getInt("SizeSpecial");
+        
+            stack1 = ItemStack.read(itemTags);
+            stack1.setCount(count);
+        
+            if (!stack1.isEmpty())
+            {
+                String s = TextFormatting.GOLD + "Stored Item Type: " + stack1.getCount() + " " + stack1.getDisplayName();
+                tooltip.add(new TranslationTextComponent(s));
+            }
+            else {
+                tooltip.add(new TranslationTextComponent("TOOLTIP STILL A WIP"));
+            }
+        }
     }
 }

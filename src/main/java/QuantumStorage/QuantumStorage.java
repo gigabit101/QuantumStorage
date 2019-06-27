@@ -42,7 +42,6 @@ import java.util.Objects;
 public class QuantumStorage
 {
     public static final String MOD_ID = "quantumstorage";
-    public static final String MOD_NAME = "QuantumStorage";
     
     public static QuantumStorage INSTANCE;
 

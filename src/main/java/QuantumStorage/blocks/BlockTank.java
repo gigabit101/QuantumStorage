@@ -4,6 +4,7 @@ import QuantumStorage.QuantumStorage;
 import QuantumStorage.tiles.TileQsu;
 import QuantumStorage.tiles.TileTank;
 import net.minecraft.block.*;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -17,6 +18,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidUtil;
@@ -24,6 +28,7 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class BlockTank extends ContainerBlock
 {
@@ -135,5 +140,11 @@ public class BlockTank extends ContainerBlock
             qsu.readFromNBTWithoutCoords(stack.getTag().getCompound("tileEntity"));
         }
         world.notifyBlockUpdate(pos, state, state, 3);
+    }
+    
+    @Override
+    public void addInformation(ItemStack p_190948_1_, @Nullable IBlockReader p_190948_2_, List<ITextComponent> tooltip, ITooltipFlag p_190948_4_)
+    {
+        tooltip.add(new TranslationTextComponent(TextFormatting.RED + "WIP"));
     }
 }

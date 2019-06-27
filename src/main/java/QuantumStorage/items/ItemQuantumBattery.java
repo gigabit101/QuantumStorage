@@ -2,6 +2,7 @@ package QuantumStorage.items;
 
 import QuantumStorage.client.CreativeTabQuantumStorage;
 import QuantumStorage.items.prefab.ItemBase;
+import com.sun.java.accessibility.util.java.awt.TextComponentTranslator;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
@@ -14,6 +15,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
@@ -83,7 +85,7 @@ public class ItemQuantumBattery extends ItemBase
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn)
     {
         super.addInformation(stack, worldIn, tooltip, flagIn);
-//        tooltip.add(I18n.format(""))
+        tooltip.add(new TranslationTextComponent("test"));
 //        tooltip.add("" + RfUtils.addPowerTooltip(stack));
     }
     

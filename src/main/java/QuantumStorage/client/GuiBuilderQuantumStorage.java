@@ -65,7 +65,7 @@ public class GuiBuilderQuantumStorage
         if (j < 0)
             j = 0;
         gui.blit(x + 4, y + 4, 0, 236, j, 10);
-//        gui.drawString(Minecraft.getInstance().fontRenderer, format + suffix, y + 5, 0xFFFFFF);
+        gui.drawString(Minecraft.getInstance().fontRenderer, format + suffix, x + 28, y + 5, 0xFFFFFF);
         if (isInRect(x, y, 114, 18, mouseX, mouseY))
         {
             int percentage = percentage(max, value);
