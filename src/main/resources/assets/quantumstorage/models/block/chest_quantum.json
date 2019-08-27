@@ -3,7 +3,9 @@
 	"textures": {
 		"0": "blocks/planks_spruce",
 		"3": "blocks/emerald_block",
-		"4": "quantumstorage:blocks/chests/planks_spruce_rotated"
+		"4": "quantumstorage:blocks/chests/planks_spruce_rotated",
+		"particle": "quantumstorage:blocks/chests/planks_spruce_rotated"
+
 	},
 	"elements": [
 		{

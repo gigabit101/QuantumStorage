@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "ACA",
+    "AAA"  ],
+  "key": {
+    "A": [
+      {
+        "item": "minecraft:stone"
+      }
+    ],
+    "C": [
+      {
+        "item": "minecraft:chest"
+      }
+    ],
+    "S": [
+      {
+        "item": "minecraft:stone_slab"
+      }
+    ]
+  },
+  "result": {
+    "item": "quantumstorage:trashcan"
+  }
+}

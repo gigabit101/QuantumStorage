@@ -21,9 +21,9 @@ public class RenderDsu extends TileEntityRenderer<TileQsu>
             GlStateManager.pushMatrix();
 
             ItemStack stack = te.inventory.getStackInSlot(2);
-            if (stack != null)
+            if (!stack.isEmpty())
             {
-                double spin = Minecraft.getInstance().getRenderPartialTicks() / 1000D;
+                double spin = System.currentTimeMillis() / 1000D;
 
                 if (stack.getItem() instanceof BlockItem)
                 {
@@ -41,7 +41,7 @@ public class RenderDsu extends TileEntityRenderer<TileQsu>
         }
     }
     
-    public static void renderItemInWorld(ItemStack stack)
+    private static void renderItemInWorld(ItemStack stack)
     {
         GlStateManager.pushMatrix();
         GlStateManager.disableLighting();

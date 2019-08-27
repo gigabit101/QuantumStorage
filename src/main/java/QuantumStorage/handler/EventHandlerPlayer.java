@@ -21,13 +21,13 @@ public class EventHandlerPlayer
     }
 
     @SubscribeEvent
-    public static void respawnEvent(net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent evt)
+    public static void respawnEvent(PlayerEvent.PlayerRespawnEvent evt)
     {
 //        evt.getPlayer().getCapability(QuantumStorageAPI.QUANTUM_BAG_PROVIDER_CAPABILITY, null).sync(null, (PlayerEntity) evt.getPlayer());
     }
 
     @SubscribeEvent
-    public static void playerChangeDimension(net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent event)
+    public static void playerChangeDimension(PlayerEvent.PlayerChangedDimensionEvent event)
     {
 //        event.getPlayer().getCapability(QuantumStorageAPI.QUANTUM_BAG_PROVIDER_CAPABILITY, null).sync(null, (PlayerEntity) event.getPlayer());
     }

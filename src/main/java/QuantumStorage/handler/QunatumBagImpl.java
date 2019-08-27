@@ -102,7 +102,7 @@ public final class QunatumBagImpl
 
     public static class Provider implements ICapabilitySerializable<CompoundNBT>
     {
-        public static final ResourceLocation NAME = new ResourceLocation(QuantumStorage.MOD_NAME, "quantum_bags");
+        public static final ResourceLocation NAME = new ResourceLocation(QuantumStorage.MOD_ID, "quantum_bags");
 
         private final IQuantumBagProvider cap = new DefaultImpl();
 

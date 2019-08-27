@@ -21,10 +21,7 @@ public class ClientProxy extends CommonProxy
     @Override
     public void registerRenders()
     {
-//        if(ConfigQuantumStorage.INSTANCE.specialRender.get())
-//        {
-            ClientRegistry.bindTileEntitySpecialRenderer(TileQsu.class, new RenderDsu());
-//        }
+        ClientRegistry.bindTileEntitySpecialRenderer(TileQsu.class, new RenderDsu());
 //        ClientRegistry.bindTileEntitySpecialRenderer(TileQuantumTank.class, new TankRender());
     }
     
@@ -61,6 +58,6 @@ public class ClientProxy extends CommonProxy
 
         ScreenManager.registerFactory(QuantumStorage.containerTrashcanContainerType, GuiTrashcan::new);
         ScreenManager.registerFactory(QuantumStorage.containerQsuContainerType, GuiQSU::new);
-        ScreenManager.registerFactory(QuantumStorage.containerTankContainerType, GuiTank::new);
+//        ScreenManager.registerFactory(QuantumStorage.containerTankContainerType, GuiTank::new);
     }
 }

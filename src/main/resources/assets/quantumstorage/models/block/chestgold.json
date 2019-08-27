@@ -3,7 +3,8 @@
 	"textures": {
 		"0": "block/spruce_planks",
 		"3": "block/gold_block",
-		"4": "quantumstorage:blocks/chests/planks_spruce_rotated"
+		"4": "quantumstorage:blocks/chests/planks_spruce_rotated",
+		"particle": "quantumstorage:blocks/chests/planks_spruce_rotated"
 	},
 	"elements": [
 		{

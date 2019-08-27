@@ -8,7 +8,7 @@
 		"4": "quantumstorage:blocks/qsu/glass_gray",
 		"5": "quantumstorage:blocks/qsu/dsubackin",
 		"6": "quantumstorage:blocks/qsu/dsuback",
-		"particle": "blocks/qsu/dsuside"
+		"particle": "quantumstorage:blocks/qsu/dsuside"
 	},
 	"elements": [
 		{

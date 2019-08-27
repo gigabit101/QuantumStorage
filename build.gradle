@@ -16,7 +16,7 @@ plugins {
 
 apply plugin: 'net.minecraftforge.gradle'
 
-group= 'gigabit101.mods'
+group= 'gigabit101.net'
 archivesBaseName = 'QuantumStorage'
 
 minecraft {
