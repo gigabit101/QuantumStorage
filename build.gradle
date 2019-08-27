@@ -25,7 +25,7 @@ configFile.withReader {
     project.ext.config = new ConfigSlurper().parse prop
 }
 
-version = "${config.MOD_VERSION}"
+version = "${config.MC_VERSION + "-" +  config.MOD_VERSION}"
 if (hasProperty('appendBuildNumber')) {
     version = version + "-" + appendBuildNumber.toString()
 }
