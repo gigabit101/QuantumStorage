@@ -38,7 +38,7 @@ public class TileChestQuantum extends AdvancedTileEntity
 {
     public TileChestQuantum()
     {
-        this.inv = new ItemStackHandler(192);
+        this.inv = new ItemStackHandler(182);
     }
     
     @Override
