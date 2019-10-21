@@ -49,47 +49,51 @@ public class TileQsu extends TileEntity implements INamedContainerProvider, ITic
     @Override
     public void tick()
     {
-        try
+        insertItem();
+        moveItemsToOutput();
+    }
+    
+    public void insertItem ()
+    {
+        if(!inventory.getStackInSlot(INPUT).isEmpty() && inventory.getStackInSlot(STORAGE).isEmpty() && inventory.getStackInSlot(OUTPUT).isEmpty())
         {
-            if (!inventory.getStackInSlot(INPUT).isEmpty())
+            inventory.setStackInSlot(STORAGE, inventory.getStackInSlot(INPUT));
+            inventory.setStackInSlot(INPUT, ItemStack.EMPTY);
+        }
+        else if(!inventory.getStackInSlot(INPUT).isEmpty() && !inventory.getStackInSlot(OUTPUT).isEmpty())
+        {
+            if(ItemStack.areItemsEqual(inventory.getStackInSlot(INPUT), inventory.getStackInSlot(STORAGE)) || ItemStack.areItemsEqual(inventory.getStackInSlot(INPUT), inventory.getStackInSlot(OUTPUT)))
             {
-                if (inventory.getStackInSlot(STORAGE).isEmpty())
+                inventory.getStackInSlot(STORAGE).grow(inventory.getStackInSlot(INPUT).getCount());
+                inventory.setStackInSlot(INPUT, ItemStack.EMPTY);
+            }
+        }
+    }
+    
+    public void moveItemsToOutput()
+    {
+        if (!inventory.getStackInSlot(STORAGE).isEmpty())
+        {
+            int size = inventory.getStackInSlot(STORAGE).getMaxStackSize();
+            if (inventory.getStackInSlot(OUTPUT) == ItemStack.EMPTY || inventory.getStackInSlot(OUTPUT).getCount() == 0)
+            {
+                if (inventory.getStackInSlot(STORAGE).getCount() >= size)
                 {
-                    inventory.setStackInSlot(STORAGE, inventory.getStackInSlot(INPUT).copy());
-                    inventory.setStackInSlot(INPUT, ItemStack.EMPTY);
-                } else if (!inventory.getStackInSlot(STORAGE).isEmpty() && ItemStack.areItemStackTagsEqual(inventory.getStackInSlot(INPUT), inventory.getStackInSlot(STORAGE)))//ItemUtils.isItemEqual(inventory.getStackInSlot(INPUT), inventory.getStackInSlot(STORAGE), true, true))
+                    inventory.setStackInSlot(OUTPUT, inventory.getStackInSlot(STORAGE).copy());
+                    inventory.getStackInSlot(OUTPUT).setCount(size);
+                    inventory.getStackInSlot(STORAGE).shrink(size);
+                } else
                 {
-                    inventory.getStackInSlot(STORAGE).grow(inventory.getStackInSlot(INPUT).getCount());
-                    inventory.setStackInSlot(INPUT, ItemStack.EMPTY);
+                    inventory.setStackInSlot(OUTPUT, inventory.getStackInSlot(STORAGE));
+                    inventory.setStackInSlot(STORAGE, ItemStack.EMPTY);
                 }
             }
-
-            if (!inventory.getStackInSlot(STORAGE).isEmpty())
+            if (inventory.getStackInSlot(STORAGE).getCount() != 0 && ItemStack.areItemStackTagsEqual(inventory.getStackInSlot(STORAGE), inventory.getStackInSlot(OUTPUT)) && inventory.getStackInSlot(OUTPUT).getCount() <= size - 1)
             {
-                int size = inventory.getStackInSlot(STORAGE).getMaxStackSize();
-                if (inventory.getStackInSlot(OUTPUT) == ItemStack.EMPTY || inventory.getStackInSlot(OUTPUT).getCount() == 0)
-                {
-                    if (inventory.getStackInSlot(STORAGE).getCount() >= size)
-                    {
-                        inventory.setStackInSlot(OUTPUT, inventory.getStackInSlot(STORAGE).copy());
-                        inventory.getStackInSlot(OUTPUT).setCount(size);
-                        inventory.getStackInSlot(STORAGE).shrink(size);
-                    } else
-                    {
-                        inventory.setStackInSlot(OUTPUT, inventory.getStackInSlot(STORAGE));
-                        inventory.setStackInSlot(STORAGE, ItemStack.EMPTY);
-                    }
-                }
-                if (inventory.getStackInSlot(STORAGE).getCount() != 0 && ItemStack.areItemStackTagsEqual(inventory.getStackInSlot(STORAGE), inventory.getStackInSlot(OUTPUT)) && inventory.getStackInSlot(OUTPUT).getCount() <= size - 1)
-                {
-                    inventory.getStackInSlot(OUTPUT).grow(1);
-                    inventory.getStackInSlot(STORAGE).shrink(1);
-                }
-                VanillaPacketDispatcher.dispatchTEToNearbyPlayers(this);
+                inventory.getStackInSlot(OUTPUT).grow(1);
+                inventory.getStackInSlot(STORAGE).shrink(1);
             }
-        } catch (Exception e)
-        {
-            e.printStackTrace();
+            VanillaPacketDispatcher.dispatchTEToNearbyPlayers(this);
         }
     }
 
