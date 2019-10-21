@@ -2,8 +2,8 @@ package QuantumStorage.multiblock;
 
 import QuantumStorage.GuiHandler;
 import QuantumStorage.QuantumStorage;
-import QuantumStorage.client.CreativeTabQuantumStorage;
-import QuantumStorage.network.PacketGui;
+import net.gigabit101.quantumstorage.client.CreativeTabQuantumStorage;
+import net.gigabit101.quantumstorage.network.PacketGui;
 import com.google.common.collect.Lists;
 import net.minecraft.block.BlockDynamicLiquid;
 import net.minecraft.block.BlockStaticLiquid;

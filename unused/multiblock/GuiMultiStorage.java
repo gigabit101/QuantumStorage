@@ -1,7 +1,7 @@
 package QuantumStorage.multiblock;
 
-import QuantumStorage.network.PacketButton;
-import QuantumStorage.network.PacketGui;
+import net.gigabit101.quantumstorage.network.PacketButton;
+import net.gigabit101.quantumstorage.network.PacketGui;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;

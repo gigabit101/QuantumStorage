@@ -1,0 +1,41 @@
+package net.gigabit101.quantumstorage.handler;
+
+import net.gigabit101.quantumstorage.QuantumStorage;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+
+@Mod.EventBusSubscriber(modid = QuantumStorage.MOD_ID)
+public class EventHandlerPlayer
+{
+    @SubscribeEvent
+    public static void cloneEvent(PlayerEvent.Clone evt)
+    {
+//        CompoundNBT bags = evt.getOriginal().getCapability(QuantumStorageAPI.QUANTUM_BAG_PROVIDER_CAPABILITY).serializeNBT();
+//        evt.getEntityPlayer().getCapability(QuantumStorageAPI.QUANTUM_BAG_PROVIDER_CAPABILITY).deserializeNBT(bags);
+    }
+
+    @SubscribeEvent
+    public static void respawnEvent(PlayerEvent.PlayerRespawnEvent evt)
+    {
+//        evt.getPlayer().getCapability(QuantumStorageAPI.QUANTUM_BAG_PROVIDER_CAPABILITY, null).sync(null, (PlayerEntity) evt.getPlayer());
+    }
+
+    @SubscribeEvent
+    public static void playerChangeDimension(PlayerEvent.PlayerChangedDimensionEvent event)
+    {
+//        event.getPlayer().getCapability(QuantumStorageAPI.QUANTUM_BAG_PROVIDER_CAPABILITY, null).sync(null, (PlayerEntity) event.getPlayer());
+    }
+
+    @SubscribeEvent
+    public static void attachCaps(AttachCapabilitiesEvent<Entity> evt)
+    {
+        if (evt.getObject() instanceof PlayerEntity)
+        {
+//            evt.addCapability(QunatumBagImpl.Provider.NAME, new QunatumBagImpl.Provider());
+        }
+    }
+}

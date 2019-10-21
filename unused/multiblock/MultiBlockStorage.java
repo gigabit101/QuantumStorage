@@ -1,7 +1,7 @@
 package QuantumStorage.multiblock;
 
-import QuantumStorage.config.ConfigQuantumStorage;
-import QuantumStorage.inventory.CachingItemHandler;
+import net.gigabit101.quantumstorage.config.ConfigQuantumStorage;
+import net.gigabit101.quantumstorage.inventory.CachingItemHandler;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import reborncore.common.multiblock.IMultiblockPart;

@@ -1,7 +1,7 @@
 package QuantumStorage.compat.jei;
 
-import QuantumStorage.api.QuantumStorageAPI;
-import QuantumStorage.init.ModBlocks;
+import net.gigabit101.quantumstorage.api.QuantumStorageAPI;
+import net.gigabit101.quantumstorage.init.ModBlocks;
 import mezz.jei.api.*;
 import net.minecraft.item.ItemStack;
 

@@ -1,6 +1,6 @@
-//package QuantumStorage.client;
+//package net.gigabit101.quantumstorage.client;
 //
-//import QuantumStorage.inventory.ContainerQuantumBag;
+//import net.gigabit101.quantumstorage.inventory.ContainerQuantumBag;
 //import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 //import net.minecraft.entity.player.PlayerEntity;
 //import net.minecraft.util.text.ITextComponent;

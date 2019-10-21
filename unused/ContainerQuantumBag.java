@@ -1,4 +1,4 @@
-//package QuantumStorage.inventory;
+//package net.gigabit101.quantumstorage.inventory;
 //
 //import net.minecraft.entity.player.PlayerEntity;
 //import net.minecraft.inventory.container.Container;

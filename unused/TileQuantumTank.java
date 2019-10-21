@@ -1,8 +1,8 @@
 //package QuantumStorage.tiles;
 //
-//import QuantumStorage.client.AdvancedGui;
-//import QuantumStorage.config.ConfigQuantumStorage;
-//import QuantumStorage.init.ModBlocks;
+//import net.gigabit101.quantumstorage.client.AdvancedGui;
+//import net.gigabit101.quantumstorage.config.ConfigQuantumStorage;
+//import net.gigabit101.quantumstorage.init.ModBlocks;
 //import net.minecraft.block.Block;
 //import net.minecraft.block.state.IBlockState;
 //import net.minecraft.client.gui.inventory.GuiContainer;

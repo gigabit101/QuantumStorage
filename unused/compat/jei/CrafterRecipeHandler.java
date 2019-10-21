@@ -1,6 +1,6 @@
 package QuantumStorage.compat.jei;
 
-import QuantumStorage.api.RecipeQuantumCrafter;
+import net.gigabit101.quantumstorage.api.RecipeQuantumCrafter;
 import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.recipe.IRecipeHandler;
 import mezz.jei.api.recipe.IRecipeWrapper;

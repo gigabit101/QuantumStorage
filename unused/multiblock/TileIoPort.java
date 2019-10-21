@@ -1,6 +1,6 @@
 package QuantumStorage.multiblock;
 
-import QuantumStorage.inventory.CachingItemHandler;
+import net.gigabit101.quantumstorage.inventory.CachingItemHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;

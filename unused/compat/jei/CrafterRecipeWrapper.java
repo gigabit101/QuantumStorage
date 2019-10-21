@@ -1,7 +1,7 @@
 package QuantumStorage.compat.jei;
 
-import QuantumStorage.api.RecipeQuantumCrafter;
-import QuantumStorage.client.GuiBuilderQuantumStorage;
+import net.gigabit101.quantumstorage.api.RecipeQuantumCrafter;
+import net.gigabit101.quantumstorage.client.GuiBuilderQuantumStorage;
 import com.google.common.collect.ImmutableList;
 import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.gui.IDrawableAnimated;

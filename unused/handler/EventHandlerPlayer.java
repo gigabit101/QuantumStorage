@@ -1,7 +1,7 @@
-//package QuantumStorage.handler;
+//package net.gigabit101.quantumstorage.handler;
 //
 //import QuantumStorage.QuantumStorage;
-//import QuantumStorage.api.QuantumStorageAPI;
+//import net.gigabit101.quantumstorage.api.QuantumStorageAPI;
 //import net.minecraft.entity.Entity;
 //import net.minecraft.entity.player.PlayerEntity;
 //import net.minecraft.nbt.CompoundNBT;

@@ -1,4 +1,4 @@
-//package QuantumStorage.network;
+//package net.gigabit101.quantumstorage.network;
 //
 //import QuantumStorage.QuantumStorage;
 //import io.netty.buffer.ByteBuf;
@@ -34,7 +34,7 @@
 //        @Override
 //        public IMessage onMessage(final SyncBagData message, MessageContext ctx)
 //        {
-//            Minecraft.getMinecraft().addScheduledTask(() -> QuantumStorage.proxy.getClientBagProps().deserializeNBT(message.nbt));
+//            Minecraft.getMinecraft().addScheduledTask(() -> net.gigabit101.quantumstorage.proxy.getClientBagProps().deserializeNBT(message.nbt));
 //
 //            return null;
 //        }

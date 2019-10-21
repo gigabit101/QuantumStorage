@@ -1,4 +1,4 @@
-//package QuantumStorage.network;
+//package net.gigabit101.quantumstorage.network;
 //
 //import QuantumStorage.GuiHandler;
 //import QuantumStorage.QuantumStorage;

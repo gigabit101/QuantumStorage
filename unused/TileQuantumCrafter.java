@@ -1,9 +1,9 @@
 //package QuantumStorage.tiles;
 //
-//import QuantumStorage.api.RecipeQuantumCrafter;
-//import QuantumStorage.config.ConfigQuantumStorage;
-//import QuantumStorage.init.ModBlocks;
-//import QuantumStorage.inventory.slot.SlotOutputItemHandler;
+//import net.gigabit101.quantumstorage.api.RecipeQuantumCrafter;
+//import net.gigabit101.quantumstorage.config.ConfigQuantumStorage;
+//import net.gigabit101.quantumstorage.init.ModBlocks;
+//import net.gigabit101.quantumstorage.inventory.slot.SlotOutputItemHandler;
 //import net.minecraft.block.Block;
 //import net.minecraft.block.state.IBlockState;
 //import net.minecraft.client.gui.inventory.GuiContainer;

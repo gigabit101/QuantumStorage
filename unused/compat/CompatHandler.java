@@ -1,9 +1,9 @@
 package QuantumStorage.compat;
 
 
-import QuantumStorage.api.QuantumStorageAPI;
-import QuantumStorage.config.ConfigQuantumStorage;
-import QuantumStorage.init.ModBlocks;
+import net.gigabit101.quantumstorage.api.QuantumStorageAPI;
+import net.gigabit101.quantumstorage.config.ConfigQuantumStorage;
+import net.gigabit101.quantumstorage.init.ModBlocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import reborncore.RebornRegistry;

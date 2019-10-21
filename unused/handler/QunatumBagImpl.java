@@ -1,10 +1,10 @@
-//package QuantumStorage.handler;
+//package net.gigabit101.quantumstorage.handler;
 //
 //import QuantumStorage.QuantumStorage;
-//import QuantumStorage.api.IQuantumBagProvider;
-//import QuantumStorage.api.QuantumStorageAPI;
-//import QuantumStorage.network.PacketHandler;
-//import QuantumStorage.network.SyncBagData;
+//import net.gigabit101.quantumstorage.api.IQuantumBagProvider;
+//import net.gigabit101.quantumstorage.api.QuantumStorageAPI;
+//import net.gigabit101.quantumstorage.network.PacketHandler;
+//import net.gigabit101.quantumstorage.network.SyncBagData;
 //import net.minecraft.entity.player.EntityPlayerMP;
 //import net.minecraft.entity.player.PlayerEntity;
 //import net.minecraft.item.DyeColor;

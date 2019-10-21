@@ -1,4 +1,4 @@
-package QuantumStorage.client.keybinding;
+package net.gigabit101.quantumstorage.client.keybinding;
 
 public enum Key
 {

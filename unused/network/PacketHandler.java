@@ -1,4 +1,4 @@
-//package QuantumStorage.network;
+//package net.gigabit101.quantumstorage.network;
 //
 //import QuantumStorage.QuantumStorage;
 //import net.minecraftforge.common.util.FakePlayer;

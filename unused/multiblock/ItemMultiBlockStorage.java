@@ -1,6 +1,6 @@
 package QuantumStorage.multiblock;
 
-import QuantumStorage.init.ModBlocks;
+import net.gigabit101.quantumstorage.init.ModBlocks;
 import net.minecraft.block.Block;
 import reborncore.common.itemblock.ItemBlockBase;
 

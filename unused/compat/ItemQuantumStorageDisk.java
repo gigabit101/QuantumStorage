@@ -1,7 +1,7 @@
 package QuantumStorage.compat;
 
 import QuantumStorage.QuantumStorage;
-import QuantumStorage.items.prefab.ItemBase;
+import net.gigabit101.quantumstorage.items.prefab.ItemBase;
 import com.raoulvdberge.refinedstorage.api.storage.StorageType;
 import com.raoulvdberge.refinedstorage.api.storage.disk.IStorageDiskProvider;
 import com.raoulvdberge.refinedstorage.api.storage.disk.IStorageDiskSyncData;

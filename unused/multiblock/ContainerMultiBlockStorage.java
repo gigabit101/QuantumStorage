@@ -1,6 +1,6 @@
 package QuantumStorage.multiblock;
 
-import QuantumStorage.inventory.CachingItemHandler;
+import net.gigabit101.quantumstorage.inventory.CachingItemHandler;
 import invtweaks.api.container.ChestContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.items.SlotItemHandler;

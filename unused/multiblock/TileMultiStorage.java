@@ -1,6 +1,6 @@
 package QuantumStorage.multiblock;
 
-import QuantumStorage.inventory.CachingItemHandler;
+import net.gigabit101.quantumstorage.inventory.CachingItemHandler;
 import QuantumStorage.utils.SortingHandler;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
