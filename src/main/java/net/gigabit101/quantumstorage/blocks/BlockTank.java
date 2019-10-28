@@ -96,14 +96,13 @@ public class BlockTank extends ContainerBlock
 
     public boolean onBlockActivated(BlockState blockState, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult traceResult)
     {
-         if(FluidUtil.interactWithFluidHandler(player, hand, world, pos, traceResult.getFace()))
-         {
-             return true;
-         }
-        if (!world.isRemote)
-        {
-            NetworkHooks.openGui((ServerPlayerEntity) player, (INamedContainerProvider) world.getTileEntity(pos), pos);
-        }
+         FluidUtil.interactWithFluidHandler(player, hand, world, pos, traceResult.getFace());
+        
+//        if (!world.isRemote)
+//        {
+//            NetworkHooks.openGui((ServerPlayerEntity) player, (INamedContainerProvider) world.getTileEntity(pos), pos);
+//            return true;
+//        }
         return true;
     }
 

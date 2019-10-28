@@ -8,6 +8,7 @@ import net.gigabit101.quantumstorage.items.ItemQuantumBag;
 import net.gigabit101.quantumstorage.proxy.ClientProxy;
 import net.gigabit101.quantumstorage.proxy.CommonProxy;
 import net.gigabit101.quantumstorage.tiles.TileQsu;
+import net.gigabit101.quantumstorage.tiles.TileTank;
 import net.gigabit101.quantumstorage.tiles.TileTrashcan;
 import net.gigabit101.quantumstorage.tiles.chests.TileChestDiamond;
 import net.gigabit101.quantumstorage.tiles.chests.TileChestGold;
@@ -120,8 +121,7 @@ public class QuantumStorage
 
         event.getRegistry().register(TileEntityType.Builder.create(TileTrashcan::new, blockTashcan).build(null).setRegistryName(new ResourceLocation(QuantumStorage.MOD_ID, "tiletrashcan")));
         event.getRegistry().register(TileEntityType.Builder.create(TileQsu::new, blockQsu).build(null).setRegistryName(new ResourceLocation(QuantumStorage.MOD_ID, "tileqsu")));
-//        event.getRegistry().register(TileEntityType.Builder.create(TileTank::new, blockTank).build(null).setRegistryName(new ResourceLocation(QuantumStorage.MOD_ID, "tiletank")));
-    
+        event.getRegistry().register(TileEntityType.Builder.create(TileTank::new, blockTank).build(null).setRegistryName(new ResourceLocation(QuantumStorage.MOD_ID, "tiletank")));
     }
 
     @SubscribeEvent
@@ -136,8 +136,7 @@ public class QuantumStorage
 
         event.getRegistry().register(new BlockTrashcan(properties));
         event.getRegistry().register(new BlockQSU(properties));
-//        event.getRegistry().register(new BlockTank(properties));
-    
+        event.getRegistry().register(new BlockTank(properties));
     }
 
     @SubscribeEvent
@@ -149,7 +148,7 @@ public class QuantumStorage
 
         event.getRegistry().register(new BlockItem(blockTashcan, new Item.Properties().group(CreativeTabQuantumStorage.INSTANCE)).setRegistryName(Objects.requireNonNull(blockTashcan.getRegistryName())));
         event.getRegistry().register(new BlockItem(blockQsu, new Item.Properties().group(CreativeTabQuantumStorage.INSTANCE)).setRegistryName(Objects.requireNonNull(blockQsu.getRegistryName())));
-//        event.getRegistry().register(new BlockItem(blockTank, new Item.Properties().group(CreativeTabQuantumStorage.INSTANCE)).setRegistryName(Objects.requireNonNull(blockTank.getRegistryName())));
+        event.getRegistry().register(new BlockItem(blockTank, new Item.Properties().group(CreativeTabQuantumStorage.INSTANCE)).setRegistryName(Objects.requireNonNull(blockTank.getRegistryName())));
         
 /*        event.getRegistry().register(new ItemQuantumBattery());
 
@@ -170,8 +169,7 @@ public class QuantumStorage
 
         event.getRegistry().register(IForgeContainerType.create(ContainerTrashcan::new).setRegistryName(MOD_ID, "trashcan"));
         event.getRegistry().register(IForgeContainerType.create(ContainerQSU::new).setRegistryName(MOD_ID, "qsu"));
-//        event.getRegistry().register(IForgeContainerType.create(ContainerTank::new).setRegistryName(MOD_ID, "tank"));
-    
+        event.getRegistry().register(IForgeContainerType.create(ContainerTank::new).setRegistryName(MOD_ID, "tank"));
     }
 
     void doClientStuff(final FMLClientSetupEvent event)

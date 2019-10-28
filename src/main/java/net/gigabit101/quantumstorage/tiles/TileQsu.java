@@ -1,5 +1,6 @@
 package net.gigabit101.quantumstorage.tiles;
 
+import net.gigabit101.quantumstorage.ItemUtils;
 import net.gigabit101.quantumstorage.QuantumStorage;
 import net.gigabit101.quantumstorage.containers.ContainerQSU;
 import net.gigabit101.quantumstorage.inventory.DsuInventoryHandler;
@@ -49,51 +50,47 @@ public class TileQsu extends TileEntity implements INamedContainerProvider, ITic
     @Override
     public void tick()
     {
-        insertItem();
-        moveItemsToOutput();
-    }
-    
-    public void insertItem ()
-    {
-        if(!inventory.getStackInSlot(INPUT).isEmpty() && inventory.getStackInSlot(STORAGE).isEmpty() && inventory.getStackInSlot(OUTPUT).isEmpty())
+        try
         {
-            inventory.setStackInSlot(STORAGE, inventory.getStackInSlot(INPUT));
-            inventory.setStackInSlot(INPUT, ItemStack.EMPTY);
-        }
-        else if(!inventory.getStackInSlot(INPUT).isEmpty() && !inventory.getStackInSlot(OUTPUT).isEmpty())
-        {
-            if(ItemStack.areItemsEqual(inventory.getStackInSlot(INPUT), inventory.getStackInSlot(STORAGE)) || ItemStack.areItemsEqual(inventory.getStackInSlot(INPUT), inventory.getStackInSlot(OUTPUT)))
+            if (!inventory.getStackInSlot(INPUT).isEmpty())
             {
-                inventory.getStackInSlot(STORAGE).grow(inventory.getStackInSlot(INPUT).getCount());
-                inventory.setStackInSlot(INPUT, ItemStack.EMPTY);
-            }
-        }
-    }
-    
-    public void moveItemsToOutput()
-    {
-        if (!inventory.getStackInSlot(STORAGE).isEmpty())
-        {
-            int size = inventory.getStackInSlot(STORAGE).getMaxStackSize();
-            if (inventory.getStackInSlot(OUTPUT) == ItemStack.EMPTY || inventory.getStackInSlot(OUTPUT).getCount() == 0)
-            {
-                if (inventory.getStackInSlot(STORAGE).getCount() >= size)
+                if (inventory.getStackInSlot(STORAGE).isEmpty())
                 {
-                    inventory.setStackInSlot(OUTPUT, inventory.getStackInSlot(STORAGE).copy());
-                    inventory.getStackInSlot(OUTPUT).setCount(size);
-                    inventory.getStackInSlot(STORAGE).shrink(size);
-                } else
+                    inventory.setStackInSlot(STORAGE, inventory.getStackInSlot(INPUT).copy());
+                    inventory.setStackInSlot(INPUT, ItemStack.EMPTY);
+                } else if (!inventory.getStackInSlot(STORAGE).isEmpty() && ItemUtils.isItemEqual(inventory.getStackInSlot(INPUT), inventory.getStackInSlot(STORAGE), true))
                 {
-                    inventory.setStackInSlot(OUTPUT, inventory.getStackInSlot(STORAGE));
-                    inventory.setStackInSlot(STORAGE, ItemStack.EMPTY);
+                    inventory.getStackInSlot(STORAGE).grow(inventory.getStackInSlot(INPUT).getCount());
+                    inventory.setStackInSlot(INPUT, ItemStack.EMPTY);
                 }
             }
-            if (inventory.getStackInSlot(STORAGE).getCount() != 0 && ItemStack.areItemStackTagsEqual(inventory.getStackInSlot(STORAGE), inventory.getStackInSlot(OUTPUT)) && inventory.getStackInSlot(OUTPUT).getCount() <= size - 1)
+        
+            if (!inventory.getStackInSlot(STORAGE).isEmpty())
             {
-                inventory.getStackInSlot(OUTPUT).grow(1);
-                inventory.getStackInSlot(STORAGE).shrink(1);
+                int size = inventory.getStackInSlot(STORAGE).getMaxStackSize();
+                if (inventory.getStackInSlot(OUTPUT) == ItemStack.EMPTY || inventory.getStackInSlot(OUTPUT).getCount() == 0)
+                {
+                    if (inventory.getStackInSlot(STORAGE).getCount() >= size)
+                    {
+                        inventory.setStackInSlot(OUTPUT, inventory.getStackInSlot(STORAGE).copy());
+                        inventory.getStackInSlot(OUTPUT).setCount(size);
+                        inventory.getStackInSlot(STORAGE).shrink(size);
+                    } else
+                    {
+                        inventory.setStackInSlot(OUTPUT, inventory.getStackInSlot(STORAGE));
+                        inventory.setStackInSlot(STORAGE, ItemStack.EMPTY);
+                    }
+                }
+                if (inventory.getStackInSlot(STORAGE).getCount() != 0 && ItemUtils.isItemEqual(inventory.getStackInSlot(STORAGE), inventory.getStackInSlot(OUTPUT), true) && inventory.getStackInSlot(OUTPUT).getCount() <= size - 1)
+                {
+                    inventory.getStackInSlot(OUTPUT).grow(1);
+                    inventory.getStackInSlot(STORAGE).shrink(1);
+                }
             }
             VanillaPacketDispatcher.dispatchTEToNearbyPlayers(this);
+        } catch (Exception e)
+        {
+            e.printStackTrace();
         }
     }
 

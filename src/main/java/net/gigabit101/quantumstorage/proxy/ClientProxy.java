@@ -57,6 +57,6 @@ public class ClientProxy extends CommonProxy
 
         ScreenManager.registerFactory(QuantumStorage.containerTrashcanContainerType, GuiTrashcan::new);
         ScreenManager.registerFactory(QuantumStorage.containerQsuContainerType, GuiQSU::new);
-//        ScreenManager.registerFactory(QuantumStorage.containerTankContainerType, GuiTank::new);
+        ScreenManager.registerFactory(QuantumStorage.containerTankContainerType, GuiTank::new);
     }
 }
