@@ -3,6 +3,7 @@ package net.gigabit101.quantumstorage.blocks;
 import net.gigabit101.quantumstorage.QuantumStorage;
 import net.gigabit101.quantumstorage.tiles.chests.TileChestIron;
 import net.minecraft.block.*;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -27,10 +28,9 @@ public class BlockChestIron extends ContainerBlock
 {
     private static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
 
-    public BlockChestIron(Properties properties)
+    public BlockChestIron()
     {
-        super(properties);
-        setRegistryName(new ResourceLocation(QuantumStorage.MOD_ID, "chestiron"));
+        super(Properties.create(Material.IRON).hardnessAndResistance(2.0F));
         this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH));
     }
 
@@ -61,16 +61,18 @@ public class BlockChestIron extends ContainerBlock
     @Override
     public TileEntity createNewTileEntity(IBlockReader worldIn)
     {
-        return QuantumStorage.tileChestIron.create();
+        return new TileChestIron();
     }
-
-    public boolean onBlockActivated(BlockState blockState, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult traceResult)
+    
+    @Override
+    public ActionResultType onBlockActivated(BlockState blockState, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult traceResult)
     {
         if (!world.isRemote)
         {
             NetworkHooks.openGui((ServerPlayerEntity) player, (INamedContainerProvider) world.getTileEntity(pos), pos);
+            return ActionResultType.SUCCESS;
         }
-        return true;
+        return ActionResultType.SUCCESS;
     }
 
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)

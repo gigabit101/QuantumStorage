@@ -4,7 +4,7 @@
 		"1": "quantumstorage:blocks/quantum_tank/dsubottom",
 		"2": "quantumstorage:blocks/quantum_tank/dsutop",
 		"6": "quantumstorage:blocks/quantum_tank/dsuback",
-		"8": "quantumstorage:blocks/quantum_tank/glass_black"
+		"8": "block/glass"
 	},
 	"elements": [
 		{

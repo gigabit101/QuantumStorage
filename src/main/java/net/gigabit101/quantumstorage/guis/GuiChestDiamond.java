@@ -16,6 +16,13 @@ public class GuiChestDiamond extends ContainerScreen<ContainerChestDiamond>
         this.xSize = 240;
         this.ySize = 240;
     }
+    
+    @Override
+    public void render(int mouseX, int mouseY, float p_render_3_)
+    {
+        super.render(mouseX, mouseY, p_render_3_);
+        this.renderHoveredToolTip(mouseX, mouseY);
+    }
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)

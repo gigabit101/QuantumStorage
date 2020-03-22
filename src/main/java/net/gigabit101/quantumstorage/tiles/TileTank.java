@@ -2,6 +2,7 @@ package net.gigabit101.quantumstorage.tiles;
 
 import net.gigabit101.quantumstorage.QuantumStorage;
 import net.gigabit101.quantumstorage.containers.ContainerTank;
+import net.gigabit101.quantumstorage.init.QSBlocks;
 import net.gigabit101.quantumstorage.network.VanillaPacketDispatcher;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -17,8 +18,8 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.templates.FluidTank;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -30,7 +31,7 @@ public class TileTank extends TileEntity implements INamedContainerProvider
 {
     public TileTank()
     {
-        super(QuantumStorage.tileTank);
+        super(QSBlocks.TANK_TILE.get());
     }
     
     public FluidTank tank = new FluidTank(Integer.MAX_VALUE);
@@ -118,7 +119,7 @@ public class TileTank extends TileEntity implements INamedContainerProvider
     public ItemStack getDropWithNBT()
     {
         CompoundNBT tileEntity = new CompoundNBT();
-        ItemStack dropStack = new ItemStack(QuantumStorage.blockTank, 1);
+        ItemStack dropStack = new ItemStack(QSBlocks.TANK.get(), 1);
         writeToNBTWithoutCoords(tileEntity);
         dropStack.setTag(new CompoundNBT());
         dropStack.getTag().put("tileEntity", tileEntity);

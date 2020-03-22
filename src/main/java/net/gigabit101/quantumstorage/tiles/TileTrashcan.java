@@ -2,6 +2,7 @@ package net.gigabit101.quantumstorage.tiles;
 
 import net.gigabit101.quantumstorage.QuantumStorage;
 import net.gigabit101.quantumstorage.containers.ContainerTrashcan;
+import net.gigabit101.quantumstorage.init.QSBlocks;
 import net.gigabit101.quantumstorage.inventory.InventoryTrashcan;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -29,7 +30,7 @@ public class TileTrashcan extends TileEntity implements INamedContainerProvider,
 
     public TileTrashcan()
     {
-        super(QuantumStorage.tileTrashcan);
+        super(QSBlocks.TRASH_CAN_TILE.get());
     }
 
     @Override

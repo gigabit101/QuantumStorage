@@ -35,7 +35,14 @@ public class GuiQSU extends ContainerScreen<ContainerQSU>
 
         builder.drawSlot(this, guiLeft + xSize / 2 - 9, guiTop + 80);
     }
-
+    
+    @Override
+    public void render(int mouseX, int mouseY, float p_render_3_)
+    {
+        super.render(mouseX, mouseY, p_render_3_);
+        this.renderHoveredToolTip(mouseX, mouseY);
+    }
+    
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
     {

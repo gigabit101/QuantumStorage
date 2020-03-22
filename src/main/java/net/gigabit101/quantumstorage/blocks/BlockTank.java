@@ -2,7 +2,9 @@ package net.gigabit101.quantumstorage.blocks;
 
 import net.gigabit101.quantumstorage.QuantumStorage;
 import net.gigabit101.quantumstorage.tiles.TileTank;
+import net.gigabit101.quantumstorage.tiles.chests.TileChestGold;
 import net.minecraft.block.*;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
@@ -33,35 +35,10 @@ public class BlockTank extends ContainerBlock
 {
     private static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
 
-    public BlockTank(Properties properties)
+    public BlockTank()
     {
-        super(properties);
-        setRegistryName(new ResourceLocation(QuantumStorage.MOD_ID, "tank"));
+        super(Properties.create(Material.IRON).hardnessAndResistance(2.0F));
         this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH));
-    }
-
-    @Override
-    public BlockRenderLayer getRenderLayer()
-    {
-        return BlockRenderLayer.CUTOUT;
-    }
-
-    @Override
-    public boolean isNormalCube(BlockState p_220081_1_, IBlockReader p_220081_2_, BlockPos p_220081_3_)
-    {
-        return false;
-    }
-
-    @Override
-    public boolean isVariableOpacity()
-    {
-        return false;
-    }
-
-    @Override
-    public boolean isSolid(BlockState p_200124_1_)
-    {
-        return false;
     }
 
     public BlockState getStateForPlacement(BlockItemUseContext context)
@@ -69,32 +46,21 @@ public class BlockTank extends ContainerBlock
         return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
     }
 
+    @Nullable
+    @Override
+    public TileEntity createNewTileEntity(IBlockReader worldIn)
+    {
+        return new TileTank();
+    }
+    
     @Nonnull
     public BlockRenderType getRenderType(BlockState state)
     {
         return BlockRenderType.MODEL;
     }
-
-    @Nonnull
-    public BlockState rotate(BlockState state, Rotation rot)
-    {
-        return state.with(FACING, rot.rotate(state.get(FACING)));
-    }
-
-    @Nonnull
-    public BlockState mirror(BlockState state, Mirror mirrorIn)
-    {
-        return state.rotate(mirrorIn.toRotation(state.get(FACING)));
-    }
-
-    @Nullable
+    
     @Override
-    public TileEntity createNewTileEntity(IBlockReader worldIn)
-    {
-        return QuantumStorage.tileTank.create();
-    }
-
-    public boolean onBlockActivated(BlockState blockState, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult traceResult)
+    public ActionResultType onBlockActivated(BlockState blockState, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult traceResult)
     {
          FluidUtil.interactWithFluidHandler(player, hand, world, pos, traceResult.getFace());
         
@@ -103,7 +69,7 @@ public class BlockTank extends ContainerBlock
 //            NetworkHooks.openGui((ServerPlayerEntity) player, (INamedContainerProvider) world.getTileEntity(pos), pos);
 //            return true;
 //        }
-        return true;
+        return ActionResultType.FAIL;
     }
 
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)

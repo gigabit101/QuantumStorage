@@ -6,6 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.fml.client.gui.GuiUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,7 +81,8 @@ public class GuiBuilderQuantumStorage
                 list.add(TextFormatting.GRAY + "prolly a bug");
                 list.add(TextFormatting.GRAY + "pls report and tell how tf you did this");
             }
-            net.minecraftforge.fml.client.config.GuiUtils.drawHoveringText(list, mouseX, mouseY, gui.width, gui.height, -1, Minecraft.getInstance().fontRenderer);
+            GuiUtils.drawHoveringText(list, mouseX, mouseY, gui.width, gui.height, -1, Minecraft.getInstance().fontRenderer);
+            
             GlStateManager.disableLighting();
             GlStateManager.color4f(1, 1, 1, 1);
         }

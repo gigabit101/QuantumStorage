@@ -34,7 +34,7 @@ group= 'gigabit101.net'
 archivesBaseName = 'QuantumStorage'
 
 minecraft {
-    mappings channel: 'snapshot', version: '20190621-1.14.2'
+    mappings channel: 'snapshot', version: '20200210-1.15.1'
     runs {
         client {
             workingDirectory project.file('run')
@@ -62,7 +62,7 @@ minecraft {
 
 
 dependencies {
-    minecraft "net.minecraftforge:forge:${MC_VERSION}-${FORGE_VERSION}"
+    minecraft 'net.minecraftforge:forge:1.15.2-31.1.1'
 }
 
 def reobfFile = file("$buildDir/reobfJar/output.jar")

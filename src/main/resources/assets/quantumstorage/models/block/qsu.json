@@ -4,8 +4,8 @@
 		"0": "quantumstorage:blocks/qsu/dsuside",
 		"1": "quantumstorage:blocks/qsu/dsubottom",
 		"2": "quantumstorage:blocks/qsu/dsutop",
-		"3": "quantumstorage:blocks/qsu/glass_gray",
-		"4": "quantumstorage:blocks/qsu/glass_gray",
+		"3": "block/glass",
+		"4": "block/glass",
 		"5": "quantumstorage:blocks/qsu/dsubackin",
 		"6": "quantumstorage:blocks/qsu/dsuback",
 		"particle": "quantumstorage:blocks/qsu/dsuside"

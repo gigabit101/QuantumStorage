@@ -3,6 +3,7 @@ package net.gigabit101.quantumstorage.tiles;
 import net.gigabit101.quantumstorage.ItemUtils;
 import net.gigabit101.quantumstorage.QuantumStorage;
 import net.gigabit101.quantumstorage.containers.ContainerQSU;
+import net.gigabit101.quantumstorage.init.QSBlocks;
 import net.gigabit101.quantumstorage.inventory.DsuInventoryHandler;
 import net.gigabit101.quantumstorage.network.VanillaPacketDispatcher;
 import net.minecraft.entity.player.PlayerEntity;
@@ -38,7 +39,7 @@ public class TileQsu extends TileEntity implements INamedContainerProvider, ITic
     
     public TileQsu()
     {
-        super(QuantumStorage.tileQsu);
+        super(QSBlocks.QSU_TILE.get());
     }
     
     @Override
@@ -87,7 +88,10 @@ public class TileQsu extends TileEntity implements INamedContainerProvider, ITic
                     inventory.getStackInSlot(STORAGE).shrink(1);
                 }
             }
-            VanillaPacketDispatcher.dispatchTEToNearbyPlayers(this);
+            if(world.getTileEntity(pos) != null)
+            {
+                VanillaPacketDispatcher.dispatchTEToNearbyPlayers(this);
+            }
         } catch (Exception e)
         {
             e.printStackTrace();
@@ -171,7 +175,7 @@ public class TileQsu extends TileEntity implements INamedContainerProvider, ITic
     public ItemStack getDropWithNBT()
     {
         CompoundNBT tileEntity = new CompoundNBT();
-        ItemStack dropStack = new ItemStack(QuantumStorage.blockQsu, 1);
+        ItemStack dropStack = new ItemStack(QSBlocks.QSU.get(), 1);
         writeToNBTWithoutCoords(tileEntity);
         dropStack.setTag(new CompoundNBT());
         dropStack.getTag().put("tileEntity", tileEntity);

@@ -21,6 +21,13 @@ public class GuiTank extends ContainerScreen<ContainerTank>
         this.xSize = 190;
         this.ySize = 220;
     }
+    
+    @Override
+    public void render(int mouseX, int mouseY, float p_render_3_)
+    {
+        super.render(mouseX, mouseY, p_render_3_);
+        this.renderHoveredToolTip(mouseX, mouseY);
+    }
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
@@ -40,7 +47,7 @@ public class GuiTank extends ContainerScreen<ContainerTank>
         if (getTank().getFluid() != null)
         {
             amount = getTank().getFluidAmount();
-            name = getTank().getFluid().getFluid().getName();
+            name = getTank().getFluid().getFluid().getRegistryName().toString();
         }
     
         builder.drawBigBlueBar(this, 36, 56, amount, getTank().getCapacity(), mouseX - guiLeft, mouseY - guiTop, "", "Fluid Type: " + name, amount + " mb " + name);

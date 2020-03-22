@@ -1,8 +1,8 @@
 package net.gigabit101.quantumstorage.blocks;
 
-import net.gigabit101.quantumstorage.QuantumStorage;
 import net.gigabit101.quantumstorage.tiles.TileQsu;
 import net.minecraft.block.*;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
@@ -34,75 +34,41 @@ import java.util.List;
 public class BlockQSU extends ContainerBlock
 {
     private static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
-
-    public BlockQSU(Properties properties)
+    
+    public BlockQSU()
     {
-        super(properties);
-        setRegistryName(new ResourceLocation(QuantumStorage.MOD_ID, "qsu"));
+        super(Properties.create(Material.IRON).notSolid().hardnessAndResistance(2.0F));
         this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH));
     }
-
-    @Override
-    public BlockRenderLayer getRenderLayer()
-    {
-        return BlockRenderLayer.CUTOUT;
-    }
-
-    @Override
-    public boolean isNormalCube(BlockState p_220081_1_, IBlockReader p_220081_2_, BlockPos p_220081_3_)
-    {
-        return false;
-    }
-
-    @Override
-    public boolean isVariableOpacity()
-    {
-        return false;
-    }
-
-    @Override
-    public boolean isSolid(BlockState p_200124_1_)
-    {
-        return false;
-    }
-
-    public BlockState getStateForPlacement(BlockItemUseContext context)
-    {
-        return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
-    }
-
+    
     @Nonnull
     public BlockRenderType getRenderType(BlockState state)
     {
         return BlockRenderType.MODEL;
     }
-
-    @Nonnull
-    public BlockState rotate(BlockState state, Rotation rot)
+    
+    @Override
+    public BlockState getStateForPlacement(BlockItemUseContext context)
     {
-        return state.with(FACING, rot.rotate(state.get(FACING)));
+        return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
     }
-
-    @Nonnull
-    public BlockState mirror(BlockState state, Mirror mirrorIn)
-    {
-        return state.rotate(mirrorIn.toRotation(state.get(FACING)));
-    }
-
+    
     @Nullable
     @Override
     public TileEntity createNewTileEntity(IBlockReader worldIn)
     {
-        return QuantumStorage.tileQsu.create();
+        return new TileQsu();
     }
 
-    public boolean onBlockActivated(BlockState blockState, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult traceResult)
+    @Override
+    public ActionResultType onBlockActivated(BlockState blockState, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult traceResult)
     {
         if (!world.isRemote)
         {
             NetworkHooks.openGui((ServerPlayerEntity) player, (INamedContainerProvider) world.getTileEntity(pos), pos);
+            return ActionResultType.SUCCESS;
         }
-        return true;
+        return ActionResultType.SUCCESS;
     }
 
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)

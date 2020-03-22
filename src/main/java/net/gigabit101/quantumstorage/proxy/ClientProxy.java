@@ -4,9 +4,12 @@ import net.gigabit101.quantumstorage.QuantumStorage;
 import net.gigabit101.quantumstorage.api.IColorable;
 import net.gigabit101.quantumstorage.client.render.RenderDsu;
 import net.gigabit101.quantumstorage.guis.*;
+import net.gigabit101.quantumstorage.init.QSBlocks;
 import net.gigabit101.quantumstorage.tiles.TileQsu;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -20,7 +23,12 @@ public class ClientProxy extends CommonProxy
     @Override
     public void registerRenders()
     {
-        ClientRegistry.bindTileEntitySpecialRenderer(TileQsu.class, new RenderDsu());
+        RenderTypeLookup.setRenderLayer(QSBlocks.QSU.get(), RenderType.cutoutMipped());
+        RenderTypeLookup.setRenderLayer(QSBlocks.TANK.get(), RenderType.cutoutMipped());
+    
+        RenderTypeLookup.setRenderLayer(QSBlocks.TRASH_CAN.get(), RenderType.cutout());
+    
+        ClientRegistry.bindTileEntityRenderer(QSBlocks.QSU_TILE.get(), RenderDsu::new);
 //        ClientRegistry.bindTileEntitySpecialRenderer(TileQuantumTank.class, new TankRender());
     }
     

@@ -1,6 +1,7 @@
 package net.gigabit101.quantumstorage.client;
 
 import net.gigabit101.quantumstorage.QuantumStorage;
+import net.gigabit101.quantumstorage.init.QSBlocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -20,6 +21,6 @@ public class CreativeTabQuantumStorage extends ItemGroup
     @Override
     public ItemStack createIcon()
     {
-        return new ItemStack(Item.getItemFromBlock(QuantumStorage.blockQsu));
+        return new ItemStack(Item.getItemFromBlock(QSBlocks.QSU.get()));
     }
 }

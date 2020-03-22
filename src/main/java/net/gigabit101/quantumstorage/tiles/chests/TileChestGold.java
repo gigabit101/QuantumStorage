@@ -2,6 +2,7 @@ package net.gigabit101.quantumstorage.tiles.chests;
 
 import net.gigabit101.quantumstorage.QuantumStorage;
 import net.gigabit101.quantumstorage.containers.ContainerChestGold;
+import net.gigabit101.quantumstorage.init.QSBlocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
@@ -29,7 +30,7 @@ public class TileChestGold extends TileEntity implements INamedContainerProvider
 
     public TileChestGold()
     {
-        super(QuantumStorage.tileChestGold);
+        super(QSBlocks.CHEST_GOLD_TILE.get());
     }
 
     @Nonnull
@@ -91,7 +92,7 @@ public class TileChestGold extends TileEntity implements INamedContainerProvider
     public ItemStack getDropWithNBT()
     {
         CompoundNBT tileEntity = new CompoundNBT();
-        ItemStack dropStack = new ItemStack(QuantumStorage.blockChestGold, 1);
+        ItemStack dropStack = new ItemStack(QSBlocks.CHEST_GOLD.get(), 1);
         writeToNBTWithoutCoords(tileEntity);
         dropStack.setTag(new CompoundNBT());
         dropStack.getTag().put("tileEntity", tileEntity);
