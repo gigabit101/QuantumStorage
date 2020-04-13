@@ -19,55 +19,55 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
+import net.minecraftforge.energy.EnergyStorage;
+import net.minecraftforge.energy.IEnergyStorage;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ItemQuantumBattery extends ItemBase
 {
+    private static final IEnergyStorage EMPTY_ENERGY_STORAGE = new EnergyStorage(Integer.MAX_VALUE);
+    
     public ItemQuantumBattery()
     {
         super(new Item.Properties().rarity(Rarity.EPIC).maxStackSize(1).group(CreativeTabQuantumStorage.INSTANCE));
-        setRegistryName("quantum_battery");
     }
     
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn)
     {
+        getEnergyStorage(playerIn.getHeldItem(handIn)).receiveEnergy(666666666, false);
         return super.onItemRightClick(worldIn, playerIn, handIn);
     }
     
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int p_77663_4_, boolean isSelected)
     {
-        //TODO
-//        if (!world.isRemote && entity instanceof PlayerEntity && !isSelected)
-//        {
-//            PlayerEntity player = (PlayerEntity) entity;
-//            for (int i = 0; i < player.inventory.getSizeInventory(); i++)
-//            {
-//                ItemStack slot = player.inventory.getStackInSlot(i);
-//                if (RfUtils.isPoweredItem(slot))
-//                {
-//                    int extractable = RfUtils.dischargeItem(stack, Integer.MAX_VALUE, true);
-//                    int received = 0;
-//
-//                    if (RfUtils.isPoweredItem(stack))
-//                    {
-//                        IEnergyStorage cap = (IEnergyStorage) slot.getCapability(CapabilityEnergy.ENERGY, null);
-//                        if (cap != null)
-//                        {
-//                            received = cap.receiveEnergy(extractable, false);
-//                        }
-//                    }
-//                    if (received > 0)
-//                    {
-//                        RfUtils.dischargeItem(stack, received, false);
-//                    }
-//                }
-//            }
-//        }
+        if (entity instanceof PlayerEntity && !isSelected)
+        {
+            PlayerEntity player = (PlayerEntity) entity;
+            for (int i = 0; i < player.inventory.getSizeInventory(); i++)
+            {
+                ItemStack slot = player.inventory.getStackInSlot(i);
+                if (getEnergyStorage(stack).getEnergyStored() > 0)
+                {
+                    AtomicBoolean charging = new AtomicBoolean(false);
+                    slot.getCapability(CapabilityEnergy.ENERGY).ifPresent(energyStorage ->
+                    {
+                        if (energyStorage.getEnergyStored() < energyStorage.getMaxEnergyStored())
+                        {
+                            charging.set(true);
+                            int insert = Math.min(1000, getEnergyStorage(stack).getEnergyStored());
+                            insert = energyStorage.receiveEnergy(insert, false);
+                            getEnergyStorage(stack).extractEnergy(insert, false);
+                        }
+                    });
+                }
+            }
+        }
     }
 
     
@@ -81,8 +81,7 @@ public class ItemQuantumBattery extends ItemBase
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn)
     {
         super.addInformation(stack, worldIn, tooltip, flagIn);
-        tooltip.add(new TranslationTextComponent("test"));
-//        tooltip.add("" + RfUtils.addPowerTooltip(stack));
+        tooltip.add(new TranslationTextComponent(RfUtils.addPowerTooltip(getEnergyStorage(stack))));
     }
     
     @Override
@@ -91,15 +90,21 @@ public class ItemQuantumBattery extends ItemBase
         return true;
     }
     
-//    @Override
-//    public double getDurabilityForDisplay(ItemStack stack)
-//    {
-//        IEnergyStorage storage = (IEnergyStorage) stack.getCapability(CapabilityEnergy.ENERGY);
-//
-//        double max = storage.getMaxEnergyStored();
-//        double diff = max - storage.getEnergyStored();
-//        return diff / max;
-//    }
+    @Override
+    public double getDurabilityForDisplay(ItemStack stack)
+    {
+        double max = getEnergyStorage(stack).getMaxEnergyStored();
+        double diff = max - getEnergyStorage(stack).getEnergyStored();
+        return diff / max;
+    }
+    
+    public IEnergyStorage getEnergyStorage(ItemStack stack)
+    {
+        if (CapabilityEnergy.ENERGY == null)
+            return EMPTY_ENERGY_STORAGE;
+        
+        return stack.getCapability(CapabilityEnergy.ENERGY).orElse(EMPTY_ENERGY_STORAGE);
+    }
     
     @Nullable
     @Override
@@ -114,7 +119,7 @@ public class ItemQuantumBattery extends ItemBase
 
         public EnergyCapabilityProvider(final ItemStack stack, ItemQuantumBattery item)
         {
-            this.storage = new CustomEnergyStorage(Integer.MAX_VALUE, 500000, 500000)
+            this.storage = new CustomEnergyStorage(Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE)
             {
                 @Override
                 public int getEnergyStored()

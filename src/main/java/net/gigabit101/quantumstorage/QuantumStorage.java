@@ -49,10 +49,6 @@ public class QuantumStorage
     public static ContainerType<ContainerQSU> containerQsuContainerType = null;
     @ObjectHolder(MOD_ID + ":" + "tank")
     public static ContainerType<ContainerTank> containerTankContainerType = null;
-    
-    //ITEMS
-    @ObjectHolder(MOD_ID + ":" + "qsu")
-    public static Item battery;
 
     public static final EnumMap<DyeColor, ItemQuantumBag> BAGS = new EnumMap<>(DyeColor.class);
 

@@ -53,11 +53,9 @@ public class RfUtils
         return String.valueOf(qty);
     }
 
-    public static String addPowerTooltip(ItemStack stack)
+    public static String addPowerTooltip(IEnergyStorage iEnergyStorage)
     {
-        IEnergyStorage storage = (IEnergyStorage) stack.getCapability(CapabilityEnergy.ENERGY, null);
-
-        return formatQuantity(storage.getEnergyStored()) + " / " + formatQuantity(storage.getMaxEnergyStored());
+        return formatQuantity(iEnergyStorage.getEnergyStored()) + " / " + formatQuantity(iEnergyStorage.getMaxEnergyStored());
     }
 
     public static boolean isItemFull(ItemStack stack)
@@ -89,12 +87,11 @@ public class RfUtils
         }
     }
 
-    public static int dischargeItem(ItemStack stack, int amount, boolean sim)
+    public static int dischargeItem(IEnergyStorage iEnergyStorage, ItemStack stack, int amount, boolean sim)
     {
         if (isPoweredItem(stack))
         {
-            final IEnergyStorage storage = (IEnergyStorage) stack.getCapability(CapabilityEnergy.ENERGY, null);
-            return storage.extractEnergy(amount, sim);
+            return iEnergyStorage.extractEnergy(amount, sim);
         }
         return 0;
     }

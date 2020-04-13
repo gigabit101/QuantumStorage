@@ -3,6 +3,7 @@ package net.gigabit101.quantumstorage.proxy;
 import net.gigabit101.quantumstorage.QuantumStorage;
 import net.gigabit101.quantumstorage.api.IColorable;
 import net.gigabit101.quantumstorage.client.render.RenderDsu;
+import net.gigabit101.quantumstorage.client.render.TankRender;
 import net.gigabit101.quantumstorage.guis.*;
 import net.gigabit101.quantumstorage.init.QSBlocks;
 import net.gigabit101.quantumstorage.tiles.TileQsu;
@@ -29,7 +30,7 @@ public class ClientProxy extends CommonProxy
         RenderTypeLookup.setRenderLayer(QSBlocks.TRASH_CAN.get(), RenderType.cutout());
     
         ClientRegistry.bindTileEntityRenderer(QSBlocks.QSU_TILE.get(), RenderDsu::new);
-//        ClientRegistry.bindTileEntitySpecialRenderer(TileQuantumTank.class, new TankRender());
+        ClientRegistry.bindTileEntityRenderer(QSBlocks.TANK_TILE.get(), TankRender::new);
     }
     
 //    @Override

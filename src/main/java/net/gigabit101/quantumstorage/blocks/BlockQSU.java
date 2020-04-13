@@ -110,24 +110,23 @@ public class BlockQSU extends ContainerBlock
     {
         if (!stack.isEmpty() && stack.hasTag())
         {
-            ListNBT tagList = stack.getTag().getCompound("tileEntity").getList("Items", Constants.NBT.TAG_COMPOUND);
-            ItemStack stack1;
-        
-            CompoundNBT itemTags = tagList.getCompound(0);
-            CompoundNBT itemTags2 = tagList.getCompound(2);
-        
-            int count = itemTags.getInt("SizeSpecial") + itemTags2.getInt("SizeSpecial");
-        
-            stack1 = ItemStack.read(itemTags);
-            stack1.setCount(count);
-        
-            if (!stack1.isEmpty())
+            if (stack.getTag().getCompound("tileEntity") != null)
             {
-                String s = TextFormatting.GOLD + "Stored Item Type: " + stack1.getCount() + " " + stack1.getDisplayName();
-                tooltip.add(new TranslationTextComponent(s));
-            }
-            else {
-                tooltip.add(new TranslationTextComponent("TOOLTIP STILL A WIP"));
+                ListNBT tagList = stack.getTag().getCompound("tileEntity").getList("Items", Constants.NBT.TAG_COMPOUND);
+                ItemStack stack1;
+            
+                CompoundNBT itemTags = tagList.getCompound(0);
+                CompoundNBT itemTags2 = tagList.getCompound(2);
+            
+                int count = itemTags.getInt("SizeSpecial") + itemTags2.getInt("SizeSpecial");
+            
+                stack1 = ItemStack.read(itemTags);
+                stack1.setCount(count);
+            
+                if (!stack1.isEmpty())
+                {
+                    tooltip.add(new TranslationTextComponent(TextFormatting.GOLD + "Stored Item Type: " + stack1.getCount() + " " + stack1.getDisplayName()));
+                }
             }
         }
     }

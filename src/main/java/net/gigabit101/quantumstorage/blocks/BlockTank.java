@@ -1,8 +1,6 @@
 package net.gigabit101.quantumstorage.blocks;
 
-import net.gigabit101.quantumstorage.QuantumStorage;
 import net.gigabit101.quantumstorage.tiles.TileTank;
-import net.gigabit101.quantumstorage.tiles.chests.TileChestGold;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.util.ITooltipFlag;
@@ -62,14 +60,16 @@ public class BlockTank extends ContainerBlock
     @Override
     public ActionResultType onBlockActivated(BlockState blockState, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult traceResult)
     {
-         FluidUtil.interactWithFluidHandler(player, hand, world, pos, traceResult.getFace());
-        
-//        if (!world.isRemote)
-//        {
-//            NetworkHooks.openGui((ServerPlayerEntity) player, (INamedContainerProvider) world.getTileEntity(pos), pos);
-//            return true;
-//        }
-        return ActionResultType.FAIL;
+        if(FluidUtil.interactWithFluidHandler(player, hand, world, pos, traceResult.getFace()))
+        {
+            return ActionResultType.SUCCESS;
+        }
+        else if(!world.isRemote && !player.isCrouching())
+        {
+            NetworkHooks.openGui((ServerPlayerEntity) player, (INamedContainerProvider) world.getTileEntity(pos), pos);
+            return ActionResultType.SUCCESS;
+        }
+        return ActionResultType.SUCCESS;
     }
 
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
@@ -107,8 +107,20 @@ public class BlockTank extends ContainerBlock
     }
     
     @Override
-    public void addInformation(ItemStack p_190948_1_, @Nullable IBlockReader p_190948_2_, List<ITextComponent> tooltip, ITooltipFlag p_190948_4_)
+    public void addInformation(ItemStack stack, @Nullable IBlockReader p_190948_2_, List<ITextComponent> tooltip, ITooltipFlag p_190948_4_)
     {
-        tooltip.add(new TranslationTextComponent(TextFormatting.RED + "WIP"));
+        if (stack != null && stack.hasTag())
+        {
+            if (stack.getTag().getCompound("tileEntity") != null)
+            {
+                String fluidname = stack.getTag().getCompound("tileEntity").getString("FluidName");
+                int fluidamount = stack.getTag().getCompound("tileEntity").getInt("Amount");
+            
+                if (fluidamount != 0)
+                {
+                    tooltip.add(new TranslationTextComponent(TextFormatting.GOLD + "Stored Fluid type: " + fluidamount + "mb " + fluidname));
+                }
+            }
+        }
     }
 }

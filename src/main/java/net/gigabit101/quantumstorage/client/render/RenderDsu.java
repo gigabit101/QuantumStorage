@@ -27,7 +27,7 @@ public class RenderDsu extends TileEntityRenderer<TileQsu>
     @Override
     public void render(TileQsu te, float v, MatrixStack matrixStack, IRenderTypeBuffer iRenderTypeBuffer, int i, int i1)
     {
-        if(!ConfigQuantumStorage.SPECIAL_RENDER_QSU.get())
+        if(ConfigQuantumStorage.SPECIAL_RENDER_QSU.get())
         {
             if (!te.inventory.getStackInSlot(2).isEmpty())
             {

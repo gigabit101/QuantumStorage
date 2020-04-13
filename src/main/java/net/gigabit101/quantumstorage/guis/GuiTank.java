@@ -47,7 +47,7 @@ public class GuiTank extends ContainerScreen<ContainerTank>
         if (getTank().getFluid() != null)
         {
             amount = getTank().getFluidAmount();
-            name = getTank().getFluid().getFluid().getRegistryName().toString();
+            name = getTank().getFluid().getDisplayName().getFormattedText();
         }
     
         builder.drawBigBlueBar(this, 36, 56, amount, getTank().getCapacity(), mouseX - guiLeft, mouseY - guiTop, "", "Fluid Type: " + name, amount + " mb " + name);

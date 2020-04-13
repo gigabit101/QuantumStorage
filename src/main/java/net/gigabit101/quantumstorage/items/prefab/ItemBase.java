@@ -10,6 +10,5 @@ public class ItemBase extends Item
     public ItemBase(Item.Properties properties)
     {
         super(properties);
-//        setCreativeTab(CreativeTabQuantumStorage.INSTANCE);
     }
 }

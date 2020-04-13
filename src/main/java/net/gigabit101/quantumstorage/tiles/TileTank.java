@@ -29,12 +29,12 @@ import javax.annotation.Nullable;
  */
 public class TileTank extends TileEntity implements INamedContainerProvider
 {
+    public FluidTank tank = new FluidTank(Integer.MAX_VALUE);
+    
     public TileTank()
     {
         super(QSBlocks.TANK_TILE.get());
     }
-    
-    public FluidTank tank = new FluidTank(Integer.MAX_VALUE);
     
     @Override
     public void onLoad()
