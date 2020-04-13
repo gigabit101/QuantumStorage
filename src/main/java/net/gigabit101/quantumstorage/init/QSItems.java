@@ -2,6 +2,7 @@ package net.gigabit101.quantumstorage.init;
 
 import net.gigabit101.quantumstorage.QuantumStorage;
 import net.gigabit101.quantumstorage.client.CreativeTabQuantumStorage;
+import net.gigabit101.quantumstorage.items.ItemNommer;
 import net.gigabit101.quantumstorage.items.ItemQuantumBattery;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -21,7 +22,9 @@ public class QSItems
     public static final RegistryObject<Item> TRASH_CAN_ITEM = ITEMS.register("trashcan", () -> new BlockItem(QSBlocks.TRASH_CAN.get(), ITEM_GROUP));
     public static final RegistryObject<Item> QSU_ITEM = ITEMS.register("qsu", () -> new BlockItem(QSBlocks.QSU.get(), ITEM_GROUP));
     public static final RegistryObject<Item> TANK_ITEM = ITEMS.register("tank", () -> new BlockItem(QSBlocks.TANK.get(), ITEM_GROUP));
-    
+
+    public static final RegistryObject<Item> NOMMER_ITEM = ITEMS.register("nommer", ItemNommer::new);
+
     public static final RegistryObject<Item> BATTERY_ITEM = ITEMS.register("battery", ItemQuantumBattery::new);
     
 }

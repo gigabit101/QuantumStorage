@@ -1,4 +1,4 @@
-package net.gigabit101.quantumstorage;
+package net.gigabit101.quantumstorage.util.inventory;
 
 import net.minecraft.item.ItemStack;
 

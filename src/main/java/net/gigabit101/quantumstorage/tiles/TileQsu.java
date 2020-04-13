@@ -1,7 +1,6 @@
 package net.gigabit101.quantumstorage.tiles;
 
-import net.gigabit101.quantumstorage.ItemUtils;
-import net.gigabit101.quantumstorage.QuantumStorage;
+import net.gigabit101.quantumstorage.util.inventory.ItemUtils;
 import net.gigabit101.quantumstorage.containers.ContainerQSU;
 import net.gigabit101.quantumstorage.init.QSBlocks;
 import net.gigabit101.quantumstorage.inventory.DsuInventoryHandler;
