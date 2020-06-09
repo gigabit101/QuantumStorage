@@ -54,7 +54,7 @@ public class TileQsu extends TileEntity implements INamedContainerProvider, ITic
         {
             if (!inventory.getStackInSlot(INPUT).isEmpty())
             {
-                if (inventory.getStackInSlot(STORAGE).isEmpty())
+                if (inventory.getStackInSlot(STORAGE).isEmpty() && (inventory.getStackInSlot(OUTPUT).isEmpty() || ItemUtils.isItemEqual(inventory.getStackInSlot(INPUT), inventory.getStackInSlot(OUTPUT), true)))
                 {
                     inventory.setStackInSlot(STORAGE, inventory.getStackInSlot(INPUT).copy());
                     inventory.setStackInSlot(INPUT, ItemStack.EMPTY);
