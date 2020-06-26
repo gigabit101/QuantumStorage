@@ -73,7 +73,7 @@ public final class QunatumBagImpl
                 if (inventories.containsKey(c))
                 {
                     INBT inv = CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.getStorage().writeNBT(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, inventories.get(c), null);
-                    ret.put(c.getName(), inv);
+                    ret.put(c.name(), inv);
                 }
             }
             return ret;
@@ -90,10 +90,10 @@ public final class QunatumBagImpl
         {
             for (DyeColor e : DyeColor.values())
             {
-                if (nbt.hasUniqueId(e.getName()))
+                if (nbt.hasUniqueId(e.name()))
                 {
                     IItemHandler inv = new ItemStackHandler(104);
-                    CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.getStorage().readNBT(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, inv, null, nbt.getCompound(e.getName()));
+                    CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.getStorage().readNBT(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, inv, null, nbt.getCompound(e.name()));
                     inventories.put(e, inv);
                 }
             }

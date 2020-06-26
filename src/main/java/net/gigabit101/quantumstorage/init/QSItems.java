@@ -13,7 +13,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class QSItems
 {
     public static final Item.Properties ITEM_GROUP = new Item.Properties().group(CreativeTabQuantumStorage.INSTANCE);
-    public static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, QuantumStorage.MOD_ID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, QuantumStorage.MOD_ID);
     
     public static final RegistryObject<Item> CHEST_DIAMOND_ITEM = ITEMS.register("chestdiamond", () -> new BlockItem(QSBlocks.CHEST_DIAMOND.get(), ITEM_GROUP));
     public static final RegistryObject<Item> CHEST_GOLD_ITEM = ITEMS.register("chestgold", () -> new BlockItem(QSBlocks.CHEST_GOLD.get(), ITEM_GROUP));
@@ -23,8 +23,7 @@ public class QSItems
     public static final RegistryObject<Item> QSU_ITEM = ITEMS.register("qsu", () -> new BlockItem(QSBlocks.QSU.get(), ITEM_GROUP));
     public static final RegistryObject<Item> TANK_ITEM = ITEMS.register("tank", () -> new BlockItem(QSBlocks.TANK.get(), ITEM_GROUP));
 
-    public static final RegistryObject<Item> NOMMER_ITEM = ITEMS.register("nommer", ItemNommer::new);
+//    public static final RegistryObject<Item> NOMMER_ITEM = ITEMS.register("nommer", ItemNommer::new);
 
-    public static final RegistryObject<Item> BATTERY_ITEM = ITEMS.register("battery", ItemQuantumBattery::new);
-    
+//    public static final RegistryObject<Item> BATTERY_ITEM = ITEMS.register("battery", ItemQuantumBattery::new);
 }

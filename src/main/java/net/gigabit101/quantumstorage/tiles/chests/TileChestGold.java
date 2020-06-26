@@ -3,6 +3,7 @@ package net.gigabit101.quantumstorage.tiles.chests;
 import net.gigabit101.quantumstorage.QuantumStorage;
 import net.gigabit101.quantumstorage.containers.ContainerChestGold;
 import net.gigabit101.quantumstorage.init.QSBlocks;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
@@ -45,9 +46,9 @@ public class TileChestGold extends TileEntity implements INamedContainerProvider
     }
 
     @Override
-    public void read(CompoundNBT compound)
+    public void func_230337_a_(BlockState state, CompoundNBT compound)
     {
-        super.read(compound);
+        super.func_230337_a_(state, compound);
         if (compound.contains("inv"))
         {
             inventory.deserializeNBT(compound.getCompound("inv"));

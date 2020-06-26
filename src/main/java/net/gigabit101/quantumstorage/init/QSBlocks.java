@@ -16,8 +16,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class QSBlocks
 {
-    public static final DeferredRegister<Block> BLOCKS = new DeferredRegister<>(ForgeRegistries.BLOCKS, QuantumStorage.MOD_ID);
-    public static final DeferredRegister<TileEntityType<?>> TILES_ENTITIES = new DeferredRegister<>(ForgeRegistries.TILE_ENTITIES, QuantumStorage.MOD_ID);
+    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, QuantumStorage.MOD_ID);
+    public static final DeferredRegister<TileEntityType<?>> TILES_ENTITIES = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, QuantumStorage.MOD_ID);
     
     public static final RegistryObject<Block> CHEST_DIAMOND = BLOCKS.register("chestdiamond", BlockChestDiamond::new);
     public static final RegistryObject<Block> CHEST_GOLD = BLOCKS.register("chestgold", BlockChestGold::new);

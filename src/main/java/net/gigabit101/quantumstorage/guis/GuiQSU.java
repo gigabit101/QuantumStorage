@@ -1,5 +1,6 @@
 package net.gigabit101.quantumstorage.guis;
 
+import com.mojang.blaze3d.matrix.MatrixStack;
 import net.gigabit101.quantumstorage.client.GuiBuilderQuantumStorage;
 import net.gigabit101.quantumstorage.containers.ContainerQSU;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
@@ -25,31 +26,34 @@ public class GuiQSU extends ContainerScreen<ContainerQSU>
         this.ySize = 220;
     }
 
+    //Render
     @Override
-    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
+    protected void func_230450_a_(MatrixStack matrixStack, float p_230450_2_, int mouseX, int mouseY)
     {
-        builder.drawDefaultBackground(this, guiLeft, guiTop, xSize, ySize);
-        builder.drawPlayerSlots(this, guiLeft + xSize / 2, guiTop + 131, true);
+        builder.drawDefaultBackground(this, matrixStack, guiLeft, guiTop, xSize, ySize, 256, 256);
+        builder.drawPlayerSlots(this, matrixStack, guiLeft + xSize / 2, guiTop + 131, true, 256, 256);
 
-        builder.drawSlot(this, guiLeft + xSize / 2 - 9, guiTop + 30);
+        builder.drawSlot(this, matrixStack, guiLeft + xSize / 2 - 9, guiTop + 30, 256, 256);
+        builder.drawSlot(this, matrixStack, guiLeft + xSize / 2 - 9, guiTop + 80, 256, 256);
+    }
 
-        builder.drawSlot(this, guiLeft + xSize / 2 - 9, guiTop + 80);
-    }
-    
+    //RenderTop
     @Override
-    public void render(int mouseX, int mouseY, float p_render_3_)
+    protected void func_230451_b_(MatrixStack matrixStack, int mouseX, int mouseY)
     {
-        super.render(mouseX, mouseY, p_render_3_);
-        this.renderHoveredToolTip(mouseX, mouseY);
+        this.field_230712_o_.func_238422_b_(matrixStack, this.field_230704_d_, 40.0F, 6.0F, 4210752);
+        this.field_230712_o_.func_238422_b_(matrixStack, this.playerInventory.getDisplayName(), 14.0F, (float) (this.ySize - 100), 4210752);
+
+        builder.drawBigBlueBar( this, matrixStack, 36, 56, this.getInv().getStackInSlot(STORAGE).getCount() + this.getInv().getStackInSlot(OUTPUT).getCount(), Integer.MAX_VALUE, mouseX - guiLeft, mouseY - guiTop, "Stored", getInv().getStackInSlot(OUTPUT).getDisplayName().getString(),
+                formatQuantity(this.getInv().getStackInSlot(STORAGE).getCount() + this.getInv().getStackInSlot(OUTPUT).getCount()), 256, 256);
     }
-    
+
     @Override
-    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
+    public void func_230430_a_(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks)
     {
-        super.drawGuiContainerForegroundLayer(mouseX, mouseY);
-        
-        builder.drawBigBlueBar( this, 36, 56, this.getInv().getStackInSlot(STORAGE).getCount() + this.getInv().getStackInSlot(OUTPUT).getCount(), Integer.MAX_VALUE, mouseX - guiLeft, mouseY - guiTop, "Stored", getInv().getStackInSlot(OUTPUT).getDisplayName().getString(),
-                formatQuantity(this.getInv().getStackInSlot(STORAGE).getCount() + this.getInv().getStackInSlot(OUTPUT).getCount()));
+        this.func_230446_a_(matrixStack);
+        super.func_230430_a_(matrixStack, mouseX, mouseY, partialTicks);
+        this.func_230459_a_(matrixStack, mouseX, mouseY);
     }
 
     public static final DecimalFormat QUANTITY_FORMATTER = new DecimalFormat("####0.#", DecimalFormatSymbols.getInstance(Locale.US));

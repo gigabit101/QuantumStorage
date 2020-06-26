@@ -30,11 +30,13 @@ if (hasProperty('appendBuildNumber')) {
     version = version + "-" + appendBuildNumber.toString()
 }
 
+sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
+
 group= 'gigabit101.net'
 archivesBaseName = 'QuantumStorage'
 
 minecraft {
-    mappings channel: 'snapshot', version: '20200210-1.15.1'
+    mappings channel: 'snapshot', version: '20200514-1.16'
     runs {
         client {
             workingDirectory project.file('run')
@@ -62,7 +64,7 @@ minecraft {
 
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.15.2-31.1.1'
+    minecraft 'net.minecraftforge:forge:1.16.1-32.0.7'
 }
 
 def reobfFile = file("$buildDir/reobfJar/output.jar")

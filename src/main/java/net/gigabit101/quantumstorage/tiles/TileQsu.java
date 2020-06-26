@@ -5,6 +5,7 @@ import net.gigabit101.quantumstorage.containers.ContainerQSU;
 import net.gigabit101.quantumstorage.init.QSBlocks;
 import net.gigabit101.quantumstorage.inventory.DsuInventoryHandler;
 import net.gigabit101.quantumstorage.network.VanillaPacketDispatcher;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
@@ -125,13 +126,13 @@ public class TileQsu extends TileEntity implements INamedContainerProvider, ITic
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket packet)
     {
         super.onDataPacket(net, packet);
-        this.read(packet.getNbtCompound());
+        this.deserializeNBT(packet.getNbtCompound());
     }
-    
+
     @Override
-    public void read(CompoundNBT compound)
+    public void func_230337_a_(BlockState state, CompoundNBT compound)
     {
-        super.read(compound);
+        super.func_230337_a_(state, compound);
         inventory.deserializeNBT(compound);
     }
 

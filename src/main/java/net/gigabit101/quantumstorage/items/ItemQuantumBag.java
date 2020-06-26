@@ -16,7 +16,7 @@ public class ItemQuantumBag extends ItemBase implements IColorable
     public ItemQuantumBag(DyeColor dyeColor)
     {
         super(new Item.Properties().group(CreativeTabQuantumStorage.INSTANCE).maxStackSize(1));
-        setRegistryName("quantum_bag_" + dyeColor.getName());
+        setRegistryName("quantum_bag_" + dyeColor.name());
         this.dyeColor = dyeColor;
         float[] vals = dyeColor.getColorComponentValues();
         int[] rgb = new int[3];

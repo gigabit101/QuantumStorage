@@ -1,17 +1,14 @@
 package net.gigabit101.quantumstorage.client.render;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.gigabit101.quantumstorage.config.ConfigQuantumStorage;
 import net.gigabit101.quantumstorage.tiles.TileQsu;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.Vector3f;
 import net.minecraft.client.renderer.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
-import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 
 /**
@@ -51,7 +48,7 @@ public class RenderDsu extends TileEntityRenderer<TileQsu>
         matrixStackIn.translate(.5, .7, .5);
         matrixStackIn.scale(.4f, .4f, .4f);
         float rotation = (float) (te.getWorld().getGameTime() % 80);
-        matrixStackIn.rotate(Vector3f.YP.rotationDegrees(360f * rotation / 80f));
+//        matrixStackIn.rotate(Vector3f.YP.rotationDegrees(360f * rotation / 80f));
         Minecraft.getInstance().getItemRenderer().renderItem(stack, ItemCameraTransforms.TransformType.NONE, combinedLightIn, combinedOverlayIn, matrixStackIn, bufferIn);
         RenderSystem.enableLighting();
         matrixStackIn.pop();

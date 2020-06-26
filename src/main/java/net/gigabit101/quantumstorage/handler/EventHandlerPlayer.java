@@ -50,51 +50,51 @@ public class EventHandlerPlayer
         }
     }
 
-    @SubscribeEvent
-    public static void itemPickup(PlayerEvent.ItemPickupEvent evt)
-    {
-        if (!(evt.getEntity() instanceof PlayerEntity))
-        {
-            return;
-        }
-        PlayerEntity player = (PlayerEntity)evt.getEntity();
-
-        IterableInventory.from(player.inventory).forEach((stack) -> {
-            if (stack.getItem() != QSItems.NOMMER_ITEM.get())
-            {
-                return;
-            }
-
-            CompoundNBT tag = stack.getTag();
-
-            if (tag == null)
-            {
-                return;
-            }
-
-            INBT filterTag = tag.get("filter");
-
-            if (filterTag == null)
-            {
-                return;
-            }
-
-            if (filterTag.getType() != CompoundNBT.TYPE)
-            {
-                return;
-            }
-
-            NonNullList<ItemStack> filterItems = NonNullList.create();
-
-            ItemStackHelper.loadAllItems((CompoundNBT)filterTag, filterItems);
-
-
-            filterItems.forEach((filterItem) -> {
-                //ItemUtils.isItemEqual()
-            });
-
-        });
-
-    }
+//    @SubscribeEvent
+//    public static void itemPickup(PlayerEvent.ItemPickupEvent evt)
+//    {
+//        if (!(evt.getEntity() instanceof PlayerEntity))
+//        {
+//            return;
+//        }
+//        PlayerEntity player = (PlayerEntity)evt.getEntity();
+//
+//        IterableInventory.from(player.inventory).forEach((stack) -> {
+//            if (stack.getItem() != QSItems.NOMMER_ITEM.get())
+//            {
+//                return;
+//            }
+//
+//            CompoundNBT tag = stack.getTag();
+//
+//            if (tag == null)
+//            {
+//                return;
+//            }
+//
+//            INBT filterTag = tag.get("filter");
+//
+//            if (filterTag == null)
+//            {
+//                return;
+//            }
+//
+//            if (filterTag.getType() != CompoundNBT.TYPE)
+//            {
+//                return;
+//            }
+//
+//            NonNullList<ItemStack> filterItems = NonNullList.create();
+//
+//            ItemStackHelper.loadAllItems((CompoundNBT)filterTag, filterItems);
+//
+//
+//            filterItems.forEach((filterItem) -> {
+//                //ItemUtils.isItemEqual()
+//            });
+//
+//        });
+//
+//    }
 
 }

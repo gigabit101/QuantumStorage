@@ -27,7 +27,7 @@ public class ContainerChestIron extends ContainerQS
         {
             for (int j1 = 0; j1 < 9; ++j1)
             {
-                addSlot(new SlotItemHandler(te.inventory, i, 14 + j1 * 18, 8 + l * 18));
+                addSlot(new SlotItemHandler(te.inventory, i, 14 + j1 * 18, 18 + l * 18));
                 i++;
             }
         }

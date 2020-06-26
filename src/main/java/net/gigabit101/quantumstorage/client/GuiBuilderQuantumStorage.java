@@ -1,10 +1,15 @@
 package net.gigabit101.quantumstorage.client;
 
+import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.gigabit101.quantumstorage.QuantumStorage;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextProperties;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.client.gui.GuiUtils;
 
@@ -18,17 +23,18 @@ public class GuiBuilderQuantumStorage
 {
     public static final ResourceLocation GUI_SHEET = new ResourceLocation(QuantumStorage.MOD_ID.toLowerCase() + ":" + "textures/gui/gui_sheet.png");
 
-    public void drawDefaultBackground(ContainerScreen gui, int x, int y, int width, int height) {
+    public void drawDefaultBackground(ContainerScreen gui, MatrixStack matrixStack, int x, int y, int width, int height, int textureXSize, int textureYSize) {
         GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
         Minecraft.getInstance().getTextureManager().bindTexture(GUI_SHEET);
 
-        gui.blit(x, y, 0, 0, width / 2, height / 2);
-        gui.blit(x + width / 2, y, 150 - width / 2, 0, width / 2, height / 2);
-        gui.blit(x, y + height / 2, 0, 150 - height / 2, width / 2, height / 2);
-        gui.blit(x + width / 2, y + height / 2, 150 - width / 2, 150 - height / 2, width / 2, height / 2);
+
+        gui.func_238463_a_(matrixStack, x, y, 0, 0, width / 2, height / 2, textureXSize, textureYSize);
+        gui.func_238463_a_(matrixStack, x + width / 2, y, 150 - width / 2, 0, width / 2, height / 2, textureXSize, textureYSize );
+        gui.func_238463_a_(matrixStack, x, y + height / 2, 0, 150 - height / 2, width / 2, height / 2, textureXSize, textureYSize);
+        gui.func_238463_a_(matrixStack, x + width / 2, y + height / 2, 150 - width / 2, 150 - height / 2, width / 2, height / 2, textureXSize, textureYSize);
     }
 
-    public void drawPlayerSlots(ContainerScreen gui, int posX, int posY, boolean center)
+    public void drawPlayerSlots(ContainerScreen gui, MatrixStack matrixStack, int posX, int posY, boolean center, int textureXSize, int textureYSize)
     {
         Minecraft.getInstance().getTextureManager().bindTexture(GUI_SHEET);
         if (center)
@@ -39,50 +45,50 @@ public class GuiBuilderQuantumStorage
         {
             for (int x = 0; x < 9; x++)
             {
-                gui.blit(posX + x * 18, posY + y * 18, 150, 0, 18, 18);
+                gui.func_238463_a_(matrixStack, posX + x * 18, posY + y * 18, 150, 0, 18, 18, textureXSize, textureYSize);
             }
         }
         for (int x = 0; x < 9; x++)
         {
-            gui.blit(posX + x * 18, posY + 58, 150, 0, 18, 18);
+            gui.func_238463_a_(matrixStack, posX + x * 18, posY + 58, 150, 0, 18, 18, textureXSize, textureYSize);
         }
     }
 
-    public void drawSlot(ContainerScreen gui, int posX, int posY)
+    public void drawSlot(ContainerScreen gui, MatrixStack matrixStack, int posX, int posY, int textureXSize, int textureYSize)
     {
         Minecraft.getInstance().getTextureManager().bindTexture(GUI_SHEET);
-        gui.blit(posX, posY, 150, 0, 18, 18);
+        gui.func_238463_a_(matrixStack, posX, posY, 150, 0, 18, 18, textureXSize, textureYSize);
     }
 
-    public void drawBigBlueBar(ContainerScreen gui, int x, int y, int value, int max, int mouseX, int mouseY, String suffix, String line2, String format)
+    public void drawBigBlueBar(ContainerScreen gui, MatrixStack matrixStack, int x, int y, int value, int max, int mouseX, int mouseY, String suffix, String line2, String format, int textureXSize, int textureYSize)
     {
         Minecraft.getInstance().getTextureManager().bindTexture(GUI_SHEET);
         if (!suffix.equals(""))
         {
             suffix = " " + suffix;
         }
-        gui.blit(x, y, 0, 218, 114, 18);
+        AbstractGui.func_238463_a_(matrixStack, x, y, 0, 218, 114, 18, textureXSize, textureYSize);
         int j = (int) ((double) value / (double) max * 106);
         if (j < 0)
             j = 0;
-        gui.blit(x + 4, y + 4, 0, 236, j, 10);
-        gui.drawString(Minecraft.getInstance().fontRenderer, format + suffix, x + 28, y + 5, 0xFFFFFF);
+        AbstractGui.func_238463_a_(matrixStack, x + 4, y + 4, 0, 236, j, 10, textureXSize, textureYSize);
+        gui.func_238471_a_(matrixStack, Minecraft.getInstance().fontRenderer, format + suffix, x + 58, y + 5, 0xFFFFFF);
         if (isInRect(x, y, 114, 18, mouseX, mouseY))
         {
             int percentage = percentage(max, value);
-            List<String> list = new ArrayList<>();
-            list.add("" + TextFormatting.GOLD + value + "/" + max + suffix);
-            list.add(getPercentageColour(percentage) + "" + percentage + "%" + TextFormatting.GRAY + " Full");
-            list.add(line2);
+            List<ITextProperties> list = new ArrayList<>();
+            list.add(new StringTextComponent("" + TextFormatting.GOLD + value + "/" + max + suffix));
+            list.add(new StringTextComponent(getPercentageColour(percentage) + "" + percentage + "%" + TextFormatting.GRAY + " Full"));
+            list.add(new StringTextComponent(line2));
 
             if (value > max)
             {
-                list.add(TextFormatting.GRAY + "Yo this is storing more than it should be able to");
-                list.add(TextFormatting.GRAY + "prolly a bug");
-                list.add(TextFormatting.GRAY + "pls report and tell how tf you did this");
+                list.add(new StringTextComponent(TextFormatting.GRAY + "Yo this is storing more than it should be able to"));
+                list.add(new StringTextComponent(TextFormatting.GRAY + "prolly a bug"));
+                list.add(new StringTextComponent(TextFormatting.GRAY + "pls report and tell how tf you did this"));
             }
-            GuiUtils.drawHoveringText(list, mouseX, mouseY, gui.width, gui.height, -1, Minecraft.getInstance().fontRenderer);
-            
+            GuiUtils.drawHoveringText(matrixStack, list, mouseX, mouseY, gui.field_230709_l_, gui.field_230709_l_, -1, Minecraft.getInstance().fontRenderer);
+
             GlStateManager.disableLighting();
             GlStateManager.color4f(1, 1, 1, 1);
         }
@@ -108,49 +114,6 @@ public class GuiBuilderQuantumStorage
             return 0;
         return (int) ((CurrentValue * 100.0f) / MaxValue);
     }
-//
-//    public void drawProgressBar(GuiContainer gui, int progress, int maxProgress, int x, int y, int mouseX, int mouseY)
-//    {
-//        gui.mc.getTextureManager().bindTexture(GUI_SHEET);
-//        gui.drawTexturedModalRect(x, y, 150, 20, 17, 16);
-//
-//        int j = (int) ((double) progress / (double) maxProgress * 24);
-//        if (j < 0)
-//            j = 0;
-//        gui.drawTexturedModalRect(x, y, 166, 20, j, 16);
-//
-//        if (isInRect(x, y, 26, 5, mouseX, mouseY))
-//        {
-//            int percentage = percentage(maxProgress, progress);
-//            List<String> list = new ArrayList<>();
-//            list.add(getPercentageColour(percentage) + "" + percentage + "%");
-//            GuiUtils.drawHoveringText(list, mouseX, mouseY, gui.width, gui.height, -1, gui.mc.fontRenderer);
-//            GlStateManager.disableLighting();
-//            GlStateManager.color(1, 1, 1, 1);
-//        }
-//    }
-//
-//    public void drawTankWithOverlay(GuiScreen gui, FluidTank tank, int x, int y, float zLevel, int width, int height, int mouseX, int mouseY)
-//    {
-//        gui.mc.getTextureManager().bindTexture(GUI_SHEET);
-//        gui.drawTexturedModalRect(x, y, 229, 18, width, height);
-//
-//
-//        RenderUtil.renderGuiTank(tank, x + 2, y - 3, zLevel, width - 4, height);
-//        if (isInRect(x, y, 14, height, mouseX, mouseY))
-//        {
-//            List<String> list = new ArrayList<String>();
-//            if (tank.getFluid() != null)
-//            {
-//                list.add(tank.getFluidAmount() + " / " + tank.getCapacity() + " " + tank.getFluid().getLocalizedName());
-//            } else
-//            {
-//                list.add("empty");
-//            }
-//            net.minecraftforge.fml.client.config.GuiUtils.drawHoveringText(list, mouseX, mouseY, gui.width, gui.height, -1, gui.mc.fontRenderer);
-//            GlStateManager.disableLighting();
-//        }
-//    }
 
     public boolean isInRect(int x, int y, int xSize, int ySize, int mouseX, int mouseY)
     {

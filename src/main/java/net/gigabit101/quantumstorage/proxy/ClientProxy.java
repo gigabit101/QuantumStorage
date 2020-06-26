@@ -24,10 +24,10 @@ public class ClientProxy extends CommonProxy
     @Override
     public void registerRenders()
     {
-        RenderTypeLookup.setRenderLayer(QSBlocks.QSU.get(), RenderType.cutoutMipped());
-        RenderTypeLookup.setRenderLayer(QSBlocks.TANK.get(), RenderType.cutoutMipped());
+        RenderTypeLookup.setRenderLayer(QSBlocks.QSU.get(), RenderType.getCutoutMipped());
+        RenderTypeLookup.setRenderLayer(QSBlocks.TANK.get(), RenderType.getCutoutMipped());
     
-        RenderTypeLookup.setRenderLayer(QSBlocks.TRASH_CAN.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(QSBlocks.TRASH_CAN.get(), RenderType.getCutout());
     
         ClientRegistry.bindTileEntityRenderer(QSBlocks.QSU_TILE.get(), RenderDsu::new);
         ClientRegistry.bindTileEntityRenderer(QSBlocks.TANK_TILE.get(), TankRender::new);

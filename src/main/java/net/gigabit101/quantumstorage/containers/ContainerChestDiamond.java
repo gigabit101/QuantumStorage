@@ -27,13 +27,13 @@ public class ContainerChestDiamond extends ContainerQS
         {
             for (int j1 = 0; j1 < 12; ++j1)
             {
-                addSlot(new SlotItemHandler(te.inventory, i, 14 + j1 * 18, 8 + l * 18));
+                addSlot(new SlotItemHandler(te.inventory, i, 14 + j1 * 18, 18 + l * 18));
                 i++;
             }
         }
 
-        drawPlayersInv(playerInv, 40, 132);
-        drawPlayersHotBar(playerInv, 40, 132 + 58);
+        drawPlayersInv(playerInv, 40, 142);
+        drawPlayersHotBar(playerInv, 40, 142 + 58);
     }
 
     @Override

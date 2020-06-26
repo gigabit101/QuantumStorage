@@ -1,11 +1,18 @@
 {
   "itemGroup.quantumstorage": "Quantum Storage",
-  "block.quantumstorage.chestiron": "Storage crate Iron",
+  "block.quantumstorage.chestiron": "Iron Storage Crate",
   "block.quantumstorage.trashcan": "Trash can",
-  "block.quantumstorage.chestgold": "Storage crate Gold",
-  "block.quantumstorage.chestdiamond": "Storage crate Diamond",
+  "block.quantumstorage.chestgold": "Gold Storage Crate",
+  "block.quantumstorage.chestdiamond": "Diamond Storage Crate",
   "block.quantumstorage.qsu": "QuantumStorage Unit",
   "block.quantumstorage.tank": "Quantum Tank",
   "item.quantumstorage.quantum_battery": "Quantum Battery",
-  "config.quantumstorge.specialrender": "Enable Special Render"
+  "config.quantumstorge.specialrender": "Enable Special Render",
+  "tile.qsu.name":"Quantum Storage Unit",
+  "tile.chestdiamond.name":"Diamond Storage Crate",
+  "tile.chestgold.name":"Gold Storage Crate",
+  "tile.chestiron.name":"Iron Storage Crate",
+  "tile.trashcan.name":"TrashCan",
+  "tile.tank.name":"Quantum Tank"
+
 }
