@@ -4,7 +4,7 @@
   "block.quantumstorage.trashcan": "Trash can",
   "block.quantumstorage.chestgold": "Gold Storage Crate",
   "block.quantumstorage.chestdiamond": "Diamond Storage Crate",
-  "block.quantumstorage.qsu": "QuantumStorage Unit",
+  "block.quantumstorage.qsu": "Quantum Storage Unit",
   "block.quantumstorage.tank": "Quantum Tank",
   "item.quantumstorage.quantum_battery": "Quantum Battery",
   "config.quantumstorge.specialrender": "Enable Special Render",
