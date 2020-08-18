@@ -30,5 +30,4 @@ public class TileChestDiamond extends TileChestBase {
     {
         return new ContainerChestDiamond(id, playerInventory, this);
     }
-
 }
