@@ -1,11 +1,11 @@
 {
 	"credit": "Made with Blockbench, a free, modern block model editor by JannisX11",
+	"parent": "block/block",
 	"textures": {
 		"0": "blocks/planks_spruce",
 		"3": "blocks/emerald_block",
 		"4": "quantumstorage:blocks/chests/planks_spruce_rotated",
 		"particle": "quantumstorage:blocks/chests/planks_spruce_rotated"
-
 	},
 	"elements": [
 		{
