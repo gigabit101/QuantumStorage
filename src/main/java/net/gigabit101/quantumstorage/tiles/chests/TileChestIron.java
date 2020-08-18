@@ -22,7 +22,7 @@ public class TileChestIron extends TileChestBase {
     @Override
     public ITextComponent getDisplayName()
     {
-        return new TranslationTextComponent("tile.chestdiamond.name");
+        return new TranslationTextComponent("tile.chestiron.name");
     }
 
 
