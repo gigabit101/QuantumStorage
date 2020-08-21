@@ -25,7 +25,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fml.network.NetworkHooks;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
@@ -35,7 +34,7 @@ public class BlockTank extends ContainerBlock
 
     public BlockTank()
     {
-        super(Properties.create(Material.IRON).hardnessAndResistance(2.0F));
+        super(Properties.create(Material.IRON).notSolid().hardnessAndResistance(2.0F));
         this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH));
     }
 
@@ -44,19 +43,18 @@ public class BlockTank extends ContainerBlock
         return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
     }
 
+    @Override
+    public BlockRenderType getRenderType(BlockState state) {
+        return BlockRenderType.MODEL;
+    }
+
     @Nullable
     @Override
     public TileEntity createNewTileEntity(IBlockReader worldIn)
     {
         return new TileTank();
     }
-    
-    @Nonnull
-    public BlockRenderType getRenderType(BlockState state)
-    {
-        return BlockRenderType.MODEL;
-    }
-    
+
     @Override
     public ActionResultType onBlockActivated(BlockState blockState, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult traceResult)
     {

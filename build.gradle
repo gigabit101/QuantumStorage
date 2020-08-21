@@ -1,74 +1,74 @@
+// thanks to its_meow (betteranimalsplus) for sharing his build script :*
 buildscript {
     repositories {
+        maven { url = 'https://files.minecraftforge.net/maven' }
         jcenter()
         mavenCentral()
-        maven {
-            name = 'forge'
-            url = 'http://files.minecraftforge.net/maven'
-        }
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
     }
 }
-plugins {
-}
-
 apply plugin: 'net.minecraftforge.gradle'
+//Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 
-ext.configFile = file "gradle.properties"
+version = "${project.mc_version}-${project.mod_version}"
+group = "${project.maven_group}"
+archivesBaseName = "${project.mod_id}"
 
-configFile.withReader {
-    // read config.  it shall from now on be referenced as simply config or as project.config
-    def prop = new Properties()
-    prop.load(it)
-    project.ext.config = new ConfigSlurper().parse prop
-}
-
-version = "${config.MC_VERSION + "-" +  config.MOD_VERSION}"
-if (hasProperty('appendBuildNumber')) {
-    version = version + "-" + appendBuildNumber.toString()
-}
-
-sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
-
-group= 'gigabit101.net'
-archivesBaseName = 'QuantumStorage'
+sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
 minecraft {
-    mappings channel: 'snapshot', version: '20200514-1.16'
+    mappings channel: project.mappings_channel, version: "${project.mappings_version}-${project.mappings_mc_version}"
+    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+
     runs {
         client {
             workingDirectory project.file('run')
-
-            // Recommended logging data for a userdev environment
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-
-            // Recommended logging level for the console
-            property 'forge.logging.console.level', 'info'
-            property 'forge.logging.noansi', 'false'
+            property 'forge.logging.markers', 'SCAN,REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            mods {
+                quantumstorage {
+                    source sourceSets.main
+                }
+            }
         }
 
         server {
             workingDirectory project.file('run')
-
-            // Recommended logging data for a userdev environment
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-
-            // Recommended logging level for the console
-            property 'forge.logging.console.level', 'info'
-            property 'forge.logging.noansi', 'false'
+            property 'forge.logging.markers', 'SCAN,REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            mods {
+                quantumstorage {
+                    source sourceSets.main
+                }
+            }
         }
     }
 }
 
+repositories {}
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.16.1-32.0.7'
+    minecraft "net.minecraftforge:forge:${project.mc_version}-${project.forge_version}"
 }
 
-def reobfFile = file("$buildDir/reobfJar/output.jar")
-def reobfArtifact = artifacts.add('default', reobfFile) {
-    type 'jar'
-    builtBy 'reobfJar'
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+    options.compilerArgs = [
+            '-Xlint:deprecation', // deprecation, rawtypes, cast, unchecked, all
+            '-Xlint:unchecked',
+    ]
+}
+
+jar {
+    manifest {
+        attributes(["Specification-Title": archivesBaseName,
+                    "Specification-Vendor": "gigabit101",
+                    "Specification-Version": "${project.mod_version}",
+                    "Implementation-Title": archivesBaseName,
+                    "Implementation-Version": "${project.mod_version}",
+                    "Implementation-Vendor" :"gigabit101",
+                    "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")],)
+    }
 }

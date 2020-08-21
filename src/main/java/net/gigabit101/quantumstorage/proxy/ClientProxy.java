@@ -6,7 +6,6 @@ import net.gigabit101.quantumstorage.client.render.RenderDsu;
 import net.gigabit101.quantumstorage.client.render.TankRender;
 import net.gigabit101.quantumstorage.guis.*;
 import net.gigabit101.quantumstorage.init.QSBlocks;
-import net.gigabit101.quantumstorage.tiles.TileQsu;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.RenderType;
