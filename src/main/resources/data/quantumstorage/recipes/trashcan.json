@@ -12,7 +12,7 @@
     ],
     "C": [
       {
-        "item": "minecraft:chest"
+        "item": "forge:chests/wooden"
       }
     ],
     "S": [
