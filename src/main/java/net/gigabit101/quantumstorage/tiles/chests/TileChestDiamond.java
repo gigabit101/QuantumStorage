@@ -5,6 +5,8 @@ import net.gigabit101.quantumstorage.init.QSBlocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 
@@ -29,5 +31,15 @@ public class TileChestDiamond extends TileChestBase {
     public Container createMenu(int id, PlayerInventory playerInventory, PlayerEntity playerEntity)
     {
         return new ContainerChestDiamond(id, playerInventory, this);
+    }
+
+    @Override
+    public ItemStack getDropWithNBT()
+    {
+        CompoundNBT tileEntityNBT = new CompoundNBT();
+        ItemStack dropStack = new ItemStack(QSBlocks.CHEST_DIAMOND.get(), 1);
+        writeToNBTWithoutCoords(tileEntityNBT);
+        dropStack.getOrCreateTag().put("tileEntity", tileEntityNBT);
+        return dropStack;
     }
 }

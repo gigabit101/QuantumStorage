@@ -25,18 +25,13 @@ public class ClientProxy extends CommonProxy
     {
         RenderTypeLookup.setRenderLayer(QSBlocks.QSU.get(), RenderType.getCutoutMipped());
         RenderTypeLookup.setRenderLayer(QSBlocks.TANK.get(), RenderType.getCutoutMipped());
-    
+        RenderTypeLookup.setRenderLayer(QSBlocks.CONTROLLER.get(), RenderType.getCutoutMipped());
+
         RenderTypeLookup.setRenderLayer(QSBlocks.TRASH_CAN.get(), RenderType.getCutout());
     
         ClientRegistry.bindTileEntityRenderer(QSBlocks.QSU_TILE.get(), RenderDsu::new);
         ClientRegistry.bindTileEntityRenderer(QSBlocks.TANK_TILE.get(), TankRender::new);
     }
-    
-//    @Override
-//    public IQuantumBagProvider getClientBagProps()
-//    {
-//        return FMLClientHandler.instance().getClientPlayerEntity().getCapability(QuantumStorageAPI.QUANTUM_BAG_PROVIDER_CAPABILITY, null);
-//    }
     
     @Override
     public void registerColors()
@@ -66,5 +61,6 @@ public class ClientProxy extends CommonProxy
         ScreenManager.registerFactory(QuantumStorage.containerTrashcanContainerType, GuiTrashcan::new);
         ScreenManager.registerFactory(QuantumStorage.containerQsuContainerType, GuiQSU::new);
         ScreenManager.registerFactory(QuantumStorage.containerTankContainerType, GuiTank::new);
+        ScreenManager.registerFactory(QuantumStorage.quantumBag, GuiBag::new);
     }
 }

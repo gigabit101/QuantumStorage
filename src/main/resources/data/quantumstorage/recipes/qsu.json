@@ -12,7 +12,7 @@
     ],
     "C": [
       {
-        "item": "forge:chests/wooden"
+        "tag": "forge:chests/wooden"
       }
     ]
   },

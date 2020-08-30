@@ -8,7 +8,6 @@ import java.util.NoSuchElementException;
 
 public class IterableInventory implements Iterable<ItemStack>
 {
-
     private final IInventory inventory;
 
     private IterableInventory(IInventory inventory)

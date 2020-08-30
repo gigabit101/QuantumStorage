@@ -1,5 +1,6 @@
 package net.gigabit101.quantumstorage.blocks;
 
+import net.gigabit101.quantumstorage.network.VanillaPacketDispatcher;
 import net.gigabit101.quantumstorage.tiles.TileTank;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
@@ -64,6 +65,10 @@ public class BlockTank extends ContainerBlock
         }
         else if(!world.isRemote && !player.isCrouching())
         {
+            TileEntity tileEntity = world.getTileEntity(pos);
+            if(tileEntity != null)
+                VanillaPacketDispatcher.dispatchTEToNearbyPlayers(tileEntity);
+
             NetworkHooks.openGui((ServerPlayerEntity) player, (INamedContainerProvider) world.getTileEntity(pos), pos);
             return ActionResultType.SUCCESS;
         }

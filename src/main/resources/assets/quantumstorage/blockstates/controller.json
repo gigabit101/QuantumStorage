@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "quantumstorage:block/controller"
+    },
+    "facing=south": {
+      "model": "quantumstorage:block/controller",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "quantumstorage:block/controller",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "quantumstorage:block/controller",
+      "y": 90
+    }
+  }
+}

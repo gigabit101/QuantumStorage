@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.vector.Vector3f;
 
 /**
  * Created by Gigabit101 on 07/03/2017.
@@ -22,35 +23,29 @@ public class RenderDsu extends TileEntityRenderer<TileQsu>
     }
     
     @Override
-    public void render(TileQsu te, float v, MatrixStack matrixStack, IRenderTypeBuffer iRenderTypeBuffer, int i, int i1)
+    public void render(TileQsu te, float v, MatrixStack matrixStack, IRenderTypeBuffer iRenderTypeBuffer, int light, int ov)
     {
-        if(ConfigQuantumStorage.SPECIAL_RENDER_QSU.get())
+        if(!ConfigQuantumStorage.SPECIAL_RENDER_QSU.get())
         {
             if (!te.inventory.getStackInSlot(2).isEmpty())
             {
-                RenderSystem.pushMatrix();
+                matrixStack.push();
         
                 ItemStack stack = te.inventory.getStackInSlot(2);
                 if (!stack.isEmpty())
                 {
-                    renderItemInWorld(te, stack, matrixStack, iRenderTypeBuffer, i, i1);
+                    matrixStack.push();
+                    matrixStack.translate(0.5D, 0.6D, 0.5D);
+                    float rotation = (float) (te.getWorld().getGameTime() % 80);
+                    matrixStack.scale(.4f, .4f, .4f);
+
+                    matrixStack.rotate(Vector3f.YP.rotationDegrees(360f * rotation / 80f));
+
+                    Minecraft.getInstance().getItemRenderer().renderItem(stack, ItemCameraTransforms.TransformType.FIXED, light, ov, matrixStack, iRenderTypeBuffer);
+                    matrixStack.pop();
                 }
-                RenderSystem.popMatrix();
+                matrixStack.pop();
             }
         }
-    }
-    
-    private static void renderItemInWorld(TileQsu te, ItemStack stack, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn)
-    {
-        matrixStackIn.push();
-        RenderSystem.disableLighting();
-        RenderSystem.color3f(1.0F, 1.0F, 1.0F);
-        matrixStackIn.translate(.5, .7, .5);
-        matrixStackIn.scale(.4f, .4f, .4f);
-        float rotation = (float) (te.getWorld().getGameTime() % 80);
-//        matrixStackIn.rotate(Vector3f.YP.rotationDegrees(360f * rotation / 80f));
-        Minecraft.getInstance().getItemRenderer().renderItem(stack, ItemCameraTransforms.TransformType.NONE, combinedLightIn, combinedOverlayIn, matrixStackIn, bufferIn);
-        RenderSystem.enableLighting();
-        matrixStackIn.pop();
     }
 }

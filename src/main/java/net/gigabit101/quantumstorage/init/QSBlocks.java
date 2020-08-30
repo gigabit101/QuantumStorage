@@ -2,6 +2,7 @@ package net.gigabit101.quantumstorage.init;
 
 import net.gigabit101.quantumstorage.QuantumStorage;
 import net.gigabit101.quantumstorage.blocks.*;
+import net.gigabit101.quantumstorage.tiles.TileController;
 import net.gigabit101.quantumstorage.tiles.TileQsu;
 import net.gigabit101.quantumstorage.tiles.TileTank;
 import net.gigabit101.quantumstorage.tiles.TileTrashcan;
@@ -26,7 +27,9 @@ public class QSBlocks
     public static final RegistryObject<Block> TRASH_CAN = BLOCKS.register("trashcan", BlockTrashcan::new);
     public static final RegistryObject<Block> QSU = BLOCKS.register("qsu", BlockQSU::new);
     public static final RegistryObject<Block> TANK = BLOCKS.register("tank", BlockTank::new);
-    
+
+    public static final RegistryObject<Block> CONTROLLER = BLOCKS.register("controller", BlockController::new);
+
     public static final RegistryObject<TileEntityType<TileChestDiamond>> CHEST_DIAMOND_TILE =
             TILES_ENTITIES.register("chestdiamond", () -> TileEntityType.Builder.create(TileChestDiamond::new, QSBlocks.CHEST_DIAMOND.get()).build(null));
     
@@ -45,4 +48,8 @@ public class QSBlocks
     
     public static final RegistryObject<TileEntityType<TileTank>> TANK_TILE =
             TILES_ENTITIES.register("tank", () -> TileEntityType.Builder.create(TileTank::new, QSBlocks.TANK.get()).build(null));
+
+    public static final RegistryObject<TileEntityType<TileController>> CONTROLLER_TILE =
+            TILES_ENTITIES.register("controller", () -> TileEntityType.Builder.create(TileController::new, QSBlocks.CONTROLLER.get()).build(null));
+
 }

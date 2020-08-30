@@ -36,12 +36,6 @@ public class BlockTrashcan extends ContainerBlock
         return BlockRenderType.MODEL;
     }
     
-//    @Override
-//    public boolean isNormalCube(BlockState p_220081_1_, IBlockReader p_220081_2_, BlockPos p_220081_3_)
-//    {
-//        return false;
-//    }
-    
     @Override
     public boolean isTransparent(BlockState p_220074_1_)
     {

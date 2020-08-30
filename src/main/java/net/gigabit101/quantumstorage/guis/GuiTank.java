@@ -29,6 +29,9 @@ public class GuiTank extends ContainerScreen<ContainerTank>
     {
         builder.drawDefaultBackground(this, matrixStack, guiLeft, guiTop, xSize, ySize, 256, 256);
         builder.drawPlayerSlots(this, matrixStack, guiLeft + xSize / 2, guiTop + 131, true, 256, 256);
+
+        builder.drawSlot(this, matrixStack, guiLeft + xSize / 2 - 9, guiTop + 30, 256, 256);
+        builder.drawSlot(this, matrixStack, guiLeft + xSize / 2 - 9, guiTop + 80, 256, 256);
     }
 
     @Override

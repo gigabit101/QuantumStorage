@@ -1,5 +1,6 @@
 package net.gigabit101.quantumstorage.inventory;
 
+import net.gigabit101.quantumstorage.util.inventory.ItemUtils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
@@ -74,7 +75,7 @@ public class DsuInventoryHandler extends ItemStackHandler
     @Override
     public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate)
     {
-        if(getStackInSlot(2).isEmpty() || !getStackInSlot(2).isEmpty() && ItemStack.areItemStackTagsEqual(getStackInSlot(2), stack))
+        if(getStackInSlot(2).isEmpty() || !getStackInSlot(2).isEmpty() && ItemUtils.isItemEqual(getStackInSlot(2), stack, false))
         {
             return super.insertItem(slot, stack, simulate);
         }
