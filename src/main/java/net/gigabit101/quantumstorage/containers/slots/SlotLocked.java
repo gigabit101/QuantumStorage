@@ -1,4 +1,4 @@
-package net.gigabit101.quantumstorage.inventory.slot;
+package net.gigabit101.quantumstorage.containers.slots;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.IInventory;

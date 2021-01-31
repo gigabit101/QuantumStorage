@@ -6,6 +6,7 @@ import net.gigabit101.quantumstorage.QuantumStorage;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextProperties;
 import net.minecraft.util.text.StringTextComponent;
@@ -78,7 +79,7 @@ public class GuiBuilderQuantumStorage
             List<ITextProperties> list = new ArrayList<>();
             list.add(new StringTextComponent("" + TextFormatting.GOLD + value + "/" + max + suffix));
             list.add(new StringTextComponent(getPercentageColour(percentage) + "" + percentage + "%" + TextFormatting.GRAY + " Full"));
-            list.add(new StringTextComponent(line2));
+            if(!line2.isEmpty()) list.add(new StringTextComponent(line2));
 
             if (value > max)
             {
@@ -86,10 +87,22 @@ public class GuiBuilderQuantumStorage
                 list.add(new StringTextComponent(TextFormatting.GRAY + "prolly a bug"));
                 list.add(new StringTextComponent(TextFormatting.GRAY + "pls report and tell how tf you did this"));
             }
-            GuiUtils.drawHoveringText(matrixStack, list, mouseX, mouseY, gui.height, gui.height, -1, Minecraft.getInstance().fontRenderer);
+            GuiUtils.drawHoveringText(matrixStack, list, mouseX, mouseY, gui.width, gui.height, -1, Minecraft.getInstance().fontRenderer);
 
             GlStateManager.disableLighting();
             GlStateManager.color4f(1, 1, 1, 1);
+        }
+    }
+
+    public void drawLock(ContainerScreen gui, MatrixStack matrixStack, int posX, int posY, int mouseX, int mouseY, int textureXSize, int textureYSize, String string)
+    {
+        Minecraft.getInstance().getTextureManager().bindTexture(GUI_SHEET);
+        gui.blit(matrixStack, posX, posY, 168, 0, 18, 18, textureXSize, textureYSize);
+        if (isInRect(posX, posY, 18, 18, mouseX, mouseY))
+        {
+            List<ITextProperties> list = new ArrayList<>();
+            list.add(new StringTextComponent(string));
+            GuiUtils.drawHoveringText(matrixStack, list, mouseX, mouseY, gui.width, gui.height, -1, Minecraft.getInstance().fontRenderer);
         }
     }
 

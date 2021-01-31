@@ -36,4 +36,10 @@ public class ControllerItemHandler extends ItemStackHandler
     {
         return controller.getStackInSlot(slot);
     }
+
+    @Override
+    public int getSlotLimit(int slot)
+    {
+        return controller.getSlotLimit(slot);
+    }
 }

@@ -1,17 +1,8 @@
-# This is an example mods.toml file. It contains the data relating to the loading mods.
-# There are several mandatory fields (#mandatory), and many more that are optional (#optional).
-# The overall format is standard TOML format, v0.5.0.
-# Note that there are a couple of TOML lists in this file.
-# Find more information on toml format here:  https://github.com/toml-lang/toml
-# The name of the mod loader type to load - for regular FML @Mod mods it should be javafml
 modLoader="javafml" #mandatory
-# A version range to match for said mod loader - for regular FML @Mod it will be the minecraft version (without the 1.)
 loaderVersion="[28,]" #mandatory
-# A text field displayed in the mod UI
+license="GNU General Public License v3.0"
 credits="" #optional
-# A text field displayed in the mod UI
 authors="gigabit101" #optional
-# A list of mods - how many allowed here is determined by the individual mod loader
 [[mods]] #mandatory
     # The modid of the mod
     modId="quantumstorage" #mandatory
@@ -26,6 +17,6 @@ authors="gigabit101" #optional
 [[dependencies.examplemod]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.16]"
+    versionRange="[1.16, 1.17]"
     ordering="NONE"
     side="BOTH"

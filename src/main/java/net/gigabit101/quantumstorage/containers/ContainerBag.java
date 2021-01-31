@@ -2,7 +2,7 @@ package net.gigabit101.quantumstorage.containers;
 
 import net.gigabit101.quantumstorage.QuantumStorage;
 import net.gigabit101.quantumstorage.containers.prefab.ContainerQS;
-import net.gigabit101.quantumstorage.inventory.slot.SlotLocked;
+import net.gigabit101.quantumstorage.containers.slots.SlotLocked;
 import net.gigabit101.quantumstorage.items.backpack.ItemQuantumBag;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;

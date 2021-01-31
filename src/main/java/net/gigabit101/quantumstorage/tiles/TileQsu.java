@@ -8,8 +8,10 @@ import net.gigabit101.quantumstorage.network.VanillaPacketDispatcher;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
@@ -17,11 +19,14 @@ import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -34,9 +39,11 @@ public class TileQsu extends TileEntity implements INamedContainerProvider, ITic
     int INPUT = 0;
     int STORAGE = 1;
     int OUTPUT = 2;
-    
-    public DsuInventoryHandler inventory = new DsuInventoryHandler();
-    
+
+    public ItemStack lockedStack = ItemStack.EMPTY;
+    public DsuInventoryHandler inventory = new DsuInventoryHandler(lockedStack);
+    public boolean isLocked = false;
+
     public TileQsu()
     {
         super(QSBlocks.QSU_TILE.get());
@@ -134,6 +141,12 @@ public class TileQsu extends TileEntity implements INamedContainerProvider, ITic
     {
         super.read(state, compound);
         inventory.deserializeNBT(compound);
+        isLocked = compound.getBoolean("locked");
+        if(!compound.getCompound("lockeditem").isEmpty()) {
+            ItemStack stack = readItemStack(compound.getCompound("lockeditem"));
+            lockedStack = stack;
+            inventory.updateLockedStack(stack);
+        }
     }
 
     @Override
@@ -142,7 +155,24 @@ public class TileQsu extends TileEntity implements INamedContainerProvider, ITic
     {
         compound = super.write(compound);
         compound.merge(inventory.serializeNBT());
+        compound.putBoolean("locked", isLocked);
+        compound.put("lockeditem", writeItemStack(lockedStack));
+
         return compound;
+    }
+
+    private static CompoundNBT writeItemStack(ItemStack i) {
+        CompoundNBT nbt = new CompoundNBT();
+        nbt.putInt("count", i.getCount());
+        nbt.putString("item", i.getItem().getRegistryName().toString());
+        nbt.putByte("type", (byte) 0);
+        return nbt;
+    }
+
+    private static ItemStack readItemStack(CompoundNBT compound) {
+        Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(compound.getString("item")));
+        int count = compound.getInt("count");
+        return new ItemStack(item, count);
     }
 
     @Override
@@ -157,6 +187,24 @@ public class TileQsu extends TileEntity implements INamedContainerProvider, ITic
     {
         return new ContainerQSU(id, playerEntity.inventory, this);
     }
+
+    public boolean isLocked(TileQsu tileQsu)
+    {
+        return tileQsu.isLocked;
+    }
+
+    public void setLocked(TileQsu tileQsu)
+    {
+        tileQsu.isLocked = true;
+        tileQsu.lockedStack = tileQsu.inventory.getStackInSlot(2);
+        inventory.updateLockedStack(tileQsu.lockedStack);
+    }
+
+    public void setUnlocked(TileQsu tileQsu)
+    {
+        tileQsu.isLocked = false;
+        tileQsu.lockedStack = ItemStack.EMPTY;
+    }
     
     public void writeToNBTWithoutCoords(CompoundNBT tagCompound)
     {
@@ -165,11 +213,13 @@ public class TileQsu extends TileEntity implements INamedContainerProvider, ITic
         {
             tagCompound.merge(inventory.serializeNBT());
         }
+        tagCompound.putBoolean("locked", isLocked);
     }
     
     public void readFromNBTWithoutCoords(CompoundNBT compound)
     {
         inventory.deserializeNBT(compound);
+        isLocked = compound.getBoolean("locked");
     }
     
     public ItemStack getDropWithNBT()

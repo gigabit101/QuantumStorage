@@ -3,9 +3,13 @@ package net.gigabit101.quantumstorage.guis;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.gigabit101.quantumstorage.client.GuiBuilderQuantumStorage;
 import net.gigabit101.quantumstorage.containers.ContainerQSU;
+import net.gigabit101.quantumstorage.network.VanillaPacketDispatcher;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
+import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.items.IItemHandler;
 
 import java.text.DecimalFormat;
@@ -26,6 +30,12 @@ public class GuiQSU extends ContainerScreen<ContainerQSU>
         this.ySize = 220;
     }
 
+    @Override
+    protected void init()
+    {
+        super.init();
+    }
+
     //Render
     @Override
     protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float p_230450_2_, int mouseX, int mouseY)
@@ -41,11 +51,19 @@ public class GuiQSU extends ContainerScreen<ContainerQSU>
     @Override
     protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int mouseX, int mouseY)
     {
-        this.font.func_238422_b_(matrixStack, this.title, 40.0F, 6.0F, 4210752);
-        this.font.func_238422_b_(matrixStack, this.playerInventory.getDisplayName(), 14.0F, (float) (this.ySize - 100), 4210752);
+        this.font.func_238422_b_(matrixStack, this.title.func_241878_f(), 40.0F, 6.0F, 4210752);
+        this.font.func_238422_b_(matrixStack, this.playerInventory.getDisplayName().func_241878_f(), 14.0F, (float) (this.ySize - 100), 4210752);
 
-        builder.drawBigBlueBar( this, matrixStack, 36, 56, this.getInv().getStackInSlot(STORAGE).getCount() + this.getInv().getStackInSlot(OUTPUT).getCount(), Integer.MAX_VALUE, mouseX - guiLeft, mouseY - guiTop, "Stored", getInv().getStackInSlot(OUTPUT).getDisplayName().getString(),
-                formatQuantity(this.getInv().getStackInSlot(STORAGE).getCount() + this.getInv().getStackInSlot(OUTPUT).getCount()), 256, 256);
+        if(!this.container.tileQsu.lockedStack.isEmpty())
+        {
+            builder.drawLock(this, matrixStack, 2, 2, mouseX - guiLeft, mouseY - guiTop, 256, 256, "Locked to " + this.container.tileQsu.lockedStack.getDisplayName().getString());
+        }
+
+        String line2 = "";
+        if(!getInv().getStackInSlot(OUTPUT).isEmpty()) line2 = getInv().getStackInSlot(OUTPUT).getDisplayName().getString();
+
+        builder.drawBigBlueBar( this, matrixStack, 36, 56, this.getInv().getStackInSlot(STORAGE).getCount() + this.getInv().getStackInSlot(OUTPUT).getCount(), Integer.MAX_VALUE, mouseX - guiLeft, mouseY - guiTop, "Stored",
+                line2, formatQuantity(this.getInv().getStackInSlot(STORAGE).getCount() + this.getInv().getStackInSlot(OUTPUT).getCount()), 256, 256);
     }
 
     @Override

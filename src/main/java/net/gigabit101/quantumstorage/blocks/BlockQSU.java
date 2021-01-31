@@ -79,6 +79,7 @@ public class BlockQSU extends ContainerBlock
     @Override
     public void harvestBlock(World world, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity tile, ItemStack stack)
     {
+        world.removeTileEntity(pos);
         TileQsu tileEntity = (TileQsu) tile;
     
         float xOffset = world.rand.nextFloat() * 0.8F + 0.1F;
@@ -86,9 +87,8 @@ public class BlockQSU extends ContainerBlock
         float zOffset = world.rand.nextFloat() * 0.8F + 0.1F;
     
         ItemStack stacknbt = (tileEntity).getDropWithNBT();
-        int amountToDrop = Math.min(world.rand.nextInt(21) + 10, stacknbt.getCount());
-    
-        ItemEntity entityitem = new ItemEntity(world, pos.getX() + xOffset, pos.getY() + yOffset, pos.getZ() + zOffset, stacknbt.split(amountToDrop));
+
+        ItemEntity entityitem = new ItemEntity(world, pos.getX() + xOffset, pos.getY() + yOffset, pos.getZ() + zOffset, stacknbt);
         world.addEntity(entityitem);
     }
     

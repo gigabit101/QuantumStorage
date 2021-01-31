@@ -2,6 +2,7 @@ package net.gigabit101.quantumstorage.containers;
 
 import net.gigabit101.quantumstorage.QuantumStorage;
 import net.gigabit101.quantumstorage.containers.prefab.ContainerQS;
+import net.gigabit101.quantumstorage.containers.slots.SlotFiltered;
 import net.gigabit101.quantumstorage.inventory.slot.SlotOutputItemHandler;
 import net.gigabit101.quantumstorage.tiles.TileQsu;
 import net.minecraft.client.Minecraft;
@@ -16,6 +17,7 @@ import java.util.Objects;
 public class ContainerQSU extends ContainerQS
 {
     public IItemHandler inv;
+    public TileQsu tileQsu;
 
     public ContainerQSU(int id, PlayerInventory playerInv, PacketBuffer extraData)
     {
@@ -25,9 +27,10 @@ public class ContainerQSU extends ContainerQS
     public ContainerQSU(int id, PlayerInventory playerInv, TileQsu te)
     {
         super(QuantumStorage.containerQsuContainerType, id);
+        tileQsu = te;
         this.inv = te.inventory;
 
-        addSlot(new SlotItemHandler(te.inventory,0, 87, 31));
+        addSlot(new SlotFiltered(te.inventory,0, 87, 31, te.inventory.getStackInSlot(0)));
         addSlot(new SlotOutputItemHandler(te.inventory,2, 87, 81));
     
         drawPlayersInv(playerInv, 15, 132);

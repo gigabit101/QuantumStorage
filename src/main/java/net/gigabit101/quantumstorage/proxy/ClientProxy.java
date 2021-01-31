@@ -2,6 +2,8 @@ package net.gigabit101.quantumstorage.proxy;
 
 import net.gigabit101.quantumstorage.QuantumStorage;
 import net.gigabit101.quantumstorage.api.IColorable;
+import net.gigabit101.quantumstorage.client.layer.BackpackLayer;
+import net.gigabit101.quantumstorage.client.layer.ContributorLayer;
 import net.gigabit101.quantumstorage.client.render.RenderDsu;
 import net.gigabit101.quantumstorage.client.render.TankRender;
 import net.gigabit101.quantumstorage.guis.*;
@@ -11,9 +13,13 @@ import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.client.renderer.color.IItemColor;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.entity.PlayerRenderer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
+
+import java.util.Map;
 
 /**
  * Created by Gigabit101 on 07/03/2017.
@@ -25,12 +31,16 @@ public class ClientProxy extends CommonProxy
     {
         RenderTypeLookup.setRenderLayer(QSBlocks.QSU.get(), RenderType.getCutoutMipped());
         RenderTypeLookup.setRenderLayer(QSBlocks.TANK.get(), RenderType.getCutoutMipped());
-        RenderTypeLookup.setRenderLayer(QSBlocks.CONTROLLER.get(), RenderType.getCutoutMipped());
 
         RenderTypeLookup.setRenderLayer(QSBlocks.TRASH_CAN.get(), RenderType.getCutout());
     
         ClientRegistry.bindTileEntityRenderer(QSBlocks.QSU_TILE.get(), RenderDsu::new);
         ClientRegistry.bindTileEntityRenderer(QSBlocks.TANK_TILE.get(), TankRender::new);
+
+        EntityRendererManager renderManager = Minecraft.getInstance().getRenderManager();
+        Map<String, PlayerRenderer> skinMap = renderManager.getSkinMap();
+        skinMap.forEach((str, renderer) -> renderer.addLayer(new ContributorLayer(renderer)));
+        skinMap.forEach((str, renderer) -> renderer.addLayer(new BackpackLayer(renderer)));
     }
     
     @Override

@@ -2,7 +2,13 @@ package net.gigabit101.quantumstorage.handler;
 
 import net.gigabit101.quantumstorage.QuantumStorage;
 import net.gigabit101.quantumstorage.items.backpack.ItemQuantumBag;
+import net.gigabit101.quantumstorage.troll.FollowGazGoal;
+import net.gigabit101.quantumstorage.troll.PanicAaronGoal;
 import net.gigabit101.quantumstorage.util.inventory.ItemUtils;
+import net.minecraft.entity.AgeableEntity;
+import net.minecraft.entity.CreatureEntity;
+import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -10,6 +16,7 @@ import net.minecraft.nbt.*;
 import net.minecraft.network.play.server.SCollectItemPacket;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
+import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -21,6 +28,22 @@ import java.util.concurrent.atomic.AtomicReference;
 @Mod.EventBusSubscriber(modid = QuantumStorage.MOD_ID)
 public class EventHandlerPlayer
 {
+    @SubscribeEvent
+    public static void onEntityLoad(LivingSpawnEvent entityJoinWorldEvent)
+    {
+        if(entityJoinWorldEvent != null)
+        {
+            if(entityJoinWorldEvent.getEntity() instanceof SheepEntity) {
+                SheepEntity sheepEntity = (SheepEntity) entityJoinWorldEvent.getEntity();
+                sheepEntity.goalSelector.addGoal(1, new FollowGazGoal((AnimalEntity) entityJoinWorldEvent.getEntity(), 1.1D));
+            }
+            if(entityJoinWorldEvent.getEntity() instanceof AgeableEntity) {
+                AgeableEntity animalEntity = (AgeableEntity) entityJoinWorldEvent.getEntity();
+                if(animalEntity.isChild()) animalEntity.goalSelector.addGoal(0, new PanicAaronGoal((CreatureEntity) entityJoinWorldEvent.getEntity(), 6.0F, 2.2D, 1.8D));
+            }
+        }
+    }
+
     @SubscribeEvent
     public static void itemPickup(EntityItemPickupEvent evt)
     {

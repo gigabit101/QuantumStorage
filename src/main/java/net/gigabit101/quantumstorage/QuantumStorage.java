@@ -1,5 +1,6 @@
 package net.gigabit101.quantumstorage;
 
+import net.gigabit101.quantumstorage.client.layer.ContributorLayer;
 import net.gigabit101.quantumstorage.config.ConfigQuantumStorage;
 import net.gigabit101.quantumstorage.containers.*;
 import net.gigabit101.quantumstorage.init.QSBlocks;
@@ -8,6 +9,9 @@ import net.gigabit101.quantumstorage.init.recipe.RecipeBagColour;
 import net.gigabit101.quantumstorage.items.backpack.ItemQuantumBag;
 import net.gigabit101.quantumstorage.proxy.ClientProxy;
 import net.gigabit101.quantumstorage.proxy.CommonProxy;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.entity.PlayerRenderer;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.Item;
@@ -26,8 +30,11 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
 import net.minecraftforge.registries.ObjectHolder;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.EnumMap;
+import java.util.Map;
 
 /**
  * Created by Gigabit101 on 27/01/2017.
@@ -36,6 +43,7 @@ import java.util.EnumMap;
 public class QuantumStorage
 {
     public static final String MOD_ID = "quantumstorage";
+    public static Logger LOGGER = LogManager.getLogger();
     
     public static QuantumStorage INSTANCE;
     

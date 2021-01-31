@@ -3,8 +3,6 @@ package net.gigabit101.quantumstorage.init;
 import net.gigabit101.quantumstorage.QuantumStorage;
 import net.gigabit101.quantumstorage.client.CreativeTabQuantumStorage;
 import net.gigabit101.quantumstorage.items.ItemHammer;
-import net.gigabit101.quantumstorage.items.ItemNommer;
-import net.gigabit101.quantumstorage.items.ItemQuantumBattery;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;
@@ -27,6 +25,7 @@ public class QSItems
     public static final RegistryObject<Item> CONTROLLER_ITEM = ITEMS.register("controller", () -> new BlockItem(QSBlocks.CONTROLLER.get(), ITEM_GROUP));
     public static final RegistryObject<Item> HAMMER_ITEM = ITEMS.register("hammer", ItemHammer::new);
 
+//    public static final RegistryObject<Item> KEY_ITEM = ITEMS.register("key", ItemKey::new);
 
 //    public static final RegistryObject<Item> NOMMER_ITEM = ITEMS.register("nommer", ItemNommer::new);
 

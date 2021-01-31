@@ -31,8 +31,8 @@ public class GuiTrashcan extends ContainerScreen<ContainerTrashcan>
     @Override
     protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int mouseX, int mouseY)
     {
-        this.font.func_238422_b_(matrixStack, this.title, 65.0F, 6.0F, 4210752);
-        this.font.func_238422_b_(matrixStack, this.playerInventory.getDisplayName(), 14.0F, (float) (this.ySize - 100), 4210752);
+        this.font.func_238422_b_(matrixStack, this.title.func_241878_f(), 65.0F, 6.0F, 4210752);
+        this.font.func_238422_b_(matrixStack, this.playerInventory.getDisplayName().func_241878_f(), 14.0F, (float) (this.ySize - 100), 4210752);
     }
 
     @Override

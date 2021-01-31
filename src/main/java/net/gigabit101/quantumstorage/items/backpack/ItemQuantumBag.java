@@ -108,7 +108,7 @@ public class ItemQuantumBag extends ItemBase implements IColorable, INamedContai
         super.addInformation(stack, worldIn, tooltip, flagIn);
         if(stack.hasTag())
         {
-            tooltip.add(new StringTextComponent("AutoPickup is " + format(stack.getTag().getBoolean("active"))));
+            tooltip.add(new StringTextComponent("Auto-Pickup: " + format(stack.getTag().getBoolean("active"))));
         }
     }
 

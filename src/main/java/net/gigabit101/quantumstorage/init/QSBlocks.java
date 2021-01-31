@@ -51,5 +51,4 @@ public class QSBlocks
 
     public static final RegistryObject<TileEntityType<TileController>> CONTROLLER_TILE =
             TILES_ENTITIES.register("controller", () -> TileEntityType.Builder.create(TileController::new, QSBlocks.CONTROLLER.get()).build(null));
-
 }

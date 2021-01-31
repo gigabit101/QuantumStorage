@@ -1,5 +1,6 @@
 package net.gigabit101.quantumstorage.inventory;
 
+import net.gigabit101.quantumstorage.tiles.TileQsu;
 import net.gigabit101.quantumstorage.util.inventory.ItemUtils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -15,10 +16,12 @@ import javax.annotation.Nonnull;
 public class DsuInventoryHandler extends ItemStackHandler
 {
     int STORAGE = 0;
+    ItemStack lockedStack;
 
-    public DsuInventoryHandler()
+    public DsuInventoryHandler(ItemStack lockedStack)
     {
         super(3);
+        this.lockedStack = lockedStack;
     }
 
     @Override
@@ -71,15 +74,31 @@ public class DsuInventoryHandler extends ItemStackHandler
         onLoad();
     }
 
+    public void updateLockedStack(ItemStack itemStack)
+    {
+        this.lockedStack = itemStack;
+    }
+
     @Nonnull
     @Override
     public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate)
     {
-        if(getStackInSlot(2).isEmpty() || !getStackInSlot(2).isEmpty() && ItemUtils.isItemEqual(getStackInSlot(2), stack, false))
+        if(!lockedStack.isEmpty() && ItemUtils.isItemEqual(lockedStack, stack, false))
+        {
+            return super.insertItem(slot, stack, simulate);
+        }
+        if(lockedStack.isEmpty() && getStackInSlot(2).isEmpty() || lockedStack.isEmpty() &&!getStackInSlot(2).isEmpty() && ItemUtils.isItemEqual(getStackInSlot(2), stack, false))
         {
             return super.insertItem(slot, stack, simulate);
         }
         return stack;
+    }
+
+    @Nonnull
+    @Override
+    public ItemStack extractItem(int slot, int amount, boolean simulate)
+    {
+        return super.extractItem(slot, amount, simulate);
     }
 
     public boolean requestUpdate = false;

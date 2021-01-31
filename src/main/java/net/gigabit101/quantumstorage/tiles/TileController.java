@@ -152,6 +152,19 @@ public class TileController extends TileEntity
         return ItemStack.EMPTY;
     }
 
+    public int getSlotLimit(int slot)
+    {
+        if(connectedTiles.isEmpty()) return 0;
+        if(connectedTiles.get(slot) == null) return 0;
+
+        if(validateConnection(connectedTiles.get(slot)))
+        {
+            TileQsu tileQsu = (TileQsu) world.getTileEntity(connectedTiles.get(slot));
+            return tileQsu.inventory.getSlotLimit(2);
+        }
+        return 0;
+    }
+
     public boolean validateConnection(BlockPos blockPos)
     {
         if(blockPos == null) return false;
@@ -160,6 +173,8 @@ public class TileController extends TileEntity
 
         return world.getTileEntity(blockPos) instanceof TileQsu;
     }
+
+
 
     public CompoundNBT serializeNBT()
     {
