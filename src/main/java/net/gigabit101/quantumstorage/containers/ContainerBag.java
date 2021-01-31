@@ -3,6 +3,7 @@ package net.gigabit101.quantumstorage.containers;
 import net.gigabit101.quantumstorage.QuantumStorage;
 import net.gigabit101.quantumstorage.containers.prefab.ContainerQS;
 import net.gigabit101.quantumstorage.containers.slots.SlotLocked;
+import net.gigabit101.quantumstorage.inventory.slot.SlotAntiBag;
 import net.gigabit101.quantumstorage.items.backpack.ItemQuantumBag;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -40,7 +41,7 @@ public class ContainerBag extends ContainerQS
 
         for (j = 0; j < 8; ++j) {
             for (k = 0; k < 13; ++k) {
-                this.addSlot(new SlotItemHandler(inv, k + j * 13, 12 + k * 18, 5 + j * 18));
+                this.addSlot(new SlotAntiBag(inv, k + j * 13, 12 + k * 18, 5 + j * 18));
             }
         }
 
