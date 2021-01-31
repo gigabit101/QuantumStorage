@@ -65,7 +65,7 @@ public class QuantumStorage
 
     public static final EnumMap<DyeColor, ItemQuantumBag> BAGS = new EnumMap<>(DyeColor.class);
 
-    private static CommonProxy proxy = DistExecutor.runForDist(() -> ClientProxy::new, () -> CommonProxy::new);
+    private static CommonProxy proxy = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> CommonProxy::new);
 
     public QuantumStorage()
     {
