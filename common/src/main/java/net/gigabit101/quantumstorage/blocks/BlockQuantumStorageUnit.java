@@ -39,7 +39,7 @@ public class BlockQuantumStorageUnit extends BlockWithRotation
 {
     public BlockQuantumStorageUnit()
     {
-        super(Properties.of(Material.METAL).noOcclusion());
+        super(Properties.of(Material.METAL).noOcclusion().strength(0.5F));
     }
 
     @Override
