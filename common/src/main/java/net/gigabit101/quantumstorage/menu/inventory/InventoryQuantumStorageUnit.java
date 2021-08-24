@@ -1,4 +1,4 @@
-package net.gigabit101.quantumstorage.menu;
+package net.gigabit101.quantumstorage.menu.inventory;
 
 import com.google.common.collect.Lists;
 import com.mojang.math.Constants;

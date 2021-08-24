@@ -1,5 +1,12 @@
 {
   "itemGroup.quantumstorage.creative_tab": "Quantum Storage",
+
   "item.quantumstorage.qsu": "Quantum-Storage Unit",
-  "container.quantumstorage.qsu": "Quantum-Storage Unit"
+  "item.quantumstorage.trashcan": "Trash Can",
+
+  "block.quantumstorage.qsu": "Quantum-Storage Unit",
+  "block.quantumstorage.trashcan": "Trash Can",
+
+  "container.quantumstorage.qsu": "Quantum-Storage Unit",
+  "container.quantumstorage.trashcan": "Trash can"
 }

@@ -5,7 +5,9 @@ import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.gigabit101.quantumstorage.QuantumStorage;
 import net.gigabit101.quantumstorage.menu.MenuQuantumStorageUnit;
+import net.gigabit101.quantumstorage.menu.MenuTrashCan;
 import net.gigabit101.quantumstorage.tiles.TileQuantumStorageUnit;
+import net.gigabit101.quantumstorage.tiles.TileTrashCan;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.world.inventory.MenuType;
@@ -25,5 +27,17 @@ public class ModMenus
                     return null;
                 }
                 return new MenuQuantumStorageUnit(id, inventory, tileQuantumStorageUnit);
+            }));
+
+    public static final RegistrySupplier<MenuType<MenuTrashCan>> TRASHCAN_MENU = MENUS.register("trashcan",
+            () -> MenuRegistry.ofExtended((id, inventory, data) -> {
+                BlockPos pos = data.readBlockPos();
+                BlockEntity tileEntity = inventory.player.getCommandSenderWorld().getBlockEntity(pos);
+                TileTrashCan tileQuantumStorageUnit = (TileTrashCan) tileEntity;
+                if (!(tileEntity instanceof TileTrashCan))
+                {
+                    return null;
+                }
+                return new MenuTrashCan(id, inventory, tileQuantumStorageUnit);
             }));
 }

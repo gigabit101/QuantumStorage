@@ -13,4 +13,7 @@ public class ModItems
 
     public static final RegistrySupplier<Item> QUANTUM_STORAGE_ITEM = ITEMS.register("qsu",
             () -> new ItemNameBlockItem(ModBlocks.QUANTUM_STORAGE_UNIT.get(), new Item.Properties().tab(QuantumStorage.CREATIVE_TAB)));
+
+    public static final RegistrySupplier<Item> TRASH_CAN = ITEMS.register("trashcan",
+            () -> new ItemNameBlockItem(ModBlocks.TRASH_CAN.get(), new Item.Properties().tab(QuantumStorage.CREATIVE_TAB)));
 }

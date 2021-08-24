@@ -5,7 +5,9 @@ import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.gigabit101.quantumstorage.QuantumStorage;
 import net.gigabit101.quantumstorage.blocks.BlockQuantumStorageUnit;
+import net.gigabit101.quantumstorage.blocks.BlockTrashCan;
 import net.gigabit101.quantumstorage.tiles.TileQuantumStorageUnit;
+import net.gigabit101.quantumstorage.tiles.TileTrashCan;
 import net.minecraft.core.Registry;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -18,6 +20,12 @@ public class ModBlocks
     public static final RegistrySupplier<Block> QUANTUM_STORAGE_UNIT = BLOCKS.register("qsu",
             BlockQuantumStorageUnit::new);
 
+    public static final RegistrySupplier<Block> TRASH_CAN = BLOCKS.register("trashcan",
+            BlockTrashCan::new);
+
     public static final RegistrySupplier<BlockEntityType<TileQuantumStorageUnit>> QUANTUM_STORAGE_UNIT_TILE = TILES.register("qsu", () ->
             BlockEntityHooks.builder(TileQuantumStorageUnit::new, QUANTUM_STORAGE_UNIT.get()).build(null));
+
+    public static final RegistrySupplier<BlockEntityType<TileTrashCan>> TRASH_CAN_TILE = TILES.register("trashcan", () ->
+            BlockEntityHooks.builder(TileTrashCan::new, TRASH_CAN.get()).build(null));
 }
