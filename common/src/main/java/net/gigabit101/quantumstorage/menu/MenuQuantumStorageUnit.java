@@ -15,17 +15,22 @@ import net.minecraft.world.inventory.Slot;
 public class MenuQuantumStorageUnit extends MenuBase
 {
     private final InventoryQuantumStorageUnit inventory;
+    public boolean hasMemoryCard;
 
     public MenuQuantumStorageUnit(int id, Inventory playerInventory, TileQuantumStorageUnit te)
     {
         super(ModMenus.QUANTUM_STORAGE_UNIT_MENU.get(), id);
         inventory = te.getInventory();
+        hasMemoryCard = te.hasMemoryCard();
 
-        addSlot(new SlotFiltered(te.getInventory(),0, 159, 33, () -> te.getItem(1)));
+        if(hasMemoryCard)
+        {
+            addSlot(new SlotFiltered(te.getInventory(), 0, 159, 33, () -> te.getItem(1)));
 
-        addSlot(new SlotNoTake(te.getInventory(),1, 132, 76));
+            addSlot(new SlotNoTake(te.getInventory(), 1, 132, 76));
 
-        addSlot(new SlotOutput(te.getInventory(),2, 159, 77));
+            addSlot(new SlotOutput(te.getInventory(), 2, 159, 77));
+        }
 
         drawPlayersInv(playerInventory, 15, 132);
         drawPlayersHotBar(playerInventory, 15, 132 + 58);

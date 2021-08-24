@@ -3,6 +3,7 @@ package net.gigabit101.quantumstorage.init;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.gigabit101.quantumstorage.QuantumStorage;
+import net.gigabit101.quantumstorage.items.ItemMemoryCard;
 import net.minecraft.core.Registry;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemNameBlockItem;
@@ -16,4 +17,6 @@ public class ModItems
 
     public static final RegistrySupplier<Item> TRASH_CAN = ITEMS.register("trashcan",
             () -> new ItemNameBlockItem(ModBlocks.TRASH_CAN.get(), new Item.Properties().tab(QuantumStorage.CREATIVE_TAB)));
+
+    public static final RegistrySupplier<Item> MEMORY_CARD = ITEMS.register("memorycard", ItemMemoryCard::new);
 }

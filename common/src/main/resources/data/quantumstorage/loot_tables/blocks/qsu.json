@@ -2,8 +2,8 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "rolls": 1.0,
-      "bonus_rolls": 0.0,
+      "name": "quantumstorage:controller",
+      "rolls": 1,
       "entries": [
         {
           "type": "minecraft:item",
@@ -11,39 +11,14 @@
             {
               "function": "minecraft:copy_name",
               "source": "block_entity"
-            },
-            {
-              "function": "minecraft:copy_nbt",
-              "source": "block_entity",
-              "ops": [
-                {
-                  "source": "Lock",
-                  "target": "BlockEntityTag.Lock",
-                  "op": "replace"
-                },
-                {
-                  "source": "LootTable",
-                  "target": "BlockEntityTag.LootTable",
-                  "op": "replace"
-                },
-                {
-                  "source": "LootTableSeed",
-                  "target": "BlockEntityTag.LootTableSeed",
-                  "op": "replace"
-                }
-              ]
-            },
-            {
-              "function": "minecraft:set_contents",
-              "entries": [
-                {
-                  "type": "minecraft:dynamic",
-                  "name": "minecraft:contents"
-                }
-              ]
             }
           ],
           "name": "quantumstorage:qsu"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
         }
       ]
     }

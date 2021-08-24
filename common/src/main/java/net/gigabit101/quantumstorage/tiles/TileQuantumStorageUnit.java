@@ -1,6 +1,7 @@
 package net.gigabit101.quantumstorage.tiles;
 
 import net.gigabit101.quantumstorage.QuantumStorage;
+import net.gigabit101.quantumstorage.blocks.BlockQuantumStorageUnit;
 import net.gigabit101.quantumstorage.init.ModBlocks;
 import net.gigabit101.quantumstorage.menu.inventory.InventoryQuantumStorageUnit;
 import net.gigabit101.quantumstorage.menu.MenuQuantumStorageUnit;
@@ -56,6 +57,12 @@ public class TileQuantumStorageUnit extends BaseContainerBlockEntity
         return new MenuQuantumStorageUnit(i, inventory, this);
     }
 
+    public void loadFromTag(CompoundTag compoundTag)
+    {
+        inventory = new InventoryQuantumStorageUnit(3);
+        inventory.deserializeNBT(compoundTag);
+    }
+
     public CompoundTag saveToTag(CompoundTag compoundTag)
     {
         compoundTag.merge(inventory.serializeNBT());
@@ -80,6 +87,11 @@ public class TileQuantumStorageUnit extends BaseContainerBlockEntity
     public InventoryQuantumStorageUnit getInventory()
     {
         return inventory;
+    }
+
+    public boolean hasMemoryCard()
+    {
+        return getBlockState().getValue(BlockQuantumStorageUnit.HAS_MEMORY_CARD);
     }
 
     @Override

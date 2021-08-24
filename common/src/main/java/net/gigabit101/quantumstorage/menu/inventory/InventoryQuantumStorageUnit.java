@@ -234,7 +234,6 @@ public class InventoryQuantumStorageUnit implements Container, StackedContentsCo
                 return;
             }
         }
-
     }
 
     private void moveItemToOccupiedSlotsWithSameType(ItemStack itemStack)
@@ -297,47 +296,6 @@ public class InventoryQuantumStorageUnit implements Container, StackedContentsCo
             {
                 items.set(slot, ItemStack.of(itemTags));
                 items.get(slot).setCount(itemTags.getInt("SizeSpecial"));
-            }
-        }
-    }
-
-    public void tick()
-    {
-        increaseStorageStack();
-
-    }
-
-    public void increaseStorageStack()
-    {
-        if(getItem(INPUT_SLOT).isEmpty()) return;
-
-        if(getItem(STORAGE_SLOT).isEmpty())
-        {
-            setItem(STORAGE_SLOT, getItem(INPUT_SLOT));
-            setItem(STORAGE_SLOT, ItemStack.EMPTY);
-            return;
-        }
-
-        if(getItem(STORAGE_SLOT).sameItem(getItem(INPUT_SLOT)))
-        {
-            getItem(STORAGE_SLOT).grow(getItem(INPUT_SLOT).getCount());
-            setItem(STORAGE_SLOT, ItemStack.EMPTY);
-            return;
-        }
-    }
-
-    public void moveStackToSlot(int from, int too)
-    {
-        if(getItem(from).isEmpty()) return;
-        if(getItem(too).isEmpty() && !getItem(from).isEmpty())
-        {
-            if(getItem(from).getCount() > getItem(from).getMaxStackSize())
-            {
-                ItemStack newStack = getItem(from);
-                int size = getItem(from).getItem().getMaxStackSize();
-                newStack.setCount(size);
-//                getItem(from).shrink(size);
-                setItem(too, newStack);
             }
         }
     }

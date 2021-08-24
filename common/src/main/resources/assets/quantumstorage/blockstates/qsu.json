@@ -1,17 +1,33 @@
 {
   "variants": {
-    "facing=north": {
+    "facing=north,has_memorycard=false": {
       "model": "quantumstorage:block/qsu"
     },
-    "facing=south": {
+    "facing=south,has_memorycard=false": {
       "model": "quantumstorage:block/qsu",
       "y": 180
     },
-    "facing=west": {
+    "facing=west,has_memorycard=false": {
       "model": "quantumstorage:block/qsu",
       "y": 270
     },
-    "facing=east": {
+    "facing=east,has_memorycard=false": {
+      "model": "quantumstorage:block/qsu",
+      "y": 90
+    },
+
+    "facing=north,has_memorycard=true": {
+      "model": "quantumstorage:block/qsu"
+    },
+    "facing=south,has_memorycard=true": {
+      "model": "quantumstorage:block/qsu",
+      "y": 180
+    },
+    "facing=west,has_memorycard=true": {
+      "model": "quantumstorage:block/qsu",
+      "y": 270
+    },
+    "facing=east,has_memorycard=true": {
       "model": "quantumstorage:block/qsu",
       "y": 90
     }
