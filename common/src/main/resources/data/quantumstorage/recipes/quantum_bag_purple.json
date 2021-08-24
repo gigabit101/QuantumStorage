@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WDW",
+    "WCW",
+    "WWW"  ],
+  "key": {
+    "W": [
+      {
+        "item": "minecraft:purple_wool"
+      }
+    ],
+    "D": [
+      {
+        "item": "minecraft:diamond"
+      }
+    ],
+    "C": [
+      {
+        "item": "quantumstorage:chestdiamond"
+      }
+    ]
+  },
+  "result": {
+    "item": "quantumstorage:quantum_bag_purple"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ACA",
+    "ACA",
+    "ACA"  ],
+  "key": {
+    "A": [
+      {
+        "item": "minecraft:iron_ingot"
+      }
+    ],
+    "C": [
+      {
+        "item": "minecraft:chest"
+      }
+    ]
+  },
+  "result": {
+    "item": "quantumstorage:qsu"
+  }
+}
