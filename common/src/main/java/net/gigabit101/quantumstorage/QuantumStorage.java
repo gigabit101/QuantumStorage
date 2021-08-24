@@ -22,12 +22,6 @@ public class QuantumStorage
     public static final String MOD_ID = "quantumstorage";
     public static final CreativeModeTab CREATIVE_TAB = CreativeTabRegistry.create(new ResourceLocation(MOD_ID, "creative_tab"), () -> new ItemStack(ModBlocks.QUANTUM_STORAGE_UNIT.get()));
 
-    @Environment(EnvType.CLIENT)
-    private static void onClientSetup(Minecraft minecraft)
-    {
-        ModScreens.init();
-    }
-
     public static void init()
     {
         ModBlocks.BLOCKS.register();
@@ -38,7 +32,13 @@ public class QuantumStorage
         if(Platform.getEnvironment() == Env.CLIENT)
         {
             ClientLifecycleEvent.CLIENT_SETUP.register(QuantumStorage::onClientSetup);
-//            RenderTypeRegistry.register(RenderType.cutoutMipped(), ModBlocks.QUANTUM_STORAGE_UNIT.get());
         }
+    }
+
+    @Environment(EnvType.CLIENT)
+    private static void onClientSetup(Minecraft minecraft)
+    {
+        ModScreens.init();
+        RenderTypeRegistry.register(RenderType.cutoutMipped(), ModBlocks.QUANTUM_STORAGE_UNIT.get());
     }
 }
