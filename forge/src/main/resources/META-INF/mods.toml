@@ -1,0 +1,35 @@
+modLoader = "javafml"
+loaderVersion = "[37,)"
+#issueTrackerURL = ""
+license = "Insert License Here"
+
+[[mods]]
+modId = "quantumstorage"
+version = "${version}"
+displayName = "QuantumStorage"
+authors = "Gigabit101"
+description = '''
+This is an example description! Tell everyone what your mod is about!
+'''
+#logoFile = ""
+
+[[dependencies.quantumstorage]]
+modId = "forge"
+mandatory = true
+versionRange = "[37,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.quantumstorage]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.17.1,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.quantumstorage]]
+modId = "architectury"
+mandatory = true
+versionRange = "[2.3.23,)"
+ordering = "AFTER"
+side = "BOTH"

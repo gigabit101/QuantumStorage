@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "quantumstorage:block/tinker_table"
+    },
+    "facing=south": {
+      "model": "quantumstorage:block/tinker_table",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "quantumstorage:block/tinker_table",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "quantumstorage:block/tinker_table",
+      "y": 90
+    }
+  }
+}

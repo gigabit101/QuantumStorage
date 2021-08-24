@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "quantumstorage:items/upgrade_battery_2"
+  }
+}

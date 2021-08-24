@@ -1,0 +1,77 @@
+{
+  "credit": "Made with Blockbench",
+  "texture_size": [32, 32],
+  "textures": {
+    "0": "quantumstorage:items/backpacks/quantum_bag_orange",
+    "particle": "quantumstorage:items/backpacks/quantum_bag_orange"
+  },
+  "display": {
+    "gui": {
+      "rotation": [ 30, 45, 0 ],
+      "translation": [ 0, 0, 0],
+      "scale":[ 0.75, 0.75, 0.75 ]
+    },
+    "ground": {
+      "rotation": [ 0, 0, 0 ],
+      "translation": [ 0, 3, 0],
+      "scale":[ 0.75, 0.75, 0.75 ]
+    },
+    "head": {
+      "rotation": [ 0, 180, 0 ],
+      "translation": [ 0, 0, 0],
+      "scale":[ 1, 1, 1]
+    },
+    "fixed": {
+      "rotation": [ 0, 180, 0 ],
+      "translation": [ 0, 0, 0],
+      "scale":[ 0.5, 0.5, 0.5 ]
+    },
+    "thirdperson_righthand": {
+      "rotation": [ 75, 315, 0 ],
+      "translation": [ 0, 2.5, 0],
+      "scale": [ 0.375, 0.375, 0.375 ]
+    },
+    "firstperson_righthand": {
+      "rotation": [ 0, 315, 0 ],
+      "translation": [ 0, 0, 0],
+      "scale": [ 0.4, 0.4, 0.4 ]
+    }
+  },
+  "elements": [
+    {
+      "name": "mainbag",
+      "from": [3, 0, 5],
+      "to": [13, 10, 12],
+      "rotation": {"angle": 0, "axis": "y", "origin": [10, 8, 13]},
+      "faces": {
+        "north": {"uv": [0, 0, 5, 5], "texture": "#0"},
+        "east": {"uv": [5, 5, 8.5, 10], "texture": "#0"},
+        "south": {"uv": [0, 5, 5, 10], "texture": "#0"},
+        "west": {"uv": [5, 0, 8.5, 5], "texture": "#0"},
+        "up": {"uv": [13.5, 12, 8.5, 8.5], "texture": "#0"},
+        "down": {"uv": [13.5, 0, 8.5, 3.5], "texture": "#0"}
+      }
+    },
+    {
+      "name": "lid",
+      "from": [3, 10, 5],
+      "to": [13, 14, 9],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 10, 5]},
+      "faces": {
+        "north": {"uv": [8.5, 3.5, 13.5, 5.5], "texture": "#0"},
+        "east": {"uv": [5, 10, 7, 12], "texture": "#0"},
+        "south": {"uv": [8.5, 5.5, 13.5, 7.5], "texture": "#0"},
+        "west": {"uv": [5, 12, 7, 14], "texture": "#0"},
+        "up": {"uv": [5, 12, 0, 10], "texture": "#0"},
+        "down": {"uv": [5, 12, 0, 14], "texture": "#0"}
+      }
+    }
+  ],
+  "groups": [0,
+    {
+      "name": "topbag",
+      "origin": [12, 18, 13],
+      "children": [1]
+    }
+  ]
+}
