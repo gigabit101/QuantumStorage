@@ -140,10 +140,12 @@ public class TileQuantumStorageUnit extends BaseContainerBlockEntity
                 {
                     inventory.setItem(STORAGE, inventory.getItem(INPUT).copy());
                     inventory.setItem(INPUT, ItemStack.EMPTY);
+                    tileQuantumStorageUnit.setChanged();
                 } else if (!inventory.getItem(STORAGE).isEmpty() && ItemStack.isSame(inventory.getItem(INPUT), inventory.getItem(STORAGE)))
                 {
                     inventory.getItem(STORAGE).grow(inventory.getItem(INPUT).getCount());
                     inventory.setItem(INPUT, ItemStack.EMPTY);
+                    tileQuantumStorageUnit.setChanged();
                 }
             }
 
@@ -157,45 +159,24 @@ public class TileQuantumStorageUnit extends BaseContainerBlockEntity
                         inventory.setItem(OUTPUT, inventory.getItem(STORAGE).copy());
                         inventory.getItem(OUTPUT).setCount(size);
                         inventory.getItem(STORAGE).shrink(size);
+                        tileQuantumStorageUnit.setChanged();
                     } else
                     {
                         inventory.setItem(OUTPUT, inventory.getItem(STORAGE));
                         inventory.setItem(STORAGE, ItemStack.EMPTY);
+                        tileQuantumStorageUnit.setChanged();
                     }
                 }
                 if (inventory.getItem(STORAGE).getCount() != 0 && ItemStack.isSame(inventory.getItem(STORAGE), inventory.getItem(OUTPUT)) && inventory.getItem(OUTPUT).getCount() <= size - 1)
                 {
                     inventory.getItem(OUTPUT).grow(1);
                     inventory.getItem(STORAGE).shrink(1);
+                    tileQuantumStorageUnit.setChanged();
                 }
             }
         } catch (Exception e)
         {
             e.printStackTrace();
         }
-
-//        inventoryQuantumStorageUnit.tick();
-//
-//        if(!inventoryQuantumStorageUnit.getItem(0).isEmpty())
-//        {
-//            ItemStack stack = inventoryQuantumStorageUnit.getItem(0);
-//            if(inventoryQuantumStorageUnit.getItem(1).isEmpty())
-//            {
-//                inventoryQuantumStorageUnit.setItem(1, stack);
-//                inventoryQuantumStorageUnit.setItem(0, ItemStack.EMPTY);
-//            }
-//            else if(inventoryQuantumStorageUnit.getItem(1).sameItem(stack))
-//            {
-//                int amount = stack.getCount();
-//                inventoryQuantumStorageUnit.getItem(1).grow(amount);
-//                inventoryQuantumStorageUnit.setItem(0, ItemStack.EMPTY);
-//            }
-//        }
-//
-//        if(inventoryQuantumStorageUnit.getItem(2).isEmpty())
-//        {
-//            inventoryQuantumStorageUnit.moveStackToSlot(1, 2);
-//
-//        }
     }
 }
