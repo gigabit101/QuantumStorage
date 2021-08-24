@@ -1,6 +1,7 @@
 package net.gigabit101.quantumstorage.menu;
 
 import net.gigabit101.quantumstorage.init.ModMenus;
+import net.gigabit101.quantumstorage.menu.slots.SlotFiltered;
 import net.gigabit101.quantumstorage.menu.slots.SlotNoTake;
 import net.gigabit101.quantumstorage.menu.slots.SlotOutput;
 import net.gigabit101.quantumstorage.tiles.TileQuantumStorageUnit;
@@ -22,7 +23,7 @@ public class MenuQuantumStorageUnit extends AbstractContainerMenu
         super(ModMenus.QUANTUM_STORAGE_UNIT_MENU.get(), id);
         inventory = te.getInventory();
 
-        addSlot(new Slot(te.getInventory(),0, 159, 33));
+        addSlot(new SlotFiltered(te.getInventory(),0, 159, 33, () -> te.getItem(1)));
 
         addSlot(new SlotNoTake(te.getInventory(),1, 132, 76));
 
