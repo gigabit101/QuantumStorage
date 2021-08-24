@@ -2,6 +2,7 @@ package net.gigabit101.quantumstorage.menu;
 
 import net.gigabit101.quantumstorage.init.ModMenus;
 import net.gigabit101.quantumstorage.menu.slots.SlotNoTake;
+import net.gigabit101.quantumstorage.menu.slots.SlotOutput;
 import net.gigabit101.quantumstorage.tiles.TileQuantumStorageUnit;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.Container;
@@ -25,7 +26,7 @@ public class MenuQuantumStorageUnit extends AbstractContainerMenu
 
         addSlot(new SlotNoTake(te.getInventory(),1, 132, 76));
 
-        addSlot(new Slot(te.getInventory(),2, 159, 77));
+        addSlot(new SlotOutput(te.getInventory(),2, 159, 77));
 
         drawPlayersInv(playerInventory, 15, 132);
         drawPlayersHotBar(playerInventory, 15, 132 + 58);

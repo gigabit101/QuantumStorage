@@ -29,6 +29,10 @@ public class BlockQuantumStorageUnit extends BlockWithRotation
     @Override
     public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult)
     {
+        if(level.isClientSide())
+        {
+            return InteractionResult.SUCCESS;
+        }
         if(!level.isClientSide())
         {
             BlockEntity blockEntity = level.getBlockEntity(blockPos);
