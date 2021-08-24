@@ -27,9 +27,12 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ShulkerBoxBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BlockQuantumStorageUnit extends BlockWithRotation
@@ -63,7 +66,7 @@ public class BlockQuantumStorageUnit extends BlockWithRotation
         {
             TileQuantumStorageUnit tileQuantumStorageUnit = (TileQuantumStorageUnit) blockEntity;
 
-            if (!level.isClientSide && player.isCreative() && !tileQuantumStorageUnit.isEmpty())
+            if (!level.isClientSide && !player.isCreative() && !tileQuantumStorageUnit.isEmpty())
             {
                 ItemStack itemStack = new ItemStack(ModBlocks.QUANTUM_STORAGE_UNIT.get());
                 CompoundTag compoundTag = tileQuantumStorageUnit.saveToTag(new CompoundTag());
@@ -72,16 +75,20 @@ public class BlockQuantumStorageUnit extends BlockWithRotation
                     itemStack.addTagElement("BlockEntityTag", compoundTag);
                 }
 
-
                 ItemEntity itemEntity = new ItemEntity(level, (double)blockPos.getX() + 0.5D, (double)blockPos.getY() + 0.5D, (double)blockPos.getZ() + 0.5D, itemStack);
                 itemEntity.setDefaultPickUpDelay();
                 level.addFreshEntity(itemEntity);
-            } else {
-//                tileQuantumStorageUnit.unpackLootTable(player);
+            } else
+            {
+                super.playerWillDestroy(level, blockPos, blockState, player);;
             }
         }
+    }
 
-        super.playerWillDestroy(level, blockPos, blockState, player);;
+    @Override
+    public List<ItemStack> getDrops(BlockState blockState, LootContext.Builder builder)
+    {
+        return new ArrayList<>();
     }
 
     @Nullable
