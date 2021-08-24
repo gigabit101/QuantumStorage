@@ -61,14 +61,12 @@ public class TileQuantumStorageUnit extends BaseContainerBlockEntity
     public void load(CompoundTag compoundTag)
     {
         super.load(compoundTag);
-        System.out.println("Reading from NBT");
         inventory.deserializeNBT(compoundTag);
     }
 
     @Override
     public CompoundTag save(CompoundTag compoundTag)
     {
-        System.out.println("Saving to NBT");
         CompoundTag compoundTag1 = super.save(compoundTag);
         compoundTag1.merge(inventory.serializeNBT());
         return compoundTag1;
