@@ -39,6 +39,8 @@ public class ItemMemoryCard extends Item
 
                 for (int i = 0; i < listTag.size(); i++)
                 {
+                    //Don't get the default stack count from the storage slot as its wrong
+                    if(i == 1) continue;
                     count += ItemStack.of(listTag.getCompound(i)).getCount();
                 }
                 list.add(new TranslatableComponent(ChatFormatting.GOLD + "Storing: " +  ChatFormatting.GREEN + count + " " + ChatFormatting.WHITE + ItemStack.of(listTag.getCompound(2)).getDisplayName().getString()));
