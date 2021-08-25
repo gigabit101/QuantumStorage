@@ -1,6 +1,0 @@
-{
-	"parent": "quantumstorage:block/chestbase",
-	"textures": {
-		"3": "block/gold_block"
-	}
-}
