@@ -1,7 +1,6 @@
-package net.gigabit101.quantumstorage.menu.inventory;
+package net.gigabit101.quantumstorage.inventory;
 
 import com.google.common.collect.Lists;
-import com.mojang.math.Constants;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;

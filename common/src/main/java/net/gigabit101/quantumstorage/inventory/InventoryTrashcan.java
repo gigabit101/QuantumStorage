@@ -1,4 +1,4 @@
-package net.gigabit101.quantumstorage.menu.inventory;
+package net.gigabit101.quantumstorage.inventory;
 
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.Container;

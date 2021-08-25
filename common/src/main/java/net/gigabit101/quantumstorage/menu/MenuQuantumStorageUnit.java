@@ -1,7 +1,7 @@
 package net.gigabit101.quantumstorage.menu;
 
 import net.gigabit101.quantumstorage.init.ModMenus;
-import net.gigabit101.quantumstorage.menu.inventory.InventoryQuantumStorageUnit;
+import net.gigabit101.quantumstorage.inventory.InventoryQuantumStorageUnit;
 import net.gigabit101.quantumstorage.menu.prefab.MenuBase;
 import net.gigabit101.quantumstorage.menu.slots.SlotFiltered;
 import net.gigabit101.quantumstorage.menu.slots.SlotNoTake;
@@ -10,7 +10,6 @@ import net.gigabit101.quantumstorage.tiles.TileQuantumStorageUnit;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.Slot;
 
 public class MenuQuantumStorageUnit extends MenuBase
 {

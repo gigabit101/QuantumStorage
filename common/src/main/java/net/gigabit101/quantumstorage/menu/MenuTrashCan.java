@@ -1,9 +1,8 @@
 package net.gigabit101.quantumstorage.menu;
 
 import net.gigabit101.quantumstorage.init.ModMenus;
-import net.gigabit101.quantumstorage.menu.inventory.InventoryTrashcan;
+import net.gigabit101.quantumstorage.inventory.InventoryTrashcan;
 import net.gigabit101.quantumstorage.menu.prefab.MenuBase;
-import net.gigabit101.quantumstorage.menu.slots.SlotNoTake;
 import net.gigabit101.quantumstorage.tiles.TileTrashCan;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;

@@ -3,7 +3,7 @@ package net.gigabit101.quantumstorage.tiles;
 import net.gigabit101.quantumstorage.QuantumStorage;
 import net.gigabit101.quantumstorage.init.ModBlocks;
 import net.gigabit101.quantumstorage.menu.MenuTrashCan;
-import net.gigabit101.quantumstorage.menu.inventory.InventoryTrashcan;
+import net.gigabit101.quantumstorage.inventory.InventoryTrashcan;
 import net.minecraft.core.BlockPos;
 
 import net.minecraft.network.chat.Component;
