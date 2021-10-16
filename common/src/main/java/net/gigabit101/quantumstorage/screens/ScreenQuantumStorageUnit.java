@@ -46,16 +46,19 @@ public class ScreenQuantumStorageUnit extends AbstractContainerScreen<MenuQuantu
         guiBuilder.drawSlot(poseStack, leftPos + imageWidth - 32, topPos + 76);
 
         String itemStack = "Empty";
-        if(!menuQuantumStorageUnit.getInventory().getItem(2).isEmpty()) itemStack = menuQuantumStorageUnit.getInventory().getItem(2).getDisplayName().getString();
+        if(menuQuantumStorageUnit != null)
+        {
+            if (!menuQuantumStorageUnit.getInventory().getItem(2).isEmpty()) itemStack = menuQuantumStorageUnit.getInventory().getItem(2).getDisplayName().getString();
 
-        if(menuQuantumStorageUnit.hasMemoryCard)
-        {
-            drawString(poseStack, font, itemStack, leftPos + 16, topPos + 40, ChatFormatting.WHITE.getColor());
-            drawString(poseStack, font, getTotalCount() + "/" + Integer.MAX_VALUE, leftPos + 16, topPos + 60, ChatFormatting.WHITE.getColor());
-        }
-        else
-        {
-            drawString(poseStack, font, "Missing memory card", leftPos + 20, topPos + 56, ChatFormatting.RED.getColor());
+            if (menuQuantumStorageUnit.hasMemoryCard)
+            {
+                drawString(poseStack, font, itemStack, leftPos + 16, topPos + 40, ChatFormatting.WHITE.getColor());
+                drawString(poseStack, font, getTotalCount() + "/" + Integer.MAX_VALUE, leftPos + 16, topPos + 60, ChatFormatting.WHITE.getColor());
+            }
+            else
+            {
+                drawString(poseStack, font, "Missing memory card", leftPos + 20, topPos + 56, ChatFormatting.RED.getColor());
+            }
         }
     }
 

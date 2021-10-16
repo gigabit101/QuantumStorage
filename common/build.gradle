@@ -10,19 +10,19 @@ architectury {
     common()
 }
 
-java {
-    withSourcesJar()
+configurations {
+    dev
+}
+
+artifacts {
+    dev(jar)
 }
 
 publishing {
     publications {
         mavenCommon(MavenPublication) {
             artifactId = rootProject.archives_base_name
-            // add all the jars that should be included when publishing to maven
-            artifact remapJar
-            artifact(sourcesJar) {
-                builtBy remapSourcesJar
-            }
+            from components.java
         }
     }
 

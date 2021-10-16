@@ -16,9 +16,12 @@ import java.util.List;
 
 public class ItemMemoryCard extends Item
 {
-    public ItemMemoryCard()
+    public int MEMORY_CARD_SIZE;
+
+    public ItemMemoryCard(int memoryCardSize)
     {
         super(new Item.Properties().rarity(Rarity.RARE).stacksTo(1).tab(QuantumStorage.CREATIVE_TAB));
+        this.MEMORY_CARD_SIZE = memoryCardSize;
     }
 
     @Override
@@ -43,7 +46,9 @@ public class ItemMemoryCard extends Item
                     if(i == 1) continue;
                     count += ItemStack.of(listTag.getCompound(i)).getCount();
                 }
-                list.add(new TranslatableComponent(ChatFormatting.GOLD + "Storing: " +  ChatFormatting.GREEN + count + " " + ChatFormatting.WHITE + ItemStack.of(listTag.getCompound(2)).getDisplayName().getString()));
+                ItemStack stack = ItemStack.of(listTag.getCompound(2));
+                String type = !stack.isEmpty() ? stack.getDisplayName().getString() : "";
+                list.add(new TranslatableComponent(ChatFormatting.GOLD + "Storing: " +  ChatFormatting.GREEN + count + "/" + MEMORY_CARD_SIZE + ChatFormatting.WHITE + " " + type));
             }
         }
         super.appendHoverText(itemStack, level, list, tooltipFlag);

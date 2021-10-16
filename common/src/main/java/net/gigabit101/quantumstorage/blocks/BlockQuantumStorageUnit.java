@@ -87,7 +87,7 @@ public class BlockQuantumStorageUnit extends BaseEntityBlock
             player.getItemInHand(interactionHand).shrink(1);
             return InteractionResult.SUCCESS;
         }
-        else if (player.getItemInHand(interactionHand).isEmpty() && blockState.getValue(HAS_MEMORY_CARD))
+        else if (player.isCrouching() && player.getItemInHand(interactionHand).isEmpty() && blockState.getValue(HAS_MEMORY_CARD))
         {
             BlockState blockState1 = blockState.setValue(HAS_MEMORY_CARD, false);
             level.setBlock(blockPos, blockState1, 3);

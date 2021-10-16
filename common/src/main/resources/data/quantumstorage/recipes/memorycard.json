@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "III",
+    "IPI",
+    "IPI"  ],
+  "key": {
+    "I": [
+      {
+        "item": "minecraft:iron_nugget"
+      }
+    ],
+    "P": [
+      {
+        "item": "minecraft:paper"
+      }
+    ]
+  },
+  "result": {
+    "item": "quantumstorage:memorycard"
+  }
+}
