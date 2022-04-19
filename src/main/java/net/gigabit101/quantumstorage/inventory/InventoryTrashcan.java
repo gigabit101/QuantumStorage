@@ -1,9 +1,8 @@
 package net.gigabit101.quantumstorage.inventory;
 
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class InventoryTrashcan extends ItemStackHandler
 {
@@ -12,9 +11,9 @@ public class InventoryTrashcan extends ItemStackHandler
         super(1);
     }
 
-    @Nonnull
+    @NotNull
     @Override
-    public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate)
+    public ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate)
     {
         return ItemStack.EMPTY;
     }

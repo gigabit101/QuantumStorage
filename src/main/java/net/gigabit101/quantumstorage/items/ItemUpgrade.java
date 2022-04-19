@@ -1,7 +1,7 @@
 package net.gigabit101.quantumstorage.items;
 
 import net.gigabit101.quantumstorage.items.prefab.ItemBase;
-import net.minecraft.item.Item;
+import net.minecraft.world.item.Item;
 
 
 /**

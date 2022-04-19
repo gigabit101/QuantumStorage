@@ -1,16 +1,14 @@
 package net.gigabit101.quantumstorage.containers;
 
-import net.gigabit101.quantumstorage.QuantumStorage;
 import net.gigabit101.quantumstorage.containers.prefab.ContainerQS;
 import net.gigabit101.quantumstorage.containers.slots.SlotFiltered;
+import net.gigabit101.quantumstorage.init.ModContainers;
 import net.gigabit101.quantumstorage.inventory.slot.SlotOutputItemHandler;
 import net.gigabit101.quantumstorage.tiles.TileQsu;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.network.PacketBuffer;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.SlotItemHandler;
 
 import java.util.Objects;
 
@@ -19,14 +17,14 @@ public class ContainerQSU extends ContainerQS
     public IItemHandler inv;
     public TileQsu tileQsu;
 
-    public ContainerQSU(int id, PlayerInventory playerInv, PacketBuffer extraData)
+    public ContainerQSU(int id, Inventory playerInv, FriendlyByteBuf extraData)
     {
-        this(id, playerInv, (TileQsu) Objects.requireNonNull(Minecraft.getInstance().world.getTileEntity(extraData.readBlockPos())));
+        this(id, playerInv, (TileQsu) Objects.requireNonNull(Minecraft.getInstance().level.getBlockEntity(extraData.readBlockPos())));
     }
 
-    public ContainerQSU(int id, PlayerInventory playerInv, TileQsu te)
+    public ContainerQSU(int id, Inventory playerInv, TileQsu te)
     {
-        super(QuantumStorage.containerQsuContainerType, id);
+        super(ModContainers.QSU_CONTAINER.get(), id);
         tileQsu = te;
         this.inv = te.inventory;
 
@@ -35,12 +33,6 @@ public class ContainerQSU extends ContainerQS
     
         drawPlayersInv(playerInv, 15, 132);
         drawPlayersHotBar(playerInv, 15, 132 + 58);
-    }
-
-    @Override
-    public boolean canInteractWith(PlayerEntity playerIn)
-    {
-        return true;
     }
     
     public IItemHandler getInv()

@@ -1,19 +1,16 @@
 package net.gigabit101.quantumstorage.blocks;
 
 import net.gigabit101.quantumstorage.tiles.chests.TileChestDiamond;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.IBlockReader;
-
-import javax.annotation.Nullable;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class BlockChestDiamond extends BlockChestBase
 {
-
-    @Nullable
+    @org.jetbrains.annotations.Nullable
     @Override
-    public TileEntity createNewTileEntity(IBlockReader worldIn)
+    public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState)
     {
-        return new TileChestDiamond();
+        return new TileChestDiamond(blockPos, blockState);
     }
-
 }

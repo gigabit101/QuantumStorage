@@ -1,13 +1,12 @@
 package net.gigabit101.quantumstorage.containers;
 
-import net.gigabit101.quantumstorage.QuantumStorage;
 import net.gigabit101.quantumstorage.containers.prefab.ContainerQS;
+import net.gigabit101.quantumstorage.init.ModContainers;
 import net.gigabit101.quantumstorage.inventory.slot.SlotOutputItemHandler;
 import net.gigabit101.quantumstorage.tiles.TileTank;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.network.PacketBuffer;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.items.SlotItemHandler;
 
@@ -17,14 +16,14 @@ public class ContainerTank extends ContainerQS
 {
     public IFluidTank tank;
     
-    public ContainerTank(int id, PlayerInventory playerInv, PacketBuffer extraData)
+    public ContainerTank(int id, Inventory playerInv, FriendlyByteBuf extraData)
     {
-        this(id, playerInv, (TileTank) Objects.requireNonNull(Minecraft.getInstance().world.getTileEntity(extraData.readBlockPos())));
+        this(id, playerInv, (TileTank) Objects.requireNonNull(Minecraft.getInstance().level.getBlockEntity(extraData.readBlockPos())));
     }
 
-    public ContainerTank(int id, PlayerInventory playerInv, TileTank te)
+    public ContainerTank(int id, Inventory playerInv, TileTank te)
     {
-        super(QuantumStorage.containerTankContainerType, id);
+        super(ModContainers.TANK_CONTAINER.get(), id);
         this.tank = te.tank;
 
         addSlot(new SlotItemHandler(te.inventory,0, 87, 31));
@@ -32,12 +31,6 @@ public class ContainerTank extends ContainerQS
     
         drawPlayersInv(playerInv, 15, 132);
         drawPlayersHotBar(playerInv, 15, 132 + 58);
-    }
-
-    @Override
-    public boolean canInteractWith(PlayerEntity playerIn)
-    {
-        return true;
     }
     
     public IFluidTank getTank()

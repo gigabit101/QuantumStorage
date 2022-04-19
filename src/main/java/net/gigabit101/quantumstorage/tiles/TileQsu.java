@@ -2,30 +2,25 @@ package net.gigabit101.quantumstorage.tiles;
 
 import net.gigabit101.quantumstorage.util.inventory.ItemUtils;
 import net.gigabit101.quantumstorage.containers.ContainerQSU;
-import net.gigabit101.quantumstorage.init.QSBlocks;
+import net.gigabit101.quantumstorage.init.ModBlocks;
 import net.gigabit101.quantumstorage.inventory.DsuInventoryHandler;
 import net.gigabit101.quantumstorage.network.VanillaPacketDispatcher;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.ItemStackHelper;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SUpdateTileEntityPacket;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nonnull;
@@ -34,7 +29,7 @@ import javax.annotation.Nullable;
 /**
  * Created by Gigabit101 on 03/04/2017.
  */
-public class TileQsu extends TileEntity implements INamedContainerProvider, ITickableTileEntity
+public class TileQsu extends BaseContainerBlockEntity
 {
     int INPUT = 0;
     int STORAGE = 1;
@@ -44,9 +39,9 @@ public class TileQsu extends TileEntity implements INamedContainerProvider, ITic
     public DsuInventoryHandler inventory = new DsuInventoryHandler(lockedStack);
     public boolean isLocked = false;
 
-    public TileQsu()
+    public TileQsu(BlockPos blockPos, BlockState blockState)
     {
-        super(QSBlocks.QSU_TILE.get());
+        super(ModBlocks.QSU_TILE.get(), blockPos, blockState);
     }
     
     @Override
@@ -55,7 +50,6 @@ public class TileQsu extends TileEntity implements INamedContainerProvider, ITic
         VanillaPacketDispatcher.dispatchTEToNearbyPlayers(this);
     }
     
-    @Override
     public void tick()
     {
         try
@@ -95,7 +89,7 @@ public class TileQsu extends TileEntity implements INamedContainerProvider, ITic
                     inventory.getStackInSlot(STORAGE).shrink(1);
                 }
             }
-            if(world.getTileEntity(pos) != null)
+            if(level.getBlockEntity(getBlockPos()) != null)
             {
                 VanillaPacketDispatcher.dispatchTEToNearbyPlayers(this);
             }
@@ -116,30 +110,31 @@ public class TileQsu extends TileEntity implements INamedContainerProvider, ITic
         return super.getCapability(cap, side);
     }
     
-    @Nullable
-    @Override
-    public SUpdateTileEntityPacket getUpdatePacket()
-    {
-        return new SUpdateTileEntityPacket(this.pos, 0, this.getUpdateTag());
-    }
-    
-    @Override
-    public CompoundNBT getUpdateTag()
-    {
-        return this.write(new CompoundNBT());
-    }
-    
-    @Override
-    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket packet)
-    {
-        super.onDataPacket(net, packet);
-        this.deserializeNBT(packet.getNbtCompound());
-    }
+//    @Nullable
+//    @Override
+//    public SUpdateTileEntityPacket getUpdatePacket()
+//    {
+//        return new SUpdateTileEntityPacket(this.pos, 0, this.getUpdateTag());
+//    }
+//
+//    @Override
+//    public CompoundNBT getUpdateTag()
+//    {
+//        return this.write(new CompoundNBT());
+//    }
+//
+//    @Override
+//    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket packet)
+//    {
+//        super.onDataPacket(net, packet);
+//        this.deserializeNBT(packet.getNbtCompound());
+//    }
+
 
     @Override
-    public void read(BlockState state, CompoundNBT compound)
+    public void load(CompoundTag compound)
     {
-        super.read(state, compound);
+        super.load(compound);
         inventory.deserializeNBT(compound);
         isLocked = compound.getBoolean("locked");
         if(!compound.getCompound("lockeditem").isEmpty()) {
@@ -150,42 +145,45 @@ public class TileQsu extends TileEntity implements INamedContainerProvider, ITic
     }
 
     @Override
-    @Nonnull
-    public CompoundNBT write(CompoundNBT compound)
+    protected void saveAdditional(CompoundTag compound)
     {
-        compound = super.write(compound);
+        super.saveAdditional(compound);
         compound.merge(inventory.serializeNBT());
         compound.putBoolean("locked", isLocked);
         compound.put("lockeditem", writeItemStack(lockedStack));
-
-        return compound;
     }
 
-    private static CompoundNBT writeItemStack(ItemStack i) {
-        CompoundNBT nbt = new CompoundNBT();
+    private static CompoundTag writeItemStack(ItemStack i) {
+        CompoundTag nbt = new CompoundTag();
         nbt.putInt("count", i.getCount());
         nbt.putString("item", i.getItem().getRegistryName().toString());
         nbt.putByte("type", (byte) 0);
         return nbt;
     }
 
-    private static ItemStack readItemStack(CompoundNBT compound) {
+    private static ItemStack readItemStack(CompoundTag compound) {
         Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(compound.getString("item")));
         int count = compound.getInt("count");
         return new ItemStack(item, count);
     }
 
     @Override
-    public ITextComponent getDisplayName()
+    public Component getDisplayName()
     {
-        return new TranslationTextComponent("tile.qsu.name");
+        return new TranslatableComponent("tile.qsu.name");
+    }
+
+    @Override
+    protected Component getDefaultName()
+    {
+        return new TranslatableComponent("tile.qsu.name");
     }
 
     @Nullable
     @Override
-    public Container createMenu(int id, PlayerInventory playerInventory, PlayerEntity playerEntity)
+    public AbstractContainerMenu createMenu(int id, Inventory playerInventory)
     {
-        return new ContainerQSU(id, playerEntity.inventory, this);
+        return new ContainerQSU(id, playerInventory, this);
     }
 
     public boolean isLocked(TileQsu tileQsu)
@@ -206,9 +204,9 @@ public class TileQsu extends TileEntity implements INamedContainerProvider, ITic
         tileQsu.lockedStack = ItemStack.EMPTY;
     }
     
-    public void writeToNBTWithoutCoords(CompoundNBT tagCompound)
+    public void writeToNBTWithoutCoords(CompoundTag tagCompound)
     {
-        tagCompound = super.write(tagCompound);
+//        tagCompound = super.write(tagCompound);
         if (inventory != null)
         {
             tagCompound.merge(inventory.serializeNBT());
@@ -216,7 +214,7 @@ public class TileQsu extends TileEntity implements INamedContainerProvider, ITic
         tagCompound.putBoolean("locked", isLocked);
     }
     
-    public void readFromNBTWithoutCoords(CompoundNBT compound)
+    public void readFromNBTWithoutCoords(CompoundTag compound)
     {
         inventory.deserializeNBT(compound);
         isLocked = compound.getBoolean("locked");
@@ -224,11 +222,60 @@ public class TileQsu extends TileEntity implements INamedContainerProvider, ITic
     
     public ItemStack getDropWithNBT()
     {
-        CompoundNBT tileEntity = new CompoundNBT();
-        ItemStack dropStack = new ItemStack(QSBlocks.QSU.get(), 1);
+        CompoundTag tileEntity = new CompoundTag();
+        ItemStack dropStack = new ItemStack(ModBlocks.QSU.get(), 1);
         writeToNBTWithoutCoords(tileEntity);
-        dropStack.setTag(new CompoundNBT());
+        dropStack.setTag(new CompoundTag());
         dropStack.getTag().put("tileEntity", tileEntity);
         return dropStack;
+    }
+
+    @Override
+    public int getContainerSize()
+    {
+        return inventory.getSlots();
+    }
+
+    @Override
+    public boolean isEmpty()
+    {
+        return false;
+    }
+
+    @Override
+    public ItemStack getItem(int slot)
+    {
+        return inventory.getStackInSlot(slot);
+    }
+
+    @Override
+    public ItemStack removeItem(int slot, int amount)
+    {
+        return inventory.extractItem(slot, amount, false);
+    }
+
+    @Override
+    public ItemStack removeItemNoUpdate(int slot)
+    {
+        return inventory.extractItem(slot, 64, false);
+    }
+
+    @Override
+    public void setItem(int slot, ItemStack stack)
+    {
+        inventory.setStackInSlot(slot, stack);
+    }
+
+    @Override
+    public boolean stillValid(Player player)
+    {
+        return true;
+    }
+
+    @Override
+    public void clearContent()
+    {
+        //TODO
+
     }
 }

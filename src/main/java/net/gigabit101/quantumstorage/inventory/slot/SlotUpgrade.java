@@ -1,9 +1,10 @@
 package net.gigabit101.quantumstorage.inventory.slot;
 
 import net.gigabit101.quantumstorage.items.ItemUpgrade;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
@@ -18,7 +19,7 @@ public class SlotUpgrade extends SlotItemHandler
     }
     
     @Override
-    public boolean isItemValid(@Nonnull ItemStack stack)
+    public boolean mayPlace(@NotNull ItemStack stack)
     {
         if (stack.getItem() instanceof ItemUpgrade)
         {

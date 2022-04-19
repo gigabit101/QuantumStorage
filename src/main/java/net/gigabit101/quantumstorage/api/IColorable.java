@@ -1,6 +1,6 @@
 package net.gigabit101.quantumstorage.api;
 
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 
 public interface IColorable
 {

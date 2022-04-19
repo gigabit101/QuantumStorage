@@ -1,15 +1,14 @@
 package net.gigabit101.quantumstorage.client;
 
 import net.gigabit101.quantumstorage.QuantumStorage;
-import net.gigabit101.quantumstorage.init.QSBlocks;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
+import net.gigabit101.quantumstorage.init.ModItems;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
 
 /**
  * Created by Gigabit101 on 27/01/2017.
  */
-public class CreativeTabQuantumStorage extends ItemGroup
+public class CreativeTabQuantumStorage extends CreativeModeTab
 {
     public static CreativeTabQuantumStorage INSTANCE = new CreativeTabQuantumStorage();
 
@@ -19,8 +18,8 @@ public class CreativeTabQuantumStorage extends ItemGroup
     }
 
     @Override
-    public ItemStack createIcon()
+    public ItemStack makeIcon()
     {
-        return new ItemStack(Item.getItemFromBlock(QSBlocks.QSU.get()));
+        return new ItemStack(ModItems.QSU_ITEM.get());
     }
 }

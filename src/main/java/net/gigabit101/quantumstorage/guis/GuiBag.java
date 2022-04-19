@@ -1,75 +1,65 @@
 package net.gigabit101.quantumstorage.guis;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.gigabit101.quantumstorage.client.GuiBuilderQuantumStorage;
 import net.gigabit101.quantumstorage.containers.ContainerBag;
-import net.gigabit101.quantumstorage.containers.ContainerChestDiamond;
-import net.minecraft.client.gui.screen.inventory.ContainerScreen;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Slot;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.gui.screens.inventory.ContainerScreen;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.Slot;
 
-public class GuiBag extends ContainerScreen<ContainerBag>
+public class GuiBag extends AbstractContainerScreen<ContainerBag>
 {
-    private final PlayerEntity player;
+    private final Player player;
     GuiBuilderQuantumStorage builder = new GuiBuilderQuantumStorage();
+    private ContainerBag container;
 
-    public GuiBag(ContainerBag container, PlayerInventory inv, ITextComponent title)
+    public GuiBag(ContainerBag container, Inventory inv, Component title)
     {
         super(container, inv, title);
-        this.xSize = 256;
-        this.ySize = 231;
+        this.container = container;
+        this.imageWidth = 256;
+        this.imageHeight = 231;
         this.player = inv.player;
     }
 
     @Override
-    public void render(MatrixStack stack, int mouseX, int mouseY, float partialTicks)
+    public void render(PoseStack stack, int mouseX, int mouseY, float partialTicks)
     {
         this.renderBackground(stack);
         super.render(stack, mouseX, mouseY, partialTicks);
-        this.func_230459_a_(stack, mouseX, mouseY);
+        this.renderTooltip(stack, mouseX, mouseY);
     }
 
-
     @Override
-    protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float v, int i, int i1)
+    protected void renderBg(PoseStack matrixStack, float p_97788_, int p_97789_, int p_97790_)
     {
-        builder.drawDefaultBackground(this, matrixStack, guiLeft, guiTop, xSize, ySize, 256, 256);
+        builder.drawDefaultBackground(this, matrixStack, leftPos, topPos, width, height, 256, 256);
         drawPlayerInventorySlots(matrixStack);
         drawInventorySlots(matrixStack);
     }
 
-    @Override
-    protected void drawGuiContainerForegroundLayer(MatrixStack p_230451_1_, int p_230451_2_, int p_230451_3_)
-    {
-//        super.drawGuiContainerForegroundLayer(p_230451_1_, p_230451_2_, p_230451_3_);
-    }
 
-    private void drawInventorySlots(MatrixStack matrixStack)
+    //TODO WHY WAS THIS EVEN A THING...
+    private void drawInventorySlots(PoseStack matrixStack)
     {
-        for(Slot slot : container.inventorySlots)
+        for(Slot slot : container.slots)
         {
-            if(slot.inventory instanceof PlayerInventory)
+            if(slot.container instanceof Inventory)
                 continue;
-            builder.drawSlot(this, matrixStack, getGuiLeft() + slot.xPos - 1, getGuiTop() + slot.yPos - 1, 256, 256);
+            builder.drawSlot(this, matrixStack, getGuiLeft() + slot.x - 1, getGuiTop() + slot.y - 1, 256, 256);
         }
     }
 
-    private void drawPlayerInventorySlots(MatrixStack matrixStack)
+    private void drawPlayerInventorySlots(PoseStack matrixStack)
     {
-        for(Slot slot : container.inventorySlots)
+        for(Slot slot : container.slots)
         {
-            if(!(slot.inventory instanceof PlayerInventory))
+            if(!(slot.container instanceof Inventory))
                 continue;
-            builder.drawSlot(this, matrixStack, getGuiLeft() + slot.xPos - 1, getGuiTop() + slot.yPos - 1, 256, 256);
+            builder.drawSlot(this, matrixStack, getGuiLeft() + slot.x - 1, getGuiTop() + slot.y - 1, 256, 256);
         }
-    }
-
-    @Override
-    public void tick()
-    {
-        if (!this.container.canInteractWith(player)) player.closeScreen();
-        super.tick();
     }
 }

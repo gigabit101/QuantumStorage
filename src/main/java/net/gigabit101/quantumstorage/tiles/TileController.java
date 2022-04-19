@@ -1,18 +1,18 @@
 package net.gigabit101.quantumstorage.tiles;
 
-import net.gigabit101.quantumstorage.init.QSBlocks;
+import net.gigabit101.quantumstorage.init.ModBlocks;
 import net.gigabit101.quantumstorage.inventory.ControllerItemHandler;
 import net.gigabit101.quantumstorage.network.VanillaPacketDispatcher;
 import net.gigabit101.quantumstorage.util.inventory.ItemUtils;
-import net.minecraft.block.BlockState;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.ListNBT;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
@@ -22,16 +22,16 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TileController extends TileEntity
+public class TileController extends BlockEntity
 {
     List<BlockPos> connectedTiles = new ArrayList<>();
     public ControllerItemHandler inventory = new ControllerItemHandler(this);
 
     public int maxConnections = 180;
 
-    public TileController()
+    public TileController(BlockPos blockPos, BlockState blockState)
     {
-        super(QSBlocks.CONTROLLER_TILE.get());
+        super(ModBlocks.CONTROLLER_TILE.get(), blockPos, blockState);
     }
 
     @Override
@@ -43,7 +43,7 @@ public class TileController extends TileEntity
 
     public boolean connectTileToController(BlockPos connectPos)
     {
-        if(world.getTileEntity(connectPos) != null && world.getTileEntity(connectPos) instanceof TileQsu && connectedTiles.size() < maxConnections)
+        if(level.getBlockEntity(connectPos) != null && level.getBlockEntity(connectPos) instanceof TileQsu && connectedTiles.size() < maxConnections)
         {
             for(BlockPos blockPos : connectedTiles)
             {
@@ -82,21 +82,19 @@ public class TileController extends TileEntity
     }
 
     @Override
-    public void read(BlockState state, CompoundNBT compound)
+    public void load(CompoundTag compound)
     {
-        super.read(state, compound);
+        super.load(compound);
         deserializeNBT(compound);
         inventory.deserializeNBT(compound);
     }
 
     @Override
     @Nonnull
-    public CompoundNBT write(CompoundNBT compound)
+    protected void saveAdditional(CompoundTag compound)
     {
-        compound = super.write(compound);
         compound.merge(serializeNBT());
         compound.merge(inventory.serializeNBT());
-        return compound;
     }
 
     public ItemStack insertItem(ItemStack stack, boolean simulate)
@@ -110,7 +108,7 @@ public class TileController extends TileEntity
             {
                 if(validateConnection(pos1))
                 {
-                    TileQsu tileQsu = (TileQsu) world.getTileEntity(pos1);
+                    TileQsu tileQsu = (TileQsu) level.getBlockEntity(pos1);
                     ItemStack insert = ItemHandlerHelper.insertItem(tileQsu.inventory, stack, simulate);
                     if(!ItemUtils.isItemEqual(insert, stack, false))
                     {
@@ -130,7 +128,7 @@ public class TileController extends TileEntity
 
         if(validateConnection(connectedTiles.get(slotID)))
         {
-            TileQsu tileQsu = (TileQsu) world.getTileEntity(connectedTiles.get(slotID));
+            TileQsu tileQsu = (TileQsu) level.getBlockEntity(connectedTiles.get(slotID));
             return tileQsu.inventory.extractItem(2, amount, simulate);
         }
         return ItemStack.EMPTY;
@@ -143,7 +141,7 @@ public class TileController extends TileEntity
 
         if(validateConnection(connectedTiles.get(slotID)))
         {
-            TileQsu tileQsu = (TileQsu) world.getTileEntity(connectedTiles.get(slotID));
+            TileQsu tileQsu = (TileQsu) level.getBlockEntity(connectedTiles.get(slotID));
             int amount = tileQsu.inventory.getStackInSlot(0).getCount() + tileQsu.inventory.getStackInSlot(1).getCount() + tileQsu.inventory.getStackInSlot(2).getCount();
             ItemStack stackOut = tileQsu.inventory.getStackInSlot(2).copy();
             stackOut.setCount(amount);
@@ -159,7 +157,7 @@ public class TileController extends TileEntity
 
         if(validateConnection(connectedTiles.get(slot)))
         {
-            TileQsu tileQsu = (TileQsu) world.getTileEntity(connectedTiles.get(slot));
+            TileQsu tileQsu = (TileQsu) level.getBlockEntity(connectedTiles.get(slot));
             return tileQsu.inventory.getSlotLimit(2);
         }
         return 0;
@@ -168,22 +166,22 @@ public class TileController extends TileEntity
     public boolean validateConnection(BlockPos blockPos)
     {
         if(blockPos == null) return false;
-        if(!world.isBlockLoaded(blockPos)) return false;
-        if(world.getTileEntity(blockPos) == null) return false;
+        if(!level.isLoaded(blockPos)) return false;
+        if(level.getBlockEntity(blockPos) == null) return false;
 
-        return world.getTileEntity(blockPos) instanceof TileQsu;
+        return level.getBlockEntity(blockPos) instanceof TileQsu;
     }
 
 
 
-    public CompoundNBT serializeNBT()
+    public CompoundTag serializeNBT()
     {
-        ListNBT nbtTagList = new ListNBT();
+        ListTag nbtTagList = new ListTag();
         for (int i = 0; i < connectedTiles.size(); i++)
         {
             if (connectedTiles.get(i) != null)
             {
-                CompoundNBT posTag = new CompoundNBT();
+                CompoundTag posTag = new CompoundTag();
                 posTag.putInt("X", connectedTiles.get(i).getX());
                 posTag.putInt("Y", connectedTiles.get(i).getY());
                 posTag.putInt("Z", connectedTiles.get(i).getZ());
@@ -191,18 +189,18 @@ public class TileController extends TileEntity
                 nbtTagList.add(posTag);
             }
         }
-        CompoundNBT nbt = new CompoundNBT();
+        CompoundTag nbt = new CompoundTag();
         nbt.put("connections", nbtTagList);
         nbt.putInt("Size", connectedTiles.size());
         return nbt;
     }
 
-    public void deserializeNBT(CompoundNBT nbt)
+    public void deserializeNBT(CompoundTag nbt)
     {
-        ListNBT tagList = nbt.getList("connections", Constants.NBT.TAG_COMPOUND);
+        ListTag tagList = nbt.getList("connections", Tag.TAG_COMPOUND);
         for (int i = 0; i < tagList.size(); i++)
         {
-            CompoundNBT itemTags = tagList.getCompound(i);
+            CompoundTag itemTags = tagList.getCompound(i);
             BlockPos pos = new BlockPos(itemTags.getInt("X"), itemTags.getInt("Y"), itemTags.getInt("Z"));
             connectedTiles.add(pos);
         }

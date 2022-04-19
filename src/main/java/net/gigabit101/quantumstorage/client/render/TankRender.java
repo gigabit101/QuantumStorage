@@ -1,27 +1,17 @@
 package net.gigabit101.quantumstorage.client.render;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
-import net.gigabit101.quantumstorage.init.QSRenderTypes;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.gigabit101.quantumstorage.tiles.TileTank;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.texture.AtlasTexture;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
-import net.minecraft.util.math.vector.Matrix4f;
-import net.minecraft.world.World;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 
-public class TankRender extends TileEntityRenderer<TileTank>
+
+public class TankRender implements BlockEntityRenderer<TileTank>
 {
-    public TankRender(TileEntityRendererDispatcher p_i226006_1_)
-    {
-        super(p_i226006_1_);
-    }
+    public TankRender() {}
     
     @Override
-    public void render(TileTank tileTank, float partialTicks, MatrixStack matrixStack, IRenderTypeBuffer iRenderTypeBuffer, int combinedLightIn, int combinedOverlayIn) {
+    public void render(TileTank tileTank, float partialTicks, PoseStack matrixStack, MultiBufferSource iRenderTypeBuffer, int combinedLightIn, int combinedOverlayIn) {
 //        World world = tileTank.getWorld();
 //        int amount = tileTank.tank.getFluidAmount();
 //

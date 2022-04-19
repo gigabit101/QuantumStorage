@@ -3,25 +3,17 @@ package net.gigabit101.quantumstorage.containers;
 import net.gigabit101.quantumstorage.containers.prefab.ContainerQS;
 import net.gigabit101.quantumstorage.inventory.slot.SlotAntiCrate;
 import net.gigabit101.quantumstorage.tiles.chests.TileChestBase;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.ContainerType;
-import net.minecraftforge.items.SlotItemHandler;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.MenuType;
 
 import javax.annotation.Nullable;
 
 public class ContainerChestBase extends ContainerQS {
-    public ContainerChestBase(@Nullable ContainerType<?> containerType, int id){
+    public ContainerChestBase(@Nullable MenuType<?> containerType, int id){
         super(containerType, id);
     }
 
-    @Override
-    public boolean canInteractWith(PlayerEntity playerIn)
-    {
-        return true;
-    }
-
-    public void addSlots(TileChestBase te, int columns, PlayerInventory playerInv){
+    public void addSlots(TileChestBase te, int columns, Inventory playerInv){
         int row = 0;
 
         for (int slot = 0; slot < te.inventory.getSlots(); ++row)

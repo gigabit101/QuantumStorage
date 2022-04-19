@@ -1,26 +1,26 @@
 package net.gigabit101.quantumstorage.containers;
 
-import net.gigabit101.quantumstorage.QuantumStorage;
 import net.gigabit101.quantumstorage.containers.prefab.ContainerQS;
+import net.gigabit101.quantumstorage.init.ModContainers;
 import net.gigabit101.quantumstorage.tiles.TileTrashcan;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.network.PacketBuffer;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.items.SlotItemHandler;
 
 import java.util.Objects;
 
 public class ContainerTrashcan extends ContainerQS
 {
-    public ContainerTrashcan(int id, PlayerInventory playerInv, PacketBuffer extraData)
+    public ContainerTrashcan(int id, Inventory playerInv, FriendlyByteBuf extraData)
     {
-        this(id, playerInv, (TileTrashcan) Objects.requireNonNull(Minecraft.getInstance().world.getTileEntity(extraData.readBlockPos())));
+        this(id, playerInv, (TileTrashcan) Objects.requireNonNull(Minecraft.getInstance().level.getBlockEntity(extraData.readBlockPos())));
     }
 
-    public ContainerTrashcan(int id, PlayerInventory playerInv, TileTrashcan te)
+    public ContainerTrashcan(int id, Inventory playerInv, TileTrashcan te)
     {
-        super(QuantumStorage.containerTrashcanContainerType, id);
+        super(ModContainers.TRASHCAN_CONTAINER.get(), id);
 
         addSlot(new SlotItemHandler(te.inventory,0, 87, 61));
 
@@ -29,7 +29,7 @@ public class ContainerTrashcan extends ContainerQS
     }
 
     @Override
-    public boolean canInteractWith(PlayerEntity playerIn)
+    public boolean stillValid(Player player)
     {
         return true;
     }

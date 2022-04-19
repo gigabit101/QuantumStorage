@@ -1,12 +1,13 @@
 package net.gigabit101.quantumstorage.tiles.chests;
 
 import net.gigabit101.quantumstorage.containers.ContainerChestIron;
-import net.gigabit101.quantumstorage.init.QSBlocks;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.gigabit101.quantumstorage.init.ModBlocks;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.level.block.state.BlockState;
 
 import javax.annotation.Nullable;
 
@@ -14,22 +15,22 @@ import javax.annotation.Nullable;
  * Created by Gigabit101 on 03/04/2017.
  */
 public class TileChestIron extends TileChestBase {
-    public TileChestIron()
+    public TileChestIron(BlockPos blockPos, BlockState blockState)
     {
-        super(QSBlocks.CHEST_IRON_TILE.get(), 36);
+        super(ModBlocks.CHEST_IRON_TILE.get(), blockPos, blockState, 36);
     }
 
     @Override
-    public ITextComponent getDisplayName()
+    public Component getDisplayName()
     {
-        return new TranslationTextComponent("tile.chestiron.name");
+        return new TranslatableComponent("tile.chestiron.name");
     }
 
 
     @Nullable
     @Override
-    public Container createMenu(int id, PlayerInventory playerInventory, PlayerEntity playerEntity)
+    public AbstractContainerMenu createMenu(int id, Inventory playerInventory)
     {
-        return new ContainerChestIron(id, playerEntity.inventory, this);
+        return new ContainerChestIron(id, playerInventory, this);
     }
 }

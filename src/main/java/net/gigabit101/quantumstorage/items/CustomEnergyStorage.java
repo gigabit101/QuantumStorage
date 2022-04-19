@@ -1,6 +1,6 @@
 package net.gigabit101.quantumstorage.items;
 
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.energy.EnergyStorage;
 
 public class CustomEnergyStorage extends EnergyStorage
@@ -67,12 +67,12 @@ public class CustomEnergyStorage extends EnergyStorage
         return energyExtracted;
     }
     
-    public void readFromNBT(CompoundNBT compound)
+    public void readFromNBT(CompoundTag compound)
     {
         this.setEnergyStored(compound.getInt("Energy"));
     }
     
-    public void writeToNBT(CompoundNBT compound)
+    public void writeToNBT(CompoundTag compound)
     {
         compound.putInt("Energy", this.getEnergyStored());
     }

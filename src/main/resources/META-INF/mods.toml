@@ -1,5 +1,5 @@
 modLoader="javafml" #mandatory
-loaderVersion="[28,]" #mandatory
+loaderVersion="[40,]" #mandatory
 license="GNU General Public License v3.0"
 credits="" #optional
 authors="gigabit101" #optional
@@ -14,9 +14,9 @@ authors="gigabit101" #optional
     description='''
 '''
 
-[[dependencies.examplemod]]
+[[dependencies.quantumstorage]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.16, 1.17]"
+    versionRange="[1.18.2]"
     ordering="NONE"
     side="BOTH"

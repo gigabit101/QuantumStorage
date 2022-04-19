@@ -1,8 +1,9 @@
 package net.gigabit101.quantumstorage.inventory.slot;
 
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
@@ -17,7 +18,7 @@ public class SlotOutputItemHandler extends SlotItemHandler
     }
     
     @Override
-    public boolean isItemValid(@Nonnull ItemStack stack)
+    public boolean mayPlace(@NotNull ItemStack stack)
     {
         return false;
     }

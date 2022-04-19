@@ -2,19 +2,19 @@ package net.gigabit101.quantumstorage.items;
 
 import net.gigabit101.quantumstorage.client.CreativeTabQuantumStorage;
 import net.gigabit101.quantumstorage.items.prefab.ItemBase;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Rarity;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
@@ -33,25 +33,25 @@ public class ItemQuantumBattery extends ItemBase
     
     public ItemQuantumBattery()
     {
-        super(new Item.Properties().rarity(Rarity.EPIC).maxStackSize(1).group(CreativeTabQuantumStorage.INSTANCE));
+        super(new Item.Properties().rarity(Rarity.EPIC).stacksTo(1).tab(CreativeTabQuantumStorage.INSTANCE));
+    }
+
+    @Override
+    public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn)
+    {
+        getEnergyStorage(playerIn.getItemInHand(handIn)).receiveEnergy(666666666, false);
+        return super.use(worldIn, playerIn, handIn);
     }
     
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn)
+    public void inventoryTick(ItemStack stack, Level world, Entity entity, int p_77663_4_, boolean isSelected)
     {
-        getEnergyStorage(playerIn.getHeldItem(handIn)).receiveEnergy(666666666, false);
-        return super.onItemRightClick(worldIn, playerIn, handIn);
-    }
-    
-    @Override
-    public void inventoryTick(ItemStack stack, World world, Entity entity, int p_77663_4_, boolean isSelected)
-    {
-        if (entity instanceof PlayerEntity && !isSelected)
+        if (entity instanceof Player && !isSelected)
         {
-            PlayerEntity player = (PlayerEntity) entity;
-            for (int i = 0; i < player.inventory.getSizeInventory(); i++)
+            Player player = (Player) entity;
+            for (int i = 0; i < player.getInventory().getContainerSize(); i++)
             {
-                ItemStack slot = player.inventory.getStackInSlot(i);
+                ItemStack slot = player.getInventory().getItem(i);
                 if (getEnergyStorage(stack).getEnergyStored() > 0)
                 {
                     AtomicBoolean charging = new AtomicBoolean(false);
@@ -72,31 +72,33 @@ public class ItemQuantumBattery extends ItemBase
 
     
     @Override
-    public boolean hasEffect(ItemStack stack)
+    public boolean isFoil(ItemStack stack)
     {
         return true;
     }
 
+
     @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn)
+    public void appendHoverText(ItemStack stack, @org.jetbrains.annotations.Nullable Level worldIn, List<Component> tooltip, TooltipFlag flagIn)
     {
-        super.addInformation(stack, worldIn, tooltip, flagIn);
-        tooltip.add(new TranslationTextComponent(RfUtils.addPowerTooltip(getEnergyStorage(stack))));
+        super.appendHoverText(stack, worldIn, tooltip, flagIn);
+        tooltip.add(new TextComponent(RfUtils.addPowerTooltip(getEnergyStorage(stack))));
     }
-    
-    @Override
-    public boolean showDurabilityBar(ItemStack stack)
-    {
-        return true;
-    }
-    
-    @Override
-    public double getDurabilityForDisplay(ItemStack stack)
-    {
-        double max = getEnergyStorage(stack).getMaxEnergyStored();
-        double diff = max - getEnergyStorage(stack).getEnergyStored();
-        return diff / max;
-    }
+
+    //TODO
+//    @Override
+//    public boolean showDurabilityBar(ItemStack stack)
+//    {
+//        return true;
+//    }
+//
+//    @Override
+//    public double getDurabilityForDisplay(ItemStack stack)
+//    {
+//        double max = getEnergyStorage(stack).getMaxEnergyStored();
+//        double diff = max - getEnergyStorage(stack).getEnergyStored();
+//        return diff / max;
+//    }
     
     public IEnergyStorage getEnergyStorage(ItemStack stack)
     {
@@ -108,7 +110,7 @@ public class ItemQuantumBattery extends ItemBase
     
     @Nullable
     @Override
-    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundNBT nbt)
+    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt)
     {
         return new EnergyCapabilityProvider(stack, this);
     }
@@ -138,7 +140,7 @@ public class ItemQuantumBattery extends ItemBase
                 {
                     if (!stack.hasTag())
                     {
-                        stack.setTag(new CompoundNBT());
+                        stack.setTag(new CompoundTag());
                     }
                     stack.getTag().putInt("Energy", energy);
                 }

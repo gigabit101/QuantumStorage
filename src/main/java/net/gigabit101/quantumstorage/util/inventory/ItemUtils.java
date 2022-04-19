@@ -1,9 +1,9 @@
 package net.gigabit101.quantumstorage.util.inventory;
 
-import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.items.ItemStackHandler;
 
 public class ItemUtils
@@ -13,7 +13,7 @@ public class ItemUtils
             return false;
         if (a.getItem() != b.getItem())
             return false;
-        if (matchNBT && !ItemStack.areItemStackTagsEqual(a, b))
+        if (matchNBT && !ItemStack.matches(a, b))
             return false;
         return true;
     }
@@ -61,24 +61,24 @@ public class ItemUtils
         return setSize(stack.copy(), size);
     }
 
-    public static void dropInventory(World world, ItemStackHandler inventory, BlockPos pos, boolean motion, int pickupDelay) {
+    public static void dropInventory(Level world, ItemStackHandler inventory, BlockPos pos, boolean motion, int pickupDelay) {
         for (int slot = 0; slot < inventory.getSlots(); slot++) {
             dropItem(inventory.getStackInSlot(slot), world, pos, motion, pickupDelay);
         }
     }
 
-    public static void dropItem(ItemStack stack, World world, BlockPos pos, boolean motion, int pickupDelay) {
-        if (world.isRemote) return;
+    public static void dropItem(ItemStack stack, Level world, BlockPos pos, boolean motion, int pickupDelay) {
+        if (world.isClientSide) return;
 
         if (stack.getMaxStackSize() <= 0 || stack.isEmpty())
             return;
 
         ItemEntity entityitem = new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), stack);
-        entityitem.setPickupDelay(pickupDelay);
+        entityitem.setPickUpDelay(pickupDelay);
         if (!motion) {
-            entityitem.setMotion(0, 0, 0);
+            entityitem.setDeltaMovement(0, 0, 0);
         }
 
-        world.addEntity(entityitem);
+        world.addFreshEntity(entityitem);
     }
 }

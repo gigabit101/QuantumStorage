@@ -1,7 +1,7 @@
 package net.gigabit101.quantumstorage.inventory;
 
 import net.gigabit101.quantumstorage.tiles.TileController;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;

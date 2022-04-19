@@ -10,6 +10,4 @@ public class CommonProxy
     public void registerColors() {}
 
     public void registerKeybindings() {}
-
-    public void registerGuis() {}
 }

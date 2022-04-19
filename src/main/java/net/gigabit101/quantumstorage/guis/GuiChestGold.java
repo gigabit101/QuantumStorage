@@ -1,12 +1,12 @@
 package net.gigabit101.quantumstorage.guis;
 
 import net.gigabit101.quantumstorage.containers.ContainerChestGold;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Inventory;
 
 public class GuiChestGold extends GuiChestBase<ContainerChestGold>
 {
-    public GuiChestGold(ContainerChestGold container, PlayerInventory playerinv, ITextComponent title)
+    public GuiChestGold(ContainerChestGold container, Inventory playerinv, Component title)
     {
         super(container, playerinv, title, 190, 225);
     }

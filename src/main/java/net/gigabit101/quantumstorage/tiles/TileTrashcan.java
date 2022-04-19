@@ -1,19 +1,18 @@
 package net.gigabit101.quantumstorage.tiles;
 
-import net.gigabit101.quantumstorage.QuantumStorage;
 import net.gigabit101.quantumstorage.containers.ContainerTrashcan;
-import net.gigabit101.quantumstorage.init.QSBlocks;
+import net.gigabit101.quantumstorage.init.ModBlocks;
 import net.gigabit101.quantumstorage.inventory.InventoryTrashcan;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -24,16 +23,15 @@ import javax.annotation.Nullable;
 /**
  * Created by Gigabit101 on 03/04/2017.
  */
-public class TileTrashcan extends TileEntity implements INamedContainerProvider, ITickableTileEntity
+public class TileTrashcan extends BaseContainerBlockEntity
 {
     public InventoryTrashcan inventory = new InventoryTrashcan();
 
-    public TileTrashcan()
+    public TileTrashcan(BlockPos blockPos, BlockState blockState)
     {
-        super(QSBlocks.TRASH_CAN_TILE.get());
+        super(ModBlocks.TRASH_CAN_TILE.get(), blockPos, blockState);
     }
 
-    @Override
     public void tick()
     {
         if(!inventory.getStackInSlot(0).isEmpty())
@@ -54,15 +52,63 @@ public class TileTrashcan extends TileEntity implements INamedContainerProvider,
     }
 
     @Override
-    public ITextComponent getDisplayName()
+    protected Component getDefaultName()
     {
-        return new TranslationTextComponent("tile.trashcan.name");
+        return new TextComponent("trashcan");
     }
 
-    @Nullable
     @Override
-    public Container createMenu(int id, PlayerInventory playerInventory, PlayerEntity playerEntity)
+    protected AbstractContainerMenu createMenu(int id, Inventory inventory)
     {
-        return new ContainerTrashcan(id, playerEntity.inventory, this);
+        return new ContainerTrashcan(id, inventory, this);
+    }
+
+    @Override
+    public int getContainerSize()
+    {
+        return inventory.getSlots();
+    }
+
+    @Override
+    public boolean isEmpty()
+    {
+        return false;
+    }
+
+    @Override
+    public ItemStack getItem(int slot)
+    {
+        return inventory.getStackInSlot(slot);
+    }
+
+    @Override
+    public ItemStack removeItem(int slot, int amount)
+    {
+        return inventory.extractItem(slot, amount, false);
+    }
+
+    @Override
+    public ItemStack removeItemNoUpdate(int slot)
+    {
+        return inventory.extractItem(slot, 64, false);
+    }
+
+    @Override
+    public void setItem(int slot, ItemStack stack)
+    {
+        inventory.setStackInSlot(slot, stack);
+    }
+
+    @Override
+    public boolean stillValid(Player player)
+    {
+        return true;
+    }
+
+    @Override
+    public void clearContent()
+    {
+        //TODO
+
     }
 }

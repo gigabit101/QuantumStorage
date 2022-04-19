@@ -6,32 +6,33 @@ import net.gigabit101.quantumstorage.client.CreativeTabQuantumStorage;
 import net.gigabit101.quantumstorage.containers.ContainerBag;
 import net.gigabit101.quantumstorage.items.prefab.ItemBase;
 import com.google.common.collect.Maps;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.item.*;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraft.ChatFormatting;
+import net.minecraft.Util;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.network.NetworkHooks;
 
 import javax.annotation.Nullable;
+import java.awt.*;
 import java.util.List;
 import java.util.Map;
 
-public class ItemQuantumBag extends ItemBase implements IColorable, INamedContainerProvider
+public class ItemQuantumBag extends ItemBase implements IColorable, MenuProvider
 {
     private static final Map<DyeColor, ItemQuantumBag> COLOR_DYE_ITEM_MAP = Maps.newEnumMap(DyeColor.class);
     private final DyeColor dyeColor;
@@ -39,10 +40,10 @@ public class ItemQuantumBag extends ItemBase implements IColorable, INamedContai
 
     public ItemQuantumBag(DyeColor dyeColor)
     {
-        super(new Item.Properties().maxStackSize(1).group(CreativeTabQuantumStorage.INSTANCE));
+        super(new Item.Properties().stacksTo(1).tab(CreativeTabQuantumStorage.INSTANCE));
         this.dyeColor = dyeColor;
-        setRegistryName(QuantumStorage.MOD_ID, "quantum_bag_" + dyeColor.getTranslationKey());
-        float[] vals = dyeColor.getColorComponentValues();
+        setRegistryName(QuantumStorage.MOD_ID, "quantum_bag_" + dyeColor.getName());
+        float[] vals = dyeColor.getTextureDiffuseColors();
         int[] rgb = new int[3];
         for (int i = 0; i < 3; i++)
             rgb[i] = (int) (255 * vals[i]);
@@ -56,28 +57,29 @@ public class ItemQuantumBag extends ItemBase implements IColorable, INamedContai
         return colour;
     }
 
+
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand)
+    public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand)
     {
-        if (!world.isRemote && player.isSneaking())
+        if (!world.isClientSide && player.isCrouching())
         {
-            ItemStack bagStack = player.getHeldItem(hand);
+            ItemStack bagStack = player.getItemInHand(hand);
             ItemQuantumBag bag = (ItemQuantumBag) bagStack.getItem();
 
             toggleActive(bagStack);
 
-            player.sendStatusMessage(new StringTextComponent("AutoPickup is " + format(bag.isActive(bagStack))), true);
-            return new ActionResult<>(ActionResultType.PASS, player.getHeldItem(hand));
+            player.sendMessage(new net.minecraft.network.chat.TextComponent("AutoPickup is " + format(bag.isActive(bagStack))), Util.NIL_UUID);
+            return new InteractionResultHolder<>(InteractionResult.PASS, player.getItemInHand(hand));
         }
-        if (!world.isRemote) NetworkHooks.openGui((ServerPlayerEntity) player, this);
-        return new ActionResult<>(ActionResultType.PASS, player.getHeldItem(hand));
+        if (!world.isClientSide) NetworkHooks.openGui((ServerPlayer) player, this);
+        return new InteractionResultHolder<>(InteractionResult.PASS, player.getItemInHand(hand));
     }
 
     public void toggleActive(ItemStack stack)
     {
         if(!stack.hasTag())
         {
-            stack.setTag(new CompoundNBT());
+            stack.setTag(new CompoundTag());
             stack.getTag().putBoolean("active", false);
         }
 
@@ -103,30 +105,32 @@ public class ItemQuantumBag extends ItemBase implements IColorable, INamedContai
     }
 
     @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn)
+    public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<net.minecraft.network.chat.Component> tooltip, TooltipFlag flagIn)
     {
-        super.addInformation(stack, worldIn, tooltip, flagIn);
+        super.appendHoverText(stack, worldIn, tooltip, flagIn);
         if(stack.hasTag())
         {
-            tooltip.add(new StringTextComponent("Auto-Pickup: " + format(stack.getTag().getBoolean("active"))));
+            tooltip.add(new TextComponent("Auto-Pickup: " + format(stack.getTag().getBoolean("active"))));
         }
     }
 
+
     @Override
-    public Container createMenu(int id, PlayerInventory inv, PlayerEntity player)
+    public AbstractContainerMenu createMenu(int id, Inventory inv, Player player)
     {
         return new ContainerBag(id, inv);
     }
 
-    @Override
-    public ITextComponent getDisplayName()
-    {
-        return new TranslationTextComponent(this.getTranslationKey());
-    }
 
     public String format(boolean b)
     {
-        if(b) return TextFormatting.GREEN + "Enabled";
-        return TextFormatting.RED + "Disabled";
+        if(b) return ChatFormatting.GREEN + "Enabled";
+        return ChatFormatting.RED + "Disabled";
+    }
+
+    @Override
+    public Component getDisplayName()
+    {
+        return new TextComponent("Quantum backpack");
     }
 }

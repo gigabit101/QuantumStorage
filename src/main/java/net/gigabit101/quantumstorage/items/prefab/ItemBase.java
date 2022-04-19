@@ -1,6 +1,6 @@
 package net.gigabit101.quantumstorage.items.prefab;
 
-import net.minecraft.item.Item;
+import net.minecraft.world.item.Item;
 
 /**
  * Created by Gigabit101 on 28/01/2017.

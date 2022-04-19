@@ -1,68 +1,66 @@
 package net.gigabit101.quantumstorage.containers.prefab;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.ContainerType;
-import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
 
-public class ContainerQS extends Container
+public class ContainerQS extends AbstractContainerMenu
 {
-    public ContainerQS(@Nullable ContainerType<?> p_i50105_1_, int p_i50105_2_)
+    public ContainerQS(@Nullable MenuType<?> p_i50105_1_, int p_i50105_2_)
     {
         super(p_i50105_1_, p_i50105_2_);
     }
 
     @Override
-    public boolean canInteractWith(PlayerEntity playerIn)
-    {
-        return false;
+    public boolean stillValid(Player player) {
+        return true;
     }
 
-    //RebornCore
-    public static boolean canStacksMerge(ItemStack stack1, ItemStack stack2) {
-        if (stack1.isEmpty() || stack2.isEmpty()) {
-            return false;
-        }
-        if (!stack1.isItemEqual(stack2)) {
-            return false;
-        }
-        if (!ItemStack.areItemStackTagsEqual(stack1, stack2)) {
-            return false;
-        }
+    public static boolean canStacksMerge(ItemStack stack1, ItemStack stack2)
+    {
+        if (stack1.isEmpty() || stack2.isEmpty()) return false;
+        if (!stack1.sameItem(stack2)) return false;
+        if (!ItemStack.tagMatches(stack1, stack2)) return false;
         return true;
-
     }
 
     @Override
-    public ItemStack transferStackInSlot(PlayerEntity player, int slotIndex) {
+    public ItemStack quickMoveStack(Player player, int slotIndex)
+    {
         ItemStack originalStack = ItemStack.EMPTY;
-        Slot slot = (Slot) inventorySlots.get(slotIndex);
-        int numSlots = inventorySlots.size();
-        if (slot != null && slot.getHasStack()) {
-            ItemStack stackInSlot = slot.getStack();
+        Slot slot = (Slot) slots.get(slotIndex);
+        int numSlots = slots.size();
+        if (slot != null && slot.hasItem()) {
+            ItemStack stackInSlot = slot.getItem();
             originalStack = stackInSlot.copy();
             if (slotIndex >= numSlots - 9 * 4 && tryShiftItem(stackInSlot, numSlots)) {
                 // NOOP
-            } else if (slotIndex >= numSlots - 9 * 4 && slotIndex < numSlots - 9) {
-                if (!shiftItemStack(stackInSlot, numSlots - 9, numSlots)) {
+            }
+            else if (slotIndex >= numSlots - 9 * 4 && slotIndex < numSlots - 9) {
+                if (!shiftItemStack(stackInSlot, numSlots - 9, numSlots))
+                {
                     return ItemStack.EMPTY;
                 }
-            } else if (slotIndex >= numSlots - 9 && slotIndex < numSlots) {
+            }
+            else if (slotIndex >= numSlots - 9 && slotIndex < numSlots) {
                 if (!shiftItemStack(stackInSlot, numSlots - 9 * 4, numSlots - 9)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!shiftItemStack(stackInSlot, numSlots - 9 * 4, numSlots)) {
+            }
+            else if (!shiftItemStack(stackInSlot, numSlots - 9 * 4, numSlots)) {
                 return ItemStack.EMPTY;
             }
-            slot.onSlotChange(stackInSlot, originalStack);
+            slot.onQuickCraft(stackInSlot, originalStack);
             if (stackInSlot.getCount() <= 0) {
-                slot.putStack(ItemStack.EMPTY);
-            } else {
-                slot.onSlotChanged();
+                slot.set(ItemStack.EMPTY);
+            }
+            else {
+                slot.setChanged();
             }
             if (stackInSlot.getCount() == originalStack.getCount()) {
                 return ItemStack.EMPTY;
@@ -76,20 +74,20 @@ public class ContainerQS extends Container
         boolean changed = false;
         if (stackToShift.isStackable()) {
             for (int slotIndex = start; stackToShift.getCount() > 0 && slotIndex < end; slotIndex++) {
-                Slot slot = (Slot) inventorySlots.get(slotIndex);
-                ItemStack stackInSlot = slot.getStack();
+                Slot slot = (Slot) slots.get(slotIndex);
+                ItemStack stackInSlot = slot.getItem();
                 if (!stackInSlot.isEmpty() && canStacksMerge(stackInSlot, stackToShift)) {
                     int resultingStackSize = stackInSlot.getCount() + stackToShift.getCount();
-                    int max = Math.min(stackToShift.getMaxStackSize(), slot.getSlotStackLimit());
+                    int max = Math.min(stackToShift.getMaxStackSize(), slot.getMaxStackSize());
                     if (resultingStackSize <= max) {
                         stackToShift.setCount(0);
                         stackInSlot.setCount(resultingStackSize);
-                        slot.onSlotChanged();
+                        slot.setChanged();
                         changed = true;
                     } else if (stackInSlot.getCount() < max) {
                         stackToShift.setCount(stackToShift.getCount()-(max-stackInSlot.getCount()));
                         stackInSlot.setCount(max);
-                        slot.onSlotChanged();
+                        slot.setChanged();
                         changed = true;
                     }
                 }
@@ -97,15 +95,15 @@ public class ContainerQS extends Container
         }
         if (stackToShift.getCount() > 0) {
             for (int slotIndex = start; stackToShift.getCount() > 0 && slotIndex < end; slotIndex++) {
-                Slot slot = (Slot) inventorySlots.get(slotIndex);
-                ItemStack stackInSlot = slot.getStack();
+                Slot slot = (Slot) slots.get(slotIndex);
+                ItemStack stackInSlot = slot.getItem();
                 if (stackInSlot.isEmpty()) {
-                    int max = Math.min(stackToShift.getMaxStackSize(), slot.getSlotStackLimit());
+                    int max = Math.min(stackToShift.getMaxStackSize(), slot.getMaxStackSize());
                     stackInSlot = stackToShift.copy();
                     stackInSlot.setCount(Math.min(stackToShift.getCount(), max));
                     stackToShift.setCount(stackToShift.getCount()-stackInSlot.getCount());
-                    slot.putStack(stackInSlot);
-                    slot.onSlotChanged();
+                    slot.set(stackInSlot);
+                    slot.setChanged();
                     changed = true;
                 }
             }
@@ -115,16 +113,16 @@ public class ContainerQS extends Container
 
     private boolean tryShiftItem(ItemStack stackToShift, int numSlots) {
         for (int machineIndex = 0; machineIndex < numSlots - 9 * 4; machineIndex++) {
-            Slot slot = (Slot) inventorySlots.get(machineIndex);
-            if (!slot.isItemValid(stackToShift))
+            Slot slot = (Slot) slots.get(machineIndex);
+            if (!slot.mayPlace(stackToShift))
                 continue;
             if (shiftItemStack(stackToShift, machineIndex, machineIndex + 1))
                 return true;
         }
         return false;
     }
-    
-    public void drawPlayersInv(PlayerInventory player, int x, int y)
+
+    public void drawPlayersInv(Inventory player, int x, int y)
     {
         int i;
         for (i = 0; i < 3; ++i)
@@ -134,10 +132,10 @@ public class ContainerQS extends Container
                 this.addSlot(new Slot(player, j + i * 9 + 9, x + j * 18, y + i * 18));
             }
         }
-        
+
     }
-    
-    public void drawPlayersHotBar(PlayerInventory player, int x, int y)
+
+    public void drawPlayersHotBar(Inventory player, int x, int y)
     {
         int i;
         for (i = 0; i < 9; ++i)
@@ -145,4 +143,5 @@ public class ContainerQS extends Container
             this.addSlot(new Slot(player, i, x + i * 18, y));
         }
     }
+
 }

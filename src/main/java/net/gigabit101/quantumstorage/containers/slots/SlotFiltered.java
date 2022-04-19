@@ -1,9 +1,10 @@
 package net.gigabit101.quantumstorage.containers.slots;
 
 import net.gigabit101.quantumstorage.util.inventory.ItemUtils;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
+import org.jetbrains.annotations.NotNull;
 
 public class SlotFiltered extends SlotItemHandler
 {
@@ -16,10 +17,10 @@ public class SlotFiltered extends SlotItemHandler
     }
 
     @Override
-    public boolean isItemValid(ItemStack stack)
+    public boolean mayPlace(@NotNull ItemStack stack)
     {
         if(filteredStack.isEmpty() || ItemUtils.isItemEqual(stack, filteredStack, true))
-            return super.isItemValid(stack);
+            return super.mayPlace(stack);
 
         return false;
     }
