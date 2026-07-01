@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": "quantumstorage:chest_diamond",
+    "I": "minecraft:iron_ingot",
+    "O": "minecraft:obsidian"
+  },
+  "pattern": [
+    "OOO",
+    "ICI",
+    "III"
+  ],
+  "result": {
+    "id": "quantumstorage:quantum_storage_unit"
+  }
+}

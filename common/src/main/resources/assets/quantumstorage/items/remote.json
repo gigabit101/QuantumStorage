@@ -1,0 +1,6 @@
+{
+    "model":  {
+                  "model":  "quantumstorage:item/remote",
+                  "type":  "minecraft:model"
+              }
+}

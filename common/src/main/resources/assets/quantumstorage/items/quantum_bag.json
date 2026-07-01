@@ -1,0 +1,6 @@
+{
+    "model":  {
+                  "model":  "quantumstorage:item/quantum_bag",
+                  "type":  "minecraft:model"
+              }
+}

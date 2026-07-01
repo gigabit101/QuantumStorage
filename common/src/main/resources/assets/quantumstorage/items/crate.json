@@ -1,0 +1,6 @@
+{
+    "model":  {
+                  "model":  "quantumstorage:item/crate",
+                  "type":  "minecraft:model"
+              }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": "minecraft:chest",
+    "I": "minecraft:iron_ingot",
+    "X": "minecraft:clock"
+  },
+  "pattern": [
+    "IXI",
+    "ICI",
+    "III"
+  ],
+  "result": {
+    "id": "quantumstorage:quantumcrafter"
+  }
+}

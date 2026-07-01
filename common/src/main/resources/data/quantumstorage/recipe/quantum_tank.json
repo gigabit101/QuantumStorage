@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "minecraft:bucket",
+    "I": "minecraft:iron_ingot",
+    "O": "minecraft:obsidian"
+  },
+  "pattern": [
+    "OOO",
+    "IBI",
+    "III"
+  ],
+  "result": {
+    "id": "quantumstorage:quantum_tank"
+  }
+}

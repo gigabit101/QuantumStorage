@@ -1,0 +1,87 @@
+package net.gigabit101.quantumstorage.client;
+
+import net.creeperhost.polylib.client.modulargui.ModularGui;
+import net.creeperhost.polylib.client.modulargui.elements.GuiElement;
+import net.creeperhost.polylib.client.modulargui.elements.GuiRectangle;
+import net.creeperhost.polylib.client.modulargui.elements.GuiSlots;
+import net.creeperhost.polylib.client.modulargui.elements.GuiText;
+import net.creeperhost.polylib.client.modulargui.lib.container.ContainerGuiProvider;
+import net.creeperhost.polylib.client.modulargui.lib.container.ContainerScreenAccess;
+import net.creeperhost.polylib.client.modulargui.lib.geometry.Align;
+import net.creeperhost.polylib.client.modulargui.lib.geometry.Constraint;
+import net.creeperhost.polylib.client.modulargui.lib.geometry.GeoParam;
+import net.gigabit101.quantumstorage.block.entity.CratingMachineBlockEntity;
+import net.gigabit101.quantumstorage.menu.CratingMachineMenu;
+import net.minecraft.network.chat.Component;
+
+public class CratingMachineGui extends ContainerGuiProvider<CratingMachineMenu> {
+    private static final int WIDTH = 176;
+    private static final int HEIGHT = 166;
+
+    @Override
+    public void buildGui(ModularGui gui, ContainerScreenAccess<CratingMachineMenu> screenAccess) {
+        CratingMachineMenu menu = screenAccess.getMenu();
+        gui.setGuiTitle(Component.translatable("gui.quantumstorage.crating_machine"));
+        gui.initStandardGui(WIDTH, HEIGHT);
+        gui.renderScreenBackground(true);
+
+        GuiElement<?> root = gui.getRoot();
+        fill(root, 0, 0, WIDTH, HEIGHT, 0xE0C6C6C6, 0xFF373737);
+        fill(root, 6, 6, WIDTH - 12, 56, 0xFFE2E2E2, 0xFF555555);
+        fill(root, 6, 72, WIDTH - 12, 88, 0xFFD6D6D6, 0xFF555555);
+
+        text(root, 10, 8, 126, 10, Component.translatable("gui.quantumstorage.crating_machine"), 0xFF303030);
+        text(root, 8, 62, 160, 10, Component.translatable("container.inventory"), 0xFF303030);
+
+        GuiSlots.singleSlot(root, screenAccess, menu.machineSlots, CratingMachineBlockEntity.CRATE_SLOT)
+                .constrain(GeoParam.LEFT, Constraint.relative(root.get(GeoParam.LEFT), 39))
+                .constrain(GeoParam.TOP, Constraint.relative(root.get(GeoParam.TOP), 34));
+        GuiSlots.singleSlot(root, screenAccess, menu.machineSlots, CratingMachineBlockEntity.ITEM_SLOT)
+                .constrain(GeoParam.LEFT, Constraint.relative(root.get(GeoParam.LEFT), 65))
+                .constrain(GeoParam.TOP, Constraint.relative(root.get(GeoParam.TOP), 34));
+        GuiSlots.singleSlot(root, screenAccess, menu.machineSlots, CratingMachineBlockEntity.OUTPUT_SLOT)
+                .constrain(GeoParam.LEFT, Constraint.relative(root.get(GeoParam.LEFT), 122))
+                .constrain(GeoParam.TOP, Constraint.relative(root.get(GeoParam.TOP), 34));
+
+        fill(root, 91, 38, 24, 10, 0xFF8C8C8C, 0xFF555555);
+        new GuiRectangle(root)
+                .fill(0xFF5BA36A)
+                .constrain(GeoParam.LEFT, Constraint.relative(root.get(GeoParam.LEFT), 92))
+                .constrain(GeoParam.TOP, Constraint.relative(root.get(GeoParam.TOP), 39))
+                .constrain(GeoParam.WIDTH, Constraint.dynamic(() -> progressWidth(menu)))
+                .constrain(GeoParam.HEIGHT, Constraint.literal(8));
+
+        new GuiSlots(root, screenAccess, menu.playerSlots, 9)
+                .constrain(GeoParam.LEFT, Constraint.relative(root.get(GeoParam.LEFT), 7))
+                .constrain(GeoParam.TOP, Constraint.relative(root.get(GeoParam.TOP), 83));
+        new GuiSlots(root, screenAccess, menu.hotbarSlots, 9)
+                .constrain(GeoParam.LEFT, Constraint.relative(root.get(GeoParam.LEFT), 7))
+                .constrain(GeoParam.TOP, Constraint.relative(root.get(GeoParam.TOP), 141));
+    }
+
+    private static void fill(GuiElement<?> root, int left, int top, int width, int height, int fill, int border) {
+        new GuiRectangle(root)
+                .rectangle(fill, border)
+                .constrain(GeoParam.LEFT, Constraint.relative(root.get(GeoParam.LEFT), left))
+                .constrain(GeoParam.TOP, Constraint.relative(root.get(GeoParam.TOP), top))
+                .constrain(GeoParam.WIDTH, Constraint.literal(width))
+                .constrain(GeoParam.HEIGHT, Constraint.literal(height));
+    }
+
+    private static void text(GuiElement<?> root, int left, int top, int width, int height, Component text, int color) {
+        new GuiText(root, text)
+                .setAlignment(Align.MIN)
+                .setShadow(false)
+                .setTextColour(color)
+                .setTrim(true)
+                .constrain(GeoParam.LEFT, Constraint.relative(root.get(GeoParam.LEFT), left))
+                .constrain(GeoParam.TOP, Constraint.relative(root.get(GeoParam.TOP), top))
+                .constrain(GeoParam.WIDTH, Constraint.literal(width))
+                .constrain(GeoParam.HEIGHT, Constraint.literal(height));
+    }
+
+    private static double progressWidth(CratingMachineMenu menu) {
+        int progress = Math.max(0, Math.min(CratingMachineBlockEntity.WORK_TIME, menu.progress.get()));
+        return progress * 22D / CratingMachineBlockEntity.WORK_TIME;
+    }
+}

@@ -1,0 +1,6 @@
+{
+    "model":  {
+                  "model":  "quantumstorage:item/chest_quantum",
+                  "type":  "minecraft:model"
+              }
+}

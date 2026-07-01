@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": "minecraft:cobblestone",
+    "H": "minecraft:chest",
+    "S": "minecraft:stone_slab"
+  },
+  "pattern": [
+    "SSS",
+    "CHC",
+    "CCC"
+  ],
+  "result": {
+    "id": "quantumstorage:trashcan"
+  }
+}

@@ -1,0 +1,6 @@
+{
+    "model":  {
+                  "model":  "quantumstorage:item/quantum_storage_unit_old",
+                  "type":  "minecraft:model"
+              }
+}

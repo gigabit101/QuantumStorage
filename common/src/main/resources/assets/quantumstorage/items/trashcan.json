@@ -1,0 +1,6 @@
+{
+    "model":  {
+                  "model":  "quantumstorage:item/trashcan",
+                  "type":  "minecraft:model"
+              }
+}

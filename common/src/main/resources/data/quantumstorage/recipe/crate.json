@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": "minecraft:paper",
+    "W": "#minecraft:planks"
+  },
+  "pattern": [
+    " W ",
+    "WPW",
+    " W "
+  ],
+  "result": {
+    "count": 16,
+    "id": "quantumstorage:crate"
+  }
+}

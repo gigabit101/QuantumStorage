@@ -1,0 +1,6 @@
+{
+    "model":  {
+                  "model":  "quantumstorage:item/quantum_storage_unit",
+                  "type":  "minecraft:model"
+              }
+}

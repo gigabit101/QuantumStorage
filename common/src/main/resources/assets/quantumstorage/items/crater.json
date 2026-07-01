@@ -1,0 +1,6 @@
+{
+    "model":  {
+                  "model":  "quantumstorage:item/crater",
+                  "type":  "minecraft:model"
+              }
+}

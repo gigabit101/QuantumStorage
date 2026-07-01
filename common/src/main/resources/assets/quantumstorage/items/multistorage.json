@@ -1,0 +1,6 @@
+{
+    "model":  {
+                  "model":  "quantumstorage:item/multistorage",
+                  "type":  "minecraft:model"
+              }
+}

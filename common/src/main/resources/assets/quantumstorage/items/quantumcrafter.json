@@ -1,0 +1,6 @@
+{
+    "model":  {
+                  "model":  "quantumstorage:item/quantumcrafter",
+                  "type":  "minecraft:model"
+              }
+}

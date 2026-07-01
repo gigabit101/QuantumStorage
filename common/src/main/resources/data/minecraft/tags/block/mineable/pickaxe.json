@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "quantumstorage:quantum_tank",
+    "quantumstorage:crater",
+    "quantumstorage:chest_iron",
+    "quantumstorage:chest_gold",
+    "quantumstorage:chest_diamond",
+    "quantumstorage:quantum_storage_unit",
+    "quantumstorage:quantumcrafter",
+    "quantumstorage:trashcan",
+    "quantumstorage:trashcanfluid",
+    "quantumstorage:chest_quantum",
+    "quantumstorage:multistorage"
+  ]
+}

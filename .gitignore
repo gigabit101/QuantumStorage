@@ -1,13 +1,37 @@
-*.iml
+bin
+*.launch
+.settings
+.metadata
+.classpath
+.project
+
+# idea
+out
 *.ipr
 *.iws
-/.idea/
-/build/
-/.gradle/
-/assets/
-/libs/
-/run/
-/classes/
-out/
-dep/
+*.iml
+.idea/*
+!.idea/scopes
 
+# gradle
+build
+.gradle
+node_modules/
+
+# other
+eclipse
+run
+runs
+docs/dist/
+docs/node_modules/
+docs/.astro/
+docs/src/content/docs/reference/generated/
+docs/public/api-index.json
+docs/public/llms.txt
+docs/public/llms-full.txt
+
+.vscode/
+.agents/
+build-logic/.gradle
+build-logic/build
+common/src/legacy

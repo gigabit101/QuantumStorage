@@ -1,0 +1,35 @@
+{
+    "schemaVersion": 1,
+    "id": "${mod_id}",
+    "version": "${version}",
+    "name": "${mod_name}",
+    "description": "${description}",
+    "authors": [
+        "${mod_author}"
+    ],
+    "contact": {
+        "sources": "https://github.com/gigabit101/QuantumStorage"
+    },
+    "license": "${license}",
+    "environment": "*",
+    "entrypoints": {
+        "main": [
+            "net.gigabit101.quantumstorage.QuantumStorageFabric"
+        ],
+        "client": [
+            "net.gigabit101.quantumstorage.QuantumStorageFabricClient"
+        ]
+    },
+    "mixins": [
+        "quantumstorage.mixins.json"
+    ],
+    "depends": {
+        "fabricloader": ">=${fabric_loader_version}",
+        "fabric-api": "*",
+        "minecraft": "~${minecraft_version}",
+        "java": ">=${java_version}"
+    },
+    "suggests": {
+        "jei": "*"
+    }
+}
