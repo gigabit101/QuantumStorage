@@ -56,7 +56,7 @@ public class UpgradeItem extends Item {
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> tooltip, TooltipFlag flag) {
         super.appendHoverText(stack, context, display, tooltip, flag);
         if (Minecraft.getInstance().hasShiftDown()) {
-            tooltip.accept(Component.translatable(type.tooltipKey()));
+            tooltip.accept(Component.translatable(type.tooltipKey()).withStyle(ChatFormatting.DARK_PURPLE));
         } else {
             tooltip.accept(Component.translatable("tooltip.quantumstorage.hold_shift").withStyle(ChatFormatting.GRAY));
         }

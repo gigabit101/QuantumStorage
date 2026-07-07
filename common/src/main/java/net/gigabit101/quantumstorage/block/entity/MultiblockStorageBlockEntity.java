@@ -9,7 +9,6 @@ import net.creeperhost.polylib.mulitblock.rectangular.RectangularMultiblockTileE
 import net.creeperhost.polylib.platform.Services;
 import net.gigabit101.quantumstorage.menu.MultiblockStorageMenu;
 import net.gigabit101.quantumstorage.multiblock.MultiblockStorageController;
-import net.gigabit101.quantumstorage.registry.QuantumStorageBlocks;
 import net.gigabit101.quantumstorage.registry.QuantumStorageContent;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -53,11 +52,11 @@ public class MultiblockStorageBlockEntity extends RectangularMultiblockTileEntit
     }
 
     public boolean isStorageBlock() {
-        return getBlockState().is(QuantumStorageContent.block(QuantumStorageBlocks.MULTISTORAGE));
+        return getBlockState().is(QuantumStorageContent.MULTISTORAGE.get());
     }
 
     public boolean isIoBlock() {
-        return getBlockState().is(QuantumStorageContent.block(QuantumStorageBlocks.MULTISTORAGE_IO));
+        return getBlockState().is(QuantumStorageContent.MULTISTORAGE_IO.get());
     }
 
     public MultiblockStorageController getMultiBlock() {
@@ -225,15 +224,15 @@ public class MultiblockStorageBlockEntity extends RectangularMultiblockTileEntit
 
     @Override
     public void isGoodForFrame() throws MultiblockValidationException {
-        if (!getBlockState().is(QuantumStorageContent.block(QuantumStorageBlocks.MULTISTORAGE_FRAME))) {
+        if (!getBlockState().is(QuantumStorageContent.MULTISTORAGE_FRAME.get())) {
             throw new MultiblockValidationException("Only Storage Frame blocks can be used for the multiblock frame.");
         }
     }
 
     @Override
     public void isGoodForSides() throws MultiblockValidationException {
-        if (!getBlockState().is(QuantumStorageContent.block(QuantumStorageBlocks.MULTISTORAGE_HEAT))
-                && !getBlockState().is(QuantumStorageContent.block(QuantumStorageBlocks.MULTISTORAGE_IO))) {
+        if (!getBlockState().is(QuantumStorageContent.MULTISTORAGE_HEAT.get())
+                && !getBlockState().is(QuantumStorageContent.MULTISTORAGE_IO.get())) {
             throw new MultiblockValidationException("Only Heat Conductors or Storage IO blocks can be used on multiblock sides.");
         }
     }
@@ -245,7 +244,7 @@ public class MultiblockStorageBlockEntity extends RectangularMultiblockTileEntit
 
     @Override
     public void isGoodForBottom() throws MultiblockValidationException {
-        if (!getBlockState().is(QuantumStorageContent.block(QuantumStorageBlocks.MULTISTORAGE_HEAT))) {
+        if (!getBlockState().is(QuantumStorageContent.MULTISTORAGE_HEAT.get())) {
             throw new MultiblockValidationException("Only Heat Conductors can be used on the multiblock bottom.");
         }
     }

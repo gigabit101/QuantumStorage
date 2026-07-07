@@ -8,7 +8,6 @@ import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.gigabit101.quantumstorage.Constants;
 import net.gigabit101.quantumstorage.item.CrateItem;
-import net.gigabit101.quantumstorage.registry.QuantumStorageBlocks;
 import net.gigabit101.quantumstorage.registry.QuantumStorageContent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.HolderLookup;
@@ -44,14 +43,14 @@ public class QuantumStorageJeiPlugin implements IModPlugin {
     public void registerRecipes(IRecipeRegistration registration) {
         registration.addRecipes(CRATING_MACHINE, createCratingRecipes(registration));
         registration.addItemStackInfo(
-                new ItemStack(QuantumStorageContent.block(QuantumStorageBlocks.CRATER)),
+                new ItemStack(QuantumStorageContent.CRATER.get()),
                 Component.translatable("jei.quantumstorage.crating_machine.info")
         );
     }
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-        registration.addCraftingStation(CRATING_MACHINE, QuantumStorageContent.block(QuantumStorageBlocks.CRATER));
+        registration.addCraftingStation(CRATING_MACHINE, QuantumStorageContent.CRATER.get());
     }
 
     private static List<CratingMachineJeiRecipe> createCratingRecipes(IRecipeRegistration registration) {

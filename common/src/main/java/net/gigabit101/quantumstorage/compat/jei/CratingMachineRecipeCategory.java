@@ -7,7 +7,6 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import mezz.jei.api.recipe.types.IRecipeType;
 import net.gigabit101.quantumstorage.block.entity.CratingMachineBlockEntity;
-import net.gigabit101.quantumstorage.registry.QuantumStorageBlocks;
 import net.gigabit101.quantumstorage.registry.QuantumStorageContent;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
@@ -22,7 +21,7 @@ public class CratingMachineRecipeCategory implements IRecipeCategory<CratingMach
     private final IDrawable arrow;
 
     public CratingMachineRecipeCategory(IGuiHelper guiHelper) {
-        icon = guiHelper.createDrawableItemLike(QuantumStorageContent.block(QuantumStorageBlocks.CRATER));
+        icon = guiHelper.createDrawableItemLike(QuantumStorageContent.CRATER.get());
         arrow = guiHelper.createAnimatedRecipeArrow(CratingMachineBlockEntity.WORK_TIME);
     }
 
