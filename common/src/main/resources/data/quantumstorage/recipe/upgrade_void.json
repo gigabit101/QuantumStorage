@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": "minecraft:lava_bucket",
+    "W": "minecraft:paper"
+  },
+  "pattern": [
+    " W ",
+    "WPW",
+    " W "
+  ],
+  "result": {
+    "id": "quantumstorage:upgrade_void"
+  }
+}

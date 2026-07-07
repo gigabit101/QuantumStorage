@@ -1,5 +1,6 @@
 {
   "itemGroup.quantumstorage": "Quantum Storage",
+  "itemGroup.quantumstorage.main": "Quantum Storage",
 
   "item.quantumstorage.quantum_storage_unit": "Quantum Storage Unit",
   "item.quantumstorage.quantum_tank": "Quantum Tank",
@@ -85,6 +86,20 @@
   "tooltip.quantumstorage.upgrade.render_installed": "Render upgrade installed",
   "tooltip.quantumstorage.upgrade.void_installed": "Void upgrade installed",
   "tooltip.quantumstorage.upgrade.water_installed": "Infinite water upgrade installed",
+  "tooltip.quantumstorage.block.quantum_storage_unit": "Stores a massive amount of one item type.",
+  "tooltip.quantumstorage.block.quantum_tank": "Stores a massive amount of one fluid type.",
+  "tooltip.quantumstorage.block.crater": "Packs full item stacks into portable crates.",
+  "tooltip.quantumstorage.block.chest_iron": "Keeps its inventory when broken.",
+  "tooltip.quantumstorage.block.chest_gold": "Keeps its inventory when broken.",
+  "tooltip.quantumstorage.block.chest_diamond": "Keeps its inventory when broken.",
+  "tooltip.quantumstorage.block.chest_quantum": "Keeps its inventory when broken.",
+  "tooltip.quantumstorage.block.quantumcrafter": "Stores and reuses crafting recipes.",
+  "tooltip.quantumstorage.block.trashcan": "Destroys inserted items.",
+  "tooltip.quantumstorage.block.trashcanfluid": "Destroys inserted fluids.",
+  "tooltip.quantumstorage.block.multistorage": "Stores items as part of a multiblock.",
+  "tooltip.quantumstorage.block.multistorage_frame": "Forms the multiblock structure frame.",
+  "tooltip.quantumstorage.block.multistorage_heat": "Forms multiblock walls, top, or bottom.",
+  "tooltip.quantumstorage.block.multistorage_io": "Provides item access for the multiblock.",
 
   "item.quantumstorage.quantum_bag.white.name": "Quantum Bag White",
   "item.quantumstorage.quantum_bag.orange.name": "Quantum Bag Orange",

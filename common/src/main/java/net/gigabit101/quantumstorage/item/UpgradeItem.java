@@ -3,6 +3,7 @@ package net.gigabit101.quantumstorage.item;
 import net.gigabit101.quantumstorage.block.entity.QuantumStorageUnitBlockEntity;
 import net.gigabit101.quantumstorage.block.entity.QuantumTankBlockEntity;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
@@ -54,20 +55,10 @@ public class UpgradeItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> tooltip, TooltipFlag flag) {
         super.appendHoverText(stack, context, display, tooltip, flag);
-        if (hasShiftDown()) {
-            tooltip.accept(Component.translatable(type.tooltipKey()).withStyle(ChatFormatting.DARK_PURPLE));
+        if (Minecraft.getInstance().hasShiftDown()) {
+            tooltip.accept(Component.translatable(type.tooltipKey()));
         } else {
             tooltip.accept(Component.translatable("tooltip.quantumstorage.hold_shift").withStyle(ChatFormatting.GRAY));
-        }
-    }
-
-    private static boolean hasShiftDown() {
-        try {
-            Class<?> minecraftClass = Class.forName("net.minecraft.client.Minecraft");
-            Object minecraft = minecraftClass.getMethod("getInstance").invoke(null);
-            return minecraft != null && Boolean.TRUE.equals(minecraftClass.getMethod("hasShiftDown").invoke(minecraft));
-        } catch (ReflectiveOperationException | LinkageError ignored) {
-            return false;
         }
     }
 

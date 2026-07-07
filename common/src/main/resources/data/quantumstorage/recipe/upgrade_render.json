@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": "minecraft:item_frame",
+    "W": "minecraft:paper"
+  },
+  "pattern": [
+    " W ",
+    "WPW",
+    " W "
+  ],
+  "result": {
+    "id": "quantumstorage:upgrade_render"
+  }
+}

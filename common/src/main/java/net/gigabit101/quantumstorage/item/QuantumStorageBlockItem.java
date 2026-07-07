@@ -5,6 +5,7 @@ import net.creeperhost.polylib.inventory.fluid.FluidManager;
 import net.creeperhost.polylib.inventory.fluid.PolyFluidStack;
 import net.gigabit101.quantumstorage.block.entity.StorageCrateBlockEntity;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.ProblemReporter;
@@ -27,24 +28,41 @@ public class QuantumStorageBlockItem extends BlockItem {
 
     private final TooltipType tooltipType;
     private final int crateSlots;
+    private final String infoKey;
 
     public QuantumStorageBlockItem(Block block, Properties properties, TooltipType tooltipType) {
-        this(block, properties, tooltipType, 0);
+        this(block, properties, tooltipType, 0, null);
     }
 
     public QuantumStorageBlockItem(Block block, Properties properties, StorageCrateBlockEntity.CrateTier tier) {
-        this(block, properties, TooltipType.STORAGE_CRATE, tier.slots());
+        this(block, properties, TooltipType.STORAGE_CRATE, tier.slots(), null);
     }
 
-    private QuantumStorageBlockItem(Block block, Properties properties, TooltipType tooltipType, int crateSlots) {
+    public QuantumStorageBlockItem(Block block, Properties properties, StorageCrateBlockEntity.CrateTier tier, String infoKey) {
+        this(block, properties, TooltipType.STORAGE_CRATE, tier.slots(), infoKey);
+    }
+
+    public QuantumStorageBlockItem(Block block, Properties properties, TooltipType tooltipType, String infoKey) {
+        this(block, properties, tooltipType, 0, infoKey);
+    }
+
+    private QuantumStorageBlockItem(Block block, Properties properties, TooltipType tooltipType, int crateSlots, String infoKey) {
         super(block, properties.stacksTo(1));
         this.tooltipType = tooltipType;
         this.crateSlots = crateSlots;
+        this.infoKey = infoKey;
     }
 
     @Override
     public void appendHoverText(ItemStack stack, Item.TooltipContext context, TooltipDisplay display, Consumer<Component> tooltip, TooltipFlag flag) {
         super.appendHoverText(stack, context, display, tooltip, flag);
+        if (infoKey != null) {
+            if (Minecraft.getInstance().hasShiftDown()) {
+                tooltip.accept(Component.translatable(infoKey).withStyle(ChatFormatting.GRAY));
+            } else {
+                tooltip.accept(Component.translatable("tooltip.quantumstorage.hold_shift").withStyle(ChatFormatting.GRAY));
+            }
+        }
 
         CustomData customData = stack.get(DataComps.getItemTileData());
         if (customData == null || customData.isEmpty()) {

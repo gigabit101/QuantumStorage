@@ -205,25 +205,26 @@ public final class QuantumStorageContent {
     }
 
     private static BlockItem createBlockItem(QuantumStorageBlockEntry entry, Block block, Item.Properties properties) {
+        String infoKey = "tooltip.quantumstorage.block." + entry.id();
         if (entry == QuantumStorageBlocks.QUANTUM_STORAGE_UNIT) {
-            return new QuantumStorageBlockItem(block, properties, QuantumStorageBlockItem.TooltipType.QUANTUM_STORAGE_UNIT);
+            return new QuantumStorageBlockItem(block, properties, QuantumStorageBlockItem.TooltipType.QUANTUM_STORAGE_UNIT, infoKey);
         }
         if (entry == QuantumStorageBlocks.QUANTUM_TANK) {
-            return new QuantumStorageBlockItem(block, properties, QuantumStorageBlockItem.TooltipType.QUANTUM_TANK);
+            return new QuantumStorageBlockItem(block, properties, QuantumStorageBlockItem.TooltipType.QUANTUM_TANK, infoKey);
         }
         if (entry == QuantumStorageBlocks.CHEST_IRON) {
-            return new QuantumStorageBlockItem(block, properties, StorageCrateBlockEntity.CrateTier.IRON);
+            return new QuantumStorageBlockItem(block, properties, StorageCrateBlockEntity.CrateTier.IRON, infoKey);
         }
         if (entry == QuantumStorageBlocks.CHEST_GOLD) {
-            return new QuantumStorageBlockItem(block, properties, StorageCrateBlockEntity.CrateTier.GOLD);
+            return new QuantumStorageBlockItem(block, properties, StorageCrateBlockEntity.CrateTier.GOLD, infoKey);
         }
         if (entry == QuantumStorageBlocks.CHEST_DIAMOND) {
-            return new QuantumStorageBlockItem(block, properties, StorageCrateBlockEntity.CrateTier.DIAMOND);
+            return new QuantumStorageBlockItem(block, properties, StorageCrateBlockEntity.CrateTier.DIAMOND, infoKey);
         }
         if (entry == QuantumStorageBlocks.CHEST_QUANTUM) {
-            return new QuantumStorageBlockItem(block, properties, StorageCrateBlockEntity.CrateTier.QUANTUM);
+            return new QuantumStorageBlockItem(block, properties, StorageCrateBlockEntity.CrateTier.QUANTUM, infoKey);
         }
-        return new BlockItem(block, properties);
+        return new QuantumStorageBlockItem(block, properties, QuantumStorageBlockItem.TooltipType.NONE, infoKey);
     }
 
     @SuppressWarnings("unchecked")
