@@ -4,6 +4,7 @@ import net.creeperhost.polylib.client.modulargui.ModularGuiContainer;
 import net.creeperhost.polylib.registry.PolyScreens;
 import net.gigabit101.quantumstorage.menu.CratingMachineMenu;
 import net.gigabit101.quantumstorage.menu.FluidTrashCanMenu;
+import net.gigabit101.quantumstorage.menu.MultiblockStorageMenu;
 import net.gigabit101.quantumstorage.menu.QuantumTankMenu;
 import net.gigabit101.quantumstorage.menu.TrashCanMenu;
 import net.gigabit101.quantumstorage.menu.QuantumStorageUnitMenu;
@@ -45,6 +46,10 @@ public final class QuantumStorageClient {
         PolyScreens.<CratingMachineMenu, ModularGuiContainer<CratingMachineMenu>>register(
                 QuantumStorageContent.CRATING_MACHINE_MENU,
                 (menu, inventory, title) -> new ModularGuiContainer<>(menu, inventory, new CratingMachineGui())
+        );
+        PolyScreens.<MultiblockStorageMenu, ModularGuiContainer<MultiblockStorageMenu>>register(
+                QuantumStorageContent.MULTIBLOCK_STORAGE_MENU,
+                (menu, inventory, title) -> new ModularGuiContainer<>(menu, inventory, new MultiblockStorageGui())
         );
     }
 }

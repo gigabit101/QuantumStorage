@@ -25,6 +25,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -39,6 +40,7 @@ public class QuantumTankBlockEntity extends PolyBlockEntity implements Interacta
             .setSlotValidator(CONTAINER_SLOT, FluidManager::isFluidItem)
             .setSlotValidator(OUTPUT_SLOT, stack -> false);
     private final PolyBlockFluidStorage tank = new PolyBlockFluidStorage(this, CAPACITY);
+    private boolean infiniteWater;
 
     public QuantumTankBlockEntity(BlockPos pos, BlockState state) {
         super(QuantumStorageContent.QUANTUM_TANK_BLOCK_ENTITY.get(), pos, state);
@@ -52,6 +54,7 @@ public class QuantumTankBlockEntity extends PolyBlockEntity implements Interacta
         }
 
         boolean changed = processContainerSlot();
+        changed |= generateInfiniteWater();
         FluidManager.distributeFluidNearby(this);
         if (changed) {
             setChanged();
@@ -68,6 +71,19 @@ public class QuantumTankBlockEntity extends PolyBlockEntity implements Interacta
 
     public long getCapacity() {
         return tank.getCapacity();
+    }
+
+    public boolean hasInfiniteWaterUpgrade() {
+        return infiniteWater;
+    }
+
+    public boolean applyInfiniteWaterUpgrade() {
+        if (infiniteWater) {
+            return false;
+        }
+        infiniteWater = true;
+        setChanged();
+        return true;
     }
 
     @Override
@@ -156,12 +172,32 @@ public class QuantumTankBlockEntity extends PolyBlockEntity implements Interacta
     public void writeExtraData(ValueOutput output) {
         inventory.serialize(output.child("inventory"));
         tank.serialize(output.child("tank"));
+        output.putBoolean("infinite_water", infiniteWater);
     }
 
     @Override
     public void readExtraData(ValueInput input) {
         inventory.deserialize(input.childOrEmpty("inventory"));
         tank.deserialize(input.childOrEmpty("tank"));
+        infiniteWater = input.getBooleanOr("infinite_water", false);
+    }
+
+    private boolean generateInfiniteWater() {
+        if (!infiniteWater) {
+            return false;
+        }
+
+        PolyFluidStack stored = tank.getFluid();
+        if (!stored.isEmpty() && stored.getFluid() != Fluids.WATER) {
+            return false;
+        }
+
+        long fillable = tank.getCapacity() - stored.getAmount();
+        if (fillable <= 0) {
+            return false;
+        }
+
+        return tank.fill(new PolyFluidStack(Fluids.WATER, fillable), false) > 0;
     }
 
     private boolean processContainerSlot() {

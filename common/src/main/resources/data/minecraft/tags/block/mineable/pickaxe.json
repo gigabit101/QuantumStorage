@@ -11,6 +11,9 @@
     "quantumstorage:trashcan",
     "quantumstorage:trashcanfluid",
     "quantumstorage:chest_quantum",
-    "quantumstorage:multistorage"
+    "quantumstorage:multistorage",
+    "quantumstorage:multistorage_frame",
+    "quantumstorage:multistorage_heat",
+    "quantumstorage:multistorage_io"
   ]
 }

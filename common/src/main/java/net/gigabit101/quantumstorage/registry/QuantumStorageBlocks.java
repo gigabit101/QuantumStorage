@@ -14,6 +14,9 @@ public final class QuantumStorageBlocks {
     public static final QuantumStorageBlockEntry TRASH_CAN_FLUID = entry("trashcanfluid");
     public static final QuantumStorageBlockEntry CHEST_QUANTUM = entry("chest_quantum");
     public static final QuantumStorageBlockEntry MULTISTORAGE = entry("multistorage");
+    public static final QuantumStorageBlockEntry MULTISTORAGE_FRAME = entry("multistorage_frame");
+    public static final QuantumStorageBlockEntry MULTISTORAGE_HEAT = entry("multistorage_heat");
+    public static final QuantumStorageBlockEntry MULTISTORAGE_IO = entry("multistorage_io");
 
     public static final List<QuantumStorageBlockEntry> ALL = List.of(
             QUANTUM_TANK,
@@ -26,7 +29,10 @@ public final class QuantumStorageBlocks {
             TRASH_CAN,
             TRASH_CAN_FLUID,
             CHEST_QUANTUM,
-            MULTISTORAGE
+            MULTISTORAGE,
+            MULTISTORAGE_FRAME,
+            MULTISTORAGE_HEAT,
+            MULTISTORAGE_IO
     );
 
     private QuantumStorageBlocks() {

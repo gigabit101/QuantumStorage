@@ -2,15 +2,16 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "C": "quantumstorage:chest_diamond",
-    "I": "minecraft:iron_ingot"
+    "I": "minecraft:iron_ingot",
+    "S": "minecraft:hopper"
   },
   "pattern": [
     "III",
-    "ICI",
+    "ISI",
     "III"
   ],
   "result": {
-    "id": "quantumstorage:multistorage"
+    "count": 2,
+    "id": "quantumstorage:multistorage_io"
   }
 }

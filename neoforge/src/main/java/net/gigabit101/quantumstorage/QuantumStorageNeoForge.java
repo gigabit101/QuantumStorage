@@ -17,7 +17,6 @@ public final class QuantumStorageNeoForge {
         if (FMLLoader.getCurrent().getDist().isClient()) {
             QuantumStorageClient.init();
             NeoPolyScreens.registerToBus(bus);
-            bus.addListener(QuantumStorageNeoForgeClient::registerItemDecorations);
         }
     }
 }

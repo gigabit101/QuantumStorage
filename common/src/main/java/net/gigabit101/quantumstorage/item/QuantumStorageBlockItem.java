@@ -62,6 +62,13 @@ public class QuantumStorageBlockItem extends BlockItem {
     }
 
     private void appendQuantumStorageUnitTooltip(ValueInput input, Consumer<Component> tooltip) {
+        if (input.getBooleanOr("render_upgrade", false)) {
+            tooltip.accept(Component.translatable("tooltip.quantumstorage.upgrade.render_installed").withStyle(ChatFormatting.DARK_PURPLE));
+        }
+        if (input.getBooleanOr("void_upgrade", false)) {
+            tooltip.accept(Component.translatable("tooltip.quantumstorage.upgrade.void_installed").withStyle(ChatFormatting.DARK_PURPLE));
+        }
+
         long storedCount = input.getLongOr("stored_count", 0L);
         Optional<ItemStack> storedStack = input.read("stored_stack", ItemStack.OPTIONAL_CODEC);
         if (storedCount <= 0 || storedStack.isEmpty() || storedStack.get().isEmpty()) {
@@ -76,6 +83,10 @@ public class QuantumStorageBlockItem extends BlockItem {
     }
 
     private void appendQuantumTankTooltip(ValueInput input, Consumer<Component> tooltip) {
+        if (input.getBooleanOr("infinite_water", false)) {
+            tooltip.accept(Component.translatable("tooltip.quantumstorage.upgrade.water_installed").withStyle(ChatFormatting.DARK_PURPLE));
+        }
+
         Optional<ValueInput> tankInput = input.child("tank");
         if (tankInput.isEmpty()) {
             return;

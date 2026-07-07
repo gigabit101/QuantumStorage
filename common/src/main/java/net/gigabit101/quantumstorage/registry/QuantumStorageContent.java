@@ -1,19 +1,23 @@
 package net.gigabit101.quantumstorage.registry;
 
 import net.gigabit101.quantumstorage.Constants;
+import net.gigabit101.quantumstorage.block.MultiblockStorageBlock;
 import net.gigabit101.quantumstorage.block.QuantumStorageBlock;
 import net.gigabit101.quantumstorage.block.QuantumStorageUnitBlock;
 import net.gigabit101.quantumstorage.block.StorageCrateBlock;
 import net.gigabit101.quantumstorage.block.entity.CratingMachineBlockEntity;
 import net.gigabit101.quantumstorage.block.entity.FluidTrashCanBlockEntity;
+import net.gigabit101.quantumstorage.block.entity.MultiblockStorageBlockEntity;
 import net.gigabit101.quantumstorage.block.entity.QuantumTankBlockEntity;
 import net.gigabit101.quantumstorage.block.entity.QuantumStorageUnitBlockEntity;
 import net.gigabit101.quantumstorage.block.entity.StorageCrateBlockEntity;
 import net.gigabit101.quantumstorage.block.entity.TrashCanBlockEntity;
 import net.gigabit101.quantumstorage.item.CrateItem;
 import net.gigabit101.quantumstorage.item.QuantumStorageBlockItem;
+import net.gigabit101.quantumstorage.item.UpgradeItem;
 import net.gigabit101.quantumstorage.menu.CratingMachineMenu;
 import net.gigabit101.quantumstorage.menu.FluidTrashCanMenu;
+import net.gigabit101.quantumstorage.menu.MultiblockStorageMenu;
 import net.gigabit101.quantumstorage.menu.QuantumTankMenu;
 import net.gigabit101.quantumstorage.menu.QuantumStorageUnitMenu;
 import net.gigabit101.quantumstorage.menu.StorageCrateMenu;
@@ -53,13 +57,19 @@ public final class QuantumStorageContent {
     public static Supplier<BlockEntityType<FluidTrashCanBlockEntity>> FLUID_TRASH_CAN_BLOCK_ENTITY;
     public static Supplier<BlockEntityType<StorageCrateBlockEntity>> STORAGE_CRATE_BLOCK_ENTITY;
     public static Supplier<BlockEntityType<CratingMachineBlockEntity>> CRATING_MACHINE_BLOCK_ENTITY;
+    public static Supplier<BlockEntityType<MultiblockStorageBlockEntity>> MULTIBLOCK_STORAGE_BLOCK_ENTITY;
     public static Supplier<MenuType<QuantumTankMenu>> QUANTUM_TANK_MENU;
     public static Supplier<MenuType<QuantumStorageUnitMenu>> QUANTUM_STORAGE_UNIT_MENU;
     public static Supplier<MenuType<TrashCanMenu>> TRASH_CAN_MENU;
     public static Supplier<MenuType<FluidTrashCanMenu>> FLUID_TRASH_CAN_MENU;
     public static Supplier<MenuType<StorageCrateMenu>> STORAGE_CRATE_MENU;
     public static Supplier<MenuType<CratingMachineMenu>> CRATING_MACHINE_MENU;
+    public static Supplier<MenuType<MultiblockStorageMenu>> MULTIBLOCK_STORAGE_MENU;
     public static Supplier<Item> CRATE_ITEM;
+    public static Supplier<Item> RENDER_UPGRADE_ITEM;
+    public static Supplier<Item> VOID_UPGRADE_ITEM;
+    public static Supplier<Item> CREATIVE_UPGRADE_ITEM;
+    public static Supplier<Item> WATER_UPGRADE_ITEM;
 
     private QuantumStorageContent() {
     }
@@ -76,6 +86,10 @@ public final class QuantumStorageContent {
             REGISTERED_BLOCKS.put(entry, block);
         }
         CRATE_ITEM = ITEMS.registerItem("crate", CrateItem::new);
+        RENDER_UPGRADE_ITEM = ITEMS.registerItem(UpgradeItem.Type.RENDER.itemId(), properties -> new UpgradeItem(UpgradeItem.Type.RENDER, properties));
+        VOID_UPGRADE_ITEM = ITEMS.registerItem(UpgradeItem.Type.VOID.itemId(), properties -> new UpgradeItem(UpgradeItem.Type.VOID, properties));
+        CREATIVE_UPGRADE_ITEM = ITEMS.registerItem(UpgradeItem.Type.CREATIVE.itemId(), properties -> new UpgradeItem(UpgradeItem.Type.CREATIVE, properties));
+        WATER_UPGRADE_ITEM = ITEMS.registerItem(UpgradeItem.Type.WATER.itemId(), properties -> new UpgradeItem(UpgradeItem.Type.WATER, properties));
 
         QUANTUM_TANK_BLOCK_ENTITY = BLOCK_ENTITY_TYPES.register(
                 QuantumStorageBlocks.QUANTUM_TANK.id(),
@@ -124,12 +138,25 @@ public final class QuantumStorageContent {
                         Set.of(REGISTERED_BLOCKS.get(QuantumStorageBlocks.CRATER).get())
                 )
         );
+        MULTIBLOCK_STORAGE_BLOCK_ENTITY = BLOCK_ENTITY_TYPES.register(
+                "multiblock_storage",
+                () -> new BlockEntityType<>(
+                        MultiblockStorageBlockEntity::new,
+                        Set.of(
+                                REGISTERED_BLOCKS.get(QuantumStorageBlocks.MULTISTORAGE).get(),
+                                REGISTERED_BLOCKS.get(QuantumStorageBlocks.MULTISTORAGE_FRAME).get(),
+                                REGISTERED_BLOCKS.get(QuantumStorageBlocks.MULTISTORAGE_HEAT).get(),
+                                REGISTERED_BLOCKS.get(QuantumStorageBlocks.MULTISTORAGE_IO).get()
+                        )
+                )
+        );
         QUANTUM_TANK_MENU = MENUS.registerMenu(QuantumStorageBlocks.QUANTUM_TANK.id(), QuantumTankMenu::new);
         QUANTUM_STORAGE_UNIT_MENU = MENUS.registerMenu(QuantumStorageBlocks.QUANTUM_STORAGE_UNIT.id(), QuantumStorageUnitMenu::new);
         TRASH_CAN_MENU = MENUS.registerMenu(QuantumStorageBlocks.TRASH_CAN.id(), TrashCanMenu::new);
         FLUID_TRASH_CAN_MENU = MENUS.registerMenu(QuantumStorageBlocks.TRASH_CAN_FLUID.id(), FluidTrashCanMenu::new);
         STORAGE_CRATE_MENU = MENUS.registerMenu("storage_crate", StorageCrateMenu::new);
         CRATING_MACHINE_MENU = MENUS.registerMenu(QuantumStorageBlocks.CRATER.id(), CratingMachineMenu::new);
+        MULTIBLOCK_STORAGE_MENU = MENUS.registerMenu("multiblock_storage", MultiblockStorageMenu::new);
 
         MAIN_TAB = CREATIVE_TABS.registerCreativeTab(
                 "main",
@@ -167,6 +194,12 @@ public final class QuantumStorageContent {
                 || entry == QuantumStorageBlocks.CHEST_QUANTUM) {
             return new StorageCrateBlock(quantumProperties.noOcclusion())
                     .setBlockEntity(() -> STORAGE_CRATE_BLOCK_ENTITY.get(), false);
+        }
+        if (entry == QuantumStorageBlocks.MULTISTORAGE
+                || entry == QuantumStorageBlocks.MULTISTORAGE_FRAME
+                || entry == QuantumStorageBlocks.MULTISTORAGE_HEAT
+                || entry == QuantumStorageBlocks.MULTISTORAGE_IO) {
+            return new MultiblockStorageBlock(quantumProperties);
         }
         return new QuantumStorageBlock(quantumProperties);
     }
@@ -209,6 +242,10 @@ public final class QuantumStorageContent {
                                 accept.invoke(output, block.get());
                             }
                             accept.invoke(output, CRATE_ITEM.get());
+                            accept.invoke(output, RENDER_UPGRADE_ITEM.get());
+                            accept.invoke(output, VOID_UPGRADE_ITEM.get());
+                            accept.invoke(output, CREATIVE_UPGRADE_ITEM.get());
+                            accept.invoke(output, WATER_UPGRADE_ITEM.get());
                         }
                         return null;
                     }

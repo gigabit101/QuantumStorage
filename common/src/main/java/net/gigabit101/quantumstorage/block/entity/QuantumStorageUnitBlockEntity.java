@@ -34,6 +34,8 @@ public class QuantumStorageUnitBlockEntity extends PolyBlockEntity implements In
             .setSlotValidator(OUTPUT_SLOT, stack -> false);
     private ItemStack storedStack = ItemStack.EMPTY;
     private long storedCount = 0L;
+    private boolean renderUpgrade;
+    private boolean voidUpgrade;
 
     public QuantumStorageUnitBlockEntity(BlockPos pos, BlockState state) {
         super(QuantumStorageContent.QUANTUM_STORAGE_UNIT_BLOCK_ENTITY.get(), pos, state);
@@ -82,10 +84,49 @@ public class QuantumStorageUnitBlockEntity extends PolyBlockEntity implements In
         return storedCount + inventory.getItem(OUTPUT_SLOT).getCount();
     }
 
+    public boolean hasRenderUpgrade() {
+        return renderUpgrade;
+    }
+
+    public boolean hasVoidUpgrade() {
+        return voidUpgrade;
+    }
+
+    public boolean applyRenderUpgrade() {
+        if (renderUpgrade) {
+            return false;
+        }
+        renderUpgrade = true;
+        setChanged();
+        return true;
+    }
+
+    public boolean applyVoidUpgrade() {
+        if (voidUpgrade) {
+            return false;
+        }
+        voidUpgrade = true;
+        setChanged();
+        return true;
+    }
+
+    public boolean applyCreativeUpgrade() {
+        ItemStack displayStack = storedStack.isEmpty() ? inventory.getItem(OUTPUT_SLOT) : storedStack;
+        if (displayStack.isEmpty()) {
+            return false;
+        }
+
+        storedStack = displayStack.copyWithCount(1);
+        storedCount = Math.max(0L, MAX_STORED - inventory.getItem(OUTPUT_SLOT).getCount());
+        setChanged();
+        return true;
+    }
+
     public boolean canAcceptItem(ItemStack stack) {
+        boolean sameItem = storedStack.isEmpty() || ItemStack.isSameItemSameComponents(storedStack, stack);
         return !stack.isEmpty()
-                && storedCount < MAX_STORED
-                && (storedStack.isEmpty() || ItemStack.isSameItemSameComponents(storedStack, stack));
+                && sameItem
+                && (storedCount < MAX_STORED || voidUpgrade);
     }
 
     @Override
@@ -160,7 +201,12 @@ public class QuantumStorageUnitBlockEntity extends PolyBlockEntity implements In
 
         int toStore = (int) Math.min(input.getCount(), MAX_STORED - storedCount);
         if (toStore <= 0) {
-            return false;
+            if (!voidUpgrade || storedStack.isEmpty() || !ItemStack.isSameItemSameComponents(storedStack, input)) {
+                return false;
+            }
+
+            inventory.setItem(INPUT_SLOT, ItemStack.EMPTY);
+            return true;
         }
 
         input.shrink(toStore);
@@ -250,6 +296,8 @@ public class QuantumStorageUnitBlockEntity extends PolyBlockEntity implements In
         inventory.serialize(output.child("inventory"));
         output.store("stored_stack", ItemStack.OPTIONAL_CODEC, storedStack);
         output.putLong("stored_count", storedCount);
+        output.putBoolean("render_upgrade", renderUpgrade);
+        output.putBoolean("void_upgrade", voidUpgrade);
     }
 
     @Override
@@ -260,6 +308,8 @@ public class QuantumStorageUnitBlockEntity extends PolyBlockEntity implements In
             storedStack = storedStack.copyWithCount(1);
         }
         storedCount = Math.max(0L, Math.min(MAX_STORED, input.getLongOr("stored_count", 0L)));
+        renderUpgrade = input.getBooleanOr("render_upgrade", false);
+        voidUpgrade = input.getBooleanOr("void_upgrade", false);
         if (storedCount == 0L && inventory.getItem(OUTPUT_SLOT).isEmpty()) {
             storedStack = ItemStack.EMPTY;
         }
