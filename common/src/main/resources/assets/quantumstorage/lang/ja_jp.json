@@ -41,16 +41,16 @@
   "item.quantumstorage.upgrade.render.name": "表示アップグレード",
   "item.quantumstorage.crate": "木箱",
   "item.quantumstorage.crate.name": "木箱",
-  "tooltipitem.quantumstorage.upgrade.render": "量子ストレージユニットに使用すると、格納されているアイテムがワールド上に表示されます",
+  "tooltipitem.quantumstorage.upgrade.render": "量子ストレージユニットにスニーク+右クリックで適用すると、格納されているアイテムがワールド上に表示されます",
 
   "item.quantumstorage.upgrade.void.name": "ボイドアップグレード",
-  "tooltipitem.quantumstorage.upgrade.void": "量子ストレージユニットに使用すると、溢れた同種のアイテムが消去されるようになります",
+  "tooltipitem.quantumstorage.upgrade.void": "量子ストレージユニットにスニーク+右クリックで適用すると、溢れた同種のアイテムが消去されるようになります",
 
   "item.quantumstorage.upgrade.creative.name": "クリエイティブアップグレード",
-  "tooltipitem.quantumstorage.upgrade.creative": "量子ストレージユニットに使用すると、格納されているアイテムが無限になります",
+  "tooltipitem.quantumstorage.upgrade.creative": "量子ストレージユニットにスニーク+右クリックで適用すると、格納されているアイテムが無限になります",
 
   "item.quantumstorage.upgrade.water.name": "無限水アップグレード",
-  "tooltipitem.quantumstorage.upgrade.water": "量子タンクに使用すると、内部で水を自動生成するようになります",
+  "tooltipitem.quantumstorage.upgrade.water": "量子タンクにスニーク+右クリックで適用すると、内部で水を自動生成するようになります",
 
   "item.quantumstorage.quantumstoragedisk": "量子ストレージディスク",
   "item.quantumstorage.quantumstoragedisk.name": "量子ストレージディスク",
